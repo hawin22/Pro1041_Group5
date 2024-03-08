@@ -11,7 +11,7 @@ import java.sql.*;
  */
 public class DBConnect1 {
 
-    static String url = "jdbc:sqlserver://;serverName=localhost;databaseName=ASM_SOF203";
+    static String url = "jdbc:sqlserver://;serverName=localhost;databaseName=DB_ChanGaGoiDemAgoni";
     static String username = "sa";
     static String password = "12345678";
     public static void main(String[] args) throws SQLException {
