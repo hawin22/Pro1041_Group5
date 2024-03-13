@@ -93,8 +93,11 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnNhanVien.setForeground(new java.awt.Color(51, 153, 255));
-        pnNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jTabbedPane2.setForeground(new java.awt.Color(51, 153, 255));
+        jTabbedPane2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTabbedPane2.setPreferredSize(new java.awt.Dimension(1280, 720));
+
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
@@ -621,14 +624,13 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnNhanVien)
-                .addGap(23, 23, 23))
+
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnNhanVien)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
         );
 
         pack();
