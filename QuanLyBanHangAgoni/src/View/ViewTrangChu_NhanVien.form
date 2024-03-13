@@ -27,17 +27,21 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane2" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnNhanVien" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane2" alignment="0" max="32767" attributes="0"/>
+          <Component id="pnNhanVien" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
+    <Container class="javax.swing.JTabbedPane" name="pnNhanVien">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -196,7 +200,7 @@
                     <Component class="javax.swing.JTable" name="tblSanPham">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="11" rowCount="4">
+                          <Table columnCount="11" rowCount="0">
                             <Column editable="true" title="M&#xe3; s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object"/>
                             <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object"/>
                             <Column editable="true" title="Ch&#x1ea5;t li&#x1ec7;u" type="java.lang.Object"/>
@@ -514,7 +518,7 @@
                         <Component class="javax.swing.JTable" name="tblHoaDon">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="6" rowCount="4">
+                              <Table columnCount="6" rowCount="0">
                                 <Column editable="true" title="M&#xe3; ho&#xe1; &#x111;&#x1a1;n" type="java.lang.Object"/>
                                 <Column editable="true" title="M&#xe3; nh&#xe2;n vi&#xea;n" type="java.lang.Object"/>
                                 <Column editable="true" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.Object"/>
@@ -755,7 +759,7 @@
                     <Component class="javax.swing.JTable" name="tblThanhToan">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="5" rowCount="4">
+                          <Table columnCount="5" rowCount="0">
                             <Column editable="true" title="M&#xe3; s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object"/>
                             <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object"/>
                             <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
@@ -845,8 +849,8 @@
         <Container class="javax.swing.JPanel" name="jPanel5">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Qu&#x1ea3;n l&#xfd; &#x1b0;u &#x111;&#xe3;i">
-                <Property name="tabTitle" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; &#x1b0;u &#x111;&#xe3;i"/>
+              <JTabbedPaneConstraints tabName="&#x1af;u &#x111;&#xe3;i">
+                <Property name="tabTitle" type="java.lang.String" value="&#x1af;u &#x111;&#xe3;i"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -854,21 +858,146 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1422" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="765" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanel7" max="32767" attributes="0"/>
+                          <Component id="jPanel11" max="32767" attributes="0"/>
+                          <Component id="jPanel12" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel7">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="254" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="722" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel19">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="99" red="33" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch &#x1b0;u &#x111;&#xe3;i"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel11">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="255" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel20">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="99" red="33" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch khuy&#x1ebf;n m&#x1ea1;i"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel12">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="361" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel21">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="99" red="33" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch ho&#xe1; &#x111;&#x1a1;n"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel6">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Qu&#x1ea3;n l&#xfd; ho&#xe1; &#x111;&#x1a1;n">
-                <Property name="tabTitle" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; ho&#xe1; &#x111;&#x1a1;n"/>
+              <JTabbedPaneConstraints tabName="Ho&#xe1; &#x111;&#x1a1;n">
+                <Property name="tabTitle" type="java.lang.String" value="Ho&#xe1; &#x111;&#x1a1;n"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -876,29 +1005,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1422" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="765" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jPanel7">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Qu&#x1ea3;n l&#xfd; nh&#xe2;n vi&#xea;n">
-                <Property name="tabTitle" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; nh&#xe2;n vi&#xea;n"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1422" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1440" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -911,8 +1018,8 @@
         <Container class="javax.swing.JPanel" name="jPanel8">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="B&#xe1;o c&#xe1;o th&#x1ed1;ng k&#xea;">
-                <Property name="tabTitle" type="java.lang.String" value="B&#xe1;o c&#xe1;o th&#x1ed1;ng k&#xea;"/>
+              <JTabbedPaneConstraints tabName="Kh&#xe1;ch h&#xe0;ng">
+                <Property name="tabTitle" type="java.lang.String" value="Kh&#xe1;ch h&#xe0;ng"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -920,7 +1027,29 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1422" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1440" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="765" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel9">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="S&#x1ea3;n ph&#x1ea9;m">
+                <Property name="tabTitle" type="java.lang.String" value="S&#x1ea3;n ph&#x1ea9;m"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="1440" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -943,7 +1072,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="558" max="32767" attributes="0"/>
+                      <EmptySpace pref="576" max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="583" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
                   </Group>
