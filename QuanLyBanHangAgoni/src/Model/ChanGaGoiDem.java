@@ -9,7 +9,5 @@ package Model;
  * @author NGHIAPC
  */
 public class ChanGaGoiDem {
-    //bbbb
-    //fsfsf
-    //tghfd
+    
 }
