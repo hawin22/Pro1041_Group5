@@ -1073,7 +1073,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+                .addComponent(pnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 805, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1154,9 +1154,11 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnThemSanPham;
     private javax.swing.JButton btnTimKiemKhuyenMai;
     private javax.swing.JButton btnTimKiemVoucher;
-    private javax.swing.JButton btnXoaHoaDon;
-    private javax.swing.JButton btnXoaHoaDon1;
+    private javax.swing.JButton btnXacNhanHuyHoaDonKM;
+    private javax.swing.JButton btnXacNhanKhuyenMai;
+    private javax.swing.JButton btnXacNhanVoucher;
     private javax.swing.JButton btnXoaKH;
+    private javax.swing.JButton btnXoaSanPhamThem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbSapXepTheoNgayHetHan;
     private javax.swing.JComboBox<String> cbbSapXepTheoNgayHetHanVoucher;
@@ -1233,14 +1235,21 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     private javax.swing.JTable tblDanhSachSanPhamApDungKM;
     private javax.swing.JTable tblDanhSachVoucher;
     private javax.swing.JTable tblHoaDon;
+    private javax.swing.JTable tblHoaDonApDungKhuyenMai;
+    private javax.swing.JTable tblHoaDonApDungVoucher;
     private javax.swing.JTable tblKhachHang;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTable tblThanhToan;
+    private javax.swing.JTable tblXacNhanVoucher;
     private javax.swing.JButton tbnSuaKH;
     private javax.swing.JTextField txtDCKH;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaKhachHang;
     private javax.swing.JTextField txtMaKhachHang1;
+    private javax.swing.JTextField txtNgayBatDauKhuyenMai;
+    private javax.swing.JTextField txtNgayBatDauVoucher;
+    private javax.swing.JTextField txtNgayKetThucKhuyenMai;
+    private javax.swing.JTextField txtNgayKetThucVoucher;
     private javax.swing.JTextField txtSDTKH;
     private javax.swing.JTextField txtTenKH;
     private javax.swing.JTextField txtTienKhachDua;
