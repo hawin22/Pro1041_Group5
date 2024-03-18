@@ -335,6 +335,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         );
 
         btnThemSanPham.setBackground(new java.awt.Color(51, 153, 255));
+        btnThemSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThemSanPham.setForeground(new java.awt.Color(255, 255, 255));
         btnThemSanPham.setText("Thêm sản phẩm");
         btnThemSanPham.addActionListener(new java.awt.event.ActionListener() {
@@ -348,6 +349,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         rdTatCa.setText("Tất cả");
 
         btnXoaSanPhamThem.setBackground(new java.awt.Color(51, 153, 255));
+        btnXoaSanPhamThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXoaSanPhamThem.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaSanPhamThem.setText("Xoá sản phẩm");
         btnXoaSanPhamThem.addActionListener(new java.awt.event.ActionListener() {
@@ -891,6 +893,9 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                     .addComponent(btnXacNhanHuyHoaDonKM))
                 .addContainerGap(560, Short.MAX_VALUE))
         );
+
+        jPanel12Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnXacNhanHuyHoaDonKM, btnXacNhanKhuyenMai});
+
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
@@ -911,6 +916,8 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                         .addComponent(btnXacNhanHuyHoaDonKM, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 112, Short.MAX_VALUE))))
         );
+
+        jPanel12Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnXacNhanHuyHoaDonKM, btnXacNhanKhuyenMai});
 
         jTabbedPane1.addTab("Khuyến mãi", jPanel12);
 
