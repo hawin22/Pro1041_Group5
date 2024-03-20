@@ -21,7 +21,6 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<KhachHang> listKhachHang = new ArrayList();
     ArrayList<Login> listLogin = new ArrayList<>();
 
-
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
         listKhachHang.clear();
