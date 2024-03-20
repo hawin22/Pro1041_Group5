@@ -231,7 +231,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
         String password = new String(pass).trim();
         list = qldn.LoginSearch(userName, password);
         if (list.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tài khản hặc mặc khảu hông chính sác");
+            JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
         } else if (list.size() == 1 && list.get(0).getRole().equals("Quản lý")) {
             this.setVisible(false);
             viewQL.setVisible(true);
