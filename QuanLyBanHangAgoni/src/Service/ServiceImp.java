@@ -19,7 +19,7 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<KhuyenMai> listKhuyenMai = new ArrayList<>();
     ArrayList<NguoiDung> listNguoiDung = new ArrayList<>();
     ArrayList<SanPham> listSanPham = new ArrayList<>();
-    ArrayList<KhachHang> listKhachHang = new ArrayList();
+    ArrayList<KhachHang> listKhachHang = new ArrayList<>();
     ArrayList<Login> listLogin = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
