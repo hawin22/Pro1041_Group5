@@ -20,6 +20,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
     public ViewTrangChu_NhanVien() {
         initComponents();
+ 
         loadDataKhachHang(ser.getAllKhachHang());
     }
 
