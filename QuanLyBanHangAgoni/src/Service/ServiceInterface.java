@@ -17,5 +17,7 @@ public interface ServiceInterface {
     ArrayList<Login> FogotPassword(String user, String email);
     ArrayList<Voucher> getAllVoucher();
     ArrayList<KhuyenMai> getAllKhuyenMai();
+    ArrayList<NguoiDung> getAllNguoiDung();
+    NguoiDung getRowNguoiDung(int row);
     ArrayList<SanPham> getAllSanPham();
 }
