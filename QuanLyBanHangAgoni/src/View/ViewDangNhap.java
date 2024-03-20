@@ -4,17 +4,23 @@
  */
 package View;
 
+import java.util.ArrayList;
+import Model.*;
+import Service.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author NGHIAPC
  */
 public class ViewDangNhap extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ViewDangNhap
-     */
+    ArrayList<Login> list = new ArrayList<>();
+    ServiceInterface qldn = new ServiceImp();
+
     public ViewDangNhap() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -109,6 +115,11 @@ public class ViewDangNhap extends javax.swing.JFrame {
         btnSignIn.setForeground(new java.awt.Color(255, 255, 255));
         btnSignIn.setText("Sign in");
         btnSignIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignInActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("...............................................................................");
 
@@ -206,8 +217,33 @@ public class ViewDangNhap extends javax.swing.JFrame {
 
     private void lbForgotPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbForgotPassMouseClicked
         // TODO add your handling code here:
-       
+        ViewForgotPass viewFG = new ViewForgotPass();
+        this.setVisible(false);
+        viewFG.setVisible(true);
     }//GEN-LAST:event_lbForgotPassMouseClicked
+
+    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
+        // TODO add your handling code here:
+        ViewTrangChu_NhanVien viewNV = new ViewTrangChu_NhanVien();
+        ViewTrangChu_QuanLy viewQL = new ViewTrangChu_QuanLy();
+        String userName = txtUserName.getText().trim();
+        char[] pass = txtPassword.getPassword();
+        String password = new String(pass).trim();
+        list = qldn.LoginSearch(userName, password);
+        if (list.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tài khản hặc mặc khảu hông chính sác");
+        } else if (list.size() == 1 && list.get(0).getRole().equals("Quản lý")) {
+            this.setVisible(false);
+            viewQL.setVisible(true);
+            viewQL.setLocationRelativeTo(null);
+        }else if (list.size() == 1 && list.get(0).getRole().equals("Nhân viên")) {
+            this.setVisible(false);
+            viewNV.setVisible(true);
+            viewNV.setLocationRelativeTo(null);
+        }
+
+
+    }//GEN-LAST:event_btnSignInActionPerformed
 
     /**
      * @param args the command line arguments
