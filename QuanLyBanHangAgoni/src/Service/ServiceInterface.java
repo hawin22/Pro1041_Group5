@@ -4,10 +4,15 @@
  */
 package Service;
 
+import Model.KhuyenMai;
+import Model.Voucher;
+import java.util.ArrayList;
+
 /**
  *
  * @author NGHIAPC
  */
 public interface ServiceInterface {
-    
+    ArrayList<Voucher> getAllVoucher();
+    ArrayList<KhuyenMai> getAllKhuyenMai();
 }
