@@ -126,7 +126,7 @@ public class ViewForgotPass extends javax.swing.JFrame {
         String email = txtEmailFG.getText();
         list = qldn.FogotPassword(userName, email);
         if (list.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nhập gà quá không biết gì cả");
+            JOptionPane.showMessageDialog(this, "Sai tên đăng nhập hoặc mật khẩu");
         }else if (list.size() == 1 && list.get(0).getUserName().equals(userName) && list.get(0).getEmail().equals(email)) {
             JOptionPane.showMessageDialog(this, "Mật khẩu: "+list.get(0).getPassword());
         }
