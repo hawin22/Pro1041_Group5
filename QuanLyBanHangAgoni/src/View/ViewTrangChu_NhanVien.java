@@ -8,21 +8,23 @@ import Model.KhachHang;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Service.*;
+
 /**
  *
  * @author NGHIAPC
  */
 public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
+
     ServiceInterface ser = new ServiceImp();
     DefaultTableModel dftm;
-    
 
     public ViewTrangChu_NhanVien() {
         initComponents();
         loadDataKhachHang(ser.getAllKhachHang());
     }
-    void loadDataKhachHang(ArrayList<KhachHang> list){
-        
+
+    void loadDataKhachHang(ArrayList<KhachHang> list) {
+
         dftm = (DefaultTableModel) tblKhachHang.getModel();
         dftm.setRowCount(0);
         for (KhachHang kh : list) {
@@ -34,6 +36,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             });
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,6 +159,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         btnXoaKH = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnDangXuat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1066,6 +1070,15 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe WP SemiLight", 3, 48)); // NOI18N
         jLabel1.setText("Đì dai by Nhóm Năm");
 
+        btnDangXuat.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
+        btnDangXuat.setForeground(new java.awt.Color(255, 153, 204));
+        btnDangXuat.setText("Đăng xuất");
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1074,11 +1087,17 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 .addContainerGap(528, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(281, 281, 281))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(250, 250, 250)
+                .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(421, Short.MAX_VALUE)
+                .addContainerGap(86, Short.MAX_VALUE)
+                .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
                 .addComponent(jLabel1)
                 .addGap(287, 287, 287))
         );
@@ -1132,6 +1151,13 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTimKiemKhuyenMaiActionPerformed
 
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        // TODO add your handling code here:
+        ViewDangNhap viewDN = new ViewDangNhap();
+        this.setVisible(false);
+        viewDN.setVisible(true);
+    }//GEN-LAST:event_btnDangXuatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1169,6 +1195,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnHuyHoaDon;
     private javax.swing.JButton btnHuyVoucher;
     private javax.swing.JButton btnSuaHoaDon;
