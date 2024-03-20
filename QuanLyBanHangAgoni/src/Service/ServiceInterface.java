@@ -4,8 +4,7 @@
  */
 package Service;
 
-import Model.KhuyenMai;
-import Model.Voucher;
+import Model.*;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +12,9 @@ import java.util.ArrayList;
  * @author NGHIAPC
  */
 public interface ServiceInterface {
+    ArrayList<KhachHang> getAllKhachHang();
+    ArrayList<Login> LoginSearch(String user, String pass);
+    ArrayList<Login> FogotPassword(String user, String email);
     ArrayList<Voucher> getAllVoucher();
     ArrayList<KhuyenMai> getAllKhuyenMai();
 }
