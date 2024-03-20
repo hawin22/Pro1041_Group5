@@ -20,8 +20,7 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<SanPham> listSanPham = new ArrayList<>();
     ArrayList<KhachHang> listKhachHang = new ArrayList();
     ArrayList<Login> listLogin = new ArrayList<>();
-    ArrayList<Voucher> listVoucher = new ArrayList<>();
-    ArrayList<KhuyenMai> listKhuyenMai = new ArrayList<>();
+
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
