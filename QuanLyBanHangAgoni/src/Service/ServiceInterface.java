@@ -5,6 +5,7 @@
 package Service;
 
 import Model.KhuyenMai;
+import Model.SanPham;
 import Model.Voucher;
 import java.util.ArrayList;
 
@@ -15,4 +16,5 @@ import java.util.ArrayList;
 public interface ServiceInterface {
     ArrayList<Voucher> getAllVoucher();
     ArrayList<KhuyenMai> getAllKhuyenMai();
+    ArrayList<SanPham> getAllSanPham();
 }
