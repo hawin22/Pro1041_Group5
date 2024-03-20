@@ -15,6 +15,9 @@ import DbConnect.*;
  */
 public class ServiceImp implements ServiceInterface {
 
+    ArrayList<Voucher> listVoucher = new ArrayList<>();
+    ArrayList<KhuyenMai> listKhuyenMai = new ArrayList<>();
+    ArrayList<SanPham> listSanPham = new ArrayList<>();
     ArrayList<KhachHang> listKhachHang = new ArrayList();
     ArrayList<Login> listLogin = new ArrayList<>();
     ArrayList<Voucher> listVoucher = new ArrayList<>();
@@ -51,7 +54,6 @@ public class ServiceImp implements ServiceInterface {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
-
             while (rs.next()) {
                 Voucher vc = new Voucher();
                 vc.setMaVoucher(rs.getString(1));
@@ -123,6 +125,66 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<KhuyenMai> getAllKhuyenMai() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        listKhuyenMai.clear();
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
+                + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai = KhuyenMai.MaKhuyenMai";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                KhuyenMai km = new KhuyenMai();
+                km.setMaKM(rs.getString(1));
+                km.setTenKM(rs.getString(2));
+                km.setSoLuongKM(rs.getInt(3));
+                km.setNgayBatDauKM(rs.getString(4));
+                km.setHanSuDungKM(rs.getString(5));
+                km.setGiamGia(rs.getDouble(6));
+                km.setMaCTSP(rs.getString(7));
+                listKhuyenMai.add(km);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listKhuyenMai;
     }
+
+    @Override
+    public ArrayList<SanPham> getAllSanPham() {
+        listSanPham.clear();
+        String sql = "select SanPham.MaSanPham, TenSanPham, TenNCC, GiaDau, SoLuong, MauSac, KichThuoc, Mau, ChatLieu, HinhAnh, Hang, MaKhuyenMai\n"
+                + "from SanPham\n"
+                + "join ChiTietSanPham on ChiTietSanPham.MaSanPham = SanPham.MaSanPham\n"
+                + "join MauSac on MauSac.MaMauSac = ChiTietSanPham.MaMauSac\n"
+                + "join KichThuoc on KichThuoc.MaKichThuoc = ChiTietSanPham.MaKichThuoc\n"
+                + "join NhaCungCap on NhaCungCap.MaNCC = ChiTietSanPham.NCC\n"
+                + "join LichSuDonGia on LichSuDonGia.MaDonGia = ChiTietSanPham.DonGia\n"
+                + "join HinhAnh on HinhAnh.MaHinhAnh = ChiTietSanPham.MaHinhAnh\n"
+                + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaSanPhamChiTiet = ChiTietSanPham.MaSanPhamChiTiet";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setNhaCungCap(rs.getString(3));
+                sp.setDonGia(rs.getDouble(4));
+                sp.setSoLuongSP(rs.getInt(5));
+                sp.setMauSac(rs.getString(6));
+                sp.setKichThuoc(rs.getString(7));
+                sp.setMau(rs.getString(8));
+                sp.setChatLieu(rs.getString(9));
+                sp.setHinhAnh(rs.getString(10));
+                sp.setHang(rs.getString(11));
+                sp.setMaSPKM(rs.getString(12));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+
 }

@@ -4,6 +4,8 @@
  */
 package View;
 
+import Model.KhuyenMai;
+import Model.SanPham;
 import Model.Voucher;
 import Service.ServiceImp;
 import Service.ServiceInterface;
@@ -28,7 +30,11 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     
     public ViewTrangChu_QuanLy() {
         initComponents();
+        this.setLocationRelativeTo(null);
         loadDataVoucher(ser.getAllVoucher());
+        loadDataKhuyenMai(ser.getAllKhuyenMai());
+        loadDataSPKM(ser.getAllSanPham());
+        loadDataKMChonSP(ser.getAllKhuyenMai());
     }
     
     void loadDataVoucher(ArrayList<Voucher> list){
@@ -43,6 +49,46 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 voucher.getNgayBatDauVC(),
                 voucher.getSoTienGiam(),
                 voucher.getSoTienYeuCau()
+            });
+        }
+    }
+    
+    void loadDataKhuyenMai(ArrayList<KhuyenMai> list){
+        dtm = (DefaultTableModel) tblKhuyenMai.getModel();
+        dtm.setRowCount(0);
+        for (KhuyenMai khuyenMai : list) {
+            dtm.addRow(new Object[]{
+                khuyenMai.getMaKM(),
+                khuyenMai.getTenKM(),
+                khuyenMai.getSoLuongKM(),
+                khuyenMai.getHanSuDungKM(),
+                khuyenMai.getNgayBatDauKM(),
+                khuyenMai.getGiamGia(),
+                khuyenMai.getMaCTSP()
+            });
+        }
+    }
+    
+    void loadDataSPKM(ArrayList<SanPham> list){
+        dtm = (DefaultTableModel) tblSPKM.getModel();
+        dtm.setRowCount(0);
+        for (SanPham sanPham : list) {
+            dtm.addRow(new Object[]{
+                sanPham.getMaSP(),
+                sanPham.getTenSP(),
+                sanPham.getMaSPKM()
+            });
+        }
+    }
+    
+    void loadDataKMChonSP(ArrayList<KhuyenMai> list){
+        dtm = (DefaultTableModel) tblKMChonSP.getModel();
+        dtm.setRowCount(0);
+        for (KhuyenMai khuyenMai : list) {
+            dtm.addRow(new Object[]{
+                khuyenMai.getMaKM(),
+                khuyenMai.getTenKM(),
+                khuyenMai.getGiamGia()
             });
         }
     }
