@@ -41,7 +41,7 @@ public class ServiceImp implements ServiceInterface {
 
         return listKhachHang;
     }
-//public class ServiceImp implements ServiceInterface{
+
 
     @Override
     public ArrayList<Voucher> getAllVoucher() {
