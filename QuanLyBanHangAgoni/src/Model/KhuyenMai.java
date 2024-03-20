@@ -9,18 +9,19 @@ package Model;
  * @author Admin
  */
 public class KhuyenMai {
-    private String maKM, tenKM, ngayBatDau, hanSuDung;
+    private String maKM, tenKM, ngayBatDauKM, hanSuDungKM, maCTSP;
     private Double giamGia;
     private Integer soLuongKM;
 
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String maKM, String tenKM, String ngayBatDau, String hanSuDung, Double giamGia, Integer soLuongKM) {
+    public KhuyenMai(String maKM, String tenKM, String ngayBatDauKM, String hanSuDungKM, String maCTSP, Double giamGia, Integer soLuongKM) {
         this.maKM = maKM;
         this.tenKM = tenKM;
-        this.ngayBatDau = ngayBatDau;
-        this.hanSuDung = hanSuDung;
+        this.ngayBatDauKM = ngayBatDauKM;
+        this.hanSuDungKM = hanSuDungKM;
+        this.maCTSP = maCTSP;
         this.giamGia = giamGia;
         this.soLuongKM = soLuongKM;
     }
@@ -41,20 +42,28 @@ public class KhuyenMai {
         this.tenKM = tenKM;
     }
 
-    public String getNgayBatDau() {
-        return ngayBatDau;
+    public String getNgayBatDauKM() {
+        return ngayBatDauKM;
     }
 
-    public void setNgayBatDau(String ngayBatDau) {
-        this.ngayBatDau = ngayBatDau;
+    public void setNgayBatDauKM(String ngayBatDauKM) {
+        this.ngayBatDauKM = ngayBatDauKM;
     }
 
-    public String getHanSuDung() {
-        return hanSuDung;
+    public String getHanSuDungKM() {
+        return hanSuDungKM;
     }
 
-    public void setHanSuDung(String hanSuDung) {
-        this.hanSuDung = hanSuDung;
+    public void setHanSuDungKM(String hanSuDungKM) {
+        this.hanSuDungKM = hanSuDungKM;
+    }
+
+    public String getMaCTSP() {
+        return maCTSP;
+    }
+
+    public void setMaCTSP(String maCTSP) {
+        this.maCTSP = maCTSP;
     }
 
     public Double getGiamGia() {
@@ -72,6 +81,8 @@ public class KhuyenMai {
     public void setSoLuongKM(Integer soLuongKM) {
         this.soLuongKM = soLuongKM;
     }
+
+    
     
     
     

@@ -9,14 +9,14 @@ package Model;
  * @author Admin
  */
 public class SanPham {
-    private String maSP, tenSP, mau, hang, chatLieu, mauSac, kichThuoc, nhaCungCap, hinhAnh;
+    private String maSP, tenSP, mau, hang, chatLieu, mauSac, kichThuoc, nhaCungCap, hinhAnh, maSPKM;
     private Double donGia;
     private Integer soLuongSP;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String tenSP, String mau, String hang, String chatLieu, String mauSac, String kichThuoc, String nhaCungCap, String hinhAnh, Double donGia, Integer soLuongSP) {
+    public SanPham(String maSP, String tenSP, String mau, String hang, String chatLieu, String mauSac, String kichThuoc, String nhaCungCap, String hinhAnh, String maSPKM, Double donGia, Integer soLuongSP) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.mau = mau;
@@ -26,6 +26,7 @@ public class SanPham {
         this.kichThuoc = kichThuoc;
         this.nhaCungCap = nhaCungCap;
         this.hinhAnh = hinhAnh;
+        this.maSPKM = maSPKM;
         this.donGia = donGia;
         this.soLuongSP = soLuongSP;
     }
@@ -102,6 +103,14 @@ public class SanPham {
         this.hinhAnh = hinhAnh;
     }
 
+    public String getMaSPKM() {
+        return maSPKM;
+    }
+
+    public void setMaSPKM(String maSPKM) {
+        this.maSPKM = maSPKM;
+    }
+
     public Double getDonGia() {
         return donGia;
     }
@@ -117,6 +126,8 @@ public class SanPham {
     public void setSoLuongSP(Integer soLuongSP) {
         this.soLuongSP = soLuongSP;
     }
+
+    
 
     
     

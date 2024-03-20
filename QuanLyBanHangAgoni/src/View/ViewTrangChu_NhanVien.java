@@ -4,19 +4,36 @@
  */
 package View;
 
+import Model.KhachHang;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import Service.*;
 /**
  *
  * @author NGHIAPC
  */
 public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
+    ServiceInterface ser = new ServiceImp();
+    DefaultTableModel dftm;
+    
 
-    /**
-     * Creates new form GiaoDienBanHang
-     */
     public ViewTrangChu_NhanVien() {
         initComponents();
+        loadDataKhachHang(ser.getAllKhachHang());
     }
-
+    void loadDataKhachHang(ArrayList<KhachHang> list){
+        
+        dftm = (DefaultTableModel) tblKhachHang.getModel();
+        dftm.setRowCount(0);
+        for (KhachHang kh : list) {
+            dftm.addRow(new Object[]{
+                kh.getMaKhachHang(),
+                kh.getTenKhachHang(),
+                kh.getSDT(),
+                kh.getDiaChi()
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -5,6 +5,8 @@
 package View;
 
 import Model.NguoiDung;
+import Model.KhuyenMai;
+import Model.SanPham;
 import Model.Voucher;
 import Service.ServiceImp;
 import Service.ServiceInterface;
@@ -32,6 +34,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         loadDataVoucher(ser.getAllVoucher());
         loadDataNguoiDung();
+        loadDataKhuyenMai(ser.getAllKhuyenMai());
+        loadDataSPKM(ser.getAllSanPham());
+        loadDataKMChonSP(ser.getAllKhuyenMai());
     }
     
     void loadDataVoucher(ArrayList<Voucher> list){
@@ -100,6 +105,47 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             txtTenDN.setText(nd.getTenDN());
             txtPassword.setText(nd.getPassWord());
         }
+    
+    void loadDataKhuyenMai(ArrayList<KhuyenMai> list){
+        dtm = (DefaultTableModel) tblKhuyenMai.getModel();
+        dtm.setRowCount(0);
+        for (KhuyenMai khuyenMai : list) {
+            dtm.addRow(new Object[]{
+                khuyenMai.getMaKM(),
+                khuyenMai.getTenKM(),
+                khuyenMai.getSoLuongKM(),
+                khuyenMai.getHanSuDungKM(),
+                khuyenMai.getNgayBatDauKM(),
+                khuyenMai.getGiamGia(),
+                khuyenMai.getMaCTSP()
+            });
+        }
+    }
+    
+    void loadDataSPKM(ArrayList<SanPham> list){
+        dtm = (DefaultTableModel) tblSPKM.getModel();
+        dtm.setRowCount(0);
+        for (SanPham sanPham : list) {
+            dtm.addRow(new Object[]{
+                sanPham.getMaSP(),
+                sanPham.getTenSP(),
+                sanPham.getMaSPKM()
+            });
+        }
+    }
+    
+    void loadDataKMChonSP(ArrayList<KhuyenMai> list){
+        dtm = (DefaultTableModel) tblKMChonSP.getModel();
+        dtm.setRowCount(0);
+        for (KhuyenMai khuyenMai : list) {
+            dtm.addRow(new Object[]{
+                khuyenMai.getMaKM(),
+                khuyenMai.getTenKM(),
+                khuyenMai.getGiamGia()
+            });
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
