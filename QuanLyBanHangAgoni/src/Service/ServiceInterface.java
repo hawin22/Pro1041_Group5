@@ -15,4 +15,6 @@ public interface ServiceInterface {
     ArrayList<KhachHang> getAllKhachHang();
     ArrayList<Login> LoginSearch(String user, String pass);
     ArrayList<Login> FogotPassword(String user, String email);
+    ArrayList<Voucher> getAllVoucher();
+    ArrayList<KhuyenMai> getAllKhuyenMai();
 }
