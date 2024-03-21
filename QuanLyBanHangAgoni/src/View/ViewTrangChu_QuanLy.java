@@ -24,22 +24,20 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     /**
      * Creates new form ViewTrangChu
      */
-    
     ServiceInterface ser = new ServiceImp();
     DefaultTableModel dtm;
-    
-    
+
     public ViewTrangChu_QuanLy() {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataVoucher(ser.getAllVoucher());
-        loadDataNguoiDung();
+        loadDataNguoiDung(ser.getAllNguoiDung());
         loadDataKhuyenMai(ser.getAllKhuyenMai());
         loadDataSPKM(ser.getAllSanPham());
         loadDataKMChonSP(ser.getAllKhuyenMai());
     }
-    
-    void loadDataVoucher(ArrayList<Voucher> list){
+
+    void loadDataVoucher(ArrayList<Voucher> list) {
         dtm = (DefaultTableModel) tblVoucher.getModel();
         dtm.setRowCount(0);
         for (Voucher voucher : list) {
@@ -54,14 +52,15 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    void loadDataNguoiDung(){
+
+    void loadDataNguoiDung(ArrayList<NguoiDung> list) {
         dtm = (DefaultTableModel) tblNhanVien.getModel();
         dtm.setRowCount(0);
-        for (NguoiDung nd : ser.getAllNguoiDung()) {
+        for (NguoiDung nd : list) {
             dtm.addRow(new Object[]{
                 nd.getMaNguoiDung(),
                 nd.getTenNguoiDung(),
-                nd.isGioiTinh()?"Nam":"Nữ",
+                nd.isGioiTinh() ? "Nam" : "Nữ",
                 nd.getSDT(),
                 nd.getEmail(),
                 nd.getRoles(),
@@ -70,15 +69,15 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    NguoiDung getForm(){
+
+    NguoiDung getForm() {
         NguoiDung nd = new NguoiDung();
         nd.setMaNguoiDung(txtMaNV.getText());
         nd.setTenNguoiDung(txtTenNV.getText());
         boolean gioiTinh;
         if (rdNam.isSelected()) {
             gioiTinh = true;
-        }
-        else{
+        } else {
             gioiTinh = false;
         }
         nd.setGioiTinh(gioiTinh);
@@ -89,24 +88,24 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         nd.setPassWord(txtPassword.getText());
         return nd;
     }
-        void setForm(NguoiDung nd){
-            txtMaNV.setText(nd.getMaNguoiDung());
-            txtTenNV.setText(nd.getTenNguoiDung());
-            Boolean gioiTinh = nd.isGioiTinh();
-            if (gioiTinh) {
-                rdNam.setSelected(true);
-            }
-            else{
-                rdNu.setSelected(true);
-            }
-            txtSDT.setText(nd.getSDT());
-            txtEmail.setText(nd.getEmail());
-            txtRoles.setText(nd.getRoles());
-            txtTenDN.setText(nd.getTenDN());
-            txtPassword.setText(nd.getPassWord());
+
+    void setForm(NguoiDung nd) {
+        txtMaNV.setText(nd.getMaNguoiDung());
+        txtTenNV.setText(nd.getTenNguoiDung());
+        Boolean gioiTinh = nd.isGioiTinh();
+        if (gioiTinh) {
+            rdNam.setSelected(true);
+        } else {
+            rdNu.setSelected(true);
         }
-    
-    void loadDataKhuyenMai(ArrayList<KhuyenMai> list){
+        txtSDT.setText(nd.getSDT());
+        txtEmail.setText(nd.getEmail());
+        txtRoles.setText(nd.getRoles());
+        txtTenDN.setText(nd.getTenDN());
+        txtPassword.setText(nd.getPassWord());
+    }
+
+    void loadDataKhuyenMai(ArrayList<KhuyenMai> list) {
         dtm = (DefaultTableModel) tblKhuyenMai.getModel();
         dtm.setRowCount(0);
         for (KhuyenMai khuyenMai : list) {
@@ -121,8 +120,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
-    void loadDataSPKM(ArrayList<SanPham> list){
+
+    void loadDataSPKM(ArrayList<SanPham> list) {
         dtm = (DefaultTableModel) tblSPKM.getModel();
         dtm.setRowCount(0);
         for (SanPham sanPham : list) {
@@ -133,8 +132,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
-    void loadDataKMChonSP(ArrayList<KhuyenMai> list){
+
+    void loadDataKMChonSP(ArrayList<KhuyenMai> list) {
         dtm = (DefaultTableModel) tblKMChonSP.getModel();
         dtm.setRowCount(0);
         for (KhuyenMai khuyenMai : list) {
@@ -957,6 +956,11 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnHienThiNV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHienThiNV.setForeground(new java.awt.Color(255, 255, 255));
         btnHienThiNV.setText("Hiển thị");
+        btnHienThiNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHienThiNVActionPerformed(evt);
+            }
+        });
 
         btnSearchNV.setBackground(new java.awt.Color(51, 153, 255));
         btnSearchNV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -969,17 +973,22 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
-        txtSearchNV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchNVActionPerformed(evt);
+        txtSearchNV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txtSearchNVMouseReleased(evt);
+            }
+        });
+        txtSearchNV.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchNVKeyReleased(evt);
             }
         });
 
         buttonGroup3.add(rdTheoMaNV);
         rdTheoMaNV.setText("Sắp xếp theo mã");
-        rdTheoMaNV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdTheoMaNVActionPerformed(evt);
+        rdTheoMaNV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdTheoMaNVMouseClicked(evt);
             }
         });
 
@@ -1219,12 +1228,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnHienThi.setForeground(new java.awt.Color(255, 255, 255));
         btnHienThi.setText("Hiển thị");
 
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
@@ -1291,11 +1294,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnBoLoc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBoLoc.setForeground(new java.awt.Color(255, 255, 255));
         btnBoLoc.setText("Bỏ lọc");
-        btnBoLoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBoLocActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -1388,12 +1386,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnHienThiHuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHienThiHuy.setForeground(new java.awt.Color(255, 255, 255));
         btnHienThiHuy.setText("Hiển thị");
-
-        txtSearchHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchHuyActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -2413,36 +2405,37 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBoLocHuyActionPerformed
 
-    private void txtSearchHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchHuyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchHuyActionPerformed
-
     private void btnSearchHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchHuyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchHuyActionPerformed
-
-    private void btnBoLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoLocActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBoLocActionPerformed
-
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void rdTheoMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTheoMaNVActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdTheoMaNVActionPerformed
-
-    private void txtSearchNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchNVActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchNVActionPerformed
-
     private void btnSearchNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNVActionPerformed
         // TODO add your handling code here:
+       String searchNV = txtSearchNV.getText();
+        ArrayList<NguoiDung> listSearchNV = ser.searchNguoiDung(searchNV);
+        if (searchNV.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã hoặc tên");
+        } else {
+            if (listSearchNV.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Không tồn tại nhân viên này");
+                txtSearchNV.setText("");
+                txtMaNV.setText("");
+                txtTenNV.setText("");
+                buttonGroup4.clearSelection();
+                txtSDT.setText("");
+                txtEmail.setText("");
+                txtRoles.setText("");
+                txtTenDN.setText("");
+                txtPassword.setText("");
+            } else {
+                loadDataNguoiDung(ser.searchNguoiDung(searchNV));
+            }
+        }
+
     }//GEN-LAST:event_btnSearchNVActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -2472,7 +2465,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         // TODO add your handling code here:
         int i = tblNhanVien.getSelectedRow();
-        if (i>=0) {
+        if (i >= 0) {
             setForm(ser.getRowNguoiDung(i));
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
@@ -2482,6 +2475,46 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         this.setVisible(false);
         viewDN.setVisible(true);
     }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void txtSearchNVMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchNVMouseReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtSearchNVMouseReleased
+
+    private void txtSearchNVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchNVKeyReleased
+        // TODO add your handling code here:
+//        String searchNV = txtSearchNV.getText();
+//        ArrayList<NguoiDung> listSearchNV = ser.searchNguoiDung(searchNV);
+//        if (searchNV.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã hoặc tên");
+//        } else {
+//            if (listSearchNV.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Không tồn tại nhân viên này");
+//                txtSearchNV.setText("");
+//                txtMaNV.setText("");
+//                txtTenNV.setText("");
+//                buttonGroup4.clearSelection();
+//                txtSDT.setText("");
+//                txtEmail.setText("");
+//                txtRoles.setText("");
+//                txtTenDN.setText("");
+//                txtPassword.setText("");
+//            } else {
+//                loadDataNguoiDung(ser.searchNguoiDung(searchNV));
+//            }
+//        }
+    }//GEN-LAST:event_txtSearchNVKeyReleased
+
+    private void btnHienThiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiNVActionPerformed
+        // TODO add your handling code here:
+        loadDataNguoiDung(ser.getAllNguoiDung());
+    }//GEN-LAST:event_btnHienThiNVActionPerformed
+
+    private void rdTheoMaNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTheoMaNVMouseClicked
+        // TODO add your handling code here:
+        loadDataNguoiDung(ser.sapXepTheoMaNgDung());
+      
+    }//GEN-LAST:event_rdTheoMaNVMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2510,7 +2543,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-         JFrame frame = new JFrame("Example");
+        JFrame frame = new JFrame("Example");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //
 //        JLabel label = new JLabel("Tìm kiếm trên Google hoặc nhập một URL");

@@ -46,6 +46,11 @@ public class ViewDangNhap extends javax.swing.JFrame {
         lbForgotPass = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         lbHinhAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ChanGaGoiDemHinhNen.png"))); // NOI18N
 
@@ -100,7 +105,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
 
         cbxRememberPass.setBackground(new java.awt.Color(255, 255, 255));
         cbxRememberPass.setForeground(new java.awt.Color(255, 255, 255));
-        cbxRememberPass.setSelected(true);
         cbxRememberPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbxRememberPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +240,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
             this.setVisible(false);
             viewQL.setVisible(true);
             viewQL.setLocationRelativeTo(null);
-        }else if (list.size() == 1 && list.get(0).getRole().equals("Nhân viên")) {
+        } else if (list.size() == 1 && list.get(0).getRole().equals("Nhân viên")) {
             this.setVisible(false);
             viewNV.setVisible(true);
             viewNV.setLocationRelativeTo(null);
@@ -244,6 +248,12 @@ public class ViewDangNhap extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnSignInActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        txtUserName.setText("nv_an");
+        txtPassword.setText("password123");
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

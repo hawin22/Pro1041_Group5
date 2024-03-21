@@ -1190,6 +1190,12 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         setFormKhachHang(ser.getAllKhachHang().get(row));
     }                                         
 
+    private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
+        // TODO add your handling code here:
+        int row = tblKhachHang.getSelectedRow();
+        setFormKhachHang(ser.getAllKhachHang().get(row));
+    }//GEN-LAST:event_tblKhachHangMouseClicked
+
     /**
      * @param args the command line arguments
      */

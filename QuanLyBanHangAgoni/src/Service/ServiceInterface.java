@@ -20,4 +20,6 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> getAllNguoiDung();
     NguoiDung getRowNguoiDung(int row);
     ArrayList<SanPham> getAllSanPham();
+    ArrayList<NguoiDung> searchNguoiDung(String ma);
+    ArrayList<NguoiDung> sapXepTheoMaNgDung();
 }
