@@ -8,6 +8,11 @@ import Model.*;
 import java.util.ArrayList;
 import java.sql.*;
 import DbConnect.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  *
@@ -43,7 +48,6 @@ public class ServiceImp implements ServiceInterface {
 
         return listKhachHang;
     }
-
 
     @Override
     public ArrayList<Voucher> getAllVoucher() {
@@ -173,6 +177,7 @@ public class ServiceImp implements ServiceInterface {
         }
         return listNguoiDung;
     }
+
     public ArrayList<SanPham> getAllSanPham() {
         listSanPham.clear();
         String sql = "select SanPham.MaSanPham, TenSanPham, TenNCC, GiaDau, SoLuong, MauSac, KichThuoc, Mau, ChatLieu, HinhAnh, Hang, MaKhuyenMai\n"
@@ -213,7 +218,7 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public NguoiDung getRowNguoiDung(int row) {
         return listNguoiDung.get(row);
-        
+
     }
 
 }
