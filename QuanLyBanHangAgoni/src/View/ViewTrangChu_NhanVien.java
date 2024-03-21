@@ -37,8 +37,26 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             });
         }
     }
+    Boolean checkSo(String so){
+        try {
+            Integer.parseInt(so);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     KhachHang getFormKhachHang(){
-        return null;
+        String maKH = txtMaKH.getText().trim();
+        String tenKH = txtTenKH.getText().trim();
+        String sdt = txtSDTKH.getText().trim();
+        String diaChi = txtDCKH.getText().trim();
+        return new KhachHang(maKH, tenKH, sdt, diaChi);
+    }
+    void setFormKhachHang(KhachHang kh){
+        txtMaKH.setText(kh.getMaKhachHang());
+        txtTenKH.setText(kh.getTenKhachHang());
+        txtSDTKH.setText(kh.getSDT());
+        txtDCKH.setText(kh.getDiaChi());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -983,6 +1001,11 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Địa chỉ"
             }
         ));
+        tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKhachHangMouseClicked(evt);
+            }
+        });
         jScrollPane10.setViewportView(tblKhachHang);
 
         btnThemKH.setBackground(new java.awt.Color(51, 153, 255));
@@ -1160,6 +1183,12 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         this.setVisible(false);
         viewDN.setVisible(true);
     }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
+        // TODO add your handling code here:
+        int row = tblKhachHang.getSelectedRow();
+        setFormKhachHang(ser.getAllKhachHang().get(row));
+    }//GEN-LAST:event_tblKhachHangMouseClicked
 
     /**
      * @param args the command line arguments
