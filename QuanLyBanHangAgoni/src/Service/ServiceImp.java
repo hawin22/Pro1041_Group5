@@ -218,7 +218,7 @@ public class ServiceImp implements ServiceInterface {
     
     @Override
     public ArrayList<NguoiDung> searchNguoiDung(String ma) {
-        String sql = "select * from NguoiDung where MaNguoiDung like ?";
+        String sql = "select * from NguoiDung where Roles like 'NV%' and MaNguoiDung like ?";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -246,6 +246,33 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<NguoiDung> sapXepTheoMaNgDung() {
         String sql = "select * from NguoiDung where Roles like 'NV%' order by MaNguoiDung desc ";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setTenNguoiDung(rs.getString(2));
+                nd.setGioiTinh(rs.getBoolean(3));
+                nd.setSDT(rs.getString(4));
+                nd.setEmail(rs.getString(5));
+                nd.setRoles(rs.getString(6));
+                nd.setTenDN(rs.getString(7));
+                nd.setPassWord(rs.getString(8));
+                listNguoiDung.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listNguoiDung;
+    }
+
+    @Override
+    public ArrayList<NguoiDung> sapXepTheoTenNgDung() {
+         String sql = "select * from NguoiDung where Roles like 'NV%' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
