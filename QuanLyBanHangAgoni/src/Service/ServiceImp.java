@@ -49,6 +49,63 @@ public class ServiceImp implements ServiceInterface {
         return listKhachHang;
     }
     
+    public void addKhachHang(KhachHang kh){
+        String sql = ("insert into KhachHang (MaKhachHang, TenKhachHang, SDT, DiaChi) values (?,?,?,?)");
+           try {
+            
+               Connection conn = DBConnect1.getConnection();
+               PreparedStatement stm = conn.prepareStatement(sql);
+               stm.setString(1, kh.getMaKhachHang());
+               stm.setString(2, kh.getTenKhachHang());
+               stm.setString(3, kh.getSDT());
+               stm.setString(4, kh.getDiaChi());
+               
+               stm.executeUpdate();
+               conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateKhachHang(KhachHang kh){
+        String sql = "update KhachHang set TenKhachHang = ?, SDT = ?, DiaChi = ? where MaKhachHang = ?";
+           try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, kh.getTenKhachHang());
+            stm.setString(2, kh.getSDT());
+            stm.setString(3, kh.getDiaChi());
+             stm.setString(4, kh.getMaKhachHang());
+             
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void deleteKhachHang(String MaKhachHang){
+    String sql = "DELETE FROM KhachHang WHERE MaKhachHang=?";
+    try {
+        Connection conn = DBConnect1.getConnection();
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1, MaKhachHang);
+        
+        stm.executeUpdate();
+        conn.close();
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+    
+    public KhachHang getRowKhachHang(int row){
+       return listKhachHang.get(row);
+    }
+    
+ 
+    
+    
     @Override
     public ArrayList<Voucher> getAllVoucher() {
         String sql = "select * from Voucher";
