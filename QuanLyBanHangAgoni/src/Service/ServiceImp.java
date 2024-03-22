@@ -301,11 +301,5 @@ public class ServiceImp implements ServiceInterface {
 
         return listNguoiDung;
     }
-
-    @Override
-    public Boolean add(NguoiDung nd) {
-        
-        return true;
-    }
     
 }
