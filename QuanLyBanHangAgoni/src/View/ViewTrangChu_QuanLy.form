@@ -329,6 +329,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtTKVoucher">
+                      <Events>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTKVoucherKeyReleased"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rdSXTMaVoucher">
                       <Properties>
@@ -417,6 +420,9 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblVoucherMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

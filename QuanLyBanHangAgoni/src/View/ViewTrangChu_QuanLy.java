@@ -52,7 +52,53 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
+    
+    Voucher getFormVoucher(){
+        Voucher vc = new Voucher();
+        vc.setMaVoucher(txtMaVoucher.getText());
+        vc.setTenVoucher(txtTenVoucher.getText());
+        if (txtSoLuongVoucher.getText() == "" || txtSoLuongVoucher.getText() == "0") {
+            vc.setSoLuongVC(null);
+        } else {
+            vc.setSoLuongVC(Integer.parseInt(txtSoLuongVoucher.getText()));
+        }
+        vc.setNgayBatDauVC(txtNBatDauVoucher.getText());
+        vc.setHanSuDungVC(txtNKetThucVoucher.getText());
+        if (txtSoTienGiamVoucher.getText() == "" || txtSoTienGiamVoucher.getText() == "0") {
+            vc.setSoTienGiam(null);
+        } else {
+            vc.setSoTienGiam(Double.parseDouble(txtSoTienGiamVoucher.getText()));
+        }
+        if (txtSoTienYCVoucher.getText() == "" || txtSoTienYCVoucher.getText() == "0") {
+            vc.setSoTienYeuCau(null);
+        } else {
+            vc.setSoTienYeuCau(Double.parseDouble(txtSoTienYCVoucher.getText()));
+        }
+        return vc;
+    }
 
+    void setFormVoucher(Voucher vc) {
+        txtMaVoucher.setText(vc.getMaVoucher());
+        txtTenVoucher.setText(vc.getTenVoucher());
+        if (vc.getSoLuongVC() == 0) {
+            txtSoLuongVoucher.setText("0");
+        } else {
+            txtSoLuongVoucher.setText(String.valueOf(vc.getSoLuongVC()));
+        }
+        txtNBatDauVoucher.setText(vc.getNgayBatDauVC());
+        txtNKetThucVoucher.setText(vc.getHanSuDungVC());
+        if (vc.getSoTienGiam()== 0) {
+            txtSoTienGiamVoucher.setText("0");
+        } else {
+            txtSoTienGiamVoucher.setText(String.valueOf(vc.getSoTienGiam()));
+        }
+        if (vc.getSoTienYeuCau()== 0) {
+            txtSoTienYCVoucher.setText("0");
+        } else {
+            txtSoTienYCVoucher.setText(String.valueOf(vc.getSoTienYeuCau()));
+        }
+    }
+    
     void loadDataNguoiDung(ArrayList<NguoiDung> list) {
         dtm = (DefaultTableModel) tblNhanVien.getModel();
         dtm.setRowCount(0);
@@ -460,6 +506,12 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Tìm kiếm voucher");
 
+        txtTKVoucher.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTKVoucherKeyReleased(evt);
+            }
+        });
+
         buttonGroup2.add(rdSXTMaVoucher);
         rdSXTMaVoucher.setText("Sắp xếp theo mã");
 
@@ -477,6 +529,11 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 "Mã voucher", "Tên voucher", "Số lượng", "Ngày bắt đầu", "Ngày hết hạn", "Số tiền giảm", "Số tiền yêu cầu"
             }
         ));
+        tblVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVoucherMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblVoucher);
 
         jLabel47.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -2515,6 +2572,24 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         loadDataNguoiDung(ser.sapXepTheoMaNgDung());
       
     }//GEN-LAST:event_rdTheoMaNVMouseClicked
+
+    private void tblVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVoucherMouseClicked
+        // TODO add your handling code here:
+        int row = tblVoucher.getSelectedRow();
+        if (row >= 0) {
+            setFormVoucher(ser.getAllVoucher().get(row));
+        }
+    }//GEN-LAST:event_tblVoucherMouseClicked
+
+    private void txtTKVoucherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTKVoucherKeyReleased
+        // TODO add your handling code here:
+        String search = txtTKVoucher.getText();
+        if (search.isEmpty()) {
+            loadDataVoucher(ser.getAllVoucher());
+        } else {
+            loadDataVoucher(ser.searchVoucher(search));
+        }
+    }//GEN-LAST:event_txtTKVoucherKeyReleased
 
     /**
      * @param args the command line arguments
