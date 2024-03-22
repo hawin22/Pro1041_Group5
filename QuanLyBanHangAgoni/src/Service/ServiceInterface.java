@@ -24,4 +24,6 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> sapXepTheoMaNgDung();
     ArrayList<Voucher> searchVoucher(String maVC);
     ArrayList<NguoiDung> sapXepTheoTenNgDung();
+    ArrayList<HoaDon> getAllHoaDon();
+    ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet();
 }

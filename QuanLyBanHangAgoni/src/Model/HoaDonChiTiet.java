@@ -9,5 +9,83 @@ package Model;
  * @author NGHIAPC
  */
 public class HoaDonChiTiet {
+    String maHoaDon;
+    String maHoaDonChiTiet;
+    Integer soLuong;
+    double donGia;
+    double donGiaSau;
+    String maSanPham;
+    String tenSanPham;
+
+    public HoaDonChiTiet() {
+    }
+
+    public HoaDonChiTiet(String maHoaDon, String maHoaDonChiTiet, Integer soLuong, double donGia, double donGiaSau, String maSanPham, String tenSanPham) {
+        this.maHoaDon = maHoaDon;
+        this.maHoaDonChiTiet = maHoaDonChiTiet;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+        this.donGiaSau = donGiaSau;
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+    }
+
+    public String getMaHoaDon() {
+        return maHoaDon;
+    }
+
+    public void setMaHoaDon(String maHoaDon) {
+        this.maHoaDon = maHoaDon;
+    }
+
+    public String getMaHoaDonChiTiet() {
+        return maHoaDonChiTiet;
+    }
+
+    public void setMaHoaDonChiTiet(String maHoaDonChiTiet) {
+        this.maHoaDonChiTiet = maHoaDonChiTiet;
+    }
+
+    public Integer getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(Integer soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public double getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(double donGia) {
+        this.donGia = donGia;
+    }
+
+    public double getDonGiaSau() {
+        return donGiaSau;
+    }
+
+    public void setDonGiaSau(double donGiaSau) {
+        this.donGiaSau = donGiaSau;
+    }
+
+    public String getMaSanPham() {
+        return maSanPham;
+    }
+
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
+    }
+
+    public String getTenSanPham() {
+        return tenSanPham;
+    }
+
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
+    }
+    
+    
     
 }
