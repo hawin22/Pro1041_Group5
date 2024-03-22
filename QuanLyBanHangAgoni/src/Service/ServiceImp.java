@@ -278,6 +278,32 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
+    public ArrayList<Voucher> searchVoucher(String maVC) {
+        listVoucher.clear();
+        String sql = "select * from Voucher where MaVoucher like ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, "%"+maVC+"%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Voucher vc = new Voucher();
+                vc.setMaVoucher(rs.getString(1));
+                vc.setTenVoucher(rs.getString(2));
+                vc.setSoLuongVC(rs.getInt(3));
+                vc.setHanSuDungVC(rs.getString(4));
+                vc.setNgayBatDauVC(rs.getString(5));
+                vc.setSoTienGiam(rs.getDouble(6));
+                vc.setSoTienYeuCau(rs.getDouble(7));
+                listVoucher.add(vc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listVoucher;
+
+    }
+    
     public ArrayList<NguoiDung> sapXepTheoTenNgDung() {
         String sql = "select * from NguoiDung where Roles like 'NV%' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
         listNguoiDung.clear();
@@ -300,7 +326,6 @@ public class ServiceImp implements ServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return listNguoiDung;
     }
 
