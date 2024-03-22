@@ -23,4 +23,5 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> searchNguoiDung(String ma);
     ArrayList<NguoiDung> sapXepTheoMaNgDung();
     ArrayList<NguoiDung> sapXepTheoTenNgDung();
+    Boolean add(NguoiDung nd);
 }
