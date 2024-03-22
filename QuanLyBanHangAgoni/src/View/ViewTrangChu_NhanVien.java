@@ -4,11 +4,12 @@
  */
 package View;
 
-import Model.KhachHang;
+import Model.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Service.*;
 import java.security.SecureRandom;
+import java.util.Random;
 
 /**
  *
@@ -20,17 +21,21 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     DefaultTableModel dftm;
     private static final String chuoiKyTu = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int leghth = 8;
-    private static SecureRandom sR = new SecureRandom();
+    private static Random sR = new Random();
     
     public static String genTuDongHoaDon (){
-        StringBuilder sB = new StringBuilder();
+        StringBuilder sB = new StringBuilder(leghth);
+        for (int i = 0; i < leghth; i++) {
+            
+        }
         return null;
     }
 
     public ViewTrangChu_NhanVien() {
         initComponents();
- 
+        loadDataSanPhamBanHang(ser.getAllSanPham());
         loadDataKhachHang(ser.getAllKhachHang());
+        loadDataHoaDonBanHang(ser.getAllHoaDon());
     }
 
     void loadDataKhachHang(ArrayList<KhachHang> list) {
@@ -43,6 +48,57 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 kh.getTenKhachHang(),
                 kh.getSDT(),
                 kh.getDiaChi()
+            });
+        }
+    }
+    double thanhTien(Integer soLuong, double donGiaSau){
+        return (soLuong*donGiaSau);
+    }
+    void loadDataHoaDonChiTiet(ArrayList<HoaDonChiTiet> listHDCT){
+        dftm = (DefaultTableModel) tblThanhToanBanHang.getModel();
+        dftm.setRowCount(0);
+        for (HoaDonChiTiet hdct : listHDCT) {
+            dftm.addRow(new Object[]{
+                hdct.getMaSanPham(),
+                hdct.getTenSanPham(),
+                hdct.getSoLuong(),
+                hdct.getDonGia(),
+                hdct.getDonGiaSau(),
+                thanhTien(hdct.getSoLuong(), hdct.getDonGiaSau())
+            });
+        }
+    }
+    void loadDataHoaDonBanHang(ArrayList<HoaDon> list){
+        dftm = (DefaultTableModel) tblHoaDonBanHang.getModel();
+        dftm.setRowCount(0);
+        for (HoaDon hd : list) {
+            dftm.addRow(new Object[]{
+                hd.getMaHoaDon(),
+                hd.getMaNhanVien(),
+                hd.getNgayTao(),
+                hd.getNgayHoanThanh(),
+                hd.getTrangThai(),
+                hd.getLoaiThanhToan()
+            });
+        }
+        
+    }
+    void loadDataSanPhamBanHang(ArrayList<SanPham> list){
+        dftm = (DefaultTableModel) tblSanPhamBanHang.getModel();
+        dftm.setRowCount(0);
+        for (SanPham sp : list) {
+            dftm.addRow(new Object[]{
+                sp.getMaSP(),
+                sp.getTenSP(),
+                sp.getChatLieu(),
+                sp.getMau(),
+                sp.getHang(),
+                sp.getSoLuongSP(),
+                sp.getKichThuoc(),
+                sp.getMauSac(),
+                sp.getHinhAnh(),
+                sp.getDonGia(),
+                sp.getNhaCungCap()
             });
         }
     }

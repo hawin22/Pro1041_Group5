@@ -19,14 +19,16 @@ import java.io.ObjectOutputStream;
  * @author NGHIAPC
  */
 public class ServiceImp implements ServiceInterface {
-    
+
     ArrayList<Voucher> listVoucher = new ArrayList<>();
     ArrayList<KhuyenMai> listKhuyenMai = new ArrayList<>();
     ArrayList<NguoiDung> listNguoiDung = new ArrayList<>();
     ArrayList<SanPham> listSanPham = new ArrayList<>();
     ArrayList<KhachHang> listKhachHang = new ArrayList<>();
     ArrayList<Login> listLogin = new ArrayList<>();
-    
+    ArrayList<HoaDon> listHoaDon = new ArrayList<>();
+    ArrayList<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
+
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
         listKhachHang.clear();
@@ -45,10 +47,10 @@ public class ServiceImp implements ServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return listKhachHang;
     }
-    
+
     @Override
     public ArrayList<Voucher> getAllVoucher() {
         String sql = "select * from Voucher";
@@ -72,9 +74,9 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
         return listVoucher;
-        
+
     }
-    
+
     public ArrayList<Login> LoginSearch(String user, String pass) {
         String sql = "select TenDangNhap, MatKhau, Roles.TenRole, Email from NguoiDung \n"
                 + "join Roles on NguoiDung.Roles = Roles.Marole\n"
@@ -99,7 +101,7 @@ public class ServiceImp implements ServiceInterface {
         }
         return listLogin;
     }
-    
+
     public ArrayList<Login> FogotPassword(String user, String email) {
         String sql = "select TenDangNhap, MatKhau, Roles.TenRole, Email from NguoiDung \n"
                 + "join Roles on NguoiDung.Roles = Roles.Marole\n"
@@ -111,7 +113,7 @@ public class ServiceImp implements ServiceInterface {
             stm.setString(1, user);
             stm.setString(2, email);
             ResultSet rs = stm.executeQuery();
-            
+
             while (rs.next()) {
                 Login lg = new Login();
                 lg.setUserName(rs.getString(1));
@@ -125,7 +127,7 @@ public class ServiceImp implements ServiceInterface {
         }
         return listLogin;
     }
-    
+
     @Override
     public ArrayList<KhuyenMai> getAllKhuyenMai() {
         listKhuyenMai.clear();
@@ -151,7 +153,7 @@ public class ServiceImp implements ServiceInterface {
         }
         return listKhuyenMai;
     }
-    
+
     @Override
     public ArrayList<NguoiDung> getAllNguoiDung() {
         String sql = "select * from NguoiDung where Roles like 'NV%'";
@@ -177,7 +179,7 @@ public class ServiceImp implements ServiceInterface {
         }
         return listNguoiDung;
     }
-    
+
     public ArrayList<SanPham> getAllSanPham() {
         listSanPham.clear();
         String sql = "select SanPham.MaSanPham, TenSanPham, TenNCC, GiaDau, SoLuong, MauSac, KichThuoc, Mau, ChatLieu, HinhAnh, Hang, MaKhuyenMai\n"
@@ -214,13 +216,13 @@ public class ServiceImp implements ServiceInterface {
         }
         return listSanPham;
     }
-    
+
     @Override
     public NguoiDung getRowNguoiDung(int row) {
         return listNguoiDung.get(row);
 
     }
-    
+
     @Override
     public ArrayList<NguoiDung> searchNguoiDung(String ma) {
         String sql = "select * from NguoiDung where Roles like 'NV%' and MaNguoiDung like ?";
@@ -228,9 +230,9 @@ public class ServiceImp implements ServiceInterface {
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, "%"+ma+"%");
+            stm.setString(1, "%" + ma + "%");
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 NguoiDung nd = new NguoiDung();
                 nd.setMaNguoiDung(rs.getString(1));
                 nd.setTenNguoiDung(rs.getString(2));
@@ -277,7 +279,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> sapXepTheoTenNgDung() {
-         String sql = "select * from NguoiDung where Roles like 'NV%' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
+        String sql = "select * from NguoiDung where Roles like 'NV%' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -301,5 +303,46 @@ public class ServiceImp implements ServiceInterface {
 
         return listNguoiDung;
     }
-    
+
+    public ArrayList<HoaDon> getAllHoaDon() {
+        String sql = "select * from HoaDon";
+        listHoaDon.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayTao(rs.getString(2));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setTrangThai(rs.getString(3));
+                listHoaDon.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
+        String sql = "select ChiTietSanPham.MaSanPham, TenSanPham, ChiTietHoaDon.SoLuong, GiaDau, GiaDau from ChiTietHoaDon join HoaDon on HoaDon.MaHoaDon = ChiTietHoaDon.MaHoaDon\n"
+                + "join ChiTietSanPham on ChiTietSanPham.MaSanPhamChiTiet = ChiTietHoaDon.MaSanPhamChiTiet\n"
+                + "join LichSuDonGia on LichSuDonGia.MaDonGia = ChiTietSanPham.DonGia\n"
+                + "join SanPham on SanPham.MaSanPham = ChiTietSanPham.MaSanPham\n"
+                + "where ChiTietHoaDon.MaHoaDon = ?";
+        listHoaDonChiTiet.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDonChiTiet;
+    }
 }
