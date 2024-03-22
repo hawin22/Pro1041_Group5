@@ -31,7 +31,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataVoucher(ser.getAllVoucher());
-        loadDataNguoiDung(ser.getAllNguoiDung());
+        loadDataNhanVien(ser.getAllNguoiDung());
         loadDataKhuyenMai(ser.getAllKhuyenMai());
         loadDataSPKM(ser.getAllSanPham());
         loadDataKMChonSP(ser.getAllKhuyenMai());
@@ -53,7 +53,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
 
-    void loadDataNguoiDung(ArrayList<NguoiDung> list) {
+    void loadDataNhanVien(ArrayList<NguoiDung> list) {
         dtm = (DefaultTableModel) tblNhanVien.getModel();
         dtm.setRowCount(0);
         for (NguoiDung nd : list) {
@@ -70,7 +70,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
 
-    NguoiDung getForm() {
+    NguoiDung getFormNhanVien() {
         NguoiDung nd = new NguoiDung();
         nd.setMaNguoiDung(txtMaNV.getText());
         nd.setTenNguoiDung(txtTenNV.getText());
@@ -89,7 +89,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         return nd;
     }
 
-    void setForm(NguoiDung nd) {
+    void setFormNhanVien(NguoiDung nd) {
         txtMaNV.setText(nd.getMaNguoiDung());
         txtTenNV.setText(nd.getTenNguoiDung());
         Boolean gioiTinh = nd.isGioiTinh();
@@ -994,6 +994,11 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
         buttonGroup3.add(rdTheoTenNV);
         rdTheoTenNV.setText("Sắp xếp theo tên");
+        rdTheoTenNV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdTheoTenNVMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1087,9 +1092,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -1141,14 +1143,15 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                                         .addGroup(jPanel10Layout.createSequentialGroup()
                                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addComponent(btnAdd))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAdd)))
                 .addContainerGap(427, Short.MAX_VALUE))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel10Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdd, btnDelete, btnUpdate});
@@ -1157,7 +1160,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(37, 37, 37)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1199,9 +1202,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     .addComponent(btnAdd)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jPanel10Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdd, btnDelete, btnUpdate});
@@ -2432,7 +2435,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 txtTenDN.setText("");
                 txtPassword.setText("");
             } else {
-                loadDataNguoiDung(ser.searchNguoiDung(searchNV));
+                loadDataNhanVien(ser.searchNguoiDung(searchNV));
             }
         }
 
@@ -2466,7 +2469,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = tblNhanVien.getSelectedRow();
         if (i >= 0) {
-            setForm(ser.getRowNguoiDung(i));
+            setFormNhanVien(ser.getRowNguoiDung(i));
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
@@ -2507,14 +2510,19 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
     private void btnHienThiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiNVActionPerformed
         // TODO add your handling code here:
-        loadDataNguoiDung(ser.getAllNguoiDung());
+        loadDataNhanVien(ser.getAllNguoiDung());
     }//GEN-LAST:event_btnHienThiNVActionPerformed
 
     private void rdTheoMaNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTheoMaNVMouseClicked
         // TODO add your handling code here:
-        loadDataNguoiDung(ser.sapXepTheoMaNgDung());
+        loadDataNhanVien(ser.sapXepTheoMaNgDung());
       
     }//GEN-LAST:event_rdTheoMaNVMouseClicked
+
+    private void rdTheoTenNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTheoTenNVMouseClicked
+        // TODO add your handling code here:
+        loadDataNhanVien(ser.sapXepTheoTenNgDung());
+    }//GEN-LAST:event_rdTheoTenNVMouseClicked
 
     /**
      * @param args the command line arguments
