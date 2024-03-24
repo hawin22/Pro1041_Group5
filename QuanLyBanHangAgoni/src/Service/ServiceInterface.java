@@ -17,10 +17,12 @@ public interface ServiceInterface {
     ArrayList<Login> FogotPassword(String user, String email);
     ArrayList<Voucher> getAllVoucher();
     ArrayList<KhuyenMai> getAllKhuyenMai();
-    ArrayList<NguoiDung> getAllNguoiDung();
-    NguoiDung getRowNguoiDung(int row);
+    ArrayList<NguoiDung> getAllNhanVien();
+    NguoiDung getRowNhanVien(int row);
     ArrayList<SanPham> getAllSanPham();
-    ArrayList<NguoiDung> searchNguoiDung(String ma);
-    ArrayList<NguoiDung> sapXepTheoMaNgDung();
-    ArrayList<NguoiDung> sapXepTheoTenNgDung();
+    ArrayList<NguoiDung> searchNhanVien(String ma);
+    ArrayList<NguoiDung> sapXepTheoMaNhVien();
+    ArrayList<NguoiDung> sapXepTheoTenNhVien();
+    ArrayList<NguoiDung> getAllNguoiDung();
+    Boolean add(NguoiDung nd);
 }
