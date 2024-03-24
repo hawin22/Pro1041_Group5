@@ -26,6 +26,8 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<SanPham> listSanPham = new ArrayList<>();
     ArrayList<KhachHang> listKhachHang = new ArrayList<>();
     ArrayList<Login> listLogin = new ArrayList<>();
+    ArrayList<HoaDon> listHoaDon = new ArrayList<>();
+    ArrayList<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
@@ -277,6 +279,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> sapXepTheoTenNhVien() {
+
         String sql = "select * from NguoiDung where Roles like 'NV%' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
         listNguoiDung.clear();
         try {
@@ -298,8 +301,33 @@ public class ServiceImp implements ServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return listNguoiDung;
+    }
+
+    public ArrayList<Voucher> searchVoucher(String maVC) {
+        listVoucher.clear();
+        String sql = "select * from Voucher where MaVoucher like ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, "%" + maVC + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Voucher vc = new Voucher();
+                vc.setMaVoucher(rs.getString(1));
+                vc.setTenVoucher(rs.getString(2));
+                vc.setSoLuongVC(rs.getInt(3));
+                vc.setHanSuDungVC(rs.getString(4));
+                vc.setNgayBatDauVC(rs.getString(5));
+                vc.setSoTienGiam(rs.getDouble(6));
+                vc.setSoTienYeuCau(rs.getDouble(7));
+                listVoucher.add(vc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listVoucher;
+
     }
 
     @Override
@@ -329,7 +357,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> getAllNguoiDung() {
-         String sql = "select * from NguoiDung";
+        String sql = "select * from NguoiDung";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -351,6 +379,48 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
         return listNguoiDung;
+
     }
 
+    public ArrayList<HoaDon> getAllHoaDon() {
+        String sql = "select * from HoaDon";
+        listHoaDon.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayTao(rs.getString(2));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setTrangThai(rs.getString(3));
+                listHoaDon.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
+        String sql = "select ChiTietSanPham.MaSanPham, TenSanPham, ChiTietHoaDon.SoLuong, GiaDau, GiaDau from ChiTietHoaDon join HoaDon on HoaDon.MaHoaDon = ChiTietHoaDon.MaHoaDon\n"
+                + "join ChiTietSanPham on ChiTietSanPham.MaSanPhamChiTiet = ChiTietHoaDon.MaSanPhamChiTiet\n"
+                + "join LichSuDonGia on LichSuDonGia.MaDonGia = ChiTietSanPham.DonGia\n"
+                + "join SanPham on SanPham.MaSanPham = ChiTietSanPham.MaSanPham\n"
+                + "where ChiTietHoaDon.MaHoaDon = ?";
+        listHoaDonChiTiet.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDonChiTiet;
+    }
 }
