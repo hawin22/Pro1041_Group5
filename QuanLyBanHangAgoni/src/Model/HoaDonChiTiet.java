@@ -9,6 +9,7 @@ package Model;
  * @author NGHIAPC
  */
 public class HoaDonChiTiet {
+
     String maHoaDon;
     String maHoaDonChiTiet;
     Integer soLuong;
@@ -85,7 +86,14 @@ public class HoaDonChiTiet {
     public void setTenSanPham(String tenSanPham) {
         this.tenSanPham = tenSanPham;
     }
-    
-    
-    
+
+    public HoaDonChiTiet(String maHoaDon, Integer soLuong, double donGia, double donGiaSau, String maSanPham, String tenSanPham) {
+        this.maHoaDon = maHoaDon;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+        this.donGiaSau = donGiaSau;
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+    }
+
 }
