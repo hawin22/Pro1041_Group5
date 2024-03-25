@@ -527,6 +527,31 @@ public class ServiceImp implements ServiceInterface {
         return listHoaDonChiTiet;
     }
 
+    @Override
+    public ArrayList<Voucher> sXMaVoucher() {
+        listVoucher.clear();
+        String sql = "select * from Voucher\n"
+                + "order by MaVoucher desc";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                Voucher vc = new Voucher();
+                vc.setMaVoucher(rs.getString(1));
+                vc.setTenVoucher(rs.getString(2));
+                vc.setSoLuongVC(rs.getInt(3));
+                vc.setHanSuDungVC(rs.getString(4));
+                vc.setNgayBatDauVC(rs.getString(5));
+                vc.setSoTienGiam(rs.getDouble(6));
+                vc.setSoTienYeuCau(rs.getDouble(7));
+                listVoucher.add(vc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listVoucher;
+    }    
     public ArrayList<LichSuGia> getAllLichSuGia() {
         String sql = "select MaSanPham, MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianKetThuc from LichSuDonGia\n"
                 + "join ChiTietSanPham on ChiTietSanPham.DonGia = LichSuDonGia.MaDonGia\n";
@@ -552,6 +577,37 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
+    public ArrayList<Voucher> sXTTTenVoucher() {
+        listVoucher.clear();
+        String sql = "select * from Voucher\n"
+                + "order by TenVoucher desc";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {                
+                Voucher vc = new Voucher();
+                vc.setMaVoucher(rs.getString(1));
+                vc.setTenVoucher(rs.getString(2));
+                vc.setSoLuongVC(rs.getInt(3));
+                vc.setHanSuDungVC(rs.getString(4));
+                vc.setNgayBatDauVC(rs.getString(5));
+                vc.setSoTienGiam(rs.getDouble(6));
+                vc.setSoTienYeuCau(rs.getDouble(7));
+                listVoucher.add(vc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listVoucher;
+        
+    }
+
+    @Override
+    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
     public void update(NguoiDung nd) {
         String sql = "update NguoiDung set TenNguoiDung = ?, GioiTinh = ?, SDT = ?, Email = ?, TenDangNhap = ?, MatKhau = ? where MaNguoiDung = ?";
         try {
