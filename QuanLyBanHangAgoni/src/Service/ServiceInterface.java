@@ -29,4 +29,9 @@ public interface ServiceInterface {
     ArrayList<HoaDon> getAllHoaDon();
     ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet(String maHoaDon);
     ArrayList<LichSuGia> getAllLichSuGia();
+    ArrayList<HoaDonChiTiet> updateSoluongSanPhamBanHang(String maSanPham, Integer soLuong, String maHoaDon);
+    HoaDon getRowHoaDon(int row);
+    SanPham getRowSanPham(int row);
+    //HoaDonChiTiet getRowHDCT(int row);
+    String getMaSanPhamChiTietFromSanPham(String maSanPham);
 };
