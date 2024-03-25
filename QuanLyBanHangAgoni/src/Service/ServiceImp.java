@@ -156,7 +156,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
-    public ArrayList<NguoiDung> getAllNguoiDung() {
+    public ArrayList<NguoiDung> getAllNhanVien() {
         String sql = "select * from NguoiDung where Roles like 'NV%'";
         listNguoiDung.clear();
         try {
@@ -253,13 +253,13 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
-    public NguoiDung getRowNguoiDung(int row) {
+    public NguoiDung getRowNhanVien(int row) {
         return listNguoiDung.get(row);
 
     }
 
     @Override
-    public ArrayList<NguoiDung> searchNguoiDung(String ma) {
+    public ArrayList<NguoiDung> searchNhanVien(String ma) {
         String sql = "select * from NguoiDung where Roles like 'NV%' and MaNguoiDung like ?";
         listNguoiDung.clear();
         try {
@@ -286,7 +286,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
-    public ArrayList<NguoiDung> sapXepTheoMaNgDung() {
+    public ArrayList<NguoiDung> sapXepTheoMaNhVien() {
         String sql = "select * from NguoiDung where Roles like 'NV%' order by MaNguoiDung desc ";
         listNguoiDung.clear();
         try {
@@ -339,7 +339,7 @@ public class ServiceImp implements ServiceInterface {
 
     }
 
-    public ArrayList<NguoiDung> sapXepTheoTenNgDung() {
+    public ArrayList<NguoiDung> sapXepTheoTenNhVien() {
         String sql = "select * from NguoiDung where Roles like 'NV%' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
         listNguoiDung.clear();
         try {
@@ -362,6 +362,58 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
         return listNguoiDung;
+    }
+
+    @Override
+    public Boolean add(NguoiDung nd) {
+        String sql = "insert into NguoiDung values(?,?,?,?,?,?,?,?)";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, nd.getMaNguoiDung());
+            stm.setString(2, nd.getTenNguoiDung());
+            stm.setBoolean(3, nd.isGioiTinh());
+            stm.setString(4, nd.getSDT());
+            stm.setString(5, nd.getEmail());
+            stm.setString(6, nd.getRoles());
+            stm.setString(7, nd.getTenDN());
+            stm.setString(8, nd.getPassWord());
+            stm.executeUpdate();
+            conn.close();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+
+        }
+    }
+
+    @Override
+    public ArrayList<NguoiDung> getAllNguoiDung() {
+        String sql = "select * from NguoiDung";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setTenNguoiDung(rs.getString(2));
+                nd.setGioiTinh(rs.getBoolean(3));
+                nd.setSDT(rs.getString(4));
+                nd.setEmail(rs.getString(5));
+                nd.setRoles(rs.getString(6));
+                nd.setTenDN(rs.getString(7));
+                nd.setPassWord(rs.getString(8));
+                listNguoiDung.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listNguoiDung;
+
     }
 
     public ArrayList<HoaDon> getAllHoaDon() {
@@ -411,6 +463,7 @@ public class ServiceImp implements ServiceInterface {
                 hdct.setDonGiaSau(rs.getDouble(5));
                 listHoaDonChiTiet.add(hdct);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
