@@ -550,4 +550,23 @@ public class ServiceImp implements ServiceInterface {
     public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public void update(NguoiDung nd) {
+        String sql = "update NguoiDung set TenNguoiDung = ?, GioiTinh = ?, SDT = ?, Email = ?, TenDangNhap = ?, MatKhau = ? where MaNguoiDung = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, nd.getTenNguoiDung());
+            stm.setBoolean(2, nd.isGioiTinh());
+            stm.setString(3, nd.getSDT());
+            stm.setString(4, nd.getEmail());
+            stm.setString(5, nd.getTenDN());
+            stm.setString(6, nd.getPassWord());
+            stm.setString(7, nd.getMaNguoiDung());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

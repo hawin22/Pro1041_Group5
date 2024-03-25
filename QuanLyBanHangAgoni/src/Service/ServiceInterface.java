@@ -32,4 +32,5 @@ public interface ServiceInterface {
     ArrayList<Voucher> sXTTTenVoucher();
     ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet(String maHoaDon);
     ArrayList<LichSuGia> getAllLichSuGia();
+    void update(NguoiDung nd);
 };
