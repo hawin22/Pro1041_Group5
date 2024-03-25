@@ -55,8 +55,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
-    Voucher getFormVoucher(){
+
+    Voucher getFormVoucher() {
         Voucher vc = new Voucher();
         vc.setMaVoucher(txtMaVoucher.getText());
         vc.setTenVoucher(txtTenVoucher.getText());
@@ -90,18 +90,18 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
         txtNBatDauVoucher.setText(vc.getNgayBatDauVC());
         txtNKetThucVoucher.setText(vc.getHanSuDungVC());
-        if (vc.getSoTienGiam()== 0) {
+        if (vc.getSoTienGiam() == 0) {
             txtSoTienGiamVoucher.setText("0");
         } else {
             txtSoTienGiamVoucher.setText(String.valueOf(vc.getSoTienGiam()));
         }
-        if (vc.getSoTienYeuCau()== 0) {
+        if (vc.getSoTienYeuCau() == 0) {
             txtSoTienYCVoucher.setText("0");
         } else {
             txtSoTienYCVoucher.setText(String.valueOf(vc.getSoTienYeuCau()));
         }
     }
-    
+
     void loadDataNhanVien(ArrayList<NguoiDung> list) {
         dtm = (DefaultTableModel) tblNhanVien.getModel();
         dtm.setRowCount(0);
@@ -228,8 +228,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
         if (count > 0) {
             return false;
+        } else {
+            return true;
+
         }
-        return true;
     }
 
     public static Boolean checkEmailNhanVien(String emailCheck) {
@@ -283,12 +285,20 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
 
     }
-    public boolean checkTrungEmailNhanVien(String email){
+
+    public boolean checkTrungEmailNhanVien(String email) {
         int count = 0;
         for (NguoiDung nd : ser.getAllNguoiDung()) {
-            
+            if (nd.getEmail().equals(email)) {
+                count++;
+            }
         }
-        return true;
+        if (count > 0) {
+            JOptionPane.showMessageDialog(this, "Trùng email");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -2714,11 +2724,28 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
+        int count = 0;
         if (check == JOptionPane.YES_OPTION) {
-            if (checkNhanVien() && checkTrungMaNhanVien(txtMaNV.getText()) && checkTrungTenDNNhanVien(txtTenDN.getText())) {
+            if (!checkNhanVien()) {
+                count++;
+            }
+            if (!checkTrungMaNhanVien(txtMaNV.getText())) {
+                count++;
+            }
+            if (!emailNV()) {
+                count++;
+            }
+            if (!checkTrungEmailNhanVien(txtEmail.getText())) {
+                count++;
+            }
+            if (!checkTrungTenDNNhanVien(txtTenDN.getText())) {
+                count++;
+            }
+            if (count == 0) {
                 ser.add(getFormNhanVien());
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 loadDataNhanVien(ser.getAllNhanVien());
+
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
