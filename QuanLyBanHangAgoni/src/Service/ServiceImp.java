@@ -545,4 +545,9 @@ public class ServiceImp implements ServiceInterface {
         return listVoucher;
         
     }
+
+    @Override
+    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
