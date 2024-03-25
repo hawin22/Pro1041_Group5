@@ -283,6 +283,13 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
 
     }
+    public boolean checkTrungEmailNhanVien(String email){
+        int count = 0;
+        for (NguoiDung nd : ser.getAllNguoiDung()) {
+            
+        }
+        return true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1211,7 +1218,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Giới tính", "Email", "Số điện thoại", "Roles", "Tên đăng nhập", "Password"
+                "Mã nhân viên", "Tên nhân viên", "Giới tính", "Số điện thoại", "Email", "Roles", "Tên đăng nhập", "Password"
             }
         ));
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2708,7 +2715,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
         if (check == JOptionPane.YES_OPTION) {
-            if (checkNhanVien() && emailNV() && checkTrungMaNhanVien(txtMaNV.getText()) && checkTrungTenDNNhanVien(txtTenDN.getText())) {
+            if (checkNhanVien() && checkTrungMaNhanVien(txtMaNV.getText()) && checkTrungTenDNNhanVien(txtTenDN.getText())) {
                 ser.add(getFormNhanVien());
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 loadDataNhanVien(ser.getAllNhanVien());
