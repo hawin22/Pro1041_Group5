@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public interface ServiceInterface {
     ArrayList<KhachHang> getAllKhachHang();
+    KhachHang getRowKhachHang(int row);
     ArrayList<Login> LoginSearch(String user, String pass);
     ArrayList<Login> FogotPassword(String user, String email);
     ArrayList<Voucher> getAllVoucher();
@@ -20,6 +21,11 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> getAllNhanVien();
     NguoiDung getRowNhanVien(int row);
     ArrayList<SanPham> getAllSanPham();
+    ArrayList<NguoiDung> searchNguoiDung(String ma);
+    ArrayList<NguoiDung> sapXepTheoMaNgDung();
+    void addKhachHang(KhachHang kh);
+    void updateKhachHang(KhachHang kh);
+    void deleteKhachHang(String MaKhachHang);
     ArrayList<NguoiDung> searchNhanVien(String ma);
     ArrayList<NguoiDung> sapXepTheoMaNhVien();
     ArrayList<NguoiDung> sapXepTheoTenNhVien();
