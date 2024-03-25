@@ -8,6 +8,7 @@ import Model.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Service.*;
+import javax.swing.JOptionPane;
 import java.security.SecureRandom;
 import java.util.Random;
 import java.time.LocalDate;
@@ -1188,16 +1189,31 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         btnThemKH.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThemKH.setForeground(new java.awt.Color(255, 255, 255));
         btnThemKH.setText("Thêm");
+        btnThemKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemKHActionPerformed(evt);
+            }
+        });
 
         tbnSuaKH.setBackground(new java.awt.Color(51, 153, 255));
         tbnSuaKH.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tbnSuaKH.setForeground(new java.awt.Color(255, 255, 255));
         tbnSuaKH.setText("Sửa");
+        tbnSuaKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbnSuaKHActionPerformed(evt);
+            }
+        });
 
         btnXoaKH.setBackground(new java.awt.Color(51, 153, 255));
         btnXoaKH.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXoaKH.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaKH.setText("Xoá");
+        btnXoaKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaKHActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -1404,6 +1420,96 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         setFormKhachHang(ser.getAllKhachHang().get(row));
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
+    boolean isValidPhoneNumber(String phoneNumber) {
+    return phoneNumber.matches("\\d+");
+    }
+    
+    boolean checkKH(){
+        if(txtMaKH.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Mã Khách hàng không  để trống");
+            txtMaKH.requestFocus();
+            
+            return false;
+        }else if(txtTenKH.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Tên khách hàng không để trống");
+            txtTenKH.requestFocus();
+            
+            return false;
+        }else if(txtSDTKH.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Số điện thoại không để trống");
+            txtSDTKH.requestFocus();
+            return false;
+        }else if(txtDCKH.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "địa chỉ không để trống ");
+            txtDCKH.requestFocus();
+            
+            return false;
+        }
+        // Kiểm tra số điện thoại chỉ chứa chữ số
+    if (!isValidPhoneNumber(txtSDTKH.getText())) {
+        JOptionPane.showMessageDialog(this, "Số ĐT chỉ được chứa chữ số");
+        txtSDTKH.requestFocus();
+        return false;
+    }
+        
+        
+        return true;
+    }
+    boolean checkTrung(ArrayList<KhachHang> list, String maKH){
+        int dem = 0;
+        for (KhachHang kh : list) {
+            if (kh.getMaKhachHang().equals(maKH)) {
+                dem++;
+            }
+        }
+        if (dem == 0) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+    private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
+         if (checkKH()) {
+        String maKH = txtMaKH.getText();
+        
+        // Kiểm tra trùng mã khách hàng
+        if (checkTrung(ser.getAllKhachHang(), maKH)) {
+            JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại");
+        } else {
+            ser.addKhachHang(getFormKhachHang());
+            loadDataKhachHang(ser.getAllKhachHang());
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+        }
+    }
+    }//GEN-LAST:event_btnThemKHActionPerformed
+
+    private void tbnSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnSuaKHActionPerformed
+        if (checkKH()) {
+        int row = tblKhachHang.getSelectedRow();
+        if (row >= 0) {
+            String maKH = txtMaKH.getText();
+            
+                KhachHang kh = getFormKhachHang();
+                kh.setMaKhachHang(maKH);
+                ser.updateKhachHang(kh);
+                loadDataKhachHang(ser.getAllKhachHang());
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            
+        }
+    }
+    }//GEN-LAST:event_tbnSuaKHActionPerformed
+
+    private void btnXoaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKHActionPerformed
+         int row = tblKhachHang.getSelectedRow();
+    if (row >= 0) {
+        String maKH = ser.getRowKhachHang(row).getMaKhachHang();
+        ser.deleteKhachHang(maKH);
+        loadDataKhachHang(ser.getAllKhachHang());
+        JOptionPane.showMessageDialog(this, "Xoá thành công khách hàng");
+    } else {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để xoá");
+    }
+    }//GEN-LAST:event_btnXoaKHActionPerformed
     private void tblHoaDonBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonBanHangMouseClicked
         // TODO add your handling code here:
         int row = tblHoaDonBanHang.getSelectedRow();
