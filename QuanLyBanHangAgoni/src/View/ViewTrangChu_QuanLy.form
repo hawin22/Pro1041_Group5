@@ -340,6 +340,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="S&#x1eaf;p x&#x1ebf;p theo m&#xe3;"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdSXTMaVoucherActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rdSXTTenVoucher">
                       <Properties>
@@ -537,6 +540,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3;"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdAllVoucherActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel66">
                       <Properties>
@@ -613,6 +619,7 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="txtSXTNKTKhuyeMai" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
                                                   <Component id="txtSXTNBDKhuyenMai" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
+                                                  <Component id="tbnTKTKNVoucher" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -671,6 +678,7 @@
                                   <Component id="jLabel60" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtSoLuongKhuyenMai" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnXoaKhuyenMai" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tbnTKTKNVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -919,6 +927,11 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtSXTNKTKhuyeMai">
+                    </Component>
+                    <Component class="javax.swing.JButton" name="tbnTKTKNVoucher">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m theo kho&#x1ea3;ng ng&#xe0;y"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
