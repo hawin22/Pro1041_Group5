@@ -223,11 +223,12 @@ public class ServiceImp implements ServiceInterface {
                 nd.setMaNguoiDung(rs.getString(1));
                 nd.setTenNguoiDung(rs.getString(2));
                 nd.setGioiTinh(rs.getBoolean(3));
-                nd.setSDT(rs.getString(4));
-                nd.setEmail(rs.getString(5));
-                nd.setRoles(rs.getString(6));
-                nd.setTenDN(rs.getString(7));
-                nd.setPassWord(rs.getString(8));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -327,11 +328,12 @@ public class ServiceImp implements ServiceInterface {
                 nd.setMaNguoiDung(rs.getString(1));
                 nd.setTenNguoiDung(rs.getString(2));
                 nd.setGioiTinh(rs.getBoolean(3));
-                nd.setSDT(rs.getString(4));
-                nd.setEmail(rs.getString(5));
-                nd.setRoles(rs.getString(6));
-                nd.setTenDN(rs.getString(7));
-                nd.setPassWord(rs.getString(8));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -353,11 +355,12 @@ public class ServiceImp implements ServiceInterface {
                 nd.setMaNguoiDung(rs.getString(1));
                 nd.setTenNguoiDung(rs.getString(2));
                 nd.setGioiTinh(rs.getBoolean(3));
-                nd.setSDT(rs.getString(4));
-                nd.setEmail(rs.getString(5));
-                nd.setRoles(rs.getString(6));
-                nd.setTenDN(rs.getString(7));
-                nd.setPassWord(rs.getString(8));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -406,11 +409,12 @@ public class ServiceImp implements ServiceInterface {
                 nd.setMaNguoiDung(rs.getString(1));
                 nd.setTenNguoiDung(rs.getString(2));
                 nd.setGioiTinh(rs.getBoolean(3));
-                nd.setSDT(rs.getString(4));
-                nd.setEmail(rs.getString(5));
-                nd.setRoles(rs.getString(6));
-                nd.setTenDN(rs.getString(7));
-                nd.setPassWord(rs.getString(8));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -421,18 +425,19 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public Boolean add(NguoiDung nd) {
-        String sql = "insert into NguoiDung values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into NguoiDung values(?,?,?,?,?,?,?,?,?)";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, nd.getMaNguoiDung());
             stm.setString(2, nd.getTenNguoiDung());
             stm.setBoolean(3, nd.isGioiTinh());
-            stm.setString(4, nd.getSDT());
-            stm.setString(5, nd.getEmail());
-            stm.setString(6, nd.getRoles());
-            stm.setString(7, nd.getTenDN());
-            stm.setString(8, nd.getPassWord());
+            stm.setInt(4, nd.getTuoi());
+            stm.setString(5, nd.getSDT());
+            stm.setString(6, nd.getEmail());
+            stm.setString(7, nd.getRoles());
+            stm.setString(8, nd.getTenDN());
+            stm.setString(9, nd.getPassWord());
             stm.executeUpdate();
             conn.close();
             return true;
@@ -457,11 +462,12 @@ public class ServiceImp implements ServiceInterface {
                 nd.setMaNguoiDung(rs.getString(1));
                 nd.setTenNguoiDung(rs.getString(2));
                 nd.setGioiTinh(rs.getBoolean(3));
-                nd.setSDT(rs.getString(4));
-                nd.setEmail(rs.getString(5));
-                nd.setRoles(rs.getString(6));
-                nd.setTenDN(rs.getString(7));
-                nd.setPassWord(rs.getString(8));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -650,17 +656,18 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public void updateNV(NguoiDung nd) {
-        String sql = "update NguoiDung set TenNguoiDung = ?, GioiTinh = ?, SDT = ?, Email = ?, TenDangNhap = ?, MatKhau = ? where MaNguoiDung = ?";
+        String sql = "update NguoiDung set TenNguoiDung = ?, GioiTinh = ?, Tuoi = ?, SDT = ?, Email = ?, TenDangNhap = ?, MatKhau = ? where MaNguoiDung = ?";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, nd.getTenNguoiDung());
             stm.setBoolean(2, nd.isGioiTinh());
-            stm.setString(3, nd.getSDT());
-            stm.setString(4, nd.getEmail());
-            stm.setString(5, nd.getTenDN());
-            stm.setString(6, nd.getPassWord());
-            stm.setString(7, nd.getMaNguoiDung());
+            stm.setInt(3, nd.getTuoi());
+            stm.setString(4, nd.getSDT());
+            stm.setString(5, nd.getEmail());
+            stm.setString(6, nd.getTenDN());
+            stm.setString(7, nd.getPassWord());
+            stm.setString(8, nd.getMaNguoiDung());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
@@ -741,5 +748,33 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public void deleteNhanVien(String maNV) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<NguoiDung> sapXepTheoTuoiNV() {
+        String sql = "select * from NguoiDung where Roles = 'NV' order by Tuoi";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setTenNguoiDung(rs.getString(2));
+                nd.setGioiTinh(rs.getBoolean(3));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
+                listNguoiDung.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listNguoiDung;
     }
 }

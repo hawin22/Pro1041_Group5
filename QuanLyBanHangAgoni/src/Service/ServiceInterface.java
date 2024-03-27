@@ -47,4 +47,5 @@ public interface ServiceInterface {
     void updateNV(NguoiDung nd);
     ArrayList<NguoiDung> getAllQuanLy();
     void deleteNhanVien(String maNV);
+    ArrayList<NguoiDung> sapXepTheoTuoiNV();
 };
