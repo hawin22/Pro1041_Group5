@@ -23,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
-    public static final String Email_Pattern = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)$";
     /**
      * Creates new form ViewTrangChu
      */
@@ -56,8 +55,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
-    Voucher getFormVoucher(){
+
+    Voucher getFormVoucher() {
         Voucher vc = new Voucher();
         vc.setMaVoucher(txtMaVoucher.getText());
         vc.setTenVoucher(txtTenVoucher.getText());
@@ -91,18 +90,18 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
         txtNBatDauVoucher.setText(vc.getNgayBatDauVC());
         txtNKetThucVoucher.setText(vc.getHanSuDungVC());
-        if (vc.getSoTienGiam()== 0) {
+        if (vc.getSoTienGiam() == 0) {
             txtSoTienGiamVoucher.setText("0");
         } else {
             txtSoTienGiamVoucher.setText(String.valueOf(vc.getSoTienGiam()));
         }
-        if (vc.getSoTienYeuCau()== 0) {
+        if (vc.getSoTienYeuCau() == 0) {
             txtSoTienYCVoucher.setText("0");
         } else {
             txtSoTienYCVoucher.setText(String.valueOf(vc.getSoTienYeuCau()));
         }
     }
-    
+
     void loadDataNhanVien(ArrayList<NguoiDung> list) {
         dtm = (DefaultTableModel) tblNhanVien.getModel();
         dtm.setRowCount(0);
@@ -229,28 +228,26 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
         if (count > 0) {
             return false;
+        } else {
+            return true;
+
         }
-        return true;
     }
 
-    public static Boolean checkEmailNhanVien(String emailCheck) {
-        if (emailCheck == null) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile(Email_Pattern);
-        Matcher matcher = pattern.matcher(emailCheck);
-        return matcher.matches();
-
+    public boolean checkEmailNV(String email) {
+        String emailRegex = "[A-Za-z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)";
+        Pattern emailPat = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = emailPat.matcher(email);
+        return matcher.find();
     }
 
     boolean emailNV() {
-        if (checkEmailNhanVien(txtEmail.getText())) {
+        if (checkEmailNV(txtEmail.getText())) {
             return true;
         } else {
             JOptionPane.showMessageDialog(this, "Sai định dạng email");
             return false;
         }
-
     }
 
     public boolean checkTrungMaNhanVien(String ma) {
@@ -283,6 +280,21 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             return true;
         }
 
+    }
+
+    public boolean checkTrungEmailNhanVien(String email) {
+        int count = 0;
+        for (NguoiDung nd : ser.getAllNguoiDung()) {
+            if (nd.getEmail().equals(email)) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            JOptionPane.showMessageDialog(this, "Trùng email");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -1227,7 +1239,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Giới tính", "Email", "Số điện thoại", "Roles", "Tên đăng nhập", "Password"
+                "Mã nhân viên", "Tên nhân viên", "Giới tính", "Số điện thoại", "Email", "Roles", "Tên đăng nhập", "Password"
             }
         ));
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2736,11 +2748,28 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
+        int count = 0;
         if (check == JOptionPane.YES_OPTION) {
-            if (checkNhanVien() && emailNV() && checkTrungMaNhanVien(txtMaNV.getText()) && checkTrungTenDNNhanVien(txtTenDN.getText())) {
+            if (!checkNhanVien()) {
+                count++;
+            }
+            if (!checkTrungMaNhanVien(txtMaNV.getText())) {
+                count++;
+            }
+            if (!emailNV()) {
+                count++;
+            }
+            if (!checkTrungEmailNhanVien(txtEmail.getText())) {
+                count++;
+            }
+            if (!checkTrungTenDNNhanVien(txtTenDN.getText())) {
+                count++;
+            }
+            if (count == 0) {
                 ser.add(getFormNhanVien());
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 loadDataNhanVien(ser.getAllNhanVien());
+
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
