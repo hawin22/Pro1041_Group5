@@ -2836,9 +2836,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 if (!checkNhanVien()) {
                     count++;
                 }
-                if (!checkTrungMaNhanVien(txtMaNV.getText())) {
-                    count++;
-                }
                 if (!emailNV()) {
                     count++;
                 }
@@ -2849,7 +2846,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     count++;
                 }
                 if (count == 0) {
-                    ser.add(getFormNhanVien());
+                    NguoiDung nd = getFormNhanVien();
+                    ser.updateNV(nd);
                     JOptionPane.showMessageDialog(this, "Sửa thành công");
                     loadDataNhanVien(ser.getAllNhanVien());
 
