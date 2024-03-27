@@ -252,6 +252,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         rdTatCa = new javax.swing.JRadioButton();
         btnXoaSanPhamThem = new javax.swing.JButton();
         btnNewBanHang = new javax.swing.JButton();
+        btnBotSanPham = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -567,6 +568,16 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             }
         });
 
+        btnBotSanPham.setBackground(new java.awt.Color(51, 153, 255));
+        btnBotSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBotSanPham.setForeground(new java.awt.Color(255, 255, 255));
+        btnBotSanPham.setText("Bớt sản phẩm");
+        btnBotSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBotSanPhamActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -592,6 +603,8 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(btnNewBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBotSanPham)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnThemSanPham)
                         .addGap(18, 18, 18)
                         .addComponent(btnXoaSanPhamThem)))
@@ -614,7 +627,8 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnXoaSanPhamThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNewBanHang))
+                    .addComponent(btnNewBanHang)
+                    .addComponent(btnBotSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1383,9 +1397,12 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                         if (checkTrungHoaDonChiTiet(maHoaDon, maSanPhamChiTiet)) {
                             JOptionPane.showMessageDialog(this, "Thêm số lượng sản phẩm thành công");
                             loadDataHoaDonChiTiet(ser.updateSoluongSanPhamBanHang(maSanPhamChiTiet, soLuong, maHoaDon));
+                            loadDataSanPhamBanHang(ser.updateSanPhamTruBanHang(maSanPhamChiTiet, soLuong));
                             loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
+                            loadDataSanPhamBanHang(ser.getAllSanPham());
                         } else {
-                            JOptionPane.showMessageDialog(this, "hehe");
+                            JOptionPane.showMessageDialog(this, "Đã thêm sản phẩm mới vào hoá đơn");
+                            
                         }
                     }
                 } else {
@@ -1518,6 +1535,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             tblSanPhamBanHang.setEnabled(true);
             btnThemSanPham.setEnabled(true);
             btnXoaSanPhamThem.setEnabled(true);
+            btnBotSanPham.setEnabled(true);
             setFormHoaDon(ser.getAllHoaDon().get(row));
             loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(ser.getAllHoaDon().get(row).getMaHoaDon()));
             txtTongTien.setText(tinhTongTienBanHang(ser.getAllHoaDonChiTiet(ser.getAllHoaDon().get(row).getMaHoaDon())) + "");
@@ -1529,6 +1547,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         tblSanPhamBanHang.setEnabled(false);
         btnThemSanPham.setEnabled(false);
         btnXoaSanPhamThem.setEnabled(false);
+        btnBotSanPham.setEnabled(false);
     }//GEN-LAST:event_formWindowActivated
 
     private void btnNewBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewBanHangActionPerformed
@@ -1538,6 +1557,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         tblSanPhamBanHang.setEnabled(false);
         btnThemSanPham.setEnabled(false);
         btnXoaSanPhamThem.setEnabled(false);
+        btnBotSanPham.setEnabled(false);
         txtTongTien.setText("");
         setFormHoaDon(new HoaDon("", "", "", "", "", "", "", ""));
 
@@ -1548,6 +1568,10 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         int row = tblSanPhamBanHang.getSelectedRow();
         System.out.println(ser.getRowSanPham(row));
     }//GEN-LAST:event_tblSanPhamBanHangMouseClicked
+
+    private void btnBotSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBotSanPhamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBotSanPhamActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1586,6 +1610,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBotSanPham;
     private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnHuyHoaDon;
     private javax.swing.JButton btnHuyVoucher;

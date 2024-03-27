@@ -664,9 +664,52 @@ public class ServiceImp implements ServiceInterface {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }       
+        }
     }
 
+    public ArrayList<SanPham> updateSanPhamTruBanHang(String maSanPham, Integer soLuong) {
+        String sql = "update ChiTietSanPham set SoLuong = SoLuong - ? where MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, soLuong);
+            stm.setString(2, maSanPham);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+
+    public ArrayList<SanPham> updateSanPhamCongBanHang(String maSanPham, Integer soLuong) {
+        String sql = "update ChiTietSanPham set SoLuong = SoLuong + ? where MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, soLuong);
+            stm.setString(2, maSanPham);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+
+    public ArrayList<HoaDonChiTiet> updateSoluongSanPhamBanHangTru(String maSanPham, Integer soLuong, String maHoaDon) {
+        String sql = "update ChiTietHoaDon set SoLuong = SoLuong - ? where MaHoaDon = ? and MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, soLuong);
+            stm.setString(2, maHoaDon);
+            stm.setString(3, maSanPham);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDonChiTiet;
+    }
     @Override
     public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

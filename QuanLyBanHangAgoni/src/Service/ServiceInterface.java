@@ -37,10 +37,13 @@ public interface ServiceInterface {
     ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet(String maHoaDon);
     ArrayList<LichSuGia> getAllLichSuGia();
     ArrayList<HoaDonChiTiet> updateSoluongSanPhamBanHang(String maSanPham, Integer soLuong, String maHoaDon);
+    ArrayList<HoaDonChiTiet> updateSoluongSanPhamBanHangTru(String maSanPham, Integer soLuong, String maHoaDon);
     HoaDon getRowHoaDon(int row);
     SanPham getRowSanPham(int row);
     //HoaDonChiTiet getRowHDCT(int row);
     String getMaSanPhamChiTietFromSanPham(String maSanPham);
+    ArrayList<SanPham> updateSanPhamTruBanHang(String maSanPham, Integer soLuong);
+    ArrayList<SanPham> updateSanPhamCongBanHang(String maSanPham, Integer soLuong);
     void updateNV(NguoiDung nd);
     ArrayList<NguoiDung> getAllQuanLy();
 };
