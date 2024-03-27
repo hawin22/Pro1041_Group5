@@ -21,8 +21,6 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> getAllNhanVien();
     NguoiDung getRowNhanVien(int row);
     ArrayList<SanPham> getAllSanPham();
-    ArrayList<NguoiDung> searchNguoiDung(String ma);
-    ArrayList<NguoiDung> sapXepTheoMaNgDung();
     void addKhachHang(KhachHang kh);
     void updateKhachHang(KhachHang kh);
     void deleteKhachHang(String MaKhachHang);
