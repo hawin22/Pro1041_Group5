@@ -666,17 +666,6 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }       
     }
-    @Override
-   
-
-    public ArrayList<NguoiDung> searchNguoiDung(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<NguoiDung> sapXepTheoMaNgDung() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
