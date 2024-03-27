@@ -29,6 +29,7 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<HoaDon> listHoaDon = new ArrayList<>();
     ArrayList<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
     ArrayList<LichSuGia> listLichSuGia = new ArrayList<>();
+    ArrayList<NguoiDung> listQuanLy = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
@@ -675,7 +676,7 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<NguoiDung> getAllQuanLy() {
          String sql = "select MaNguoiDung, Email, Roles, TenDangNhap from NguoiDung where Roles like 'QL%'";
-        listNguoiDung.clear();
+        listQuanLy.clear();
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -686,11 +687,11 @@ public class ServiceImp implements ServiceInterface {
                 nd.setEmail(rs.getString(2));
                 nd.setRoles(rs.getString(3));
                 nd.setTenDN(rs.getString(4));
-                listNguoiDung.add(nd);
+                listQuanLy.add(nd);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listNguoiDung;
+        return listQuanLy;
     }
 }

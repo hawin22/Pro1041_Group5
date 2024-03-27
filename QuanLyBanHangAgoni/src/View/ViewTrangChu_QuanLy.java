@@ -194,7 +194,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    void loadDataQuanLy(ArrayList<NguoiDung> list){
+
+    void loadDataQuanLy(ArrayList<NguoiDung> list) {
         dtm = (DefaultTableModel) tblQuanLy.getModel();
         dtm.setRowCount(0);
         for (NguoiDung nd : list) {
@@ -206,6 +207,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
+
     public boolean checkNhanVien() {
         int i = tblNhanVien.getSelectedRow();
         int count = 0;
@@ -1277,6 +1279,11 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setBackground(new java.awt.Color(51, 153, 255));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -2690,6 +2697,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         int i = tblNhanVien.getSelectedRow();
         if (i >= 0) {
             setFormNhanVien(ser.getRowNhanVien(i));
+            txtMaNV.setEnabled(false);
+
         }
     }//GEN-LAST:event_tblNhanVienMouseClicked
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
@@ -2731,6 +2740,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private void btnHienThiNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiNVActionPerformed
         // TODO add your handling code here:
         loadDataNhanVien(ser.getAllNhanVien());
+        txtMaNV.setEnabled(true);
+        setFormNhanVien(new NguoiDung());
     }//GEN-LAST:event_btnHienThiNVActionPerformed
 
     private void rdTheoMaNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTheoMaNVMouseClicked
@@ -2812,6 +2823,43 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_formWindowActivated
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int count = 0;
+        int i = tblNhanVien.getSelectedRow();
+        if (i < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng");
+        } else {
+            int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không");
+            if (check == JOptionPane.YES_OPTION) {
+                if (!checkNhanVien()) {
+                    count++;
+                }
+                if (!checkTrungMaNhanVien(txtMaNV.getText())) {
+                    count++;
+                }
+                if (!emailNV()) {
+                    count++;
+                }
+                if (!checkTrungEmailNhanVien(txtEmail.getText())) {
+                    count++;
+                }
+                if (!checkTrungTenDNNhanVien(txtTenDN.getText())) {
+                    count++;
+                }
+                if (count == 0) {
+                    ser.add(getFormNhanVien());
+                    JOptionPane.showMessageDialog(this, "Sửa thành công");
+                    loadDataNhanVien(ser.getAllNhanVien());
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
