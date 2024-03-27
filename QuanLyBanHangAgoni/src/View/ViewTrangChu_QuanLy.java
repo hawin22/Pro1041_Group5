@@ -23,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
-    public static final String Email_Pattern = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)$";
     /**
      * Creates new form ViewTrangChu
      */
@@ -234,24 +233,20 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
 
-    public static Boolean checkEmailNhanVien(String emailCheck) {
-        if (emailCheck == null) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile(Email_Pattern);
-        Matcher matcher = pattern.matcher(emailCheck);
-        return matcher.matches();
-
+    public boolean checkEmailNV(String email) {
+        String emailRegex = "[A-Za-z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)";
+        Pattern emailPat = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = emailPat.matcher(email);
+        return matcher.find();
     }
 
     boolean emailNV() {
-        if (checkEmailNhanVien(txtEmail.getText())) {
+        if (checkEmailNV(txtEmail.getText())) {
             return true;
         } else {
             JOptionPane.showMessageDialog(this, "Sai định dạng email");
             return false;
         }
-
     }
 
     public boolean checkTrungMaNhanVien(String ma) {
