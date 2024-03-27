@@ -12,6 +12,7 @@ public class NguoiDung {
    String maNguoiDung;
    String tenNguoiDung;
    boolean gioiTinh;
+   int tuoi;
    String SDT;
    String Email;
    String Roles;
@@ -21,10 +22,11 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public NguoiDung(String maNguoiDung, String tenNguoiDung, boolean gioiTinh, String SDT, String Email, String Roles, String tenDN, String passWord) {
+    public NguoiDung(String maNguoiDung, String tenNguoiDung, boolean gioiTinh, int tuoi, String SDT, String Email, String Roles, String tenDN, String passWord) {
         this.maNguoiDung = maNguoiDung;
         this.tenNguoiDung = tenNguoiDung;
         this.gioiTinh = gioiTinh;
+        this.tuoi = tuoi;
         this.SDT = SDT;
         this.Email = Email;
         this.Roles = Roles;
@@ -54,6 +56,14 @@ public class NguoiDung {
 
     public void setGioiTinh(boolean gioiTinh) {
         this.gioiTinh = gioiTinh;
+    }
+
+    public int getTuoi() {
+        return tuoi;
+    }
+
+    public void setTuoi(int tuoi) {
+        this.tuoi = tuoi;
     }
 
     public String getSDT() {
@@ -95,6 +105,10 @@ public class NguoiDung {
     public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
+
+    
+
+    
    
    
 }

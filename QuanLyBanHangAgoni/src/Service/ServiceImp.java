@@ -799,9 +799,31 @@ public class ServiceImp implements ServiceInterface {
         }
         return listKhuyenMai;
     }
+    
+    public ArrayList<NguoiDung> sapXepTheoTuoiNV() {
+        String sql = "select * from NguoiDung where Roles = 'NV' order by Tuoi";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setTenNguoiDung(rs.getString(2));
+                nd.setGioiTinh(rs.getBoolean(3));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
+                listNguoiDung.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-    @Override
-    public void update(NguoiDung nd) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return listNguoiDung;
     }
 }

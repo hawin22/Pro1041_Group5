@@ -36,7 +36,6 @@ public interface ServiceInterface {
     ArrayList<Voucher> sXTTTenVoucher();
     ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet(String maHoaDon);
     ArrayList<LichSuGia> getAllLichSuGia();
-    void update(NguoiDung nd);
     ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD);
     ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD);
     ArrayList<HoaDonChiTiet> updateSoluongSanPhamBanHang(String maSanPham, Integer soLuong, String maHoaDon);
@@ -50,4 +49,5 @@ public interface ServiceInterface {
     void updateNV(NguoiDung nd);
     ArrayList<NguoiDung> getAllQuanLy();
     void deleteNhanVien(String maNV);
+    ArrayList<NguoiDung> sapXepTheoTuoiNV();
 };
