@@ -29,6 +29,7 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<HoaDon> listHoaDon = new ArrayList<>();
     ArrayList<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
     ArrayList<LichSuGia> listLichSuGia = new ArrayList<>();
+    ArrayList<NguoiDung> listQuanLy = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
@@ -211,7 +212,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> getAllNhanVien() {
-        String sql = "select * from NguoiDung where Roles like 'NV%'";
+        String sql = "select * from NguoiDung where Roles = 'NV'";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -314,7 +315,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> searchNhanVien(String ma) {
-        String sql = "select * from NguoiDung where Roles like 'NV%' and MaNguoiDung like ?";
+        String sql = "select * from NguoiDung where Roles = 'NV' and MaNguoiDung like ?";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -341,7 +342,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> sapXepTheoMaNhVien() {
-        String sql = "select * from NguoiDung where Roles like 'NV%' order by MaNguoiDung desc ";
+        String sql = "select * from NguoiDung where Roles = 'NV' order by MaNguoiDung desc ";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -394,7 +395,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<NguoiDung> sapXepTheoTenNhVien() {
-        String sql = "select * from NguoiDung where Roles like 'NV%' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
+        String sql = "select * from NguoiDung where Roles = 'NV' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -496,12 +497,16 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet(String maHoaDon) {
-        String sql = "select ChiTietSanPham.MaSanPham, TenSanPham, ChiTietHoaDon.SoLuong, GiaDau, GiaDau from ChiTietHoaDon "
-                + "join HoaDon on HoaDon.MaHoaDon = ChiTietHoaDon.MaHoaDon\n"
-                + "join ChiTietSanPham on ChiTietSanPham.MaSanPhamChiTiet = ChiTietHoaDon.MaSanPhamChiTiet\n"
-                + "join LichSuDonGia on LichSuDonGia.MaDonGia = ChiTietSanPham.DonGia\n"
-                + "join SanPham on SanPham.MaSanPham = ChiTietSanPham.MaSanPham\n"
-                + "where ChiTietHoaDon.MaHoaDon = ?";
+        String sql = "SELECT cthd.MaHoaDon, cthd.MaSanPhamChiTiet, sp.TenSanPham, cthd.SoLuong, ls.GiaDau,\n"
+                + "    CASE\n"
+                + "        WHEN ls.ThoiGianBatDau <= CURRENT_TIMESTAMP AND ls.ThoiGianKetThuc >= CURRENT_TIMESTAMP THEN ls.GiaSau\n"
+                + "        ELSE ls.GiaDau\n"
+                + "    END AS Gia\n"
+                + "FROM ChiTietSanPham ct\n"
+                + "JOIN LichSuDonGia ls ON ls.MaDonGia = ct.DonGia\n"
+                + "JOIN SanPham sp ON sp.MaSanPham = ct.MaSanPham\n"
+                + "JOIN ChiTietHoaDon cthd ON cthd.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "WHERE cthd.MaHoaDon = ?;";
         listHoaDonChiTiet.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -510,11 +515,12 @@ public class ServiceImp implements ServiceInterface {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 HoaDonChiTiet hdct = new HoaDonChiTiet();
-                hdct.setMaSanPham(rs.getString(1));
-                hdct.setTenSanPham(rs.getString(2));
-                hdct.setSoLuong(rs.getInt(3));
-                hdct.setDonGia(rs.getDouble(4));
-                hdct.setDonGiaSau(rs.getDouble(5));
+                hdct.setMaHoaDon(rs.getString(1));
+                hdct.setMaSanPham(rs.getString(2));
+                hdct.setTenSanPham(rs.getString(3));
+                hdct.setSoLuong(rs.getInt(4));
+                hdct.setDonGia(rs.getDouble(5));
+                hdct.setDonGiaSau(rs.getDouble(6));
                 listHoaDonChiTiet.add(hdct);
             }
 
@@ -601,12 +607,49 @@ public class ServiceImp implements ServiceInterface {
 
     }
 
-    @Override
-    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<HoaDonChiTiet> updateSoluongSanPhamBanHang(String maSanPham, Integer soLuong, String maHoaDon) {
+        String sql = "update ChiTietHoaDon set SoLuong = SoLuong + ? where MaHoaDon = ? and MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, soLuong);
+            stm.setString(2, maHoaDon);
+            stm.setString(3, maSanPham);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDonChiTiet;
     }
 
-    public void update(NguoiDung nd) {
+    public HoaDon getRowHoaDon(int row) {
+        return listHoaDon.get(row);
+    }
+
+    public SanPham getRowSanPham(int row) {
+        return listSanPham.get(row);
+    }
+
+    public String getMaSanPhamChiTietFromSanPham(String maSanPham) {
+        String sql = "select MaSanPhamChiTiet from ChiTietSanPham join SanPham on SanPham.MaSanPham = ChiTietSanPham.MaSanPham where SanPham.MaSanPham = ?";
+        String kq = "";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maSanPham);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                kq = rs.getString("MaSanPhamChiTiet");
+            }
+            System.out.println(kq);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kq;
+    }
+
+    public void updateNV(NguoiDung nd) {
         String sql = "update NguoiDung set TenNguoiDung = ?, GioiTinh = ?, SDT = ?, Email = ?, TenDangNhap = ?, MatKhau = ? where MaNguoiDung = ?";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -625,13 +668,78 @@ public class ServiceImp implements ServiceInterface {
         }
     }
 
+    public ArrayList<SanPham> updateSanPhamTruBanHang(String maSanPham, Integer soLuong) {
+        String sql = "update ChiTietSanPham set SoLuong = SoLuong - ? where MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, soLuong);
+            stm.setString(2, maSanPham);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+
+    public ArrayList<SanPham> updateSanPhamCongBanHang(String maSanPham, Integer soLuong) {
+        String sql = "update ChiTietSanPham set SoLuong = SoLuong + ? where MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, soLuong);
+            stm.setString(2, maSanPham);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+
+    public ArrayList<HoaDonChiTiet> updateSoluongSanPhamBanHangTru(String maSanPham, Integer soLuong, String maHoaDon) {
+        String sql = "update ChiTietHoaDon set SoLuong = SoLuong - ? where MaHoaDon = ? and MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, soLuong);
+            stm.setString(2, maHoaDon);
+            stm.setString(3, maSanPham);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDonChiTiet;
+    }
     @Override
-    public ArrayList<NguoiDung> searchNguoiDung(String ma) {
+    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<NguoiDung> sapXepTheoMaNgDung() {
+    public ArrayList<NguoiDung> getAllQuanLy() {
+         String sql = "select MaNguoiDung, Email, Roles, TenDangNhap from NguoiDung where Roles = 'QL'";
+        listQuanLy.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setEmail(rs.getString(2));
+                nd.setRoles(rs.getString(3));
+                nd.setTenDN(rs.getString(4));
+                listQuanLy.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listQuanLy;
+    }
+
+    @Override
+    public void deleteNhanVien(String maNV) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -690,5 +798,10 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
         return listKhuyenMai;
+    }
+
+    @Override
+    public void update(NguoiDung nd) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
