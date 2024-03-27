@@ -28,7 +28,7 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> sapXepTheoMaNhVien();
     ArrayList<NguoiDung> sapXepTheoTenNhVien();
     ArrayList<NguoiDung> getAllNguoiDung();
-    Boolean add(NguoiDung nd);
+    Boolean addNhanVien(NguoiDung nd);
     ArrayList<Voucher> searchVoucher(String maVC);
     ArrayList<HoaDon> getAllHoaDon();
     ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet();

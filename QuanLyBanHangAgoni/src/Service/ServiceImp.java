@@ -424,7 +424,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
-    public Boolean add(NguoiDung nd) {
+    public Boolean addNhanVien(NguoiDung nd) {
         String sql = "insert into NguoiDung values(?,?,?,?,?,?,?,?,?)";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -747,7 +747,15 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public void deleteNhanVien(String maNV) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = " delete NguoiDung where MaNguoiDung = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maNV);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
