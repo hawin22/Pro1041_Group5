@@ -21,8 +21,6 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> getAllNhanVien();
     NguoiDung getRowNhanVien(int row);
     ArrayList<SanPham> getAllSanPham();
-    ArrayList<NguoiDung> searchNguoiDung(String ma);
-    ArrayList<NguoiDung> sapXepTheoMaNgDung();
     void addKhachHang(KhachHang kh);
     void updateKhachHang(KhachHang kh);
     void deleteKhachHang(String MaKhachHang);
@@ -44,8 +42,8 @@ public interface ServiceInterface {
     SanPham getRowSanPham(int row);
     //HoaDonChiTiet getRowHDCT(int row);
     String getMaSanPhamChiTietFromSanPham(String maSanPham);
-    void update(NguoiDung nd);
     ArrayList<SanPham> updateSanPhamTruBanHang(String maSanPham, Integer soLuong);
     ArrayList<SanPham> updateSanPhamCongBanHang(String maSanPham, Integer soLuong);
-    
+    void updateNV(NguoiDung nd);
+    ArrayList<NguoiDung> getAllQuanLy();
 };

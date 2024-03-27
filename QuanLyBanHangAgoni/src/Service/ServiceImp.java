@@ -648,7 +648,7 @@ public class ServiceImp implements ServiceInterface {
         return kq;
     }
 
-    public void update(NguoiDung nd) {
+    public void updateNV(NguoiDung nd) {
         String sql = "update NguoiDung set TenNguoiDung = ?, GioiTinh = ?, SDT = ?, Email = ?, TenDangNhap = ?, MatKhau = ? where MaNguoiDung = ?";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -710,20 +710,30 @@ public class ServiceImp implements ServiceInterface {
         }
         return listHoaDonChiTiet;
     }
-
-    @Override
-
-    public ArrayList<NguoiDung> searchNguoiDung(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<NguoiDung> sapXepTheoMaNgDung() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     @Override
     public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<NguoiDung> getAllQuanLy() {
+         String sql = "select MaNguoiDung, Email, Roles, TenDangNhap from NguoiDung where Roles like 'QL%'";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setEmail(rs.getString(2));
+                nd.setRoles(rs.getString(3));
+                nd.setTenDN(rs.getString(4));
+                listNguoiDung.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listNguoiDung;
     }
 }
