@@ -737,4 +737,9 @@ public class ServiceImp implements ServiceInterface {
         }
         return listQuanLy;
     }
+
+    @Override
+    public void deleteNhanVien(String maNV) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

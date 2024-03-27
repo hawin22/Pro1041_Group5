@@ -46,4 +46,5 @@ public interface ServiceInterface {
     ArrayList<SanPham> updateSanPhamCongBanHang(String maSanPham, Integer soLuong);
     void updateNV(NguoiDung nd);
     ArrayList<NguoiDung> getAllQuanLy();
+    void deleteNhanVien(String maNV);
 };
