@@ -41,5 +41,6 @@ public interface ServiceInterface {
     SanPham getRowSanPham(int row);
     //HoaDonChiTiet getRowHDCT(int row);
     String getMaSanPhamChiTietFromSanPham(String maSanPham);
-    void update(NguoiDung nd);
+    void updateNV(NguoiDung nd);
+    ArrayList<NguoiDung> getAllQuanLy();
 };
