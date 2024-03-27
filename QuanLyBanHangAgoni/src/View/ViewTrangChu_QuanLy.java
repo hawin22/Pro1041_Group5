@@ -2741,7 +2741,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         loadDataNhanVien(ser.getAllNhanVien());
         txtMaNV.setEnabled(true);
-        setFormNhanVien(new NguoiDung());
+        setFormNhanVien(new NguoiDung("", "", true, "", "", "NV", "", ""));
     }//GEN-LAST:event_btnHienThiNVActionPerformed
 
     private void rdTheoMaNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTheoMaNVMouseClicked
