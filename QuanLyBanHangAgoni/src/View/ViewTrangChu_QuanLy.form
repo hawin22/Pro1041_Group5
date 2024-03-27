@@ -235,15 +235,16 @@
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txtSXTNKTVoucher" min="-2" pref="225" max="-2" attributes="0"/>
-                                                  <Component id="txtSXNBDVoucher" min="-2" pref="225" max="-2" attributes="0"/>
+                                                  <Component id="txtTKNKTVoucher" min="-2" pref="225" max="-2" attributes="0"/>
+                                                  <Component id="txtTKNBDVoucher" min="-2" pref="225" max="-2" attributes="0"/>
+                                                  <Component id="btnTKTKhoangNgayVC" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <Component id="jScrollPane1" alignment="0" min="-2" pref="1278" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="91" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -269,7 +270,7 @@
                                   <Component id="txtMaVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel64" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtSXNBDVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtTKNBDVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -277,13 +278,14 @@
                                   <Component id="txtTenVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel66" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtSXTNKTVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtTKNKTVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel50" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtSoLuongVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnTKTKhoangNgayVC" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -305,7 +307,7 @@
                                   <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtSoTienYCVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="207" max="32767" attributes="0"/>
+                              <EmptySpace pref="76" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -533,7 +535,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel64">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="S&#x1eaf;p x&#x1ebf;p ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u"/>
+                        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rdAllVoucher">
@@ -549,12 +551,29 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel66">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="S&#x1eaf;p x&#x1ebf;p ng&#xe0;y k&#x1ebf;t th&#xfa;c"/>
+                        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m ng&#xe0;y k&#x1ebf;t th&#xfa;c"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtSXTNKTVoucher">
+                    <Component class="javax.swing.JTextField" name="txtTKNKTVoucher">
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtSXNBDVoucher">
+                    <Component class="javax.swing.JTextField" name="txtTKNBDVoucher">
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btnTKTKhoangNgayVC">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="99" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m theo kho&#x1ea3;ng ng&#xe0;y"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTKTKhoangNgayVCActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -620,8 +639,8 @@
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txtSXTNKTKhuyeMai" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
-                                                  <Component id="txtSXTNBDKhuyenMai" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
+                                                  <Component id="txtTKNKTKhuyeMai" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
+                                                  <Component id="txtTKNBDKhuyenMai" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
                                                   <Component id="tbnTKTKNVoucher" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -629,7 +648,7 @@
                                   </Group>
                                   <Component id="jScrollPane14" alignment="0" min="-2" pref="1273" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="96" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -667,12 +686,12 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel65" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtSXTNBDKhuyenMai" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtTKNBDKhuyenMai" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel67" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtSXTNKTKhuyeMai" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtTKNKTKhuyeMai" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -919,22 +938,34 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel65">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="S&#x1eaf;p x&#x1ebf;p theo ng&#xe0;y &#x111;&#x1ea7;u"/>
+                        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m theo ng&#xe0;y &#x111;&#x1ea7;u"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtSXTNBDKhuyenMai">
+                    <Component class="javax.swing.JTextField" name="txtTKNBDKhuyenMai">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel67">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="S&#x103;p x&#x1ebf;p ng&#xe0;y k&#x1ebf;t th&#xfa;c"/>
+                        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m ng&#xe0;y k&#x1ebf;t th&#xfa;c"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtSXTNKTKhuyeMai">
+                    <Component class="javax.swing.JTextField" name="txtTKNKTKhuyeMai">
                     </Component>
                     <Component class="javax.swing.JButton" name="tbnTKTKNVoucher">
                       <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="99" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m theo kho&#x1ea3;ng ng&#xe0;y"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbnTKTKNVoucherActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1038,7 +1069,7 @@
                                       <Component id="jScrollPane15" min="-2" pref="200" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="372" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>

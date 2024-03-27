@@ -39,4 +39,6 @@ public interface ServiceInterface {
     ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet(String maHoaDon);
     ArrayList<LichSuGia> getAllLichSuGia();
     void update(NguoiDung nd);
+    ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD);
+    ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD);
 };
