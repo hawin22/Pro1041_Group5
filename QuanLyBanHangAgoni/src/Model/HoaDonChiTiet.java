@@ -96,4 +96,12 @@ public class HoaDonChiTiet {
         this.tenSanPham = tenSanPham;
     }
 
+    @Override
+    public String toString() {
+        return "HoaDonChiTiet{" + "maHoaDon=" + maHoaDon + ", maHoaDonChiTiet=" + maHoaDonChiTiet + ", soLuong=" + soLuong + ", donGia=" + donGia + ", donGiaSau=" + donGiaSau + ", maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + '}';
+    }
+
+    public void inThonTin() {
+        System.out.println("HoaDonChiTiet{" + "maHoaDon=" + maHoaDon + ", maHoaDonChiTiet=" + maHoaDonChiTiet + ", soLuong=" + soLuong + ", donGia=" + donGia + ", donGiaSau=" + donGiaSau + ", maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + '}');
+    }
 }
