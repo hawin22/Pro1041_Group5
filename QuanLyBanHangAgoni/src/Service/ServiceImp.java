@@ -29,6 +29,7 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<HoaDon> listHoaDon = new ArrayList<>();
     ArrayList<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
     ArrayList<LichSuGia> listLichSuGia = new ArrayList<>();
+    ArrayList<NguoiDung> listQuanLy = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
@@ -211,7 +212,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> getAllNhanVien() {
-        String sql = "select * from NguoiDung where Roles like 'NV%'";
+        String sql = "select * from NguoiDung where Roles = 'NV'";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -314,7 +315,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> searchNhanVien(String ma) {
-        String sql = "select * from NguoiDung where Roles like 'NV%' and MaNguoiDung like ?";
+        String sql = "select * from NguoiDung where Roles = 'NV' and MaNguoiDung like ?";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -341,7 +342,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> sapXepTheoMaNhVien() {
-        String sql = "select * from NguoiDung where Roles like 'NV%' order by MaNguoiDung desc ";
+        String sql = "select * from NguoiDung where Roles = 'NV' order by MaNguoiDung desc ";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -394,7 +395,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<NguoiDung> sapXepTheoTenNhVien() {
-        String sql = "select * from NguoiDung where Roles like 'NV%' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
+        String sql = "select * from NguoiDung where Roles = 'NV' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -717,8 +718,8 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> getAllQuanLy() {
-         String sql = "select MaNguoiDung, Email, Roles, TenDangNhap from NguoiDung where Roles like 'QL%'";
-        listNguoiDung.clear();
+         String sql = "select MaNguoiDung, Email, Roles, TenDangNhap from NguoiDung where Roles = 'QL'";
+        listQuanLy.clear();
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -729,11 +730,11 @@ public class ServiceImp implements ServiceInterface {
                 nd.setEmail(rs.getString(2));
                 nd.setRoles(rs.getString(3));
                 nd.setTenDN(rs.getString(4));
-                listNguoiDung.add(nd);
+                listQuanLy.add(nd);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listNguoiDung;
+        return listQuanLy;
     }
 }
