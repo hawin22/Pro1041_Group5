@@ -55,11 +55,10 @@ public interface ServiceInterface {
     ArrayList<SanPham> sapXepSanPhamTheoGiaBanHang();
     ArrayList<SanPham> TimKiemSanPhamTheoMaVaTenBanHang(String keyWord);
     ArrayList<NguoiDung> sapXepTheoTuoiNV();
+    ArrayList<HoaDon> locHoaDonTheoTrangThaiBanHang(String trangThai);
     String updateTrangThaiNhanVien(boolean trangThai, String maNhanVien);
     ArrayList<NguoiDung> searchNhanVienNghi(String ma, String tenNV);
     ArrayList<NguoiDung> sapXepTheoMaNhVienNghi();
     ArrayList<NguoiDung> sapXepTheoTenNhVienNghi();
     ArrayList<NguoiDung> sapXepTheoTuoiNVNghi();
-
-
 };

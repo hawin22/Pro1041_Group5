@@ -215,7 +215,7 @@ public class ServiceImp implements ServiceInterface {
         String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = ?";
         listNguoiDung.clear();
         try {
-            Connection conn = DBConnect1.getConnection();       
+            Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setBoolean(1, trangThai);
             ResultSet rs = stm.executeQuery();
@@ -309,9 +309,11 @@ public class ServiceImp implements ServiceInterface {
         }
         return listSanPham;
     }
-    public NguoiDung getRowNhanVien(boolean trangThai, int row){
+
+    public NguoiDung getRowNhanVien(boolean trangThai, int row) {
         return getAllNhanVien(trangThai).get(row);
     }
+
     @Override
     public ArrayList<NguoiDung> searchNhanVien(String ma, String tenNV) {
         String sql = "select * from NguoiDung where Roles = 'NV' and MaNguoiDung like ? or TenNguoiDung like ? and TrangThai = 1";
@@ -1103,8 +1105,8 @@ public class ServiceImp implements ServiceInterface {
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, "%"+keyWord+"%");
-            stm.setString(2, "%"+keyWord+"%");
+            stm.setString(1, "%" + keyWord + "%");
+            stm.setString(2, "%" + keyWord + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham();
@@ -1129,6 +1131,33 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
+    public ArrayList<HoaDon> locHoaDonTheoTrangThaiBanHang(String trangThai) {
+        String sql = "select * from HoaDon where TrangThai = ?";
+        listHoaDon.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, trangThai);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayTao(rs.getString(2));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setTrangThai(rs.getString(3));
+                listHoaDon.add(hd);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
     public String updateTrangThaiNhanVien(boolean trangThai, String maNhanVien) {
         String sql = "update NguoiDung set TrangThai = ? where MaNguoiDung = ? and Roles = 'NV'";
         try {
@@ -1147,7 +1176,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> searchNhanVienNghi(String ma, String tenNV) {
-     String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 and MaNguoiDung like ? or TenNguoiDung like ?";
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 and MaNguoiDung like ? or TenNguoiDung like ?";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1174,9 +1203,10 @@ public class ServiceImp implements ServiceInterface {
         }
         return listNguoiDung;
     }
+
     @Override
     public ArrayList<NguoiDung> sapXepTheoMaNhVienNghi() {
-String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 order by MaNguoiDung desc ";
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 order by MaNguoiDung desc ";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1233,7 +1263,7 @@ String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 order
 
     @Override
     public ArrayList<NguoiDung> sapXepTheoTuoiNVNghi() {
- String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 order by Tuoi";
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 order by Tuoi";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1260,6 +1290,4 @@ String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 order
         return listNguoiDung;
     }
 
-    
-   
 }

@@ -549,6 +549,10 @@
                           </StringArray>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cbbLocHoaDonBanHangMouseClicked"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbLocHoaDonBanHangActionPerformed"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
@@ -1412,7 +1416,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cbbSapXepTheoNgayHetHan" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                                      <Component id="cbbSapXepTheoNgayHetHanKhuyenMai" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="txtTimKiemKhuyenMai" min="-2" pref="222" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1444,7 +1448,7 @@
                                               <Component id="btnTimKiemKhuyenMai" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="cbbSapXepTheoNgayHetHan" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cbbSapXepTheoNgayHetHanKhuyenMai" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="3" attributes="0">
@@ -1525,7 +1529,7 @@
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JComboBox" name="cbbSapXepTheoNgayHetHan">
+                        <Component class="javax.swing.JComboBox" name="cbbSapXepTheoNgayHetHanKhuyenMai">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="4">
