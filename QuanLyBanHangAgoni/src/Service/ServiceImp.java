@@ -248,7 +248,7 @@ public class ServiceImp implements ServiceInterface {
                 + "    MauSac, \n"
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
-                + "    ChatLieu,\n"
+                + "    TenChatLieu,\n"
                 + "	\n"
                 + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
                 + " Hang,\n"
@@ -279,7 +279,7 @@ public class ServiceImp implements ServiceInterface {
                 + "    MauSac, \n"
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
-                + "    ChatLieu,\n"
+                + "    TenChatLieu,\n"
                 + " Hang,\n"
                 + "	maKhuyenMai";
         try {
@@ -718,6 +718,7 @@ public class ServiceImp implements ServiceInterface {
         }
         return listHoaDonChiTiet;
     }
+
     @Override
     public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -725,7 +726,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> getAllQuanLy() {
-         String sql = "select MaNguoiDung, Email, Roles, TenDangNhap from NguoiDung where Roles = 'QL'";
+        String sql = "select MaNguoiDung, Email, Roles, TenDangNhap from NguoiDung where Roles = 'QL'";
         listQuanLy.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -743,6 +744,269 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
         return listQuanLy;
+    }
+
+    public ArrayList<HoaDonChiTiet> addHoaDonChiTiet(HoaDonChiTiet hdct) {
+        String sql = "insert into ChiTietHoaDon(MaHoaDon, MaSanPhamChiTiet, SoLuong) values(?,?,?)";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, hdct.getMaHoaDon());
+            stm.setString(2, hdct.getMaSanPham());
+            stm.setInt(3, hdct.getSoLuong());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDonChiTiet;
+    }
+
+    public ArrayList<HoaDonChiTiet> deleteHoaDonChiTiet(String maSanPhamChiTiet, String maHoaDon) {
+        String sql = "delete ChiTietHoaDon where MaHoaDon = ? and MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maHoaDon);
+            stm.setString(2, maSanPhamChiTiet);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDonChiTiet;
+    }
+
+    public String getMaSanPhamFromChiTietSanPham(String maSanPhamChiTiet) {
+        String maSanPham = "";
+        String sql = "select MaSanPham from ChiTietSanPham \n"
+                + "where MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maSanPhamChiTiet);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                maSanPham = rs.getString(1);
+            }
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return maSanPham;
+    }
+
+    public ArrayList<SanPham> sapXepSanPhamTheoTenBanHang() {
+        listSanPham.clear();
+        String sql = "SELECT distinct\n"
+                + "    c.MaSanPham, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
+                + "	Hang,\n"
+                + "	maKhuyenMai\n"
+                + "FROM \n"
+                + "    ChiTietSanPham c\n"
+                + "JOIN \n"
+                + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
+                + "JOIN \n"
+                + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
+                + "JOIN \n"
+                + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
+                + "JOIN \n"
+                + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
+                + "JOIN \n"
+                + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
+                + "JOIN \n"
+                + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
+                + "left JOIN \n"
+                + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "join \n"
+                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "	group by  c.MaSanPham, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + "	Hang,\n"
+                + "	maKhuyenMai\n"
+                + "	order by TenSanPham";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setNhaCungCap(rs.getString(3));
+                sp.setDonGia(rs.getDouble(4));
+                sp.setSoLuongSP(rs.getInt(5));
+                sp.setMauSac(rs.getString(6));
+                sp.setKichThuoc(rs.getString(7));
+                sp.setMau(rs.getString(8));
+                sp.setChatLieu(rs.getString(9));
+                sp.setHinhAnh(rs.getString(10));
+                sp.setHang(rs.getString(11));
+                sp.setMaSPKM(rs.getString(12));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+
+    public ArrayList<SanPham> sapXepSanPhamTheoMaBanHang() {
+        listSanPham.clear();
+        String sql = "SELECT distinct\n"
+                + "    c.MaSanPham, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
+                + "	Hang,\n"
+                + "	maKhuyenMai\n"
+                + "FROM \n"
+                + "    ChiTietSanPham c\n"
+                + "JOIN \n"
+                + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
+                + "JOIN \n"
+                + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
+                + "JOIN \n"
+                + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
+                + "JOIN \n"
+                + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
+                + "JOIN \n"
+                + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
+                + "JOIN \n"
+                + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
+                + "left JOIN \n"
+                + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "join \n"
+                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "	group by  c.MaSanPham, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + "	Hang,\n"
+                + "	maKhuyenMai\n"
+                + "	order by c.MaSanPham";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setNhaCungCap(rs.getString(3));
+                sp.setDonGia(rs.getDouble(4));
+                sp.setSoLuongSP(rs.getInt(5));
+                sp.setMauSac(rs.getString(6));
+                sp.setKichThuoc(rs.getString(7));
+                sp.setMau(rs.getString(8));
+                sp.setChatLieu(rs.getString(9));
+                sp.setHinhAnh(rs.getString(10));
+                sp.setHang(rs.getString(11));
+                sp.setMaSPKM(rs.getString(12));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+
+    public ArrayList<SanPham> sapXepSanPhamTheoGiaBanHang() {
+        listSanPham.clear();
+        String sql = "SELECT distinct\n"
+                + "    c.MaSanPham, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
+                + "	Hang,\n"
+                + "	maKhuyenMai\n"
+                + "FROM \n"
+                + "    ChiTietSanPham c\n"
+                + "JOIN \n"
+                + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
+                + "JOIN \n"
+                + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
+                + "JOIN \n"
+                + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
+                + "JOIN \n"
+                + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
+                + "JOIN \n"
+                + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
+                + "JOIN \n"
+                + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
+                + "left JOIN \n"
+                + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "join \n"
+                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "	group by  c.MaSanPham, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + "	Hang,\n"
+                + "	maKhuyenMai\n"
+                + "	order by GiaDau";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setNhaCungCap(rs.getString(3));
+                sp.setDonGia(rs.getDouble(4));
+                sp.setSoLuongSP(rs.getInt(5));
+                sp.setMauSac(rs.getString(6));
+                sp.setKichThuoc(rs.getString(7));
+                sp.setMau(rs.getString(8));
+                sp.setChatLieu(rs.getString(9));
+                sp.setHinhAnh(rs.getString(10));
+                sp.setHang(rs.getString(11));
+                sp.setMaSPKM(rs.getString(12));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
     }
 
     @Override
@@ -784,5 +1048,79 @@ public class ServiceImp implements ServiceInterface {
         }
 
         return listNguoiDung;
+    }
+
+    @Override
+    public ArrayList<SanPham> TimKiemSanPhamTheoMaVaTenBanHang(String keyWord) {
+        listSanPham.clear();
+        String sql = "SELECT distinct\n"
+                + "    c.MaSanPham, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
+                + "	Hang,\n"
+                + "	maKhuyenMai\n"
+                + "FROM \n"
+                + "    ChiTietSanPham c\n"
+                + "JOIN \n"
+                + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
+                + "JOIN \n"
+                + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
+                + "JOIN \n"
+                + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
+                + "JOIN \n"
+                + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
+                + "JOIN \n"
+                + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
+                + "JOIN \n"
+                + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
+                + "left JOIN \n"
+                + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "join \n"
+                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "	group by  c.MaSanPham, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + "	Hang,\n"
+                + "	maKhuyenMai\n"
+                + "having c.MaSanPham like ? or TenSanPham like ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, "%"+keyWord+"%");
+            stm.setString(2, "%"+keyWord+"%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setNhaCungCap(rs.getString(3));
+                sp.setDonGia(rs.getDouble(4));
+                sp.setSoLuongSP(rs.getInt(5));
+                sp.setMauSac(rs.getString(6));
+                sp.setKichThuoc(rs.getString(7));
+                sp.setMau(rs.getString(8));
+                sp.setChatLieu(rs.getString(9));
+                sp.setHinhAnh(rs.getString(10));
+                sp.setHang(rs.getString(11));
+                sp.setMaSPKM(rs.getString(12));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
     }
 }

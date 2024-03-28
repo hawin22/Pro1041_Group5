@@ -96,6 +96,13 @@ public class HoaDonChiTiet {
         this.tenSanPham = tenSanPham;
     }
 
+    public HoaDonChiTiet(String maHoaDon, Integer soLuong, String maSanPham) {
+        this.maHoaDon = maHoaDon;
+        this.soLuong = soLuong;
+        this.maSanPham = maSanPham;
+    }
+    
+
     @Override
     public String toString() {
         return "HoaDonChiTiet{" + "maHoaDon=" + maHoaDon + ", maHoaDonChiTiet=" + maHoaDonChiTiet + ", soLuong=" + soLuong + ", donGia=" + donGia + ", donGiaSau=" + donGiaSau + ", maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + '}';
