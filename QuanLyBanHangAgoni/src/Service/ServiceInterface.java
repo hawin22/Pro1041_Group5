@@ -18,13 +18,13 @@ public interface ServiceInterface {
     ArrayList<Login> FogotPassword(String user, String email);
     ArrayList<Voucher> getAllVoucher();
     ArrayList<KhuyenMai> getAllKhuyenMai();
-    ArrayList<NguoiDung> getAllNhanVien();
-    NguoiDung getRowNhanVien(int row);
+    ArrayList<NguoiDung> getAllNhanVien(boolean trangThai);
+    NguoiDung getRowNhanVien(boolean trangThai,int row);
     ArrayList<SanPham> getAllSanPham();
     void addKhachHang(KhachHang kh);
     void updateKhachHang(KhachHang kh);
     void deleteKhachHang(String MaKhachHang);
-    ArrayList<NguoiDung> searchNhanVien(String ma);
+    ArrayList<NguoiDung> searchNhanVien(String ma, String tenNV);
     ArrayList<NguoiDung> sapXepTheoMaNhVien();
     ArrayList<NguoiDung> sapXepTheoTenNhVien();
     ArrayList<NguoiDung> getAllNguoiDung();
@@ -56,4 +56,9 @@ public interface ServiceInterface {
     ArrayList<SanPham> TimKiemSanPhamTheoMaVaTenBanHang(String keyWord);
     ArrayList<NguoiDung> sapXepTheoTuoiNV();
     ArrayList<HoaDon> locHoaDonTheoTrangThaiBanHang(String trangThai);
+    String updateTrangThaiNhanVien(boolean trangThai, String maNhanVien);
+    ArrayList<NguoiDung> searchNhanVienNghi(String ma, String tenNV);
+    ArrayList<NguoiDung> sapXepTheoMaNhVienNghi();
+    ArrayList<NguoiDung> sapXepTheoTenNhVienNghi();
+    ArrayList<NguoiDung> sapXepTheoTuoiNVNghi();
 };

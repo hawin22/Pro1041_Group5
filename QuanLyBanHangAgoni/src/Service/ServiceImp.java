@@ -211,13 +211,14 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
-    public ArrayList<NguoiDung> getAllNhanVien() {
-        String sql = "select * from NguoiDung where Roles = 'NV'";
+    public ArrayList<NguoiDung> getAllNhanVien(boolean trangThai) {
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = ?";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setBoolean(1, trangThai);
+            ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 NguoiDung nd = new NguoiDung();
                 nd.setMaNguoiDung(rs.getString(1));
@@ -229,6 +230,7 @@ public class ServiceImp implements ServiceInterface {
                 nd.setRoles(rs.getString(7));
                 nd.setTenDN(rs.getString(8));
                 nd.setPassWord(rs.getString(9));
+                nd.setTrangThai(rs.getBoolean(10));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -308,20 +310,19 @@ public class ServiceImp implements ServiceInterface {
         return listSanPham;
     }
 
-    @Override
-    public NguoiDung getRowNhanVien(int row) {
-        return listNguoiDung.get(row);
-
+    public NguoiDung getRowNhanVien(boolean trangThai, int row) {
+        return getAllNhanVien(trangThai).get(row);
     }
 
     @Override
-    public ArrayList<NguoiDung> searchNhanVien(String ma) {
-        String sql = "select * from NguoiDung where Roles = 'NV' and MaNguoiDung like ?";
+    public ArrayList<NguoiDung> searchNhanVien(String ma, String tenNV) {
+        String sql = "select * from NguoiDung where Roles = 'NV' and MaNguoiDung like ? or TenNguoiDung like ? and TrangThai = 1";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, "%" + ma + "%");
+            stm.setString(2, "%" + tenNV + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 NguoiDung nd = new NguoiDung();
@@ -334,6 +335,7 @@ public class ServiceImp implements ServiceInterface {
                 nd.setRoles(rs.getString(7));
                 nd.setTenDN(rs.getString(8));
                 nd.setPassWord(rs.getString(9));
+                nd.setTrangThai(rs.getBoolean(10));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -344,7 +346,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> sapXepTheoMaNhVien() {
-        String sql = "select * from NguoiDung where Roles = 'NV' order by MaNguoiDung desc ";
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 1 order by MaNguoiDung desc ";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -361,6 +363,7 @@ public class ServiceImp implements ServiceInterface {
                 nd.setRoles(rs.getString(7));
                 nd.setTenDN(rs.getString(8));
                 nd.setPassWord(rs.getString(9));
+                nd.setTrangThai(rs.getBoolean(10));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -398,7 +401,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<NguoiDung> sapXepTheoTenNhVien() {
-        String sql = "select * from NguoiDung where Roles = 'NV' order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 1 order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -415,6 +418,7 @@ public class ServiceImp implements ServiceInterface {
                 nd.setRoles(rs.getString(7));
                 nd.setTenDN(rs.getString(8));
                 nd.setPassWord(rs.getString(9));
+                nd.setTrangThai(rs.getBoolean(10));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -425,7 +429,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public Boolean addNhanVien(NguoiDung nd) {
-        String sql = "insert into NguoiDung values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into NguoiDung values(?,?,?,?,?,?,?,?,?,?)";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
@@ -438,6 +442,7 @@ public class ServiceImp implements ServiceInterface {
             stm.setString(7, nd.getRoles());
             stm.setString(8, nd.getTenDN());
             stm.setString(9, nd.getPassWord());
+            stm.setBoolean(10, true);
             stm.executeUpdate();
             conn.close();
             return true;
@@ -1011,7 +1016,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public void deleteNhanVien(String maNV) {
-        String sql = " delete NguoiDung where MaNguoiDung = ?";
+        String sql = " delete NguoiDung where MaNguoiDung = ? and TrangThai = 0";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
@@ -1024,7 +1029,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<NguoiDung> sapXepTheoTuoiNV() {
-        String sql = "select * from NguoiDung where Roles = 'NV' order by Tuoi";
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 1 order by Tuoi";
         listNguoiDung.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1041,6 +1046,7 @@ public class ServiceImp implements ServiceInterface {
                 nd.setRoles(rs.getString(7));
                 nd.setTenDN(rs.getString(8));
                 nd.setPassWord(rs.getString(9));
+                nd.setTrangThai(rs.getBoolean(10));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -1144,10 +1150,144 @@ public class ServiceImp implements ServiceInterface {
                 hd.setNgayHoanThanh(rs.getString(6));
                 hd.setTrangThai(rs.getString(3));
                 listHoaDon.add(hd);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listHoaDon;
     }
+
+    public String updateTrangThaiNhanVien(boolean trangThai, String maNhanVien) {
+        String sql = "update NguoiDung set TrangThai = ? where MaNguoiDung = ? and Roles = 'NV'";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setBoolean(1, trangThai);
+            stm.setString(2, maNhanVien);
+            stm.executeUpdate();
+            conn.close();
+            return "Thành công";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Thất bại";
+    }
+
+    @Override
+    public ArrayList<NguoiDung> searchNhanVienNghi(String ma, String tenNV) {
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 and MaNguoiDung like ? or TenNguoiDung like ?";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, "%" + ma + "%");
+            stm.setString(2, "%" + tenNV + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setTenNguoiDung(rs.getString(2));
+                nd.setGioiTinh(rs.getBoolean(3));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
+                nd.setTrangThai(rs.getBoolean(10));
+                listNguoiDung.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listNguoiDung;
+    }
+
+    @Override
+    public ArrayList<NguoiDung> sapXepTheoMaNhVienNghi() {
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 order by MaNguoiDung desc ";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setTenNguoiDung(rs.getString(2));
+                nd.setGioiTinh(rs.getBoolean(3));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
+                nd.setTrangThai(rs.getBoolean(10));
+                listNguoiDung.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listNguoiDung;
+    }
+
+    @Override
+    public ArrayList<NguoiDung> sapXepTheoTenNhVienNghi() {
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 order by RIGHT(TenNguoiDung, CHARINDEX(' ', REVERSE(TenNguoiDung)) - 1)";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setTenNguoiDung(rs.getString(2));
+                nd.setGioiTinh(rs.getBoolean(3));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
+                nd.setTrangThai(rs.getBoolean(10));
+                listNguoiDung.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listNguoiDung;
+    }
+
+    @Override
+    public ArrayList<NguoiDung> sapXepTheoTuoiNVNghi() {
+        String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 0 order by Tuoi";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setMaNguoiDung(rs.getString(1));
+                nd.setTenNguoiDung(rs.getString(2));
+                nd.setGioiTinh(rs.getBoolean(3));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
+                nd.setTrangThai(rs.getBoolean(10));
+                listNguoiDung.add(nd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listNguoiDung;
+    }
+
 }
