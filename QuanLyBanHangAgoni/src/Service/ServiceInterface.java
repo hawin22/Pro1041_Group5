@@ -47,6 +47,13 @@ public interface ServiceInterface {
     void updateNV(NguoiDung nd);
     ArrayList<NguoiDung> getAllQuanLy();
     void deleteNhanVien(String maNV);
+    ArrayList<HoaDonChiTiet> addHoaDonChiTiet(HoaDonChiTiet hdct);
+    ArrayList<HoaDonChiTiet> deleteHoaDonChiTiet(String maSanPhamChiTiet, String maHoaDon);
+    String getMaSanPhamFromChiTietSanPham(String maSanPhamChiTiet);
+    ArrayList<SanPham> sapXepSanPhamTheoTenBanHang();
+    ArrayList<SanPham> sapXepSanPhamTheoMaBanHang();
+    ArrayList<SanPham> sapXepSanPhamTheoGiaBanHang();
+    ArrayList<SanPham> TimKiemSanPhamTheoMaVaTenBanHang(String keyWord);
     ArrayList<NguoiDung> sapXepTheoTuoiNV();
     String updateTrangThaiNhanVien(boolean trangThai, String maNhanVien);
     ArrayList<NguoiDung> searchNhanVienNghi(String ma, String tenNV);
