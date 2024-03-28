@@ -1099,8 +1099,8 @@ public class ServiceImp implements ServiceInterface {
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, "%"+keyWord+"%");
-            stm.setString(2, "%"+keyWord+"%");
+            stm.setString(1, "%" + keyWord + "%");
+            stm.setString(2, "%" + keyWord + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham();
@@ -1122,5 +1122,32 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
         return listSanPham;
+    }
+
+    @Override
+    public ArrayList<HoaDon> locHoaDonTheoTrangThaiBanHang(String trangThai) {
+        String sql = "select * from HoaDon where TrangThai = ?";
+        listHoaDon.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, trangThai);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayTao(rs.getString(2));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setTrangThai(rs.getString(3));
+                listHoaDon.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
     }
 }

@@ -55,4 +55,5 @@ public interface ServiceInterface {
     ArrayList<SanPham> sapXepSanPhamTheoGiaBanHang();
     ArrayList<SanPham> TimKiemSanPhamTheoMaVaTenBanHang(String keyWord);
     ArrayList<NguoiDung> sapXepTheoTuoiNV();
+    ArrayList<HoaDon> locHoaDonTheoTrangThaiBanHang(String trangThai);
 };

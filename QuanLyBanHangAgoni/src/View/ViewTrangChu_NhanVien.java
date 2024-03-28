@@ -20,34 +20,34 @@ import javax.swing.JOptionPane;
  * @author NGHIAPC
  */
 public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
-    
+
     ServiceInterface ser = new ServiceImp();
     DefaultTableModel dftm;
     private static final String chuoiKyTu = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int leghth = 8;
     private static Random sR = new Random();
-    
+
     public static String genTuDongHoaDon() {
         StringBuilder sB = new StringBuilder(leghth);
         for (int i = 0; i < leghth; i++) {
-            
+
         }
         return null;
     }
-    
+
     public LocalDate getLocalDate() {
         return LocalDate.now();
     }
-    
+
     public ViewTrangChu_NhanVien() {
         initComponents();
         loadDataSanPhamBanHang(ser.getAllSanPham());
         loadDataKhachHang(ser.getAllKhachHang());
         loadDataHoaDonBanHang(ser.getAllHoaDon());
     }
-    
+
     void loadDataKhachHang(ArrayList<KhachHang> list) {
-        
+
         dftm = (DefaultTableModel) tblKhachHang.getModel();
         dftm.setRowCount(0);
         for (KhachHang kh : list) {
@@ -59,12 +59,12 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             });
         }
     }
-    
+
     double thanhTien(Integer soLuong, double donGiaSau) {
-        
+
         return (soLuong * donGiaSau);
     }
-    
+
     double setGiaTheoNgayLichSuDonGia(String maSanPham, ArrayList<LichSuGia> list) {
         double gia = 0;
         for (LichSuGia lsg : list) {
@@ -78,7 +78,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         }
         return gia;
     }
-    
+
     void tinhTongTienBanHang(ArrayList<HoaDonChiTiet> list) {
         double tongTien = 0;
         for (HoaDonChiTiet hdct : list) {
@@ -86,7 +86,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         }
         txtTongTien.setText(tongTien + "");
     }
-    
+
     void tinhThanhTien() {
         double tongTien = 0;
         int row = tblThanhToanBanHang.getRowCount();
@@ -95,7 +95,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         }
         txtTongTien.setText(tongTien + "");
     }
-    
+
     void loadDataHoaDonChiTiet(ArrayList<HoaDonChiTiet> listHDCT) {
         dftm = (DefaultTableModel) tblThanhToanBanHang.getModel();
         dftm.setRowCount(0);
@@ -110,7 +110,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             });
         }
     }
-    
+
     void loadDataHoaDonBanHang(ArrayList<HoaDon> list) {
         dftm = (DefaultTableModel) tblHoaDonBanHang.getModel();
         dftm.setRowCount(0);
@@ -124,9 +124,9 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 hd.getLoaiThanhToan()
             });
         }
-        
+
     }
-    
+
     void loadDataSanPhamBanHang(ArrayList<SanPham> list) {
         dftm = (DefaultTableModel) tblSanPhamBanHang.getModel();
         dftm.setRowCount(0);
@@ -146,7 +146,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             });
         }
     }
-    
+
     Boolean checkSo(String so) {
         try {
             Integer.parseInt(so);
@@ -155,7 +155,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             return false;
         }
     }
-    
+
     KhachHang getFormKhachHang() {
         String maKH = txtMaKH.getText().trim();
         String tenKH = txtTenKH.getText().trim();
@@ -163,14 +163,14 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         String diaChi = txtDCKH.getText().trim();
         return new KhachHang(maKH, tenKH, sdt, diaChi);
     }
-    
+
     void setFormKhachHang(KhachHang kh) {
         txtMaKH.setText(kh.getMaKhachHang());
         txtTenKH.setText(kh.getTenKhachHang());
         txtSDTKH.setText(kh.getSDT());
         txtDCKH.setText(kh.getDiaChi());
     }
-    
+
     void setFormHoaDon(HoaDon hd) {
         lblMaHoaDonHoaDon.setText(hd.getMaHoaDon());
         lblMaHoaDon.setText(hd.getMaHoaDon());
@@ -180,7 +180,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         lblNgayHoanThanh.setText(hd.getNgayHoanThanh());
         txtMaKhachHangBanHang.setText(hd.getMaKhachHang());
         txtMaKhachHangBanHangHDCT.setText(hd.getMaKhachHang());
-        
+
         if (hd.getLoaiThanhToan().equals("Thanh toán khi nhận hàng")) {
             rdTienMat.setSelected(true);
             rdChuyenKhoan.setSelected(false);
@@ -195,7 +195,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             rdChuyenKhoan.setSelected(false);
         }
     }
-    
+
     Boolean checkTrungHoaDonChiTiet(String maHoaDon, String maSanPham) {
         int dem = 0;
         for (HoaDonChiTiet hdct : ser.getAllHoaDonChiTiet(maHoaDon)) {
@@ -209,7 +209,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             return true;
         }
     }
-    
+
     void loadDuLieu(String maHoaDon) {
         for (HoaDonChiTiet hdct : ser.getAllHoaDonChiTiet(maHoaDon)) {
             hdct.inThonTin();
@@ -309,7 +309,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         tblDanhSachKhuyenMai = new javax.swing.JTable();
         txtTimKiemKhuyenMai = new javax.swing.JTextField();
-        cbbSapXepTheoNgayHetHan = new javax.swing.JComboBox<>();
+        cbbSapXepTheoNgayHetHanKhuyenMai = new javax.swing.JComboBox<>();
         txtNgayKetThucKhuyenMai = new javax.swing.JTextField();
         txtNgayBatDauKhuyenMai = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
@@ -477,6 +477,16 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         });
 
         cbbLocHoaDonBanHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Chưa hoàn thành", "Đã hoàn thành", "Đã huỷ" }));
+        cbbLocHoaDonBanHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbbLocHoaDonBanHangMouseClicked(evt);
+            }
+        });
+        cbbLocHoaDonBanHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbLocHoaDonBanHangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1019,7 +1029,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
         txtTimKiemKhuyenMai.setToolTipText("");
 
-        cbbSapXepTheoNgayHetHan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Theo ngày sắp hết hạn", "Dưới 1 Ngày", "Dưới 10 ngày", "Dưới 20 ngày" }));
+        cbbSapXepTheoNgayHetHanKhuyenMai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Theo ngày sắp hết hạn", "Dưới 1 Ngày", "Dưới 10 ngày", "Dưới 20 ngày" }));
 
         jLabel25.setText("Ngày bắt đầu");
 
@@ -1043,7 +1053,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbbSapXepTheoNgayHetHan, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbSapXepTheoNgayHetHanKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(txtTimKiemKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1068,7 +1078,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                             .addComponent(txtTimKiemKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTimKiemKhuyenMai))
                         .addGap(18, 18, 18)
-                        .addComponent(cbbSapXepTheoNgayHetHan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbbSapXepTheoNgayHetHanKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNgayBatDauKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1497,7 +1507,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                     loadDataSanPhamBanHang(ser.getAllSanPham());
                     loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
                     JOptionPane.showMessageDialog(this, "Xoá thành công sản phẩm khỏi hoá đơn");
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(this, "Đã huỷ");
                 }
@@ -1526,21 +1536,21 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         int row = tblKhachHang.getSelectedRow();
         setFormKhachHang(ser.getAllKhachHang().get(row));
     }//GEN-LAST:event_tblKhachHangMouseClicked
-    
+
     boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber.matches("\\d+");
     }
-    
+
     boolean checkKH() {
         if (txtMaKH.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mã Khách hàng không  để trống");
             txtMaKH.requestFocus();
-            
+
             return false;
         } else if (txtTenKH.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Tên khách hàng không để trống");
             txtTenKH.requestFocus();
-            
+
             return false;
         } else if (txtSDTKH.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Số điện thoại không để trống");
@@ -1549,7 +1559,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         } else if (txtDCKH.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "địa chỉ không để trống ");
             txtDCKH.requestFocus();
-            
+
             return false;
         }
         // Kiểm tra số điện thoại chỉ chứa chữ số
@@ -1558,10 +1568,10 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             txtSDTKH.requestFocus();
             return false;
         }
-        
+
         return true;
     }
-    
+
     boolean checkTrung(ArrayList<KhachHang> list, String maKH) {
         int dem = 0;
         for (KhachHang kh : list) {
@@ -1595,13 +1605,13 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             int row = tblKhachHang.getSelectedRow();
             if (row >= 0) {
                 String maKH = txtMaKH.getText();
-                
+
                 KhachHang kh = getFormKhachHang();
                 kh.setMaKhachHang(maKH);
                 ser.updateKhachHang(kh);
                 loadDataKhachHang(ser.getAllKhachHang());
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-                
+
             }
         }
     }//GEN-LAST:event_tbnSuaKHActionPerformed
@@ -1739,6 +1749,29 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         loadDataSanPhamBanHang(ser.TimKiemSanPhamTheoMaVaTenBanHang(timKiem));
     }//GEN-LAST:event_txtTimKiemSanPhamKeyReleased
 
+    private void cbbLocHoaDonBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbLocHoaDonBanHangMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cbbLocHoaDonBanHangMouseClicked
+
+    private void cbbLocHoaDonBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLocHoaDonBanHangActionPerformed
+        // TODO add your handling code here:
+        String keyWord = cbbLocHoaDonBanHang.getSelectedItem().toString();
+        System.out.println(keyWord);
+        if (keyWord.equals("Tất cả")) {
+            loadDataHoaDonBanHang(ser.getAllHoaDon());
+        }
+        if (keyWord.equals("Chưa hoàn thành")) {
+            loadDataHoaDonBanHang(ser.locHoaDonTheoTrangThaiBanHang(keyWord));
+        }
+        if (keyWord.equals("Đã hoàn thành")) {
+            loadDataHoaDonBanHang(ser.locHoaDonTheoTrangThaiBanHang(keyWord));
+        }
+        if (keyWord.equals("Đã huỷ")) {
+            loadDataHoaDonBanHang(ser.locHoaDonTheoTrangThaiBanHang(keyWord));
+        }
+    }//GEN-LAST:event_cbbLocHoaDonBanHangActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1795,7 +1828,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnXoaSanPhamThem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbLocHoaDonBanHang;
-    private javax.swing.JComboBox<String> cbbSapXepTheoNgayHetHan;
+    private javax.swing.JComboBox<String> cbbSapXepTheoNgayHetHanKhuyenMai;
     private javax.swing.JComboBox<String> cbbSapXepTheoNgayHetHanVoucher;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
