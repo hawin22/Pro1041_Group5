@@ -9,14 +9,14 @@ package Model;
  * @author Admin
  */
 public class SanPham {
-    private String maSP, tenSP, mau, hang, chatLieu, mauSac, kichThuoc, nhaCungCap, hinhAnh, maSPKM;
-    private Double donGia;
+    private String maSP, tenSP, mau, hang, chatLieu, mauSac, kichThuoc, nhaCungCap, hinhAnh, maSPKM, maMS, maKT,maCL, MaNCC, diaChiNCC, SDTNCC, emailNCC ;
+    private double donGia;
     private Integer soLuongSP;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String tenSP, String mau, String hang, String chatLieu, String mauSac, String kichThuoc, String nhaCungCap, String hinhAnh, String maSPKM, Double donGia, Integer soLuongSP) {
+    public SanPham(String maSP, String tenSP, String mau, String hang, String chatLieu, String mauSac, String kichThuoc, String nhaCungCap, String hinhAnh, String maSPKM, String maMS, String maKT, String maCL, String MaNCC, String diaChiNCC, String SDTNCC, String emailNCC, double donGia, Integer soLuongSP) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.mau = mau;
@@ -27,6 +27,13 @@ public class SanPham {
         this.nhaCungCap = nhaCungCap;
         this.hinhAnh = hinhAnh;
         this.maSPKM = maSPKM;
+        this.maMS = maMS;
+        this.maKT = maKT;
+        this.maCL = maCL;
+        this.MaNCC = MaNCC;
+        this.diaChiNCC = diaChiNCC;
+        this.SDTNCC = SDTNCC;
+        this.emailNCC = emailNCC;
         this.donGia = donGia;
         this.soLuongSP = soLuongSP;
     }
@@ -111,11 +118,67 @@ public class SanPham {
         this.maSPKM = maSPKM;
     }
 
-    public Double getDonGia() {
+    public String getMaMS() {
+        return maMS;
+    }
+
+    public void setMaMS(String maMS) {
+        this.maMS = maMS;
+    }
+
+    public String getMaKT() {
+        return maKT;
+    }
+
+    public void setMaKT(String maKT) {
+        this.maKT = maKT;
+    }
+
+    public String getMaCL() {
+        return maCL;
+    }
+
+    public void setMaCL(String maCL) {
+        this.maCL = maCL;
+    }
+
+    public String getMaNCC() {
+        return MaNCC;
+    }
+
+    public void setMaNCC(String MaNCC) {
+        this.MaNCC = MaNCC;
+    }
+
+    public String getDiaChiNCC() {
+        return diaChiNCC;
+    }
+
+    public void setDiaChiNCC(String diaChiNCC) {
+        this.diaChiNCC = diaChiNCC;
+    }
+
+    public String getSDTNCC() {
+        return SDTNCC;
+    }
+
+    public void setSDTNCC(String SDTNCC) {
+        this.SDTNCC = SDTNCC;
+    }
+
+    public String getEmailNCC() {
+        return emailNCC;
+    }
+
+    public void setEmailNCC(String emailNCC) {
+        this.emailNCC = emailNCC;
+    }
+
+    public double getDonGia() {
         return donGia;
     }
 
-    public void setDonGia(Double donGia) {
+    public void setDonGia(double donGia) {
         this.donGia = donGia;
     }
 
@@ -127,10 +190,5 @@ public class SanPham {
         this.soLuongSP = soLuongSP;
     }
 
-    
-
-    
-    
-    
     
 }
