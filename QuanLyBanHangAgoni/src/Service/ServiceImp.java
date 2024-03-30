@@ -467,11 +467,12 @@ public class ServiceImp implements ServiceInterface {
                 nd.setMaNguoiDung(rs.getString(1));
                 nd.setTenNguoiDung(rs.getString(2));
                 nd.setGioiTinh(rs.getBoolean(3));
-                nd.setSDT(rs.getString(4));
-                nd.setEmail(rs.getString(5));
-                nd.setRoles(rs.getString(6));
-                nd.setTenDN(rs.getString(7));
-                nd.setPassWord(rs.getString(8));
+                nd.setTuoi(rs.getInt(4));
+                nd.setSDT(rs.getString(5));
+                nd.setEmail(rs.getString(6));
+                nd.setRoles(rs.getString(7));
+                nd.setTenDN(rs.getString(8));
+                nd.setPassWord(rs.getString(9));
                 listNguoiDung.add(nd);
             }
         } catch (Exception e) {
@@ -660,17 +661,18 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public void updateNV(NguoiDung nd) {
-        String sql = "update NguoiDung set TenNguoiDung = ?, GioiTinh = ?, SDT = ?, Email = ?, TenDangNhap = ?, MatKhau = ? where MaNguoiDung = ?";
+        String sql = "update NguoiDung set TenNguoiDung = ?, GioiTinh = ?, Tuoi = ?, SDT = ?, Email = ?, TenDangNhap = ?, MatKhau = ? where MaNguoiDung = ?";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, nd.getTenNguoiDung());
             stm.setBoolean(2, nd.isGioiTinh());
-            stm.setString(3, nd.getSDT());
-            stm.setString(4, nd.getEmail());
-            stm.setString(5, nd.getTenDN());
-            stm.setString(6, nd.getPassWord());
-            stm.setString(7, nd.getMaNguoiDung());
+            stm.setInt(3, nd.getTuoi());
+            stm.setString(4, nd.getSDT());
+            stm.setString(5, nd.getEmail());
+            stm.setString(6, nd.getTenDN());
+            stm.setString(7, nd.getPassWord());
+            stm.setString(8, nd.getMaNguoiDung());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
@@ -1026,62 +1028,6 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
-    public ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD) {
-        listVoucher.clear();
-        String sql = "select * from Voucher\n"
-                + "where NgayBatDau >= ? and HanSuDung <= ?";
-        try {
-            Connection conn = DBConnect1.getConnection();
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, ngayBD);
-            stm.setString(2, HanSD);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Voucher vc = new Voucher();
-                vc.setMaVoucher(rs.getString(1));
-                vc.setTenVoucher(rs.getString(2));
-                vc.setSoLuongVC(rs.getInt(3));
-                vc.setHanSuDungVC(rs.getString(4));
-                vc.setNgayBatDauVC(rs.getString(5));
-                vc.setSoTienGiam(rs.getDouble(6));
-                vc.setSoTienYeuCau(rs.getDouble(7));
-                listVoucher.add(vc);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listVoucher;
-    }
-
-    @Override
-    public ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD) {
-        listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, HanSuDung, NgayBatDau, PTKhuyenMai, MaSanPhamChiTiet from KhuyenMai\n"
-                + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai  = KhuyenMai.MaKhuyenMai\n"
-                + "where NgayBatDau >= ? and HanSuDung <= ?";
-        try {
-            Connection conn = DBConnect1.getConnection();
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, ngayBD);
-            stm.setString(2, HanSD);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                KhuyenMai km = new KhuyenMai();
-                km.setMaKM(rs.getString(1));
-                km.setTenKM(rs.getString(2));
-                km.setSoLuongKM(rs.getInt(3));
-                km.setHanSuDungKM(rs.getString(4));
-                km.setNgayBatDauKM(rs.getString(5));
-                km.setGiamGia(rs.getDouble(6));
-                km.setMaCTSP(rs.getString(7));
-                listKhuyenMai.add(km);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listKhuyenMai;
-    }
-    
     public ArrayList<NguoiDung> sapXepTheoTuoiNV() {
         String sql = "select * from NguoiDung where Roles = 'NV' and TrangThai = 1 order by Tuoi";
         listNguoiDung.clear();
