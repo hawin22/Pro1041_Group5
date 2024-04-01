@@ -181,13 +181,13 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         txtMaKhachHangBanHang.setText(hd.getMaKhachHang());
         txtMaKhachHangBanHangHDCT.setText(hd.getMaKhachHang());
 
-        if (hd.getLoaiThanhToan().equals("Thanh toán khi nhận hàng")) {
+        if (hd.getLoaiThanhToan().equals("Tiền mặt")) {
             rdTienMat.setSelected(true);
             rdChuyenKhoan.setSelected(false);
-        } else if (hd.getLoaiThanhToan().equals("Thanh toán qua thẻ")) {
+        } else if (hd.getLoaiThanhToan().equals("Chuyển khoản")) {
             rdChuyenKhoan.setSelected(true);
             rdTienMat.setSelected(false);
-        } else if (hd.getLoaiThanhToan().equals("Thanh toán khi nhận hàng, Thanh toán qua thẻ")) {
+        } else if (hd.getLoaiThanhToan().equals("Chuyển khoản, Tiền mặt")) {
             rdTienMat.setSelected(true);
             rdChuyenKhoan.setSelected(true);
         } else {
@@ -214,6 +214,18 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         for (HoaDonChiTiet hdct : ser.getAllHoaDonChiTiet(maHoaDon)) {
             hdct.inThonTin();
         }
+    }
+
+    Integer setMaHoaDon(ArrayList<HoaDon> list) {
+        return list.size() + 1;
+    }
+
+    Integer setMaHoaDonChuan(ArrayList<HoaDon> list) {
+        String maHoaDonChuan = list.get(list.size()-1).getMaHoaDon();
+        int leght = maHoaDonChuan.length();
+        String maHoaDonChuanDet = maHoaDonChuan.substring(leght - 3);
+        System.out.println(maHoaDonChuanDet);
+        return Integer.parseInt(maHoaDonChuanDet)+1;
     }
 
     /**
@@ -1422,6 +1434,20 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
         // TODO add your handling code here:
+        //int row = tblHoaDonBanHang.getSelectedRow();
+        //String trangThai = ser.getRowHoaDon(row).getTrangThai();
+        //System.out.println(trangThai);
+        String maNhanVien = ser.searchMaNhanVienTheoTenDangNhap(ser.listLoginBanHang());
+        System.out.println(maNhanVien);
+        int y = JOptionPane.showConfirmDialog(this, "Are you chắc tạo hoá alone");
+        if (y == JOptionPane.YES_OPTION) {
+            HoaDon hd = new HoaDon("HD0" + setMaHoaDonChuan(ser.getAllHoaDon()), getLocalDate() + "", "Chưa hoàn thành", maNhanVien, "Tiền mặt");
+            loadDataHoaDonBanHang(ser.addHoaDonBanHang(hd));
+            JOptionPane.showMessageDialog(this, "Thêm hoá đơn thành công");
+            loadDataHoaDonBanHang(ser.getAllHoaDon());
+        }else{
+            JOptionPane.showMessageDialog(this, "Đã huỷ");
+        }
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void btnHuyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyHoaDonActionPerformed
@@ -1483,7 +1509,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm để thêm");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Hoá đơn này không thể thêm sản phẩm vì hoá đơn: " + trangThaiHoaDon);
+            JOptionPane.showMessageDialog(this, "Hoá đơn này không thể thêm sản phẩm vì hoá đơn " + trangThaiHoaDon.toLowerCase());
         }
 
     }//GEN-LAST:event_btnThemSanPhamActionPerformed
@@ -1515,7 +1541,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Chưa chọn dòng để xoá");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Hoá đơn này không thể xoá sản phầm vì hoá đơn: " + trangThaiHoaDon);
+            JOptionPane.showMessageDialog(this, "Hoá đơn này không thể xoá sản phầm vì hoá đơn " + trangThaiHoaDon.toLowerCase());
         }
 
     }//GEN-LAST:event_btnXoaSanPhamThemActionPerformed
@@ -1648,6 +1674,9 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         btnThemSanPham.setEnabled(false);
         btnXoaSanPhamThem.setEnabled(false);
         btnBotSanPham.setEnabled(false);
+        String thu = ser.listLoginBanHang();
+        System.out.println(thu);
+        
     }//GEN-LAST:event_formWindowActivated
 
     private void btnNewBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewBanHangActionPerformed
@@ -1712,7 +1741,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Chưa chọn dòng");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Không thể bớt sản phẩm vì hoá đơn: " + trangThaiHoaDon);
+            JOptionPane.showMessageDialog(this, "Không thể bớt sản phẩm vì hoá đơn " + trangThaiHoaDon.toLowerCase());
         }
 
     }//GEN-LAST:event_btnBotSanPhamActionPerformed

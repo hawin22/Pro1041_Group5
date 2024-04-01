@@ -61,6 +61,11 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> sapXepTheoMaNhVienNghi();
     ArrayList<NguoiDung> sapXepTheoTenNhVienNghi();
     ArrayList<NguoiDung> sapXepTheoTuoiNVNghi();
+    ArrayList<HoaDon> addHoaDonBanHang(HoaDon hd);
+    String searchMaNhanVienTheoTenDangNhap(String tenDangNhap);
+    ArrayList<Login> layUserName(Login lg);
+    String listLoginBanHang();
+    HoaDon getRowHoaDonTheoMa(String maHoaDon);
     ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD);
     ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD);
     Boolean addVoucher(Voucher vc);
