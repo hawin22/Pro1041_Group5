@@ -25,11 +25,12 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<NguoiDung> listNguoiDung = new ArrayList<>();
     ArrayList<SanPham> listSanPham = new ArrayList<>();
     ArrayList<KhachHang> listKhachHang = new ArrayList<>();
-    ArrayList<Login> listLogin = new ArrayList<>();
+    public ArrayList<Login> listLogin = new ArrayList<>();
     ArrayList<HoaDon> listHoaDon = new ArrayList<>();
     ArrayList<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
     ArrayList<LichSuGia> listLichSuGia = new ArrayList<>();
     ArrayList<NguoiDung> listQuanLy = new ArrayList<>();
+    ArrayList<Login> listLoginTam = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
@@ -1290,4 +1291,57 @@ public class ServiceImp implements ServiceInterface {
         return listNguoiDung;
     }
 
+    public ArrayList<HoaDon> addHoaDonBanHang(HoaDon hd) {
+        String sql = "insert into HoaDon(MaHoaDon, NgayTao, TrangThai, MaNhanVien) values(?,?,?,?)";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, hd.getMaHoaDon());
+            stm.setString(2, hd.getNgayTao());
+            stm.setString(3, hd.getTrangThai());
+            stm.setString(4, hd.getMaNhanVien());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    public String searchMaNhanVienTheoTenDangNhap(String tenDangNhap) {
+        String sql = "select MaNguoiDung from NguoiDung where TenDangNhap = ?";
+        String kq = "";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, tenDangNhap);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                kq = rs.getString(1);
+            }
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kq;
+    }
+
+    public ArrayList<Login> layUserName(Login lg) {
+        //listLoginTam.clear();
+        listLoginTam.add(lg);
+        return listLoginTam;
+    }
+
+    public String listLoginBanHang() {
+        return listLoginTam.get(0).getUserName();
+    }
+
+    public HoaDon getRowHoaDonTheoMa(String maHoaDon) {
+        for (HoaDon hd : listHoaDon) {
+            if (hd.equals(maHoaDon)) {
+                return hd;
+            }
+        }
+        return new HoaDon();
+    }
 }

@@ -234,6 +234,11 @@ public class ViewDangNhap extends javax.swing.JFrame {
         char[] pass = txtPassword.getPassword();
         String password = new String(pass).trim();
         list = qldn.LoginSearch(userName, password);
+        Login lgin = new Login(userName, password, "", "");
+        qldn.layUserName(lgin);
+        System.out.println(lgin.getUserName());
+        qldn.listLoginBanHang();
+        System.out.println(qldn.listLoginBanHang());
         if (list.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
         } else if (list.size() == 1 && list.get(0).getRole().equals("Quản lý")) {
@@ -242,6 +247,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
             viewQL.setLocationRelativeTo(null);
         } else if (list.size() == 1 && list.get(0).getRole().equals("Nhân viên")) {
             this.setVisible(false);
+            viewNV.ser.layUserName(lgin);
             viewNV.setVisible(true);
             viewNV.setLocationRelativeTo(null);
         }
