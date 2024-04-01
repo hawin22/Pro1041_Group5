@@ -40,7 +40,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         loadDataSPKM(ser.getAllSanPham());
         loadDataKMChonSP(ser.getAllKhuyenMai());
         rdAllVoucher.setSelected(true);
-        loadDataQLSP();
+        loadDataQLSP(ser.getAllSanPham());
         showCboMauSacTT();
         showCboKichThuoc();
         showCboChatLieu();
@@ -296,10 +296,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
     }
 
-    void loadDataQLSP() {
+    void loadDataQLSP(List<SanPham> listSP) {
         dtm = (DefaultTableModel) tblSanPhamTTSP.getModel();
         dtm.setRowCount(0);
-        for (SanPham sp : ser.getAllSanPham()) {
+        for (SanPham sp : listSP ) {
             dtm.addRow(new Object[]{
                 sp.getMaSP(),
                 sp.getTenSP(),
@@ -928,9 +928,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         txtTimKiemSPTTSP = new javax.swing.JTextField();
         rdoSXMaTTSP = new javax.swing.JRadioButton();
         rdoSXTenTTSP = new javax.swing.JRadioButton();
-        rdoSXNgayTTSP = new javax.swing.JRadioButton();
         jScrollPane12 = new javax.swing.JScrollPane();
         tblSanPhamTTSP = new javax.swing.JTable();
+        btnTimKiemTTSP = new javax.swing.JButton();
         jLabel43 = new javax.swing.JLabel();
         jPanel27 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
@@ -2416,16 +2416,23 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jPanel26.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel42.setText("Tìm kiếm sản phẩm");
+        jLabel42.setText("Tìm kiếm mã sản phẩm");
 
         buttonGroup6.add(rdoSXMaTTSP);
         rdoSXMaTTSP.setText("Sắp xếp theo mã");
+        rdoSXMaTTSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdoSXMaTTSPMouseClicked(evt);
+            }
+        });
 
-        buttonGroup1.add(rdoSXTenTTSP);
+        buttonGroup6.add(rdoSXTenTTSP);
         rdoSXTenTTSP.setText("Sắp xếp theo tên");
-
-        buttonGroup1.add(rdoSXNgayTTSP);
-        rdoSXNgayTTSP.setText("Sắp xếp theo ngày tạo");
+        rdoSXTenTTSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdoSXTenTTSPMouseClicked(evt);
+            }
+        });
 
         tblSanPhamTTSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2444,6 +2451,16 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         });
         jScrollPane12.setViewportView(tblSanPhamTTSP);
 
+        btnTimKiemTTSP.setBackground(new java.awt.Color(51, 153, 255));
+        btnTimKiemTTSP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnTimKiemTTSP.setForeground(new java.awt.Color(255, 255, 255));
+        btnTimKiemTTSP.setText("Tìm Kiếm");
+        btnTimKiemTTSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemTTSPActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
@@ -2452,14 +2469,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addGap(101, 101, 101)
                 .addComponent(jLabel42)
                 .addGap(18, 18, 18)
-                .addComponent(txtTimKiemSPTTSP, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-                .addGap(34, 34, 34)
+                .addComponent(txtTimKiemSPTTSP, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(btnTimKiemTTSP, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
                 .addComponent(rdoSXMaTTSP)
                 .addGap(18, 18, 18)
                 .addComponent(rdoSXTenTTSP)
-                .addGap(18, 18, 18)
-                .addComponent(rdoSXNgayTTSP)
-                .addGap(101, 101, 101))
+                .addGap(77, 77, 77))
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane12)
@@ -2468,13 +2485,13 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
                     .addComponent(txtTimKiemSPTTSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdoSXMaTTSP)
                     .addComponent(rdoSXTenTTSP)
-                    .addComponent(rdoSXNgayTTSP))
+                    .addComponent(btnTimKiemTTSP))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -2491,7 +2508,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel31)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1070, Short.MAX_VALUE))
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel24Layout.createSequentialGroup()
@@ -4040,6 +4057,49 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         checkTTSP();
     }//GEN-LAST:event_jButton16ActionPerformed
 
+    private void btnTimKiemTTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemTTSPActionPerformed
+        if (txtTimKiemSPTTSP.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã sản phẩm cần tìm");
+            } else {
+                String keyword = txtTimKiemSPTTSP.getText();
+                ArrayList<SanPham> searchResults = ser.getTimKiemSanPhamTTSP(keyword); 
+
+                if (searchResults.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy sinh viên nào với mã: " + keyword);
+                } else {
+                     dtm = (DefaultTableModel) tblSanPhamTTSP.getModel();
+        dtm.setRowCount(0);
+        for (SanPham sp : searchResults) {
+            dtm.addRow(new Object[]{
+                sp.getMaSP(),
+                sp.getTenSP(),
+                sp.getNhaCungCap(),
+                sp.getHang(),
+                sp.getDonGia(),
+                sp.getSoLuongSP(),
+                sp.getMauSac(),
+                sp.getKichThuoc(),
+                sp.getMau(),
+                sp.getChatLieu(),
+                sp.getHinhAnh()
+            });
+        
+                    }
+                }
+            }
+        
+    }//GEN-LAST:event_btnTimKiemTTSPActionPerformed
+
+    private void rdoSXMaTTSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoSXMaTTSPMouseClicked
+        // TODO add your handling code here:
+        loadDataQLSP(ser.SapXepTheoMaSP());
+    }//GEN-LAST:event_rdoSXMaTTSPMouseClicked
+
+    private void rdoSXTenTTSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoSXTenTTSPMouseClicked
+        // TODO add your handling code here:
+        loadDataQLSP(ser.SapXepTheoTenSP());
+    }//GEN-LAST:event_rdoSXTenTTSPMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -4117,6 +4177,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btnSearchNV;
     private javax.swing.JButton btnSuaMauSacTTSP;
     private javax.swing.JButton btnThemKhuyenMai;
+    private javax.swing.JButton btnTimKiemTTSP;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdateChatLieu;
     private javax.swing.JButton btnUpdateKichThuoc;
@@ -4308,7 +4369,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdTheoMaNV;
     private javax.swing.JRadioButton rdTheoTenNV;
     private javax.swing.JRadioButton rdoSXMaTTSP;
-    private javax.swing.JRadioButton rdoSXNgayTTSP;
     private javax.swing.JRadioButton rdoSXTenTTSP;
     private javax.swing.JTable tblChatLieuTTSP;
     private javax.swing.JTable tblChiTietDoanhThu;

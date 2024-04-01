@@ -61,4 +61,8 @@ public interface ServiceInterface {
     void addNCCTTSP(SanPham s);
     void updateNCCTTSP(SanPham s);
     void deleteNCCTTSP(String ma);
+    ArrayList<SanPham> getTimKiemSanPhamTTSP(String keyword);
+    ArrayList<SanPham> SapXepTheoMaSP();
+    ArrayList<SanPham> SapXepTheoTenSP();
+
 };
