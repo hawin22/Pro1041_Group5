@@ -1290,4 +1290,132 @@ public class ServiceImp implements ServiceInterface {
         return listNguoiDung;
     }
 
+    @Override
+    public ArrayList<HoaDon> getAllQuanLyHD() {
+        String sql = "select h.* from HoaDon h\n" +
+"join ChiTietHoaDon c on c.MaHoaDon = h.MaHoaDon\n" +
+"join ChiTietSanPham ctsp on ctsp.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n" +
+"join LichSuDonGia  l on l.MaDonGia = ctsp.DonGia\n" +
+"where h.NgayHoanThanh between l.ThoiGianBatDau and l.ThoiGianKetThuc and TrangThai = N'Đã hoàn thành'";
+        listHoaDon.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setNgayTao(rs.getString(2));
+                hd.setTrangThai(rs.getString(3));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                listHoaDon.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    @Override
+    public ArrayList<SanPham> getAllQuanLyHDSP(String maHoaDon) {
+        String sql = "select s.TenSanPham, c.TenChatLieu, k.KichThuoc, m.MauSac, s.Mau, s.Hang, cthd.SoLuong, l.GiaSau, (cthd.SoLuong * l.GiaSau) as ThanhTien from SanPham s\n" +
+"join ChiTietSanPham ctsp on ctsp.MaSanPham = s.MaSanPham\n" +
+"join MauSac m on m.MaMauSac = ctsp.MaMauSac\n" +
+"join KichThuoc k on k.MaKichThuoc = ctsp.MaKichThuoc\n" +
+"join ChatLieu c on c.MaChatLieu = ctsp.ChatLieu\n" +
+"join LichSuDonGia l on l.MaDonGia = ctsp.DonGia\n" +
+"join ChiTietHoaDon cthd on cthd.MaSanPhamChiTiet = ctsp.MaSanPhamChiTiet\n" +
+"where cthd.MaHoaDon = ?";
+        listSanPham.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maHoaDon);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {                
+                SanPham sp = new SanPham();
+                sp.setTenSP(rs.getString(1));
+                sp.setChatLieu(rs.getString(2));
+                sp.setKichThuoc(rs.getString(3));
+                sp.setMauSac(rs.getString(4));
+                sp.setMau(rs.getString(5));
+                sp.setHang(rs.getString(6));
+                sp.setSoLuongSP(rs.getInt(7));
+                sp.setDonGia(rs.getDouble(8));
+                listSanPham.add(sp);
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+
+    @Override
+    public ArrayList<HoaDon> getAllQLHDHuy() {
+        String sql = "select h.*, l.GiaSau*ctsp.SoLuong as TongTien from HoaDon h\n" +
+"join ChiTietHoaDon c on c.MaHoaDon = h.MaHoaDon\n" +
+"join ChiTietSanPham ctsp on ctsp.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n" +
+"join LichSuDonGia  l on l.MaDonGia = ctsp.DonGia\n" +
+"where h.NgayHoanThanh between l.ThoiGianBatDau and l.ThoiGianKetThuc and TrangThai = N'Đã huỷ'";
+        listHoaDon.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setNgayTao(rs.getString(2));
+                hd.setTrangThai(rs.getString(3));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                listHoaDon.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    @Override
+    public ArrayList<HoaDon> searchQLHD(String maHoaDon) {
+        String sql = "select h.*, l.GiaSau*ctsp.SoLuong as TongTien from HoaDon h\n" +
+"join ChiTietHoaDon c on c.MaHoaDon = h.MaHoaDon\n" +
+"join ChiTietSanPham ctsp on ctsp.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n" +
+"join LichSuDonGia  l on l.MaDonGia = ctsp.DonGia\n" +
+"where h.NgayHoanThanh between l.ThoiGianBatDau and l.ThoiGianKetThuc and TrangThai = N'Đã hoàn thành' and h.MaHoaDon = ?";
+        listNguoiDung.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, "%" + maHoaDon + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                 HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setNgayTao(rs.getString(2));
+                hd.setTrangThai(rs.getString(3));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                listHoaDon.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+   
+    
 }

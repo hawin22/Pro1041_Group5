@@ -61,4 +61,8 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> sapXepTheoMaNhVienNghi();
     ArrayList<NguoiDung> sapXepTheoTenNhVienNghi();
     ArrayList<NguoiDung> sapXepTheoTuoiNVNghi();
+    ArrayList<HoaDon> getAllQuanLyHD();
+    ArrayList<SanPham> getAllQuanLyHDSP(String maHoaDon);
+    ArrayList<HoaDon> getAllQLHDHuy();
+    ArrayList<HoaDon> searchQLHD(String maHoaDon);
 };
