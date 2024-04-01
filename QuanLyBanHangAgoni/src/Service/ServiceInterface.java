@@ -66,4 +66,9 @@ public interface ServiceInterface {
     ArrayList<Login> layUserName(Login lg);
     String listLoginBanHang();
     HoaDon getRowHoaDonTheoMa(String maHoaDon);
+    ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD);
+    ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD);
+    Boolean addVoucher(Voucher vc);
+    Boolean deleteVoucher(String mvc);
+    Boolean updateVoucher(Voucher vc);
 };

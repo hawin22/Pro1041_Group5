@@ -1344,4 +1344,125 @@ public class ServiceImp implements ServiceInterface {
         }
         return new HoaDon();
     }
+    @Override
+    public ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD) {
+        listVoucher.clear();
+        String sql = "select * from Voucher\n"
+                + "where NgayBatDau >= ? and HanSuDung <= ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, ngayBD);
+            stm.setString(2, HanSD);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Voucher vc = new Voucher();
+                vc.setMaVoucher(rs.getString(1));
+                vc.setTenVoucher(rs.getString(2));
+                vc.setSoLuongVC(rs.getInt(3));
+                vc.setHanSuDungVC(rs.getString(4));
+                vc.setNgayBatDauVC(rs.getString(5));
+                vc.setSoTienGiam(rs.getDouble(6));
+                vc.setSoTienYeuCau(rs.getDouble(7));
+                listVoucher.add(vc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listVoucher;
+    }
+
+    @Override
+    public ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD) {
+        listKhuyenMai.clear();
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, HanSuDung, NgayBatDau, PTKhuyenMai, MaSanPhamChiTiet from KhuyenMai\n"
+                + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai  = KhuyenMai.MaKhuyenMai\n"
+                + "where NgayBatDau >= ? and HanSuDung <= ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, ngayBD);
+            stm.setString(2, HanSD);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                KhuyenMai km = new KhuyenMai();
+                km.setMaKM(rs.getString(1));
+                km.setTenKM(rs.getString(2));
+                km.setSoLuongKM(rs.getInt(3));
+                km.setHanSuDungKM(rs.getString(4));
+                km.setNgayBatDauKM(rs.getString(5));
+                km.setGiamGia(rs.getDouble(6));
+                km.setMaCTSP(rs.getString(7));
+                listKhuyenMai.add(km);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listKhuyenMai;
+    }
+    
+    public Boolean addVoucher(Voucher vc){
+        String sql = "insert into Voucher values (?,?,?,?,?,?,?)";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setString(1, vc.getMaVoucher());
+            stm.setString(2, vc.getTenVoucher());
+            stm.setInt(3, vc.getSoLuongVC());
+            stm.setString(4, vc.getHanSuDungVC());
+            stm.setString(5, vc.getNgayBatDauVC());
+            stm.setDouble(6, vc.getSoTienGiam());
+            stm.setDouble(7, vc.getSoTienYeuCau());
+            
+            stm.executeUpdate();
+            
+            conn.close();
+            
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }     
+    }
+    
+    public Boolean updateVoucher(Voucher vc){
+        String sql = "update Voucher set TenVoucher =? , SoLuong=? , HanSuDung=?, NgayBatDau=?, SoTienGiam=?, SoTienYeuCau=? Where MaVoucher =?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, vc.getTenVoucher());
+            stm.setInt(2, vc.getSoLuongVC());
+            stm.setString(3, vc.getHanSuDungVC());
+            stm.setString(4, vc.getNgayBatDauVC());
+            stm.setDouble(5, vc.getSoTienGiam());
+            stm.setDouble(6, vc.getSoTienYeuCau());
+            stm.setString(7, vc.getMaVoucher());
+            
+            stm.executeUpdate();
+            conn.close();
+           return true;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public Boolean deleteVoucher(String mvc){
+        String sql = "Delete Voucher where MaVoucher=?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, mvc);
+            
+            stm.executeUpdate();
+            conn.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+    }
+
 }
