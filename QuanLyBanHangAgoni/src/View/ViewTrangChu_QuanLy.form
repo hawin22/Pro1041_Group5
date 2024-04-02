@@ -2306,11 +2306,11 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnHienThi" linkSize="4" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
+                                      <Component id="btnHienThiHD" linkSize="4" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="btnSearch" linkSize="4" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnSearchHD" linkSize="4" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtSearch" min="-2" pref="209" max="-2" attributes="0"/>
+                                          <Component id="txtSearchHD" min="-2" pref="209" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -2322,18 +2322,18 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtSearch" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                      <Component id="btnSearch" linkSize="9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtSearchHD" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="btnSearchHD" linkSize="9" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="btnHienThi" linkSize="9" min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Component id="btnHienThiHD" linkSize="9" min="-2" pref="23" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JButton" name="btnSearch">
+                        <Component class="javax.swing.JButton" name="btnSearchHD">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -2350,10 +2350,10 @@
                             <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m "/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchHDActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="btnHienThi">
+                        <Component class="javax.swing.JButton" name="btnHienThiHD">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -2366,8 +2366,11 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Hi&#x1ec3;n th&#x1ecb;"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHienThiHDActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtSearch">
+                        <Component class="javax.swing.JTextField" name="txtSearchHD">
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2378,7 +2381,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="tblSanPham">
+                        <Component class="javax.swing.JTable" name="tblQLSanPham">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="9" rowCount="0">
@@ -2550,16 +2553,16 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtBatDau" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
-                                      <Component id="txtKetThuc" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                      <Component id="txtBatDauHD" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                      <Component id="txtKetThucHD" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btnLoc" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnLocHD" linkSize="5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="81" max="32767" attributes="0"/>
-                                  <Component id="btnBoLoc" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnBoLocHD" linkSize="5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2569,18 +2572,18 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtBatDau" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtBatDauHD" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtKetThuc" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtKetThucHD" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="btnLoc" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnBoLoc" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnLocHD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnBoLocHD" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
@@ -2588,7 +2591,7 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="txtBatDau">
+                        <Component class="javax.swing.JTextField" name="txtBatDauHD">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel10">
                           <Properties>
@@ -2600,9 +2603,9 @@
                             <Property name="text" type="java.lang.String" value="K&#x1ebf;t th&#xfa;c"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txtKetThuc">
+                        <Component class="javax.swing.JTextField" name="txtKetThucHD">
                         </Component>
-                        <Component class="javax.swing.JButton" name="btnLoc">
+                        <Component class="javax.swing.JButton" name="btnLocHD">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -2615,8 +2618,11 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="L&#x1ecd;c"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLocHDActionPerformed"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="btnBoLoc">
+                        <Component class="javax.swing.JButton" name="btnBoLocHD">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -2629,6 +2635,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="B&#x1ecf; l&#x1ecd;c"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBoLocHDActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2756,6 +2765,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Hi&#x1ec3;n th&#x1ecb;"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHienThiHuyActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtSearchHuy">
                         </Component>
@@ -2846,6 +2858,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="L&#x1ecd;c"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLocHuyActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnBoLocHuy">
                           <Properties>
@@ -2941,6 +2956,9 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblQLHoaDonHuyMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
