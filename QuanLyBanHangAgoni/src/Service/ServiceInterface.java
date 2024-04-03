@@ -31,7 +31,6 @@ public interface ServiceInterface {
     Boolean addNhanVien(NguoiDung nd);
     ArrayList<Voucher> searchVoucher(String maVC);
     ArrayList<HoaDon> getAllHoaDon();
-    ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet();
     ArrayList<Voucher> sXMaVoucher();
     ArrayList<Voucher> sXTTTenVoucher();
     ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet(String maHoaDon);
