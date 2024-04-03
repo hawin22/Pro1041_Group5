@@ -205,6 +205,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         for (HoaDonChiTiet hdct : ser.getAllHoaDonChiTiet(maHoaDon)) {
             hdct.inThonTin();
         }
+        }
     }
 
     /**
@@ -1582,6 +1583,9 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         ser.deleteKhachHang(maKH);
         loadDataKhachHang(ser.getAllKhachHang());
         JOptionPane.showMessageDialog(this, "Xoá thành công khách hàng");
+    } else {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để xoá");
+    }
     } else {
         JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để xoá");
     }
