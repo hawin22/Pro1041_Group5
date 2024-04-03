@@ -1319,7 +1319,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public ArrayList<HoaDon> getAllQuanLyHD() {
-        String sql = "select h.* from HoaDon h\n"
+        String sql = "select distinct h.* from HoaDon h\n"
                 + "join ChiTietHoaDon cthd on h.MaHoaDon = cthd.MaHoaDon\n"
                 + "join ChiTietSanPham ctsp  on ctsp.MaSanPhamChiTiet = cthd.MaSanPhamChiTiet\n"
                 + "join LichSuDonGia lsdg on lsdg.MaSanPhamChiTiet = ctsp.MaSanPhamChiTiet\n"
