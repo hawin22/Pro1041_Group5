@@ -104,5 +104,6 @@ public class HoaDon {
         this.loaiThanhToan = loaiThanhToan;
     }
 
+
     
 }
