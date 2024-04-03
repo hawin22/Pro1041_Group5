@@ -90,4 +90,12 @@ public interface ServiceInterface {
     ArrayList<SanPham> getTimKiemSanPhamTTSP(String keyword);
     ArrayList<SanPham> SapXepTheoMaSP();
     ArrayList<SanPham> SapXepTheoTenSP();
+    ArrayList<SanPham> getAllSanPhamCT();
+    String getIDSanPham(String tenSP);
+    String getIDMauSac(String tenMS);
+    String getIDKichThuoc(String tenKT);
+    String getIDChatLieu(String tenCL);
+    String getIDNCC(String tenNCC);
+    public void addCTSPTTSP(SanPham s);
+    
 };

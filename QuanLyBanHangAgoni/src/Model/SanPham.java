@@ -9,14 +9,19 @@ package Model;
  * @author Admin
  */
 public class SanPham {
-    private String maSP, tenSP, mau, hang, chatLieu, mauSac, kichThuoc, nhaCungCap, hinhAnh, maSPKM, maMS, maKT,maCL, MaNCC, diaChiNCC, SDTNCC, emailNCC ;
+    private String maSP, tenSP, mau, hang, chatLieu, mauSac, kichThuoc, nhaCungCap, hinhAnh, maSPKM, maMS, maKT,maCL, MaNCC, diaChiNCC, SDTNCC, emailNCC, maSPCT ;
     private double donGia;
     private Integer soLuongSP;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String tenSP, String mau, String hang, String chatLieu, String mauSac, String kichThuoc, String nhaCungCap, String hinhAnh, String maSPKM, String maMS, String maKT, String maCL, String MaNCC, String diaChiNCC, String SDTNCC, String emailNCC, double donGia, Integer soLuongSP) {
+    @Override
+    public String toString() {
+        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", mau=" + mau + ", hang=" + hang + ", chatLieu=" + chatLieu + ", mauSac=" + mauSac + ", kichThuoc=" + kichThuoc + ", nhaCungCap=" + nhaCungCap + ", hinhAnh=" + hinhAnh + ", maSPKM=" + maSPKM + ", maMS=" + maMS + ", maKT=" + maKT + ", maCL=" + maCL + ", MaNCC=" + MaNCC + ", diaChiNCC=" + diaChiNCC + ", SDTNCC=" + SDTNCC + ", emailNCC=" + emailNCC + ", maSPCT=" + maSPCT + ", donGia=" + donGia + ", soLuongSP=" + soLuongSP + '}';
+    }
+
+    public SanPham(String maSP, String tenSP, String mau, String hang, String chatLieu, String mauSac, String kichThuoc, String nhaCungCap, String hinhAnh, String maSPKM, String maMS, String maKT, String maCL, String MaNCC, String diaChiNCC, String SDTNCC, String emailNCC, String maSPCT, double donGia, Integer soLuongSP) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.mau = mau;
@@ -34,6 +39,7 @@ public class SanPham {
         this.diaChiNCC = diaChiNCC;
         this.SDTNCC = SDTNCC;
         this.emailNCC = emailNCC;
+        this.maSPCT = maSPCT;
         this.donGia = donGia;
         this.soLuongSP = soLuongSP;
     }
@@ -174,6 +180,14 @@ public class SanPham {
         this.emailNCC = emailNCC;
     }
 
+    public String getMaSPCT() {
+        return maSPCT;
+    }
+
+    public void setMaSPCT(String maSPCT) {
+        this.maSPCT = maSPCT;
+    }
+
     public double getDonGia() {
         return donGia;
     }
@@ -190,10 +204,5 @@ public class SanPham {
         this.soLuongSP = soLuongSP;
     }
 
-    
-
-    
-    
-    
-    
+   
 }

@@ -1344,6 +1344,7 @@ public class ServiceImp implements ServiceInterface {
         }
         return new HoaDon();
     }
+
     @Override
     public ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD) {
         listVoucher.clear();
@@ -1400,8 +1401,8 @@ public class ServiceImp implements ServiceInterface {
         }
         return listKhuyenMai;
     }
-    
-    public Boolean addVoucher(Voucher vc){
+
+    public Boolean addVoucher(Voucher vc) {
         String sql = "insert into Voucher values (?,?,?,?,?,?,?)";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1413,19 +1414,19 @@ public class ServiceImp implements ServiceInterface {
             stm.setString(5, vc.getNgayBatDauVC());
             stm.setDouble(6, vc.getSoTienGiam());
             stm.setDouble(7, vc.getSoTienYeuCau());
-            
+
             stm.executeUpdate();
-            
+
             conn.close();
-            
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
-        }     
+        }
     }
-    
-    public Boolean updateVoucher(Voucher vc){
+
+    public Boolean updateVoucher(Voucher vc) {
         String sql = "update Voucher set TenVoucher =? , SoLuong=? , HanSuDung=?, NgayBatDau=?, SoTienGiam=?, SoTienYeuCau=? Where MaVoucher =?";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1437,24 +1438,24 @@ public class ServiceImp implements ServiceInterface {
             stm.setDouble(5, vc.getSoTienGiam());
             stm.setDouble(6, vc.getSoTienYeuCau());
             stm.setString(7, vc.getMaVoucher());
-            
+
             stm.executeUpdate();
             conn.close();
-           return true;
-            
+            return true;
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-    
-    public Boolean deleteVoucher(String mvc){
+
+    public Boolean deleteVoucher(String mvc) {
         String sql = "Delete Voucher where MaVoucher=?";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, mvc);
-            
+
             stm.executeUpdate();
             conn.close();
             return true;
@@ -1462,10 +1463,10 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
             return false;
         }
-        
+
     }
 
-      public ArrayList<SanPham> getAllMauSac() {
+    public ArrayList<SanPham> getAllMauSac() {
         listSanPham.clear();
         String sql = "select MaMauSac, MauSac from MauSac";
         try {
@@ -1721,7 +1722,7 @@ public class ServiceImp implements ServiceInterface {
     public ArrayList<SanPham> getTimKiemSanPhamTTSP(String keyword) {
         listSanPham.clear();
         String sql = "SELECT DISTINCT\n"
-                + "    c.MaSanPham, \n"
+                + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham,\n"
                 + "    TenNCC, \n"
                 + "    GiaDau, \n"
@@ -1754,7 +1755,7 @@ public class ServiceImp implements ServiceInterface {
                 + "WHERE \n"
                 + "    c.maSanPham LIKE ?\n"
                 + "GROUP BY  \n"
-                + "    c.MaSanPham, \n"
+                + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham, \n"
                 + "    TenNCC, \n"
                 + "    GiaDau, \n"
@@ -1773,7 +1774,7 @@ public class ServiceImp implements ServiceInterface {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 SanPham sp = new SanPham();
-                sp.setMaSP(rs.getString(1));
+                sp.setMaSPCT(rs.getString(1));
                 sp.setTenSP(rs.getString(2));
                 sp.setNhaCungCap(rs.getString(3));
                 sp.setDonGia(rs.getDouble(4));
@@ -1797,7 +1798,7 @@ public class ServiceImp implements ServiceInterface {
     public ArrayList<SanPham> SapXepTheoMaSP() {
         listSanPham.clear();
         String sql = " SELECT DISTINCT\n"
-                + "    c.MaSanPham, \n"
+                + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham,\n"
                 + "    TenNCC, \n"
                 + "    GiaDau, \n"
@@ -1828,7 +1829,7 @@ public class ServiceImp implements ServiceInterface {
                 + "JOIN \n"
                 + "    chiTietKhuyenMai ctkm ON ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "GROUP BY  \n"
-                + "    c.MaSanPham, \n"
+                + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham, \n"
                 + "    TenNCC, \n"
                 + "    GiaDau, \n"
@@ -1840,14 +1841,14 @@ public class ServiceImp implements ServiceInterface {
                 + "    Hang,\n"
                 + "    maKhuyenMai\n"
                 + "ORDER BY\n"
-                + "    c.MaSanPham ";
+                + "    c.MaSanPhamChiTiet ";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 SanPham sp = new SanPham();
-                sp.setMaSP(rs.getString(1));
+                sp.setMaSPCT(rs.getString(1));
                 sp.setTenSP(rs.getString(2));
                 sp.setNhaCungCap(rs.getString(3));
                 sp.setDonGia(rs.getDouble(4));
@@ -1871,7 +1872,7 @@ public class ServiceImp implements ServiceInterface {
     public ArrayList<SanPham> SapXepTheoTenSP() {
         listSanPham.clear();
         String sql = " SELECT DISTINCT\n"
-                + "    c.MaSanPham, \n"
+                + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham,\n"
                 + "    TenNCC, \n"
                 + "    GiaDau, \n"
@@ -1902,7 +1903,7 @@ public class ServiceImp implements ServiceInterface {
                 + "JOIN \n"
                 + "    chiTietKhuyenMai ctkm ON ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "GROUP BY  \n"
-                + "    c.MaSanPham, \n"
+                + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham, \n"
                 + "    TenNCC, \n"
                 + "    GiaDau, \n"
@@ -1921,7 +1922,7 @@ public class ServiceImp implements ServiceInterface {
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 SanPham sp = new SanPham();
-                sp.setMaSP(rs.getString(1));
+                sp.setMaSPCT(rs.getString(1));
                 sp.setTenSP(rs.getString(2));
                 sp.setNhaCungCap(rs.getString(3));
                 sp.setDonGia(rs.getDouble(4));
@@ -1942,5 +1943,208 @@ public class ServiceImp implements ServiceInterface {
         return listSanPham;
     }
 
+    public ArrayList<SanPham> getAllSanPhamCT() {
+        listSanPham.clear();
+        String sql = "SELECT distinct\n"
+                + "    c.MaSanPhamChiTiet, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + "	\n"
+                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
+                + " Hang,\n"
+                + "	maKhuyenMai\n"
+                + "FROM \n"
+                + "    ChiTietSanPham c\n"
+                + "JOIN \n"
+                + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
+                + "JOIN \n"
+                + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
+                + "JOIN \n"
+                + "    LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "JOIN \n"
+                + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
+                + "JOIN \n"
+                + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
+                + "JOIN \n"
+                + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
+                + "left JOIN \n"
+                + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "join \n"
+                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "	group by  c.MaSanPhamChiTiet, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC, \n"
+                + "    GiaDau, \n"
+                + "    c.SoLuong, \n"
+                + "    MauSac, \n"
+                + "    KichThuoc, \n"
+                + "    Mau, \n"
+                + "    TenChatLieu,\n"
+                + " Hang,\n"
+                + "	maKhuyenMai";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSPCT(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setNhaCungCap(rs.getString(3));
+                sp.setDonGia(rs.getDouble(4));
+                sp.setSoLuongSP(rs.getInt(5));
+                sp.setMauSac(rs.getString(6));
+                sp.setKichThuoc(rs.getString(7));
+                sp.setMau(rs.getString(8));
+                sp.setChatLieu(rs.getString(9));
+                sp.setHinhAnh(rs.getString(10));
+                sp.setHang(rs.getString(11));
+                sp.setMaSPKM(rs.getString(12));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
 
+    public String getIDSanPham(String tenSP) {
+        listSanPham.clear();
+        String sql = "Select MaSanPham from SanPham where TenSanPham = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, tenSP);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+            stm.executeUpdate();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return null;
+    }
+
+    public String getIDMauSac(String tenMS) {
+        listSanPham.clear();
+        String sql = "Select MaMauSac from MauSac where MauSac = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, tenMS);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+            stm.executeUpdate();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return null;
+    }
+
+    public String getIDKichThuoc(String tenKT) {
+        listSanPham.clear();
+        String sql = "Select MaKichThuoc from KichThuoc where KichThuoc = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, tenKT);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+            stm.executeUpdate();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return null;
+    }
+
+    public String getIDChatLieu(String tenCL) {
+        listSanPham.clear();
+        String sql = "Select MaChatLieu from ChatLieu where TenChatLieu = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, tenCL);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+            stm.executeUpdate();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return null;
+    }
+    
+        public String getIDNCC(String tenNCC) {
+        listSanPham.clear();
+        String sql = "Select MaNCC from NhaCungCap where TenNCC = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, tenNCC);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+            stm.executeUpdate();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return null;
+    }
+        public static void main(String[] args) {
+            ServiceInterface ser = new ServiceImp();
+            System.out.println(ser.getIDNCC("Công ty TNHH A"));
+    }
+        
+            public void addCTSPTTSP(SanPham s) {
+        try {
+            Connection conn = DBConnect1.getConnection();
+            String sql = "Insert into Chitietsanpham( MaSanPhamChiTiet, MaSanPham, SoLuong, MaKichThuoc, MaMauSac, NCC, ChatLieu)Values (?,?,?,?,?,?,?)";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, s.getMaSPCT());
+            stm.setString(2, s.getMaSP());
+            stm.setInt(3, s.getSoLuongSP());
+            stm.setString(4, s.getMaKT());
+            stm.setString(5, s.getMaMS());
+            stm.setString(6, s.getMaNCC());
+            stm.setString(7, s.getMaCL());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+        
 }
