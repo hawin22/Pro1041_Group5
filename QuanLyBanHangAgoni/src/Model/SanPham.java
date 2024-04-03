@@ -204,5 +204,7 @@ public class SanPham {
         this.soLuongSP = soLuongSP;
     }
 
-   
+    public void inThongTin() {
+        System.out.println("SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", mau=" + mau + ", hang=" + hang + ", chatLieu=" + chatLieu + ", mauSac=" + mauSac + ", kichThuoc=" + kichThuoc + ", nhaCungCap=" + nhaCungCap + ", hinhAnh=" + hinhAnh + ", maSPKM=" + maSPKM + ", donGia=" + donGia + ", soLuongSP=" + soLuongSP + '}');
+    }
 }

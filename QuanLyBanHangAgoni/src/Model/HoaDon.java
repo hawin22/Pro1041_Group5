@@ -9,6 +9,7 @@ package Model;
  * @author NGHIAPC
  */
 public class HoaDon {
+
     String maHoaDon;
     String ngayTao;
     String TrangThai;
@@ -104,6 +105,13 @@ public class HoaDon {
         this.loaiThanhToan = loaiThanhToan;
     }
 
+    @Override
+    public String toString() {
+        return "HoaDon{" + "maHoaDon=" + maHoaDon + ", ngayTao=" + ngayTao + ", TrangThai=" + TrangThai + ", maVoucher=" + maVoucher + ", maNhanVien=" + maNhanVien + ", ngayHoanThanh=" + ngayHoanThanh + ", loaiThanhToan=" + loaiThanhToan + ", maKhachHang=" + maKhachHang + '}';
+    }
 
-    
+    public void inThongTin() {
+        System.out.println("HoaDon{" + "maHoaDon=" + maHoaDon + ", ngayTao=" + ngayTao + ", TrangThai=" + TrangThai + ", maVoucher=" + maVoucher + ", maNhanVien=" + maNhanVien + ", ngayHoanThanh=" + ngayHoanThanh + ", loaiThanhToan=" + loaiThanhToan + ", maKhachHang=" + maKhachHang + '}');
+    }
+
 }
