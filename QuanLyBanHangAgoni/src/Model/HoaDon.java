@@ -95,15 +95,5 @@ public class HoaDon {
     public void setMaKhachHang(String maKhachHang) {
         this.maKhachHang = maKhachHang;
     }
-
-    public HoaDon(String maHoaDon, String ngayTao, String TrangThai, String maNhanVien, String loaiThanhToan) {
-        this.maHoaDon = maHoaDon;
-        this.ngayTao = ngayTao;
-        this.TrangThai = TrangThai;
-        this.maNhanVien = maNhanVien;
-        this.loaiThanhToan = loaiThanhToan;
-    }
-
-
     
 }

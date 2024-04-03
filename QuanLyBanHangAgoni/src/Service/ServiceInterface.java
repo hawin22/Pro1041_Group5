@@ -20,17 +20,17 @@ public interface ServiceInterface {
     ArrayList<Login> FogotPassword(String user, String email);
     ArrayList<Voucher> getAllVoucher();
     ArrayList<KhuyenMai> getAllKhuyenMai();
-    ArrayList<NguoiDung> getAllNhanVien(boolean trangThai);
-    NguoiDung getRowNhanVien(boolean trangThai,int row);
+    ArrayList<NguoiDung> getAllNhanVien();
+    NguoiDung getRowNhanVien(int row);
     ArrayList<SanPham> getAllSanPham();
     void addKhachHang(KhachHang kh);
     void updateKhachHang(KhachHang kh);
     void deleteKhachHang(String MaKhachHang);
-    ArrayList<NguoiDung> searchNhanVien(String ma, String tenNV);
+    ArrayList<NguoiDung> searchNhanVien(String ma);
     ArrayList<NguoiDung> sapXepTheoMaNhVien();
     ArrayList<NguoiDung> sapXepTheoTenNhVien();
     ArrayList<NguoiDung> getAllNguoiDung();
-    Boolean addNhanVien(NguoiDung nd);
+    Boolean add(NguoiDung nd);
     ArrayList<Voucher> searchVoucher(String maVC);
     ArrayList<HoaDon> getAllHoaDon();
     ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet();
@@ -59,6 +59,7 @@ public interface ServiceInterface {
     Integer tongHoaDonThanhToan();
    ArrayList<ChiTietHoaDon> getALlCTHD();
    
+<<<<<<< HEAD
     ArrayList<HoaDonChiTiet> addHoaDonChiTiet(HoaDonChiTiet hdct);
     ArrayList<HoaDonChiTiet> deleteHoaDonChiTiet(String maSanPhamChiTiet, String maHoaDon);
     String getMaSanPhamFromChiTietSanPham(String maSanPhamChiTiet);
@@ -87,4 +88,6 @@ public interface ServiceInterface {
     Boolean addVoucher(Voucher vc);
     Boolean deleteVoucher(String mvc);
     Boolean updateVoucher(Voucher vc);
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 };
