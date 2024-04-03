@@ -9,27 +9,32 @@ package Model;
  * @author NGHIAPC
  */
 public class NguoiDung {
-   String maNguoiDung;
-   String tenNguoiDung;
-   boolean gioiTinh;
-   String SDT;
-   String Email;
-   String Roles;
-   String tenDN;
-   String passWord;
+
+    String maNguoiDung;
+    String tenNguoiDung;
+    boolean gioiTinh;
+    int tuoi;
+    String SDT;
+    String Email;
+    String Roles;
+    String tenDN;
+    String passWord;
+    boolean trangThai;
 
     public NguoiDung() {
     }
 
-    public NguoiDung(String maNguoiDung, String tenNguoiDung, boolean gioiTinh, String SDT, String Email, String Roles, String tenDN, String passWord) {
+    public NguoiDung(String maNguoiDung, String tenNguoiDung, boolean gioiTinh, int tuoi, String SDT, String Email, String Roles, String tenDN, String passWord, boolean trangThai) {
         this.maNguoiDung = maNguoiDung;
         this.tenNguoiDung = tenNguoiDung;
         this.gioiTinh = gioiTinh;
+        this.tuoi = tuoi;
         this.SDT = SDT;
         this.Email = Email;
         this.Roles = Roles;
         this.tenDN = tenDN;
         this.passWord = passWord;
+        this.trangThai = trangThai;
     }
 
     public String getMaNguoiDung() {
@@ -54,6 +59,14 @@ public class NguoiDung {
 
     public void setGioiTinh(boolean gioiTinh) {
         this.gioiTinh = gioiTinh;
+    }
+
+    public int getTuoi() {
+        return tuoi;
+    }
+
+    public void setTuoi(int tuoi) {
+        this.tuoi = tuoi;
     }
 
     public String getSDT() {
@@ -95,6 +108,22 @@ public class NguoiDung {
     public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
-   
-   
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return "NguoiDung{" + "maNguoiDung=" + maNguoiDung + ", tenNguoiDung=" + tenNguoiDung + ", gioiTinh=" + gioiTinh + ", tuoi=" + tuoi + ", SDT=" + SDT + ", Email=" + Email + ", Roles=" + Roles + ", tenDN=" + tenDN + ", passWord=" + passWord + ", trangThai=" + trangThai + '}';
+    }
+
+    public void inInf() {
+        System.out.println("NguoiDung{" + "maNguoiDung=" + maNguoiDung + ", tenNguoiDung=" + tenNguoiDung + ", gioiTinh=" + gioiTinh + ", tuoi=" + tuoi + ", SDT=" + SDT + ", Email=" + Email + ", Roles=" + Roles + ", tenDN=" + tenDN + ", passWord=" + passWord + ", trangThai=" + trangThai + '}');
+    }
+
 }
