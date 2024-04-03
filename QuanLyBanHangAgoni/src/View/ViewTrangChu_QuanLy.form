@@ -1599,15 +1599,7 @@
                           </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtSearchNV">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="99" green="99" red="99" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#xe3; ho&#x1eb7;c t&#xea;n nh&#xe2;n vi&#xea;n"/>
-                          </Properties>
                           <Events>
-                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchNVFocusGained"/>
-                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchNVFocusLost"/>
                             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSearchNVMouseReleased"/>
                             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSearchNVKeyReleased"/>
                           </Events>
@@ -1945,7 +1937,7 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="31" max="32767" attributes="0"/>
+                              <EmptySpace pref="37" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jScrollPane18" min="-2" pref="867" max="-2" attributes="0"/>
@@ -2078,9 +2070,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnHienThiNVNghi" linkSize="13" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
+                                      <Component id="btnHienThiNVNghi" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="btnSearchNVNghi" linkSize="13" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnSearchNVNghi" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="txtSearchNVNghi" min="-2" pref="225" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
@@ -2103,11 +2095,11 @@
                                       <Component id="txtSearchNVNghi" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                       <Component id="rdTheoMaNVNghi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="rdTheoTenNVNghi" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnSearchNVNghi" linkSize="14" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnSearchNVNghi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="rdTheoTuoiNhanVienNghi" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="btnHienThiNVNghi" linkSize="14" min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Component id="btnHienThiNVNghi" min="-2" pref="23" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2152,15 +2144,7 @@
                           </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtSearchNVNghi">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="99" green="99" red="99" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#xe3; ho&#x1eb7;c t&#xea;n nh&#xe2;n vi&#xea;n"/>
-                          </Properties>
                           <Events>
-                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchNVNghiFocusGained"/>
-                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchNVNghiFocusLost"/>
                             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSearchNVNghiMouseReleased"/>
                             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSearchNVNghiKeyReleased"/>
                           </Events>
@@ -2236,7 +2220,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="jTabbedPane1" min="-2" pref="957" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -2256,13 +2240,6 @@
             <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
               <Properties>
                 <Property name="tabPlacement" type="int" value="2"/>
-                <Property name="autoscrolls" type="boolean" value="true"/>
-                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Default Cursor"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="12" style="1"/>
-                </Property>
               </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -2394,16 +2371,6 @@
                           </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtSearchHD">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="99" green="99" red="99" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#xe3; ho&#xe1; &#x111;&#x1a1;n c&#x1ea7;n t&#xec;m"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchHDFocusGained"/>
-                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchHDFocusLost"/>
-                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2625,16 +2592,6 @@
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JTextField" name="txtBatDauHD">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="99" green="99" red="99" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="dd-mm-yyyy"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtBatDauHDFocusGained"/>
-                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtBatDauHDFocusLost"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel10">
                           <Properties>
@@ -2647,16 +2604,6 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtKetThucHD">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="99" green="99" red="99" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="dd-mm-yyyy"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtKetThucHDFocusGained"/>
-                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtKetThucHDFocusLost"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnLocHD">
                           <Properties>
@@ -2823,16 +2770,6 @@
                           </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtSearchHuy">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="99" green="99" red="99" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Nh&#x1ead;p m&#xe3; ho&#xe1; &#x111;&#x1a1;n c&#x1ea7;n t&#xec;m"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchHuyFocusGained"/>
-                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchHuyFocusLost"/>
-                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2864,7 +2801,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                   <Component id="btnLocHuy" linkSize="7" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="100" max="32767" attributes="0"/>
+                                  <EmptySpace pref="107" max="32767" attributes="0"/>
                                   <Component id="btnBoLocHuy" linkSize="7" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                               </Group>
@@ -2895,16 +2832,6 @@
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JTextField" name="txtBatDauHuy">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="99" green="99" red="99" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="dd-mm-yyyy"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtBatDauHuyFocusGained"/>
-                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtBatDauHuyFocusLost"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel6">
                           <Properties>
@@ -2917,16 +2844,6 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtKetThucHuy">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="99" green="99" red="99" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="dd-mm-yyyy"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtKetThucHuyFocusGained"/>
-                            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtKetThucHuyFocusLost"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnLocHuy">
                           <Properties>
