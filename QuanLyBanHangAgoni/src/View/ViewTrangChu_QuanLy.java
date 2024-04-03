@@ -4443,24 +4443,25 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     }
                     if (count == 0) {
                         NguoiDung nd = getFormNhanVien();
-                        int d = 0;
-                        NguoiDung nv = ser.getRowNhanVien(true, i);
-                            if (nd == nv) {
-                                d++;
-                            
-                            System.out.println(nv);
-                        }
-                        System.out.println(d);
-                        System.out.println(nd);
-                        if (d>0) {
-                            JOptionPane.showMessageDialog(this, "Chưa thay đổi dữ liệu");
-                        } else {
+//                        int d = 0;
+//                        NguoiDung nv = ser.getRowNhanVien(true, i);
+//                        System.out.println(nv.toString());
+//                            if (nd == nv) {
+//                                d++;
+//                            
+//                            System.out.println(nv);
+//                        }
+//                        System.out.println(d);
+                        //System.out.println(nd);
+//                        if (d<=0) {
+//                            JOptionPane.showMessageDialog(this, "Chưa thay đổi dữ liệu");
+//                        } else {
                             ser.updateNV(nd);
 
                             JOptionPane.showMessageDialog(this, "Sửa thành công");
                             loadDataNhanVien(ser.getAllNhanVien(true));
 
-                        }
+//                        }
                     } else {
                         JOptionPane.showMessageDialog(this, "Sửa thất bại");
                     }
