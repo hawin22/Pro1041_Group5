@@ -61,6 +61,10 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> sapXepTheoMaNhVienNghi();
     ArrayList<NguoiDung> sapXepTheoTenNhVienNghi();
     ArrayList<NguoiDung> sapXepTheoTuoiNVNghi();
+    ArrayList<HoaDon> getAllQuanLyHD();
+    ArrayList<SanPham> getAllQuanLyHDSP(String maHoaDon);
+    ArrayList<HoaDon> getAllQLHDHuy();
+    ArrayList<HoaDon> searchQLHD(String maHoaDon);
     ArrayList<HoaDon> addHoaDonBanHang(HoaDon hd);
     String searchMaNhanVienTheoTenDangNhap(String tenDangNhap);
     ArrayList<Login> layUserName(Login lg);
@@ -71,4 +75,7 @@ public interface ServiceInterface {
     Boolean addVoucher(Voucher vc);
     Boolean deleteVoucher(String mvc);
     Boolean updateVoucher(Voucher vc);
+    ArrayList<HoaDon> searchQLHuy(String maHoaDon);
+    ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc);
+    ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc);
 };
