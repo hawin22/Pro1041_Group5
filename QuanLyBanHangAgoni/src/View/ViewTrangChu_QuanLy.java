@@ -12,6 +12,7 @@ import Model.SanPham;
 import Model.Voucher;
 import Service.ServiceImp;
 import Service.ServiceInterface;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -1445,6 +1446,16 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
+        txtSearchNV.setForeground(new java.awt.Color(153, 153, 153));
+        txtSearchNV.setText("Nhập mã hoặc tên nhân viên");
+        txtSearchNV.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSearchNVFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSearchNVFocusLost(evt);
+            }
+        });
         txtSearchNV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 txtSearchNVMouseReleased(evt);
@@ -1793,6 +1804,16 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
+        txtSearchNVNghi.setForeground(new java.awt.Color(153, 153, 153));
+        txtSearchNVNghi.setText("Nhập mã hoặc tên nhân viên");
+        txtSearchNVNghi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSearchNVNghiFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSearchNVNghiFocusLost(evt);
+            }
+        });
         txtSearchNVNghi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 txtSearchNVNghiMouseReleased(evt);
@@ -1848,6 +1869,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         .addComponent(rdTheoTuoiNhanVienNghi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
+
+        jPanel35Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnHienThiNVNghi, btnSearchNVNghi});
+
         jPanel35Layout.setVerticalGroup(
             jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel35Layout.createSequentialGroup()
@@ -1862,6 +1886,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addComponent(btnHienThiNVNghi, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
+
+        jPanel35Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnHienThiNVNghi, btnSearchNVNghi});
 
         btnKhoiPhuc.setBackground(new java.awt.Color(51, 153, 255));
         btnKhoiPhuc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -1878,7 +1904,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jPanel34Layout.setHorizontalGroup(
             jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel34Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel34Layout.createSequentialGroup()
                         .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1923,6 +1949,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jTabbedPane2.addTab("Quản lý nhân viên", jPanel10);
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        jTabbedPane1.setAutoscrolls(true);
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1944,6 +1973,17 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnHienThiHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHienThiHDActionPerformed(evt);
+            }
+        });
+
+        txtSearchHD.setForeground(new java.awt.Color(153, 153, 153));
+        txtSearchHD.setText("Nhập mã hoá đơn cần tìm");
+        txtSearchHD.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSearchHDFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSearchHDFocusLost(evt);
             }
         });
 
@@ -2005,9 +2045,31 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
         jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        txtBatDauHD.setForeground(new java.awt.Color(153, 153, 153));
+        txtBatDauHD.setText("dd-mm-yyyy");
+        txtBatDauHD.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtBatDauHDFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtBatDauHDFocusLost(evt);
+            }
+        });
+
         jLabel10.setText("Bắt đầu");
 
         jLabel11.setText("Kết thúc");
+
+        txtKetThucHD.setForeground(new java.awt.Color(153, 153, 153));
+        txtKetThucHD.setText("dd-mm-yyyy");
+        txtKetThucHD.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtKetThucHDFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtKetThucHDFocusLost(evt);
+            }
+        });
 
         btnLocHD.setBackground(new java.awt.Color(51, 153, 255));
         btnLocHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -2126,6 +2188,17 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
+        txtSearchHuy.setForeground(new java.awt.Color(153, 153, 153));
+        txtSearchHuy.setText("Nhập mã hoá đơn cần tìm");
+        txtSearchHuy.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSearchHuyFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSearchHuyFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -2159,9 +2232,31 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
         jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        txtBatDauHuy.setForeground(new java.awt.Color(153, 153, 153));
+        txtBatDauHuy.setText("dd-mm-yyyy");
+        txtBatDauHuy.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtBatDauHuyFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtBatDauHuyFocusLost(evt);
+            }
+        });
+
         jLabel6.setText("Bắt đầu");
 
         jLabel7.setText("Kết thúc");
+
+        txtKetThucHuy.setForeground(new java.awt.Color(153, 153, 153));
+        txtKetThucHuy.setText("dd-mm-yyyy");
+        txtKetThucHuy.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtKetThucHuyFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtKetThucHuyFocusLost(evt);
+            }
+        });
 
         btnLocHuy.setBackground(new java.awt.Color(51, 153, 255));
         btnLocHuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -2200,7 +2295,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(btnLocHuy)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addComponent(btnBoLocHuy)
                 .addGap(47, 47, 47))
         );
@@ -2287,7 +2382,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(30, 30, 30)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 957, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -3345,16 +3440,16 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     }
                     if (count == 0) {
                         NguoiDung nd = getFormNhanVien();
-                        boolean checkTrung = true;
-                        for (NguoiDung nv : ser.getAllNhanVien(true)) {
+                        int d = 0;
+                        NguoiDung nv = ser.getRowNhanVien(true, i);
                             if (nd == nv) {
-                                checkTrung = true;
-                                return;
-                            } else {
-                                checkTrung = false;
-                            }
+                                d++;
+                            
+                            System.out.println(nv);
                         }
-                        if (checkTrung == true) {
+                        System.out.println(d);
+                        System.out.println(nd);
+                        if (d>0) {
                             JOptionPane.showMessageDialog(this, "Chưa thay đổi dữ liệu");
                         } else {
                             ser.updateNV(nd);
@@ -3457,6 +3552,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
     private void btnSearchNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNVActionPerformed
         // TODO add your handling code here:
+        
         String searchNV = txtSearchNV.getText();
         String searchTen = txtSearchNV.getText();
         ArrayList<NguoiDung> listSearchNV = ser.searchNhanVien(searchNV, searchTen);
@@ -3718,6 +3814,134 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         loadDataQuanLyHD(ser.getAllQuanLyHD());
     }//GEN-LAST:event_btnBoLocHDActionPerformed
 
+    private void txtSearchNVFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchNVFocusGained
+        // TODO add your handling code here:
+        if (txtSearchNV.getText().equals("Nhập mã hoặc tên nhân viên")) {
+            txtSearchNV.setText("");
+            txtSearchNV.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtSearchNVFocusGained
+
+    private void txtSearchNVFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchNVFocusLost
+        // TODO add your handling code here:
+        if (txtSearchNV.getText().equals("")) {
+            txtSearchNV.setText("Nhập mã hoặc tên nhân viên");
+            txtSearchNV.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtSearchNVFocusLost
+
+    private void txtSearchNVNghiFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchNVNghiFocusGained
+        // TODO add your handling code here:
+        if (txtSearchNVNghi.getText().equals("Nhập mã hoặc tên nhân viên")) {
+            txtSearchNVNghi.setText("");
+            txtSearchNVNghi.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtSearchNVNghiFocusGained
+
+    private void txtSearchNVNghiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchNVNghiFocusLost
+        // TODO add your handling code here:
+         if (txtSearchNV.getText().equals("")) {
+            txtSearchNV.setText("Nhập mã hoặc tên nhân viên");
+            txtSearchNV.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtSearchNVNghiFocusLost
+
+    private void txtSearchHDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchHDFocusGained
+        // TODO add your handling code here:
+        if (txtSearchHD.getText().equals("Nhập mã hoá đơn cần tìm")) {
+            txtSearchHD.setText("");
+            txtSearchHD.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtSearchHDFocusGained
+
+    private void txtSearchHDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchHDFocusLost
+        // TODO add your handling code here:
+        if (txtSearchHD.getText().equals("")) {
+            txtSearchHD.setText("Nhập mã hoá đơn cần tìm");
+            txtSearchHD.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtSearchHDFocusLost
+
+    private void txtSearchHuyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchHuyFocusGained
+        // TODO add your handling code here:
+        if (txtSearchHuy.getText().equals("Nhập mã hoá đơn cần tìm")) {
+            txtSearchHuy.setText("");
+            txtSearchHuy.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtSearchHuyFocusGained
+
+    private void txtSearchHuyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchHuyFocusLost
+        // TODO add your handling code here:
+        if (txtSearchHuy.getText().equals("")) {
+            txtSearchHuy.setText("Nhập mã hoá đơn cần tìm");
+            txtSearchHuy.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtSearchHuyFocusLost
+
+    private void txtBatDauHDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBatDauHDFocusGained
+        // TODO add your handling code here:
+        if (txtBatDauHD.getText().equals("dd-mm-yyyy")) {
+            txtBatDauHD.setText("");
+            txtBatDauHD.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtBatDauHDFocusGained
+
+    private void txtBatDauHDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBatDauHDFocusLost
+        // TODO add your handling code here:
+         if (txtBatDauHD.getText().equals("")) {
+            txtBatDauHD.setText("dd-mm-yyyy");
+            txtBatDauHD.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtBatDauHDFocusLost
+
+    private void txtKetThucHDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHDFocusGained
+        // TODO add your handling code here:
+         if (txtKetThucHD.getText().equals("dd-mm-yyyy")) {
+            txtKetThucHD.setText("");
+            txtKetThucHD.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtKetThucHDFocusGained
+
+    private void txtKetThucHDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHDFocusLost
+        // TODO add your handling code here:
+         if (txtKetThucHD.getText().equals("")) {
+            txtKetThucHD.setText("dd-mm-yyyy");
+            txtKetThucHD.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtKetThucHDFocusLost
+
+    private void txtBatDauHuyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBatDauHuyFocusGained
+        // TODO add your handling code here:
+          if (txtBatDauHuy.getText().equals("dd-mm-yyyy")) {
+            txtBatDauHuy.setText("");
+            txtBatDauHuy.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtBatDauHuyFocusGained
+
+    private void txtBatDauHuyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBatDauHuyFocusLost
+        // TODO add your handling code here:
+        if (txtBatDauHuy.getText().equals("")) {
+            txtBatDauHuy.setText("dd-mm-yyyy");
+            txtBatDauHuy.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtBatDauHuyFocusLost
+
+    private void txtKetThucHuyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHuyFocusGained
+        // TODO add your handling code here:
+        if (txtKetThucHuy.getText().equals("dd-mm-yyyy")) {
+            txtKetThucHuy.setText("");
+            txtKetThucHuy.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtKetThucHuyFocusGained
+
+    private void txtKetThucHuyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHuyFocusLost
+        // TODO add your handling code here:
+         if (txtKetThucHuy.getText().equals("")) {
+            txtKetThucHuy.setText("dd-mm-yyyy");
+            txtKetThucHuy.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtKetThucHuyFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -3747,24 +3971,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         //</editor-fold>
         JFrame frame = new JFrame("Example");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        JLabel label = new JLabel("Tìm kiếm trên Google hoặc nhập một URL");
-//        JTextField textField = new JTextField();
-//        JButton button = new JButton("Tìm kiếm");
-//
-//        button.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                // Viết code xử lý chức năng tìm kiếm
-//            }
-//        });
-//
-//        frame.add(label);
-//        frame.add(textField);
-//        frame.add(button);
-//
-//        frame.setSize(400, 300);
-//        frame.setVisible(true);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
