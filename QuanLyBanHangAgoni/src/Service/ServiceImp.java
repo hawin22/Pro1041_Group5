@@ -242,49 +242,54 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<SanPham> getAllSanPham() {
         listSanPham.clear();
-        String sql = "SELECT distinct\n"
-                + "    c.MaSanPham, \n"
-                + "    TenSanPham, \n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "	\n"
-                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + " Hang,\n"
-                + "	maKhuyenMai\n"
-                + "FROM \n"
-                + "    ChiTietSanPham c\n"
-                + "JOIN \n"
-                + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
-                + "JOIN \n"
-                + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
-                + "JOIN \n"
-                + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
-                + "JOIN \n"
-                + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
-                + "JOIN \n"
-                + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
-                + "JOIN \n"
-                + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
-                + "left JOIN \n"
-                + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "join \n"
-                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "	group by  c.MaSanPham, \n"
-                + "    TenSanPham, \n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + " Hang,\n"
-                + "	maKhuyenMai";
+        String sql = "	SELECT distinct\n"
+                + "                   c.MaSanPham,\n"
+                + "                   TenSanPham,\n"
+                + "                    TenNCC, \n"
+                + "                    case when l.ThoiGianBatDau <= CURRENT_TIMESTAMP AND l.ThoiGianKetThuc >= CURRENT_TIMESTAMP THEN l.GiaSau\n"
+                + "					else l.GiaDau \n"
+                + "					end as Gia,\n"
+                + "                   c.SoLuong, \n"
+                + "                   MauSac, \n"
+                + "                    KichThuoc, \n"
+                + "                   Mau, \n"
+                + "                    TenChatLieu,\n"
+                + "                \n"
+                + "                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
+                + "                Hang,\n"
+                + "                maKhuyenMai\n"
+                + "                FROM \n"
+                + "                  ChiTietSanPham c\n"
+                + "                JOIN \n"
+                + "                   SanPham s ON c.MaSanPham = s.MaSanPham\n"
+                + "                JOIN \n"
+                + "                   NhaCungCap n ON n.MaNCC = c.NCC\n"
+                + "                JOIN \n"
+                + "                   LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                JOIN \n"
+                + "                   MauSac m ON m.MaMauSac = c.MaMauSac\n"
+                + "                JOIN \n"
+                + "                   KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
+                + "                JOIN \n"
+                + "                   ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
+                + "                left JOIN\n"
+                + "                HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                join \n"
+                + "                chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                group by  c.MaSanPham, \n"
+                + "                  TenSanPham,\n"
+                + "                    TenNCC,\n"
+                + "                    GiaDau,\n"
+                + "                   c.SoLuong, \n"
+                + "                   MauSac, \n"
+                + "                   KichThuoc, \n"
+                + "                    Mau, \n"
+                + "                   TenChatLieu,\n"
+                + "                Hang,\n"
+                + "				l.ThoiGianBatDau,\n"
+                + "				l.ThoiGianKetThuc,\n"
+                + "				l.GiaSau,\n"
+                + "                maKhuyenMai";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -510,15 +515,16 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet(String maHoaDon) {
         String sql = "SELECT cthd.MaHoaDon, cthd.MaSanPhamChiTiet, sp.TenSanPham, cthd.SoLuong, ls.GiaDau,\n"
-                + "    CASE\n"
-                + "        WHEN ls.ThoiGianBatDau <= CURRENT_TIMESTAMP AND ls.ThoiGianKetThuc >= CURRENT_TIMESTAMP THEN ls.GiaSau\n"
-                + "        ELSE ls.GiaDau\n"
-                + "    END AS Gia\n"
-                + "FROM ChiTietSanPham ct\n"
-                + "JOIN LichSuDonGia ls ON ls.MaDonGia = ct.DonGia\n"
-                + "JOIN SanPham sp ON sp.MaSanPham = ct.MaSanPham\n"
-                + "JOIN ChiTietHoaDon cthd ON cthd.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
-                + "WHERE cthd.MaHoaDon = ?;";
+                + "               CASE\n"
+                + "                       WHEN hd.NgayHoanThanh between ThoiGianBatDau and ThoiGianKetThuc then ls.GiaSau\n"
+                + "                        ELSE ls.GiaDau\n"
+                + "                    END AS Gia\n"
+                + "                FROM ChiTietSanPham ct\n"
+                + "                JOIN LichSuDonGia ls ON ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "                JOIN SanPham sp ON sp.MaSanPham = ct.MaSanPham\n"
+                + "				JOIN ChiTietHoaDon cthd ON cthd.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "                join HoaDon hd on hd.MaHoaDon = cthd.MaHoaDon \n"
+                + "                WHERE cthd.MaHoaDon = ?;";
         listHoaDonChiTiet.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -804,48 +810,54 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<SanPham> sapXepSanPhamTheoTenBanHang() {
         listSanPham.clear();
-        String sql = "SELECT distinct\n"
-                + "    c.MaSanPham, \n"
-                + "    TenSanPham, \n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "	Hang,\n"
-                + "	maKhuyenMai\n"
-                + "FROM \n"
-                + "    ChiTietSanPham c\n"
-                + "JOIN \n"
-                + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
-                + "JOIN \n"
-                + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
-                + "JOIN \n"
-                + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
-                + "JOIN \n"
-                + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
-                + "JOIN \n"
-                + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
-                + "JOIN \n"
-                + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
-                + "left JOIN \n"
-                + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "join \n"
-                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "	group by  c.MaSanPham, \n"
-                + "    TenSanPham, \n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "	Hang,\n"
-                + "	maKhuyenMai\n"
+        String sql = "	SELECT distinct\n"
+                + "                   c.MaSanPham,\n"
+                + "                   TenSanPham,\n"
+                + "                    TenNCC, \n"
+                + "                    case when l.ThoiGianBatDau <= CURRENT_TIMESTAMP AND l.ThoiGianKetThuc >= CURRENT_TIMESTAMP THEN l.GiaSau\n"
+                + "					else l.GiaDau \n"
+                + "					end as Gia,\n"
+                + "                   c.SoLuong, \n"
+                + "                   MauSac, \n"
+                + "                    KichThuoc, \n"
+                + "                   Mau, \n"
+                + "                    TenChatLieu,\n"
+                + "                \n"
+                + "                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
+                + "                Hang,\n"
+                + "                maKhuyenMai\n"
+                + "                FROM \n"
+                + "                  ChiTietSanPham c\n"
+                + "                JOIN \n"
+                + "                   SanPham s ON c.MaSanPham = s.MaSanPham\n"
+                + "                JOIN \n"
+                + "                   NhaCungCap n ON n.MaNCC = c.NCC\n"
+                + "                JOIN \n"
+                + "                   LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                JOIN \n"
+                + "                   MauSac m ON m.MaMauSac = c.MaMauSac\n"
+                + "                JOIN \n"
+                + "                   KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
+                + "                JOIN \n"
+                + "                   ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
+                + "                left JOIN\n"
+                + "                HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                join \n"
+                + "                chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                group by  c.MaSanPham, \n"
+                + "                  TenSanPham,\n"
+                + "                    TenNCC,\n"
+                + "                    GiaDau,\n"
+                + "                   c.SoLuong, \n"
+                + "                   MauSac, \n"
+                + "                   KichThuoc, \n"
+                + "                    Mau, \n"
+                + "                   TenChatLieu,\n"
+                + "                Hang,\n"
+                + "				l.ThoiGianBatDau,\n"
+                + "				l.ThoiGianKetThuc,\n"
+                + "				l.GiaSau,\n"
+                + "                maKhuyenMai"
                 + "	order by TenSanPham";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -875,49 +887,55 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<SanPham> sapXepSanPhamTheoMaBanHang() {
         listSanPham.clear();
-        String sql = "SELECT distinct\n"
-                + "    c.MaSanPham, \n"
-                + "    TenSanPham, \n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "	Hang,\n"
-                + "	maKhuyenMai\n"
-                + "FROM \n"
-                + "    ChiTietSanPham c\n"
-                + "JOIN \n"
-                + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
-                + "JOIN \n"
-                + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
-                + "JOIN \n"
-                + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
-                + "JOIN \n"
-                + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
-                + "JOIN \n"
-                + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
-                + "JOIN \n"
-                + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
-                + "left JOIN \n"
-                + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "join \n"
-                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "	group by  c.MaSanPham, \n"
-                + "    TenSanPham, \n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "	Hang,\n"
-                + "	maKhuyenMai\n"
-                + "	order by c.MaSanPham";
+        String sql = "	SELECT distinct\n"
+                + "                   c.MaSanPham,\n"
+                + "                   TenSanPham,\n"
+                + "                    TenNCC, \n"
+                + "                    case when l.ThoiGianBatDau <= CURRENT_TIMESTAMP AND l.ThoiGianKetThuc >= CURRENT_TIMESTAMP THEN l.GiaSau\n"
+                + "					else l.GiaDau \n"
+                + "					end as Gia,\n"
+                + "                   c.SoLuong, \n"
+                + "                   MauSac, \n"
+                + "                    KichThuoc, \n"
+                + "                   Mau, \n"
+                + "                    TenChatLieu,\n"
+                + "                \n"
+                + "                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
+                + "                Hang,\n"
+                + "                maKhuyenMai\n"
+                + "                FROM \n"
+                + "                  ChiTietSanPham c\n"
+                + "                JOIN \n"
+                + "                   SanPham s ON c.MaSanPham = s.MaSanPham\n"
+                + "                JOIN \n"
+                + "                   NhaCungCap n ON n.MaNCC = c.NCC\n"
+                + "                JOIN \n"
+                + "                   LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                JOIN \n"
+                + "                   MauSac m ON m.MaMauSac = c.MaMauSac\n"
+                + "                JOIN \n"
+                + "                   KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
+                + "                JOIN \n"
+                + "                   ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
+                + "                left JOIN\n"
+                + "                HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                join \n"
+                + "                chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                group by  c.MaSanPham, \n"
+                + "                  TenSanPham,\n"
+                + "                    TenNCC,\n"
+                + "                    GiaDau,\n"
+                + "                   c.SoLuong, \n"
+                + "                   MauSac, \n"
+                + "                   KichThuoc, \n"
+                + "                    Mau, \n"
+                + "                   TenChatLieu,\n"
+                + "                Hang,\n"
+                + "				l.ThoiGianBatDau,\n"
+                + "				l.ThoiGianKetThuc,\n"
+                + "				l.GiaSau,\n"
+                + "                maKhuyenMai\n"
+                + "			order by c.MaSanPham";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -946,49 +964,55 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<SanPham> sapXepSanPhamTheoGiaBanHang() {
         listSanPham.clear();
-        String sql = "SELECT distinct\n"
-                + "    c.MaSanPham, \n"
-                + "    TenSanPham, \n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "	Hang,\n"
-                + "	maKhuyenMai\n"
-                + "FROM \n"
-                + "    ChiTietSanPham c\n"
-                + "JOIN \n"
-                + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
-                + "JOIN \n"
-                + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
-                + "JOIN \n"
-                + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
-                + "JOIN \n"
-                + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
-                + "JOIN \n"
-                + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
-                + "JOIN \n"
-                + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
-                + "left JOIN \n"
-                + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "join \n"
-                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "	group by  c.MaSanPham, \n"
-                + "    TenSanPham, \n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "	Hang,\n"
-                + "	maKhuyenMai\n"
-                + "	order by GiaDau";
+        String sql = "	SELECT distinct\n"
+                + "                   c.MaSanPham,\n"
+                + "                   TenSanPham,\n"
+                + "                    TenNCC, \n"
+                + "                    case when l.ThoiGianBatDau <= CURRENT_TIMESTAMP AND l.ThoiGianKetThuc >= CURRENT_TIMESTAMP THEN l.GiaSau\n"
+                + "					else l.GiaDau \n"
+                + "					end as Gia,\n"
+                + "                   c.SoLuong, \n"
+                + "                   MauSac, \n"
+                + "                    KichThuoc, \n"
+                + "                   Mau, \n"
+                + "                    TenChatLieu,\n"
+                + "                \n"
+                + "                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
+                + "                Hang,\n"
+                + "                maKhuyenMai\n"
+                + "                FROM \n"
+                + "                  ChiTietSanPham c\n"
+                + "                JOIN \n"
+                + "                   SanPham s ON c.MaSanPham = s.MaSanPham\n"
+                + "                JOIN \n"
+                + "                   NhaCungCap n ON n.MaNCC = c.NCC\n"
+                + "                JOIN \n"
+                + "                   LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                JOIN \n"
+                + "                   MauSac m ON m.MaMauSac = c.MaMauSac\n"
+                + "                JOIN \n"
+                + "                   KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
+                + "                JOIN \n"
+                + "                   ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
+                + "                left JOIN\n"
+                + "                HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                join \n"
+                + "                chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "                group by  c.MaSanPham, \n"
+                + "                  TenSanPham,\n"
+                + "                    TenNCC,\n"
+                + "                    GiaDau,\n"
+                + "                   c.SoLuong, \n"
+                + "                   MauSac, \n"
+                + "                   KichThuoc, \n"
+                + "                    Mau, \n"
+                + "                   TenChatLieu,\n"
+                + "                Hang,\n"
+                + "				l.ThoiGianBatDau,\n"
+                + "				l.ThoiGianKetThuc,\n"
+                + "				l.GiaSau,\n"
+                + "                maKhuyenMai\n"
+                + "			order by Gia";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -1292,7 +1316,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<HoaDon> addHoaDonBanHang(HoaDon hd) {
-        String sql = "insert into HoaDon(MaHoaDon, NgayTao, TrangThai, MaNhanVien) values(?,?,?,?)";
+        String sql = "insert into HoaDon(MaHoaDon, NgayTao, TrangThai, MaNhanVien, LoaiThanhToan) values(?,?,?,?,?)";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
@@ -1300,6 +1324,7 @@ public class ServiceImp implements ServiceInterface {
             stm.setString(2, hd.getNgayTao());
             stm.setString(3, hd.getTrangThai());
             stm.setString(4, hd.getMaNhanVien());
+            stm.setString(5, hd.getLoaiThanhToan());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
@@ -1344,6 +1369,7 @@ public class ServiceImp implements ServiceInterface {
         }
         return new HoaDon();
     }
+
     @Override
     public ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD) {
         listVoucher.clear();
@@ -1400,8 +1426,8 @@ public class ServiceImp implements ServiceInterface {
         }
         return listKhuyenMai;
     }
-    
-    public Boolean addVoucher(Voucher vc){
+
+    public Boolean addVoucher(Voucher vc) {
         String sql = "insert into Voucher values (?,?,?,?,?,?,?)";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1413,19 +1439,19 @@ public class ServiceImp implements ServiceInterface {
             stm.setString(5, vc.getNgayBatDauVC());
             stm.setDouble(6, vc.getSoTienGiam());
             stm.setDouble(7, vc.getSoTienYeuCau());
-            
+
             stm.executeUpdate();
-            
+
             conn.close();
-            
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
-        }     
+        }
     }
-    
-    public Boolean updateVoucher(Voucher vc){
+
+    public Boolean updateVoucher(Voucher vc) {
         String sql = "update Voucher set TenVoucher =? , SoLuong=? , HanSuDung=?, NgayBatDau=?, SoTienGiam=?, SoTienYeuCau=? Where MaVoucher =?";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1437,24 +1463,24 @@ public class ServiceImp implements ServiceInterface {
             stm.setDouble(5, vc.getSoTienGiam());
             stm.setDouble(6, vc.getSoTienYeuCau());
             stm.setString(7, vc.getMaVoucher());
-            
+
             stm.executeUpdate();
             conn.close();
-           return true;
-            
+            return true;
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-    
-    public Boolean deleteVoucher(String mvc){
+
+    public Boolean deleteVoucher(String mvc) {
         String sql = "Delete Voucher where MaVoucher=?";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, mvc);
-            
+
             stm.executeUpdate();
             conn.close();
             return true;
@@ -1462,7 +1488,100 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
             return false;
         }
-        
+
     }
 
+    public ArrayList<HoaDon> updateLoaiThanhToanMaKhachHangBanHang(HoaDon hd) {
+        String sql = "  update HoaDon set LoaiThanhToan = ? , MaKhachHang = ? where MaHoaDon = ?";
+        if (hd.getMaKhachHang().isEmpty()) {
+            hd.setMaKhachHang(null);
+        }
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, hd.getLoaiThanhToan());
+            stm.setString(2, hd.getMaKhachHang());
+            stm.setString(3, hd.getMaHoaDon());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    public String thanhToanHoaDon(String trangThai, String ngayHoanThanh, String maHoaDon) {
+        String sql = "update HoaDon set TrangThai = ?, NgayHoanThanh = ? where MaHoaDon = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, trangThai);
+            stm.setString(2, ngayHoanThanh);
+            stm.setString(3, maHoaDon);
+            stm.executeUpdate();
+            conn.close();
+            return "Thanh toán thành công";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Thanh toán thất bại";
+    }
+
+    @Override
+    public ArrayList<HoaDon> huyHoaDonBanHang(String maHoaDon, String trangThai) {
+        String sql = "update HoaDon set TrangThai = ? where maHoaDon = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, trangThai);
+            stm.setString(2, maHoaDon);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    @Override
+    public ArrayList<HoaDon> xoaHoaDonBanhang(String maHoaDon) {
+        String sql = "delete HoaDon where maHoaDon = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maHoaDon);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    public ArrayList<HoaDon> showHoaDonTheoVoucher(String maHoaDon, String maVoucher) {
+        String sql = "";
+        listHoaDon.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maHoaDon);
+            stm.setString(2, maVoucher);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {                
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayTao(rs.getString(2));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setTrangThai(rs.getString(3));
+                listHoaDon.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
 }
