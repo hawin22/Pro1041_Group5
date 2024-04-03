@@ -9,6 +9,7 @@ package Model;
  * @author Admin
  */
 public class SanPham {
+
     private String maSP, tenSP, mau, hang, chatLieu, mauSac, kichThuoc, nhaCungCap, hinhAnh, maSPKM;
     private Double donGia;
     private Integer soLuongSP;
@@ -127,10 +128,12 @@ public class SanPham {
         this.soLuongSP = soLuongSP;
     }
 
-    
+    @Override
+    public String toString() {
+        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", mau=" + mau + ", hang=" + hang + ", chatLieu=" + chatLieu + ", mauSac=" + mauSac + ", kichThuoc=" + kichThuoc + ", nhaCungCap=" + nhaCungCap + ", hinhAnh=" + hinhAnh + ", maSPKM=" + maSPKM + ", donGia=" + donGia + ", soLuongSP=" + soLuongSP + '}';
+    }
 
-    
-    
-    
-    
+    public void inThongTin() {
+        System.out.println("SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", mau=" + mau + ", hang=" + hang + ", chatLieu=" + chatLieu + ", mauSac=" + mauSac + ", kichThuoc=" + kichThuoc + ", nhaCungCap=" + nhaCungCap + ", hinhAnh=" + hinhAnh + ", maSPKM=" + maSPKM + ", donGia=" + donGia + ", soLuongSP=" + soLuongSP + '}');
+    }
 }
