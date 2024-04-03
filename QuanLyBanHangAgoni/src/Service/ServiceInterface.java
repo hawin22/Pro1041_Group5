@@ -60,6 +60,7 @@ public interface ServiceInterface {
    ArrayList<ChiTietHoaDon> getALlCTHD();
    
 <<<<<<< HEAD
+<<<<<<< HEAD
     ArrayList<HoaDonChiTiet> addHoaDonChiTiet(HoaDonChiTiet hdct);
     ArrayList<HoaDonChiTiet> deleteHoaDonChiTiet(String maSanPhamChiTiet, String maHoaDon);
     String getMaSanPhamFromChiTietSanPham(String maSanPhamChiTiet);
@@ -88,6 +89,8 @@ public interface ServiceInterface {
     Boolean addVoucher(Voucher vc);
     Boolean deleteVoucher(String mvc);
     Boolean updateVoucher(Voucher vc);
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 };

@@ -204,7 +204,11 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     void loadDuLieu(String maHoaDon) {
         for (HoaDonChiTiet hdct : ser.getAllHoaDonChiTiet(maHoaDon)) {
             hdct.inThonTin();
+<<<<<<< HEAD
         }
+=======
+        } 
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
     }
 
     /**

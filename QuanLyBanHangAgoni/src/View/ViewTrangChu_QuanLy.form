@@ -1710,6 +1710,7 @@
               </AuxValues>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -2395,6 +2396,8 @@
                   </SubComponents>
                 </Container>
 =======
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tblQuanLy">
@@ -2436,6 +2439,9 @@
                     </Property>
                   </Properties>
                 </Component>
+<<<<<<< HEAD
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
+=======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
               </SubComponents>
             </Container>
@@ -2602,7 +2608,11 @@
                           </Properties>
                         </Component>
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <Component class="javax.swing.JTextField" name="txtSearchHD">
+=======
+                        <Component class="javax.swing.JTextField" name="txtSearch">
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
                         <Component class="javax.swing.JTextField" name="txtSearch">
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
@@ -2824,7 +2834,11 @@
                       </Layout>
                       <SubComponents>
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <Component class="javax.swing.JTextField" name="txtBatDauHD">
+=======
+                        <Component class="javax.swing.JTextField" name="txtBatDau">
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
                         <Component class="javax.swing.JTextField" name="txtBatDau">
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
@@ -2840,7 +2854,11 @@
                           </Properties>
                         </Component>
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <Component class="javax.swing.JTextField" name="txtKetThucHD">
+=======
+                        <Component class="javax.swing.JTextField" name="txtKetThuc">
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
                         <Component class="javax.swing.JTextField" name="txtKetThuc">
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)

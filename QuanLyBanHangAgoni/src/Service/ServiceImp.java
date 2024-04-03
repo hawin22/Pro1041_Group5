@@ -434,7 +434,11 @@ public class ServiceImp implements ServiceInterface {
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
 <<<<<<< HEAD
+<<<<<<< HEAD
                 + "    TenChatLieu,\n"
+=======
+                + "    ChatLieu,\n"
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
                 + "    ChatLieu,\n"
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
@@ -450,7 +454,11 @@ public class ServiceImp implements ServiceInterface {
                 + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
                 + "JOIN \n"
 <<<<<<< HEAD
+<<<<<<< HEAD
                 + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
+=======
+                + "    LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
                 + "    LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
@@ -473,7 +481,11 @@ public class ServiceImp implements ServiceInterface {
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
 <<<<<<< HEAD
+<<<<<<< HEAD
                 + "    TenChatLieu,\n"
+=======
+                + "    ChatLieu,\n"
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
                 + "    ChatLieu,\n"
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
@@ -939,6 +951,7 @@ public class ServiceImp implements ServiceInterface {
 
     @Override
     public void deleteNhanVien(String maNV) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         String sql = " delete NguoiDung where MaNguoiDung = ? and TrangThai = 0";
         try {
@@ -1500,6 +1513,9 @@ public class ServiceImp implements ServiceInterface {
             return false;
         }
         
+=======
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)

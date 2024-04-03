@@ -58,10 +58,13 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         lblThanhCong.setText(String.valueOf(ser.tongHoaDonThanhToan()));
         lblCTT.setText(String.valueOf(ser.tongHoaDonMD()-ser.tongHoaDonThanhToan()));
 <<<<<<< HEAD
+<<<<<<< HEAD
         loadDataNhanVienNghi(ser.getAllNhanVien(false));
         loadDataQuanLyHD(ser.getAllQuanLyHD());
         loadDataQuanLyHDHuy(ser.getAllQLHDHuy());
         rdAllVoucher.setSelected(true);
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
     }
@@ -220,6 +223,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     KhuyenMai getFormKhuyenMai() {
         KhuyenMai km = new KhuyenMai();
@@ -258,6 +262,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
     
+=======
+
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
 
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
@@ -337,12 +344,18 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             count++;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
         if (rdNam.isSelected() == false && rdNu.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "Chưa chọn giới tính");
             count++;
         }
+<<<<<<< HEAD
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
+=======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
         if (count > 0) {
             return false;
@@ -351,6 +364,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             
         }
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     
     public boolean checkTuoiNV() {
@@ -368,6 +382,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
     
+=======
+
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
 
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
@@ -434,6 +451,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
     
+<<<<<<< HEAD
 <<<<<<< HEAD
     public boolean checkTrungEmailTenDNNhanVien(String maNV, String email, String tenDN) {
         ArrayList<NguoiDung> listEmailTenDN = ser.getAllNguoiDung();
@@ -560,6 +578,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
         }
     }
+=======
+    
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
     
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
@@ -1569,6 +1590,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jScrollPane17.setViewportView(tblQuanLy);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         jLabel16.setText("Roles");
 
         lblRoles.setText("NV");
@@ -1887,6 +1909,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
 =======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -2030,15 +2054,21 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnHienThiHD.setBackground(new java.awt.Color(51, 153, 255));
         btnHienThiHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHienThiHD.setForeground(new java.awt.Color(255, 255, 255));
         btnHienThiHD.setText("Hiển thị");
 =======
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
         btnHienThi.setBackground(new java.awt.Color(51, 153, 255));
         btnHienThi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHienThi.setForeground(new java.awt.Color(255, 255, 255));
         btnHienThi.setText("Hiển thị");
+<<<<<<< HEAD
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
+=======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -2099,6 +2129,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jLabel11.setText("Kết thúc");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnLocHD.setBackground(new java.awt.Color(51, 153, 255));
         btnLocHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLocHD.setForeground(new java.awt.Color(255, 255, 255));
@@ -2109,6 +2140,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnBoLocHD.setForeground(new java.awt.Color(255, 255, 255));
         btnBoLocHD.setText("Bỏ lọc");
 =======
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
         btnLoc.setBackground(new java.awt.Color(51, 153, 255));
         btnLoc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLoc.setForeground(new java.awt.Color(255, 255, 255));
@@ -2118,6 +2151,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnBoLoc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBoLoc.setForeground(new java.awt.Color(255, 255, 255));
         btnBoLoc.setText("Bỏ lọc");
+<<<<<<< HEAD
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
+=======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
@@ -3274,6 +3310,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
 <<<<<<< HEAD
+<<<<<<< HEAD
          String searchHD = txtSearchHD.getText();
         ArrayList<HoaDon> listSearchHD = ser.searchQLHD(searchHD);
         System.out.println(listSearchHD);
@@ -3284,6 +3321,30 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Không tồn tại hoá đơn này");
             } else {
                 loadDataQuanLyHD(ser.searchQLHD(searchHD));
+=======
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnSearchNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNVActionPerformed
+        // TODO add your handling code here:
+        String searchNV = txtSearchNV.getText();
+        ArrayList<NguoiDung> listSearchNV = ser.searchNhanVien(searchNV);
+        if (searchNV.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã hoặc tên");
+        } else {
+            if (listSearchNV.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Không tồn tại nhân viên này");
+                txtSearchNV.setText("");
+                txtMaNV.setText("");
+                txtTenNV.setText("");
+                buttonGroup4.clearSelection();
+                txtSDT.setText("");
+                txtEmail.setText("");
+                lblRoles.setText("");
+                txtTenDN.setText("");
+                txtPassword.setText("");
+            } else {
+                loadDataNhanVien(ser.searchNhanVien(searchNV));
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -3473,6 +3534,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
 <<<<<<< HEAD
+<<<<<<< HEAD
         int row = tblQLHoaDon.getSelectedRow();
         if (row >= 0) {
             String maHoaDon = ser.getRowHoaDon(row).getMaHoaDon();
@@ -3497,6 +3559,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 }
                 if (!checkTuoiNV()) {
 =======
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
         int count = 0;
         int i = tblNhanVien.getSelectedRow();
         if (i < 0) {
@@ -3505,6 +3569,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không");
             if (check == JOptionPane.YES_OPTION) {
                 if (!checkNhanVien()) {
+<<<<<<< HEAD
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
+=======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
                     count++;
                 }
@@ -3522,6 +3589,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     ser.updateNV(nd);
                     JOptionPane.showMessageDialog(this, "Sửa thành công");
                     loadDataNhanVien(ser.getAllNhanVien());
+<<<<<<< HEAD
 <<<<<<< HEAD
             }
             
@@ -3587,6 +3655,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     }
 =======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Sửa thất bại");
@@ -3594,6 +3664,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         // TODO add your handling code here:
@@ -4069,6 +4140,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 =======
     }//GEN-LAST:event_btnUpdateActionPerformed
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
+=======
+    }//GEN-LAST:event_btnUpdateActionPerformed
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 
   private boolean isValidDate(String date) {
     return date.matches("\\d{4}-\\d{2}-\\d{2}");
@@ -4404,7 +4478,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JTextField txtSXTNKTKhuyeMai;
     private javax.swing.JTextField txtSXTNKTVoucher;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private javax.swing.JTextField txtSearchHD;
+=======
+>>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 =======
 >>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
     private javax.swing.JTextField txtSearch;
