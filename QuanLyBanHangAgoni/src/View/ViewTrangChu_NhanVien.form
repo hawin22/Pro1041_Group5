@@ -887,6 +887,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTienKhachDua">
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTienKhachDuaKeyReleased"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTienThua">
                 </Component>
@@ -903,6 +906,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Thanh &#xa;&#xa;to&#xe1;n"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThanhToanActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lbPhanTramTru">
                   <Properties>
@@ -1079,16 +1085,28 @@
                         <Component class="javax.swing.JTable" name="tblDanhSachVoucher">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="5" rowCount="0">
+                              <Table columnCount="7" rowCount="0">
                                 <Column editable="true" title="M&#xe3; voucher" type="java.lang.Object"/>
                                 <Column editable="true" title="T&#xea;n voucher" type="java.lang.Object"/>
                                 <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
                                 <Column editable="true" title="H&#x1ea1;n s&#x1eed; d&#x1ee5;ng" type="java.lang.Object"/>
                                 <Column editable="true" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
+                                <Column editable="true" title="S&#x1ed1; ti&#x1ec1;n gi&#x1ea3;m" type="java.lang.Object"/>
+                                <Column editable="true" title="S&#x1ed1; ti&#x1ec1;n y&#xea;u c&#x1ea7;u" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
                                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                   <Title/>
                                   <Editor/>
@@ -1480,16 +1498,22 @@
                             <Component class="javax.swing.JTable" name="tblDanhSachKhuyenMai">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="5" rowCount="0">
+                                  <Table columnCount="6" rowCount="0">
                                     <Column editable="true" title="M&#xe3; khuy&#x1ebf;n m&#xe3;i" type="java.lang.Object"/>
                                     <Column editable="true" title="T&#xea;n khuy&#x1ebf;n m&#xe3;i" type="java.lang.Object"/>
                                     <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
                                     <Column editable="true" title="H&#x1ea1;n s&#x1eed; d&#x1ee5;ng" type="java.lang.Object"/>
                                     <Column editable="true" title="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u" type="java.lang.Object"/>
+                                    <Column editable="true" title="Ph&#x1ea7;n tr&#x103;m gi&#x1ea3;m" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
                                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                                   <TableColumnModel selectionModel="0">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                       <Title/>
                                       <Editor/>
@@ -1560,6 +1584,15 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="btnTimKiemKhuyenMai">
                           <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="66" red="33" type="rgb"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
                           </Properties>
                           <Events>

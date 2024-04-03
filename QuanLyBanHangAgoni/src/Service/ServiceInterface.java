@@ -75,6 +75,11 @@ public interface ServiceInterface {
     Boolean addVoucher(Voucher vc);
     Boolean deleteVoucher(String mvc);
     Boolean updateVoucher(Voucher vc);
+    ArrayList<HoaDon> updateLoaiThanhToanMaKhachHangBanHang(HoaDon hd);
+    String thanhToanHoaDon(String trangThai, String ngayHoanThanh, String maHoaDon);
+    ArrayList<HoaDon> huyHoaDonBanHang(String maHoaDon, String trangThai);
+    ArrayList<HoaDon> xoaHoaDonBanhang(String maHoaDon);
+    ArrayList<HoaDon> showHoaDonTheoVoucher(String maHoaDon, String maVoucher);
     ArrayList<HoaDon> searchQLHuy(String maHoaDon);
     ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc);
     ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc);
