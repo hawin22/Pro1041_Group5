@@ -1460,6 +1460,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         }
         // Kiểm tra số điện thoại chỉ chứa chữ số
     if (!isValidPhoneNumber(txtSDTKH.getText())) {
+<<<<<<< HEAD
     boolean checkKH(){
         if(txtMaKH.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Mã Khách hàng không  để trống");
@@ -1483,6 +1484,8 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         }
         // Kiểm tra số điện thoại chỉ chứa chữ số
     if (!isValidPhoneNumber(txtSDTKH.getText())) {
+=======
+>>>>>>> parent of 4097362 (lenh)
         JOptionPane.showMessageDialog(this, "Số ĐT chỉ được chứa chữ số");
         txtSDTKH.requestFocus();
         return false;
@@ -1491,10 +1494,13 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         
         return true;
     }
+<<<<<<< HEAD
         
         
         return true;
     }
+=======
+>>>>>>> parent of 4097362 (lenh)
     boolean checkTrung(ArrayList<KhachHang> list, String maKH){
         int dem = 0;
         for (KhachHang kh : list) {
@@ -1510,7 +1516,10 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     }
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
          if (checkKH()) {
+<<<<<<< HEAD
          if (checkKH()) {
+=======
+>>>>>>> parent of 4097362 (lenh)
         String maKH = txtMaKH.getText();
         
         // Kiểm tra trùng mã khách hàng
@@ -1520,16 +1529,22 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             ser.addKhachHang(getFormKhachHang());
             loadDataKhachHang(ser.getAllKhachHang());
             JOptionPane.showMessageDialog(this, "Thêm thành công");
+<<<<<<< HEAD
             ser.addKhachHang(getFormKhachHang());
             loadDataKhachHang(ser.getAllKhachHang());
             JOptionPane.showMessageDialog(this, "Thêm thành công");
+=======
+>>>>>>> parent of 4097362 (lenh)
         }
     }
     }//GEN-LAST:event_btnThemKHActionPerformed
 
     private void tbnSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnSuaKHActionPerformed
         if (checkKH()) {
+<<<<<<< HEAD
         if (checkKH()) {
+=======
+>>>>>>> parent of 4097362 (lenh)
         int row = tblKhachHang.getSelectedRow();
         if (row >= 0) {
             String maKH = txtMaKH.getText();
@@ -1540,6 +1555,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 loadDataKhachHang(ser.getAllKhachHang());
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công");
             
+<<<<<<< HEAD
             
                 KhachHang kh = getFormKhachHang();
                 kh.setMaKhachHang(maKH);
@@ -1547,6 +1563,8 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 loadDataKhachHang(ser.getAllKhachHang());
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công");
             
+=======
+>>>>>>> parent of 4097362 (lenh)
         }
     }
     }//GEN-LAST:event_tbnSuaKHActionPerformed
@@ -1555,9 +1573,12 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
          int row = tblKhachHang.getSelectedRow();
     if (row >= 0) {
         String maKH = ser.getRowKhachHang(row).getMaKhachHang();
+<<<<<<< HEAD
          int row = tblKhachHang.getSelectedRow();
     if (row >= 0) {
         String maKH = ser.getRowKhachHang(row).getMaKhachHang();
+=======
+>>>>>>> parent of 4097362 (lenh)
         ser.deleteKhachHang(maKH);
         loadDataKhachHang(ser.getAllKhachHang());
         JOptionPane.showMessageDialog(this, "Xoá thành công khách hàng");
