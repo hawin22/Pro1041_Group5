@@ -28,6 +28,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     private static Random sR = new Random();
     ArrayList<HoaDon> listHoaDon = new ArrayList<>();
     ArrayList<SanPham> listSanPham = new ArrayList<>();
+    ArrayList<HoaDon> locHoaDonVoucher = new ArrayList<>();
     String tienThuaThongBao = "";
 
     public static String genTuDongHoaDon() {
