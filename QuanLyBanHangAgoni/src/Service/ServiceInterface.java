@@ -59,38 +59,4 @@ public interface ServiceInterface {
     Integer tongHoaDonThanhToan();
    ArrayList<ChiTietHoaDon> getALlCTHD();
    
-<<<<<<< HEAD
-<<<<<<< HEAD
-    ArrayList<HoaDonChiTiet> addHoaDonChiTiet(HoaDonChiTiet hdct);
-    ArrayList<HoaDonChiTiet> deleteHoaDonChiTiet(String maSanPhamChiTiet, String maHoaDon);
-    String getMaSanPhamFromChiTietSanPham(String maSanPhamChiTiet);
-    ArrayList<SanPham> sapXepSanPhamTheoTenBanHang();
-    ArrayList<SanPham> sapXepSanPhamTheoMaBanHang();
-    ArrayList<SanPham> sapXepSanPhamTheoGiaBanHang();
-    ArrayList<SanPham> TimKiemSanPhamTheoMaVaTenBanHang(String keyWord);
-    ArrayList<NguoiDung> sapXepTheoTuoiNV();
-    ArrayList<HoaDon> locHoaDonTheoTrangThaiBanHang(String trangThai);
-    String updateTrangThaiNhanVien(boolean trangThai, String maNhanVien);
-    ArrayList<NguoiDung> searchNhanVienNghi(String ma, String tenNV);
-    ArrayList<NguoiDung> sapXepTheoMaNhVienNghi();
-    ArrayList<NguoiDung> sapXepTheoTenNhVienNghi();
-    ArrayList<NguoiDung> sapXepTheoTuoiNVNghi();
-    ArrayList<HoaDon> getAllQuanLyHD();
-    ArrayList<SanPham> getAllQuanLyHDSP(String maHoaDon);
-    ArrayList<HoaDon> getAllQLHDHuy();
-    ArrayList<HoaDon> searchQLHD(String maHoaDon);
-    ArrayList<HoaDon> addHoaDonBanHang(HoaDon hd);
-    String searchMaNhanVienTheoTenDangNhap(String tenDangNhap);
-    ArrayList<Login> layUserName(Login lg);
-    String listLoginBanHang();
-    HoaDon getRowHoaDonTheoMa(String maHoaDon);
-    ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD);
-    ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD);
-    Boolean addVoucher(Voucher vc);
-    Boolean deleteVoucher(String mvc);
-    Boolean updateVoucher(Voucher vc);
-=======
->>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
-=======
->>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
 };
