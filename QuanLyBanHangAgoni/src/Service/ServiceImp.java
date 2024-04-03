@@ -263,7 +263,7 @@ public class ServiceImp implements ServiceInterface {
                 + "JOIN \n"
                 + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
                 + "JOIN \n"
-                + "    LichSuDonGia l ON l.MaDonGia = c.DonGia\n"
+                + "    LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "JOIN \n"
                 + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
                 + "JOIN \n"
