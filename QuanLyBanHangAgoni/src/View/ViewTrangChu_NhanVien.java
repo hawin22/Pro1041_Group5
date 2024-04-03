@@ -204,11 +204,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     void loadDuLieu(String maHoaDon) {
         for (HoaDonChiTiet hdct : ser.getAllHoaDonChiTiet(maHoaDon)) {
             hdct.inThonTin();
-<<<<<<< HEAD
         }
-=======
-        } 
->>>>>>> parent of 162a6ab (Merge branch 'master' of https://github.com/hawin22/Pro1041_Group5 into lenh)
     }
 
     /**
@@ -1464,9 +1460,36 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         }
         // Kiểm tra số điện thoại chỉ chứa chữ số
     if (!isValidPhoneNumber(txtSDTKH.getText())) {
+    boolean checkKH(){
+        if(txtMaKH.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Mã Khách hàng không  để trống");
+            txtMaKH.requestFocus();
+            
+            return false;
+        }else if(txtTenKH.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Tên khách hàng không để trống");
+            txtTenKH.requestFocus();
+            
+            return false;
+        }else if(txtSDTKH.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Số điện thoại không để trống");
+            txtSDTKH.requestFocus();
+            return false;
+        }else if(txtDCKH.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "địa chỉ không để trống ");
+            txtDCKH.requestFocus();
+            
+            return false;
+        }
+        // Kiểm tra số điện thoại chỉ chứa chữ số
+    if (!isValidPhoneNumber(txtSDTKH.getText())) {
         JOptionPane.showMessageDialog(this, "Số ĐT chỉ được chứa chữ số");
         txtSDTKH.requestFocus();
         return false;
+    }
+        
+        
+        return true;
     }
         
         
@@ -1487,6 +1510,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     }
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
          if (checkKH()) {
+         if (checkKH()) {
         String maKH = txtMaKH.getText();
         
         // Kiểm tra trùng mã khách hàng
@@ -1496,15 +1520,26 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             ser.addKhachHang(getFormKhachHang());
             loadDataKhachHang(ser.getAllKhachHang());
             JOptionPane.showMessageDialog(this, "Thêm thành công");
+            ser.addKhachHang(getFormKhachHang());
+            loadDataKhachHang(ser.getAllKhachHang());
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
     }
     }//GEN-LAST:event_btnThemKHActionPerformed
 
     private void tbnSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnSuaKHActionPerformed
         if (checkKH()) {
+        if (checkKH()) {
         int row = tblKhachHang.getSelectedRow();
         if (row >= 0) {
             String maKH = txtMaKH.getText();
+            
+                KhachHang kh = getFormKhachHang();
+                kh.setMaKhachHang(maKH);
+                ser.updateKhachHang(kh);
+                loadDataKhachHang(ser.getAllKhachHang());
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            
             
                 KhachHang kh = getFormKhachHang();
                 kh.setMaKhachHang(maKH);
@@ -1517,6 +1552,9 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_tbnSuaKHActionPerformed
 
     private void btnXoaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKHActionPerformed
+         int row = tblKhachHang.getSelectedRow();
+    if (row >= 0) {
+        String maKH = ser.getRowKhachHang(row).getMaKhachHang();
          int row = tblKhachHang.getSelectedRow();
     if (row >= 0) {
         String maKH = ser.getRowKhachHang(row).getMaKhachHang();
