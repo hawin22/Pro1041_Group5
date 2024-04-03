@@ -5,6 +5,8 @@
 package Service;
 
 import Model.*;
+import com.sun.jdi.connect.spi.Connection;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -47,4 +49,14 @@ public interface ServiceInterface {
     void updateNV(NguoiDung nd);
     ArrayList<NguoiDung> getAllQuanLy();
     void deleteNhanVien(String maNV);
+    
+    Integer tonghoadon(String ngayBatDau, String ngayKetThuc);
+   Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
+   Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
+   Integer tongHoaDonMD();
+    Double tongDoanhThuMD();
+    Integer tongDoanhSoMD();
+    Integer tongHoaDonThanhToan();
+   ArrayList<ChiTietHoaDon> getALlCTHD();
+   
 };
