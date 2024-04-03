@@ -3744,14 +3744,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 System.out.println(ngayBD);
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Ngày bắt đầu không đúng định dạng");
-              System.out.println("Error converting date: " + e.getMessage());
+//                return;
             }
             try {
                 Date date2 = sdf.parse(ngayKT);
                 System.out.println(ngayKT);
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Ngày kết thúc không đúng định dạng");
-                System.out.println("Error converting date: " + e.getMessage());
+//                return;
             }
             ArrayList<HoaDon> listLocHDHuy = ser.locHDHuyTheoNgay(ngayBD, ngayKT);
             if (listLocHDHuy.isEmpty()) {
@@ -3788,14 +3788,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 System.out.println(ngayBD);
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Ngày bắt đầu không đúng định dạng");
-                System.out.println("Error converting date: " + e.getMessage());
+//                return;
             }
             try {
                 Date date2 = sdf.parse(ngayKT);
                 System.out.println(ngayKT);
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Ngày kết thúc không đúng định dạng");
-                System.out.println("Error converting date: " + e.getMessage());
+//                return;
             }
             ArrayList<HoaDon> listLocHD = ser.locHDTheoNgay(ngayBD, ngayKT);
             if (listLocHD.isEmpty()) {

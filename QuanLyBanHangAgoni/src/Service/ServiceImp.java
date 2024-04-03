@@ -731,6 +731,10 @@ public class ServiceImp implements ServiceInterface {
         return listHoaDonChiTiet;
     }
 
+    @Override
+    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     @Override
     public ArrayList<NguoiDung> getAllQuanLy() {
