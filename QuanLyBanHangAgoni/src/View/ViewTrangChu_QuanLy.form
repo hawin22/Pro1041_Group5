@@ -2366,9 +2366,6 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Hi&#x1ec3;n th&#x1ecb;"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHienThiHDActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtSearchHD">
                         </Component>
@@ -2618,9 +2615,6 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="L&#x1ecd;c"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLocHDActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnBoLocHD">
                           <Properties>
@@ -2635,9 +2629,6 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="B&#x1ecf; l&#x1ecd;c"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBoLocHDActionPerformed"/>
-                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2765,9 +2756,6 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Hi&#x1ec3;n th&#x1ecb;"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHienThiHuyActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="txtSearchHuy">
                         </Component>
@@ -2858,9 +2846,6 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="L&#x1ecd;c"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLocHuyActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnBoLocHuy">
                           <Properties>
