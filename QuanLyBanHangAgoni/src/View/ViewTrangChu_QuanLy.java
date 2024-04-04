@@ -2670,6 +2670,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
+        
+
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
