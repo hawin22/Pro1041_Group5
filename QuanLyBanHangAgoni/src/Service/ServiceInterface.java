@@ -112,4 +112,5 @@ public interface ServiceInterface {
     ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc);
     ArrayList<Login> reSetPassWord(String user, String passWord);
     void updateMK(String user, String passWord);
+    ArrayList<HoaDon> getAllHoaDonChuaHoanThanh();
 };

@@ -18,8 +18,7 @@ import javax.swing.JOptionPane;
 public class ViewResetPass extends javax.swing.JFrame {
 
     ServiceInterface ser = new ServiceImp();
-    ArrayList<Login> list = new ArrayList<>();
-    ViewDangNhap viewDN = new ViewDangNhap();
+    ArrayList<Login> list = new ArrayList<>(); 
     /**
      * Creates new form ViewResetPass
      */
@@ -170,7 +169,7 @@ public class ViewResetPass extends javax.swing.JFrame {
     private void btnXNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXNActionPerformed
         // TODO add your handling code here:
         int count = 0;
-        
+        ViewDangNhap viewDN = new ViewDangNhap();
         String tenDN = txtTenDN.getText().trim();
         char[] passOld = txtPassWord.getPassword();
         char[] passNew = txtPassNew.getPassword();
@@ -228,6 +227,7 @@ public class ViewResetPass extends javax.swing.JFrame {
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         // TODO add your handling code here:
+        ViewDangNhap viewDN = new ViewDangNhap();
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn quay về trang đăng nhập không???");
         if (check == JOptionPane.YES_OPTION) {
             this.setVisible(false);

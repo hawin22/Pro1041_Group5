@@ -2338,10 +2338,8 @@ public class ServiceImp implements ServiceInterface {
         }
     }
 
-
-
-@Override
-public ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc) {
+    @Override
+    public ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc) {
         String sql = "select MaHoaDon, NgayTao, TrangThai, MaVoucher, MaNhanVien, NgayHoanThanh, LoaiThanhToan, MaKhachHang from HoaDon\n"
                 + "where  TrangThai not in (N'Đã huỷ') and NgayTao between ? and ? ";
         listHoaDon.clear();
@@ -2370,7 +2368,7 @@ public ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc) {
     }
 
     @Override
-public ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc) {
+    public ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc) {
         String sql = "select MaHoaDon, NgayTao, TrangThai, MaVoucher, MaNhanVien, NgayHoanThanh, LoaiThanhToan, MaKhachHang from HoaDon\n"
                 + "where  TrangThai = N'Đã huỷ' and NgayTao between ? and ? ";
         listHoaDon.clear();
@@ -2504,7 +2502,7 @@ public ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc)
             stm.setString(1, user);
             stm.setString(2, passWord);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 Login lg = new Login();
                 lg.setUserName(rs.getString(1));
                 lg.setPassword(rs.getString(2));
@@ -2516,6 +2514,33 @@ public ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc)
             e.printStackTrace();
         }
         return listLogin;
+
+    }
+
+    public ArrayList<HoaDon> getAllHoaDonChuaHoanThanh() {
+        String sql = "select h.* from HoaDon h where h.TrangThai = N'Chưa hoàn thành'";
+        listHoaDon.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayTao(rs.getString(2));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setTrangThai(rs.getString(3));
+                listHoaDon.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listHoaDon;
     }
 
     @Override
@@ -2532,5 +2557,4 @@ public ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc)
             e.printStackTrace();
         }
     }
-    
 }
