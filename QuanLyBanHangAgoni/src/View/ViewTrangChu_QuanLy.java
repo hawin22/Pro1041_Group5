@@ -373,6 +373,22 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
 
+    public boolean checkSDT(String SDT) {
+        String sdtRegex = "^(\\+84|0)(\\d{1,3})([\\s-.]?)(\\d{3})([\\s-.]?)(\\d{3})$";
+        Pattern sdtPat = Pattern.compile(sdtRegex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = sdtPat.matcher(SDT);
+        return matcher.find();
+    }
+
+    boolean sdtNV() {
+        if (checkSDT(txtSDT.getText())) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(this, "Sai định dạng số điện thoại");
+            return false;
+        }
+    }
+
     public boolean checkTrungMaNhanVien(String ma) {
         int count = 0;
         for (NguoiDung nd : ser.getAllNguoiDung()) {
@@ -420,7 +436,23 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
 
-    public boolean checkTrungEmailTenDNNhanVien(String maNV, String email, String tenDN) {
+    public boolean checkTrungSDTNhanVien(String SDT) {
+        int count = 0;
+        for (NguoiDung nd : ser.getAllNguoiDung()) {
+            if (nd.getSDT().equals(SDT)) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            JOptionPane.showMessageDialog(this, "Trùng số điện thoại");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean checkTrungEmailTenDNNhanVien(String maNV, String email, String tenDN, String SDT) {
+    
         ArrayList<NguoiDung> listEmailTenDN = ser.getAllNguoiDung();
         for (int i = 0; i < listEmailTenDN.size(); i++) {
             if (listEmailTenDN.get(i).getMaNguoiDung().equals(maNV)) {
@@ -436,6 +468,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             if (nd.getTenDN().equals(tenDN)) {
                 count++;
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập này đã tồn tại");
+            }
+            if (nd.getSDT().equals(SDT)) {
+                count++;
+                JOptionPane.showMessageDialog(this, "Số điện thoại này đã tồn tại");
             }
         }
         if (count == 0) {
@@ -4492,15 +4528,22 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 if (!checkTuoiNV()) {
                     count++;
                 }
+                if (!sdtNV()) {
+                    count++;
+                }
                 if (!emailNV()) {
                     count++;
                 }
                 if (!checkTrungEmailNhanVien(txtEmail.getText())) {
                     count++;
                 }
+                if (!checkTrungSDTNhanVien(txtSDT.getText())) {
+                    count++;
+                }
                 if (!checkTrungTenDNNhanVien(txtTenDN.getText())) {
                     count++;
                 }
+                
             }
 
             if (count == 0) {
@@ -4533,11 +4576,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     if (!checkTuoiNV()) {
                         count++;
                     }
+                    if (!sdtNV()) {
+                        count++;
+                    }
                     if (!emailNV()) {
                         count++;
                     }
 
-                    if (!checkTrungEmailTenDNNhanVien(txtMaNV.getText(), txtEmail.getText(), txtTenDN.getText())) {
+                    if (!checkTrungEmailTenDNNhanVien(txtMaNV.getText(), txtEmail.getText(), txtTenDN.getText(), txtSDT.getText())) {
                         count++;
                     }
                     if (count == 0) {
