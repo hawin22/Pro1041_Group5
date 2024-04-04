@@ -110,4 +110,13 @@ public interface ServiceInterface {
     ArrayList<HoaDon> searchQLHuy(String maHoaDon);
     ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc);
     ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc);
+    
+    ArrayList<KhuyenMai> sXMaKM();
+    ArrayList<KhuyenMai> sXTTTenKM();
+    ArrayList<Voucher> sXTNgayVoucher();
+    ArrayList<KhuyenMai> sXTNgayKhuyenMai();
+    void addKhuyenMai(KhuyenMai km);
+    void updateKhuyenMai(KhuyenMai km);
+    void addSPKM(SanPham sp);
+    String getMaSPCT(String MaSP);
 };
