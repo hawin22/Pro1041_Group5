@@ -2491,4 +2491,46 @@ public ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc)
         }
         return listHoaDon;
     }
+
+    @Override
+    public ArrayList<Login> reSetPassWord(String user, String passWord) {
+        String sql = "select TenDangNhap, MatKhau, TenRole, Email from NguoiDung \n"
+                + "join Roles on NguoiDung.Roles = Roles.Marole\n"
+                + "where NguoiDung.TenDangNhap = ? and MatKhau = ?";
+        listLogin.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, user);
+            stm.setString(2, passWord);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {                
+                Login lg = new Login();
+                lg.setUserName(rs.getString(1));
+                lg.setPassword(rs.getString(2));
+                lg.setRole(rs.getString(3));
+                lg.setEmail(rs.getString(4));
+                listLogin.add(lg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listLogin;
+    }
+
+    @Override
+    public void updateMK(String user, String passWord) {
+        String sql = "update NguoiDung set MatKhau = ? where TenDangNhap = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, passWord);
+            stm.setString(2, user);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
