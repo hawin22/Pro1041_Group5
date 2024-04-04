@@ -989,7 +989,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Ph&#x1ea7;n tr&#x103;m tr&#x1eeb;"/>
+                    <Property name="text" type="java.lang.String" value="S&#x1ed1; ti&#x1ec1;n tr&#x1eeb;"/>
                   </Properties>
                 </Component>
               </SubComponents>

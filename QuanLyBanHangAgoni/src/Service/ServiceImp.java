@@ -2338,10 +2338,8 @@ public class ServiceImp implements ServiceInterface {
         }
     }
 
-
-
-@Override
-public ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc) {
+    @Override
+    public ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc) {
         String sql = "select MaHoaDon, NgayTao, TrangThai, MaVoucher, MaNhanVien, NgayHoanThanh, LoaiThanhToan, MaKhachHang from HoaDon\n"
                 + "where  TrangThai not in (N'Đã huỷ') and NgayTao between ? and ? ";
         listHoaDon.clear();
@@ -2370,7 +2368,7 @@ public ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc) {
     }
 
     @Override
-public ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc) {
+    public ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc) {
         String sql = "select MaHoaDon, NgayTao, TrangThai, MaVoucher, MaNhanVien, NgayHoanThanh, LoaiThanhToan, MaKhachHang from HoaDon\n"
                 + "where  TrangThai = N'Đã huỷ' and NgayTao between ? and ? ";
         listHoaDon.clear();
@@ -2474,6 +2472,32 @@ public ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc)
             stm.setString(1, maHoaDon);
             stm.setString(2, maVoucher);
             ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon();
+                hd.setMaHoaDon(rs.getString(1));
+                hd.setMaNhanVien(rs.getString(5));
+                hd.setNgayTao(rs.getString(2));
+                hd.setLoaiThanhToan(rs.getString(7));
+                hd.setMaKhachHang(rs.getString(8));
+                hd.setMaVoucher(rs.getString(4));
+                hd.setNgayHoanThanh(rs.getString(6));
+                hd.setTrangThai(rs.getString(3));
+                listHoaDon.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    @Override
+    public ArrayList<HoaDon> getAllHoaDonChuaHoanThanh() {
+        String sql = "select h.* from HoaDon h where h.TrangThai = N'Chưa hoàn thành'";
+        listHoaDon.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 HoaDon hd = new HoaDon();
                 hd.setMaHoaDon(rs.getString(1));
