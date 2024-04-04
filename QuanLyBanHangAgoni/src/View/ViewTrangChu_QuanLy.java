@@ -14,8 +14,6 @@ import Service.ServiceImp;
 import Service.ServiceInterface;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -54,27 +52,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         loadDataQuanLyHDHuy(ser.getAllQLHDHuy());
         rdAllVoucher.setSelected(true);
 
-    }
-
-    public static String generateMD5(String input) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(input.getBytes());
-            byte[] digest = md.digest();
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : digest) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     void loadDataVoucher(ArrayList<Voucher> list) {
@@ -174,7 +151,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         nd.setEmail(txtEmail.getText());
         nd.setRoles(lblRoles.getText());
         nd.setTenDN(txtTenDN.getText());
-        nd.setPassWord(generateMD5(txtPassword.getText()));
+        nd.setPassWord(txtPassword.getText());
         return nd;
     }
 
@@ -559,9 +536,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         buttonGroup4 = new javax.swing.ButtonGroup();
         buttonGroup5 = new javax.swing.ButtonGroup();
         jPanel33 = new javax.swing.JPanel();
-        trangChu = new javax.swing.JTabbedPane();
-        jPanel36 = new javax.swing.JPanel();
-        jLabel75 = new javax.swing.JLabel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -874,29 +849,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
-        trangChu.setForeground(new java.awt.Color(51, 153, 255));
-        trangChu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        jLabel75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chanGaGoiDemAgoNi.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
-        jPanel36.setLayout(jPanel36Layout);
-        jPanel36Layout.setHorizontalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel36Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
-        );
-        jPanel36Layout.setVerticalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel36Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        trangChu.addTab("Trang chủ", jPanel36);
+        jTabbedPane2.setForeground(new java.awt.Color(51, 153, 255));
+        jTabbedPane2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jTabbedPane5.setForeground(new java.awt.Color(51, 153, 255));
         jTabbedPane5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -1124,7 +1078,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     .addComponent(txtSoTienYCVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Voucher", jPanel2);
@@ -1316,7 +1270,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     .addComponent(txtGiamGiaKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Khuyến mãi", jPanel30);
@@ -1443,7 +1397,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                             .addComponent(txtGiamGiaKMChonSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(64, 64, 64)
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(380, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Chọn sản phẩm khuyến mãi", jPanel31);
@@ -1459,7 +1413,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             .addComponent(jTabbedPane5)
         );
 
-        trangChu.addTab("Quản lý ưu đãi", jPanel5);
+        jTabbedPane2.addTab("Quản lý ưu đãi", jPanel5);
 
         jTabbedPane6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
@@ -1990,7 +1944,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        trangChu.addTab("Quản lý nhân viên", jPanel10);
+        jTabbedPane2.addTab("Quản lý nhân viên", jPanel10);
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         jTabbedPane1.setAutoscrolls(true);
@@ -2438,7 +2392,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addContainerGap(273, Short.MAX_VALUE))
         );
 
-        trangChu.addTab("Quản lý hoá đơn", jPanel6);
+        jTabbedPane2.addTab("Quản lý hoá đơn", jPanel6);
 
         jTabbedPane4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane4.setForeground(new java.awt.Color(0, 51, 255));
@@ -2899,7 +2853,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        trangChu.addTab("Quản lý sản phẩm", jPanel9);
+        jTabbedPane2.addTab("Quản lý sản phẩm", jPanel9);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -3240,7 +3194,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        trangChu.addTab("Báo cáo thống kê", jPanel8);
+        jTabbedPane2.addTab("Báo cáo thống kê", jPanel8);
 
         jLabel1.setFont(new java.awt.Font("Segoe WP SemiLight", 3, 48)); // NOI18N
         jLabel1.setText("Đì dai by Nhóm Năm");
@@ -3272,12 +3226,12 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(287, 287, 287))
         );
 
-        trangChu.addTab("?", jPanel1);
+        jTabbedPane2.addTab("?", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -3285,14 +3239,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(trangChu)
+                .addComponent(jTabbedPane2)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(trangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -3496,14 +3450,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         NguoiDung nd = getFormNhanVien();
                         int d = 0;
                         NguoiDung nv = ser.getRowNhanVien(true, i);
-                        if (nd == nv) {
-                            d++;
-
+                            if (nd == nv) {
+                                d++;
+                            
                             System.out.println(nv);
                         }
                         System.out.println(d);
                         System.out.println(nd);
-                        if (d > 0) {
+                        if (d>0) {
                             JOptionPane.showMessageDialog(this, "Chưa thay đổi dữ liệu");
                         } else {
                             ser.updateNV(nd);
@@ -3606,7 +3560,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
     private void btnSearchNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNVActionPerformed
         // TODO add your handling code here:
-
+        
         String searchNV = txtSearchNV.getText();
         String searchTen = txtSearchNV.getText();
         ArrayList<NguoiDung> listSearchNV = ser.searchNhanVien(searchNV, searchTen);
@@ -3872,7 +3826,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchNV.getText().equals("Nhập mã hoặc tên nhân viên")) {
             txtSearchNV.setText("");
-            txtSearchNV.setForeground(new Color(153, 153, 153));
+            txtSearchNV.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtSearchNVFocusGained
 
@@ -3880,7 +3834,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchNV.getText().equals("")) {
             txtSearchNV.setText("Nhập mã hoặc tên nhân viên");
-            txtSearchNV.setForeground(new Color(153, 153, 153));
+            txtSearchNV.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtSearchNVFocusLost
 
@@ -3888,15 +3842,15 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchNVNghi.getText().equals("Nhập mã hoặc tên nhân viên")) {
             txtSearchNVNghi.setText("");
-            txtSearchNVNghi.setForeground(new Color(153, 153, 153));
+            txtSearchNVNghi.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtSearchNVNghiFocusGained
 
     private void txtSearchNVNghiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchNVNghiFocusLost
         // TODO add your handling code here:
-        if (txtSearchNV.getText().equals("")) {
+         if (txtSearchNV.getText().equals("")) {
             txtSearchNV.setText("Nhập mã hoặc tên nhân viên");
-            txtSearchNV.setForeground(new Color(153, 153, 153));
+            txtSearchNV.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtSearchNVNghiFocusLost
 
@@ -3904,7 +3858,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchHD.getText().equals("Nhập mã hoá đơn cần tìm")) {
             txtSearchHD.setText("");
-            txtSearchHD.setForeground(new Color(153, 153, 153));
+            txtSearchHD.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtSearchHDFocusGained
 
@@ -3912,7 +3866,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchHD.getText().equals("")) {
             txtSearchHD.setText("Nhập mã hoá đơn cần tìm");
-            txtSearchHD.setForeground(new Color(153, 153, 153));
+            txtSearchHD.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtSearchHDFocusLost
 
@@ -3920,7 +3874,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchHuy.getText().equals("Nhập mã hoá đơn cần tìm")) {
             txtSearchHuy.setText("");
-            txtSearchHuy.setForeground(new Color(153, 153, 153));
+            txtSearchHuy.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtSearchHuyFocusGained
 
@@ -3928,7 +3882,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchHuy.getText().equals("")) {
             txtSearchHuy.setText("Nhập mã hoá đơn cần tìm");
-            txtSearchHuy.setForeground(new Color(153, 153, 153));
+            txtSearchHuy.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtSearchHuyFocusLost
 
@@ -3936,39 +3890,39 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtBatDauHD.getText().equals("dd-mm-yyyy")) {
             txtBatDauHD.setText("");
-            txtBatDauHD.setForeground(new Color(153, 153, 153));
+            txtBatDauHD.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtBatDauHDFocusGained
 
     private void txtBatDauHDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBatDauHDFocusLost
         // TODO add your handling code here:
-        if (txtBatDauHD.getText().equals("")) {
+         if (txtBatDauHD.getText().equals("")) {
             txtBatDauHD.setText("dd-mm-yyyy");
-            txtBatDauHD.setForeground(new Color(153, 153, 153));
+            txtBatDauHD.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtBatDauHDFocusLost
 
     private void txtKetThucHDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHDFocusGained
         // TODO add your handling code here:
-        if (txtKetThucHD.getText().equals("dd-mm-yyyy")) {
+         if (txtKetThucHD.getText().equals("dd-mm-yyyy")) {
             txtKetThucHD.setText("");
-            txtKetThucHD.setForeground(new Color(153, 153, 153));
+            txtKetThucHD.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtKetThucHDFocusGained
 
     private void txtKetThucHDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHDFocusLost
         // TODO add your handling code here:
-        if (txtKetThucHD.getText().equals("")) {
+         if (txtKetThucHD.getText().equals("")) {
             txtKetThucHD.setText("dd-mm-yyyy");
-            txtKetThucHD.setForeground(new Color(153, 153, 153));
+            txtKetThucHD.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtKetThucHDFocusLost
 
     private void txtBatDauHuyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBatDauHuyFocusGained
         // TODO add your handling code here:
-        if (txtBatDauHuy.getText().equals("dd-mm-yyyy")) {
+          if (txtBatDauHuy.getText().equals("dd-mm-yyyy")) {
             txtBatDauHuy.setText("");
-            txtBatDauHuy.setForeground(new Color(153, 153, 153));
+            txtBatDauHuy.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtBatDauHuyFocusGained
 
@@ -3976,7 +3930,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtBatDauHuy.getText().equals("")) {
             txtBatDauHuy.setText("dd-mm-yyyy");
-            txtBatDauHuy.setForeground(new Color(153, 153, 153));
+            txtBatDauHuy.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtBatDauHuyFocusLost
 
@@ -3984,15 +3938,15 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtKetThucHuy.getText().equals("dd-mm-yyyy")) {
             txtKetThucHuy.setText("");
-            txtKetThucHuy.setForeground(new Color(153, 153, 153));
+            txtKetThucHuy.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtKetThucHuyFocusGained
 
     private void txtKetThucHuyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHuyFocusLost
         // TODO add your handling code here:
-        if (txtKetThucHuy.getText().equals("")) {
+         if (txtKetThucHuy.getText().equals("")) {
             txtKetThucHuy.setText("dd-mm-yyyy");
-            txtKetThucHuy.setForeground(new Color(153, 153, 153));
+            txtKetThucHuy.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_txtKetThucHuyFocusLost
 
@@ -4144,7 +4098,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -4176,7 +4129,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
-    private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -4209,6 +4161,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
@@ -4258,7 +4211,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton tbnTKTKNKM;
     private javax.swing.JButton tbnThemSPKM;
     private javax.swing.JButton tbnXoaSPKM;
-    private javax.swing.JTabbedPane trangChu;
     private javax.swing.JTextField txtBatDauHD;
     private javax.swing.JTextField txtBatDauHuy;
     private javax.swing.JTextField txtEmail;

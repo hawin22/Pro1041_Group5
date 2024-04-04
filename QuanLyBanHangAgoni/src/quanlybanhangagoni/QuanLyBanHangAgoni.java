@@ -17,5 +17,5 @@ public class QuanLyBanHangAgoni {
         // TODO code application logic here
         System.out.println("Hiihih");
     }
-
+    
 }
