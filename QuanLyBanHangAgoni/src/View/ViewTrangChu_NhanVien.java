@@ -51,6 +51,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         loadDataVoucher(ser.getAllVoucher());
         loadDataKhuyenMai(ser.getAllKhuyenMai());
         loadDataHoaDonVoucher(ser.getAllHoaDon());
+        loadDataHoaDonBanHangApDungKM(ser.getAllHoaDonChuaHoanThanh());
     }
 
     void loadDataKhachHang(ArrayList<KhachHang> list) {
@@ -161,6 +162,21 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 hd.getNgayHoanThanh(),
                 hd.getTrangThai(),
                 hd.getLoaiThanhToan()
+            });
+        }
+
+    }
+
+    void loadDataHoaDonBanHangApDungKM(ArrayList<HoaDon> list) {
+        dftm = (DefaultTableModel) tblHoaDonApDungVoucher.getModel();
+        dftm.setRowCount(0);
+        for (HoaDon hd : list) {
+            dftm.addRow(new Object[]{
+                hd.getMaHoaDon(),
+                hd.getMaNhanVien(),
+                hd.getNgayTao(),
+                hd.getTrangThai(),
+                hd.getMaKhachHang()
             });
         }
 
@@ -866,7 +882,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         });
 
         lbPhanTramTru.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lbPhanTramTru.setText("Phần trăm trừ");
+        lbPhanTramTru.setText("Số tiền trừ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
