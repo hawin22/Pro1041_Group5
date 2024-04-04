@@ -73,7 +73,7 @@ public interface ServiceInterface {
     ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD);
     ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD);
     Boolean addVoucher(Voucher vc);
-    Boolean deleteVoucher(String mvc);
+  //  Boolean deleteVoucher(String mvc);
     Boolean updateVoucher(Voucher vc);
     ArrayList<SanPham> getAllMauSac();
     ArrayList<SanPham> getAllKichThuoc();
