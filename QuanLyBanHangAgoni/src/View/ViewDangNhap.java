@@ -22,7 +22,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
 
     ArrayList<Login> list = new ArrayList<>();
     ServiceInterface qldn = new ServiceImp();
-
     public ViewDangNhap() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -70,6 +69,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
         btnSignIn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lbForgotPass = new javax.swing.JLabel();
+        lblChangePass = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -163,6 +163,16 @@ public class ViewDangNhap extends javax.swing.JFrame {
             }
         });
 
+        lblChangePass.setFont(new java.awt.Font("Segoe WP Semibold", 0, 12)); // NOI18N
+        lblChangePass.setForeground(new java.awt.Color(0, 133, 255));
+        lblChangePass.setText("Change a password");
+        lblChangePass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblChangePass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblChangePassMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -193,7 +203,10 @@ public class ViewDangNhap extends javax.swing.JFrame {
                         .addGap(83, 83, 83))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lbForgotPass)
-                        .addGap(89, 89, 89))))
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblChangePass)
+                        .addGap(80, 80, 80))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,6 +227,8 @@ public class ViewDangNhap extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(lbForgotPass)
+                .addGap(26, 26, 26)
+                .addComponent(lblChangePass)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -289,6 +304,13 @@ public class ViewDangNhap extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowActivated
 
+    private void lblChangePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChangePassMouseClicked
+        // TODO add your handling code here:
+        ViewResetPass viewReset = new ViewResetPass();
+        this.setVisible(false);
+        viewReset.setVisible(true);
+    }//GEN-LAST:event_lblChangePassMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -337,6 +359,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbForgotPass;
     private javax.swing.JLabel lbHinhAnh;
+    private javax.swing.JLabel lblChangePass;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
