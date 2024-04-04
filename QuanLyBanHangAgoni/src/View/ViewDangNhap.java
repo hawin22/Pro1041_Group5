@@ -7,11 +7,6 @@ package View;
 import java.util.ArrayList;
 import Model.*;
 import Service.*;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,27 +21,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
     public ViewDangNhap() {
         initComponents();
         this.setLocationRelativeTo(null);
-    }
-
-    public static String generateMD5(String input) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(input.getBytes());
-            byte[] digest = md.digest();
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : digest) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     /**
@@ -259,8 +233,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
         String userName = txtUserName.getText().trim();
         char[] pass = txtPassword.getPassword();
         String password = new String(pass).trim();
-        String passwordMD5 = generateMD5(password);
-        list = qldn.LoginSearch(userName, passwordMD5);
+        list = qldn.LoginSearch(userName, password);
         Login lgin = new Login(userName, password, "", "");
         qldn.layUserName(lgin);
         System.out.println(lgin.getUserName());
@@ -286,7 +259,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtUserName.setText("nv_an");
         txtPassword.setText("password123");
-        
     }//GEN-LAST:event_formWindowActivated
 
     /**
@@ -320,7 +292,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ViewDangNhap().setVisible(true);
-
             }
         });
     }
