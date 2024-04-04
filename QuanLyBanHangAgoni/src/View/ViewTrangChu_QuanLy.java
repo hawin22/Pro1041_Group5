@@ -3182,8 +3182,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jLabel43.setForeground(new java.awt.Color(51, 153, 255));
         jLabel43.setText("Quản lý sản phẩm");
 
-        
-
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
