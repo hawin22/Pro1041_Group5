@@ -14,6 +14,8 @@ import Service.ServiceImp;
 import Service.ServiceInterface;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -38,7 +40,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     ServiceInterface ser = new ServiceImp();
     DefaultTableModel dtm;
     ArrayList<SanPham> listSPTrong = new ArrayList<>();
-    
+
     ArrayList<HoaDon> listHoaDon = new ArrayList<>();
 
     public ViewTrangChu_QuanLy() {
@@ -65,7 +67,28 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         loadDataNCC();
 
     }
-    
+
+    public static String generateMD5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(input.getBytes());
+            byte[] digest = md.digest();
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : digest) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     void loadDataVoucher(ArrayList<Voucher> list) {
         dtm = (DefaultTableModel) tblVoucher.getModel();
         dtm.setRowCount(0);
@@ -81,7 +104,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
+
     Voucher getFormVoucher() {
         Voucher vc = new Voucher();
         vc.setMaVoucher(txtMaVoucher.getText());
@@ -105,7 +128,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
         return vc;
     }
-    
+
     void setFormVoucher(Voucher vc) {
         txtMaVoucher.setText(vc.getMaVoucher());
         txtTenVoucher.setText(vc.getTenVoucher());
@@ -127,7 +150,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             txtSoTienYCVoucher.setText(String.valueOf(vc.getSoTienYeuCau()));
         }
     }
-    
+
     void loadDataNhanVien(ArrayList<NguoiDung> list) {
         dtm = (DefaultTableModel) tblNhanVien.getModel();
         dtm.setRowCount(0);
@@ -146,7 +169,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
+
     NguoiDung getFormNhanVien() {
         NguoiDung nd = new NguoiDung();
         nd.setMaNguoiDung(txtMaNV.getText());
@@ -163,10 +186,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         nd.setEmail(txtEmail.getText());
         nd.setRoles(lblRoles.getText());
         nd.setTenDN(txtTenDN.getText());
-        nd.setPassWord(txtPassword.getText());
+        nd.setPassWord(generateMD5(txtPassword.getText()));
         return nd;
     }
-    
+
     void setFormNhanVien(NguoiDung nd) {
         txtMaNV.setText(nd.getMaNguoiDung());
         txtTenNV.setText(nd.getTenNguoiDung());
@@ -183,7 +206,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         txtTenDN.setText(nd.getTenDN());
         txtPassword.setText(nd.getPassWord());
     }
-    
+
     void loadDataKhuyenMai(ArrayList<KhuyenMai> list) {
         dtm = (DefaultTableModel) tblKhuyenMai.getModel();
         dtm.setRowCount(0);
@@ -199,7 +222,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
 
     KhuyenMai getFormKhuyenMai() {
         KhuyenMai km = new KhuyenMai();
@@ -237,6 +259,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             txtGiamGiaKhuyenMai.setText(String.valueOf(km.getGiamGia()));
         }
     }
+
     void loadDataSPKM(ArrayList<SanPham> list) {
         dtm = (DefaultTableModel) tblSPKM.getModel();
         dtm.setRowCount(0);
@@ -248,7 +271,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
+
     void loadDataKMChonSP(ArrayList<KhuyenMai> list) {
         dtm = (DefaultTableModel) tblKMChonSP.getModel();
         dtm.setRowCount(0);
@@ -260,7 +283,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
+
     void loadDataQuanLy(ArrayList<NguoiDung> list) {
         dtm = (DefaultTableModel) tblQuanLy.getModel();
         dtm.setRowCount(0);
@@ -273,7 +296,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
+
     public boolean checkNhanVien() {
         int i = tblNhanVien.getSelectedRow();
         int count = 0;
@@ -297,7 +320,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Không được để trống số điện thoại");
             count++;
         }
-        
+
         if (txtEmail.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Không được để trống email");
             count++;
@@ -310,15 +333,15 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Không được để trống password");
             count++;
         }
-        
+
         if (count > 0) {
             return false;
         } else {
             return true;
-            
+
         }
     }
-    
+
     public boolean checkTuoiNV() {
         try {
             int tuoi = Integer.parseInt(txtTuoi.getText());
@@ -333,14 +356,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             return false;
         }
     }
-    
+
     public boolean checkEmailNV(String email) {
         String emailRegex = "[A-Za-z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)";
         Pattern emailPat = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = emailPat.matcher(email);
         return matcher.find();
     }
-    
+
     boolean emailNV() {
         if (checkEmailNV(txtEmail.getText())) {
             return true;
@@ -349,7 +372,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             return false;
         }
     }
-    
+
     public boolean checkTrungMaNhanVien(String ma) {
         int count = 0;
         for (NguoiDung nd : ser.getAllNguoiDung()) {
@@ -363,9 +386,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         } else {
             return true;
         }
-        
+
     }
-    
+
     public boolean checkTrungTenDNNhanVien(String ten) {
         int count = 0;
         for (NguoiDung nd : ser.getAllNguoiDung()) {
@@ -379,9 +402,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         } else {
             return true;
         }
-        
+
     }
-    
+
     public boolean checkTrungEmailNhanVien(String email) {
         int count = 0;
         for (NguoiDung nd : ser.getAllNguoiDung()) {
@@ -396,7 +419,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             return true;
         }
     }
-    
+
     public boolean checkTrungEmailTenDNNhanVien(String maNV, String email, String tenDN) {
         ArrayList<NguoiDung> listEmailTenDN = ser.getAllNguoiDung();
         for (int i = 0; i < listEmailTenDN.size(); i++) {
@@ -421,7 +444,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             return false;
         }
     }
-    
+
     void loadDataNhanVienNghi(ArrayList<NguoiDung> list) {
         dtm = (DefaultTableModel) tblNhanVienNghi.getModel();
         dtm.setRowCount(0);
@@ -440,12 +463,11 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             });
         }
     }
-    
-    
-        void loadDataQLSP(List<SanPham> listSP) {
+
+    void loadDataQLSP(List<SanPham> listSP) {
         dtm = (DefaultTableModel) tblSanPhamTTSP.getModel();
         dtm.setRowCount(0);
-        for (SanPham sp : listSP ) {
+        for (SanPham sp : listSP) {
             dtm.addRow(new Object[]{
                 sp.getMaSPCT(),
                 sp.getTenSP(),
@@ -473,8 +495,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         sp.setMaMS(ser.getIDMauSac(cboMauSacTTSP.getSelectedItem().toString()));
         sp.setMaKT(ser.getIDKichThuoc(cboKichThuocTTSP.getSelectedItem().toString()));
         sp.setMaCL(ser.getIDChatLieu(cboChatLieuTTSP.getSelectedItem().toString()));
-        sp.setMau(String.valueOf(cboMauTTSP.getSelectedItem()+""));
-        System.out.println(""+sp.toString());
+        sp.setMau(String.valueOf(cboMauTTSP.getSelectedItem() + ""));
+        System.out.println("" + sp.toString());
         return sp;
     }
 
@@ -490,17 +512,18 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         cboChatLieuTTSP.setSelectedItem(sp.getChatLieu());
         cboMauTTSP.setSelectedItem(sp.getMau());
     }
-     void setFormSanPhamTTSP1(int row) {
-        txtMaSPCT.setText(tblSanPhamTTSP.getValueAt(row, 0) +  "");
-        txtTenSP.setText(tblSanPhamTTSP.getValueAt(row, 1)+"");
-        cboTenNCCTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 2)+"");
-        txtHang.setText(tblSanPhamTTSP.getValueAt(row, 3)+"");
-        txtDonGiaTTSP.setText(tblSanPhamTTSP.getValueAt(row, 4)+"");
-        txtSoLuongTTSP.setText(tblSanPhamTTSP.getValueAt(row, 5)+"");
-        cboMauSacTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 6)+"");
-        cboKichThuocTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 7)+"");
-        cboChatLieuTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 8)+"");
-        cboMauTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 9)+"");
+
+    void setFormSanPhamTTSP1(int row) {
+        txtMaSPCT.setText(tblSanPhamTTSP.getValueAt(row, 0) + "");
+        txtTenSP.setText(tblSanPhamTTSP.getValueAt(row, 1) + "");
+        cboTenNCCTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 2) + "");
+        txtHang.setText(tblSanPhamTTSP.getValueAt(row, 3) + "");
+        txtDonGiaTTSP.setText(tblSanPhamTTSP.getValueAt(row, 4) + "");
+        txtSoLuongTTSP.setText(tblSanPhamTTSP.getValueAt(row, 5) + "");
+        cboMauSacTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 6) + "");
+        cboKichThuocTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 7) + "");
+        cboChatLieuTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 8) + "");
+        cboMauTTSP.setSelectedItem(tblSanPhamTTSP.getValueAt(row, 9) + "");
     }
 
     void showCboKichThuoc() {
@@ -663,8 +686,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
 
     }
-    
-        public boolean checkTrungTenMauSac(String ten) {
+
+    public boolean checkTrungTenMauSac(String ten) {
         int count = 0;
         for (SanPham sp : ser.getAllMauSac()) {
             if (sp.getMauSac().equals(ten)) {
@@ -691,8 +714,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
         return true;
     }
-    
-        public boolean checkTrungMaKichThuoc(String ma) {
+
+    public boolean checkTrungMaKichThuoc(String ma) {
         int count = 0;
         for (SanPham sp : ser.getAllKichThuoc()) {
             if (sp.getMaKT().equals(ma)) {
@@ -836,19 +859,20 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         if (txtHang.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập hãng sản phẩm");
             return false;
-        }if (txtDonGiaTTSP.getText().trim().equals("")) {
+        }
+        if (txtDonGiaTTSP.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập đơn giá sản phẩm");
             return false;
-        }if (txtSoLuongTTSP.getText().trim().equals("")) {
+        }
+        if (txtSoLuongTTSP.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập số lượng sản phẩm");
             return false;
         }
-       
+
         return true;
     }
 
-    
-        public boolean checkTrungMaSP(String ma) {
+    public boolean checkTrungMaSP(String ma) {
         int count = 0;
         for (SanPham sp : ser.getAllSanPham()) {
             if (sp.getMaSP().equals(ma)) {
@@ -879,8 +903,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
 
     }
-    
-    
 
     double tinhTongTienTheoHoaDon(String maHoaDon) {
         double tinhTien = 0.0;
@@ -991,6 +1013,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jPanel33 = new javax.swing.JPanel();
         buttonGroup6 = new javax.swing.ButtonGroup();
         jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel39 = new javax.swing.JPanel();
+        jLabel89 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -1351,6 +1375,27 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
         jTabbedPane2.setForeground(new java.awt.Color(51, 153, 255));
         jTabbedPane2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jLabel89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chanGaGoiDemAgoNi.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel39Layout = new javax.swing.GroupLayout(jPanel39);
+        jPanel39.setLayout(jPanel39Layout);
+        jPanel39Layout.setHorizontalGroup(
+            jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel39Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel89, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
+        );
+        jPanel39Layout.setVerticalGroup(
+            jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel39Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel89, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane2.addTab("Trang chủ", jPanel39);
 
         jTabbedPane5.setForeground(new java.awt.Color(51, 153, 255));
         jTabbedPane5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -4385,7 +4430,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 dem++;
             }
             if (dem == 0) {
-                
+
                 if (!checkTrungMaNhanVien(txtMaNV.getText())) {
                     count++;
                 }
@@ -4402,17 +4447,17 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     count++;
                 }
             }
-            
+
             if (count == 0) {
 //                System.out.println("tgkjggf");
                 ser.addNhanVien(getFormNhanVien());
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 loadDataNhanVien(ser.getAllNhanVien(true));
             } else {
-                
+
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
-            
+
         }
     }//GEN-LAST:event_btnAddNhanVienActionPerformed
 
@@ -4436,7 +4481,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     if (!emailNV()) {
                         count++;
                     }
-                    
+
                     if (!checkTrungEmailTenDNNhanVien(txtMaNV.getText(), txtEmail.getText(), txtTenDN.getText())) {
                         count++;
                     }
@@ -4455,10 +4500,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 //                        if (d<=0) {
 //                            JOptionPane.showMessageDialog(this, "Chưa thay đổi dữ liệu");
 //                        } else {
-                            ser.updateNV(nd);
+                        ser.updateNV(nd);
 
-                            JOptionPane.showMessageDialog(this, "Sửa thành công");
-                            loadDataNhanVien(ser.getAllNhanVien(true));
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                        loadDataNhanVien(ser.getAllNhanVien(true));
 
 //                        }
                     } else {
@@ -4493,7 +4538,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
                 // boolean trangThaiFalse = false;
                 JOptionPane.showMessageDialog(this, ser.updateTrangThaiNhanVien(false, maNhanVien));
-                
+
                 loadDataNhanVien(ser.getAllNhanVien(true));
                 loadDataNhanVienNghi(ser.getAllNhanVien(false));
             } else {
@@ -4555,7 +4600,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
     private void btnSearchNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNVActionPerformed
         // TODO add your handling code here:
-        
+
         String searchNV = txtSearchNV.getText();
         String searchTen = txtSearchNV.getText();
         ArrayList<NguoiDung> listSearchNV = ser.searchNhanVien(searchNV, searchTen);
@@ -5040,34 +5085,34 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private void btnTimKiemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemSPActionPerformed
         listSPTrong.clear();
         if (txtTimKiemSPTTSP.getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã sản phẩm cần tìm");
-            } else {
-                String keyword = txtTimKiemSPTTSP.getText();
-                listSPTrong = ser.getTimKiemSanPhamTTSP(keyword); 
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã sản phẩm cần tìm");
+        } else {
+            String keyword = txtTimKiemSPTTSP.getText();
+            listSPTrong = ser.getTimKiemSanPhamTTSP(keyword);
 
-                if (listSPTrong.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Không tìm thấy sinh viên nào với mã: " + keyword);
-                } else {
-                     dtm = (DefaultTableModel) tblSanPhamTTSP.getModel();
-        dtm.setRowCount(0);
-        for (SanPham sp : listSPTrong) {
-            dtm.addRow(new Object[]{
-                sp.getMaSPCT(),
-                sp.getTenSP(),
-                sp.getNhaCungCap(),
-                sp.getHang(),
-                sp.getDonGia(),
-                sp.getSoLuongSP(),
-                sp.getMauSac(),
-                sp.getKichThuoc(),
-                sp.getMau(),
-                sp.getChatLieu(),
-                sp.getHinhAnh()
-            });
-        
-                    }
+            if (listSPTrong.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sinh viên nào với mã: " + keyword);
+            } else {
+                dtm = (DefaultTableModel) tblSanPhamTTSP.getModel();
+                dtm.setRowCount(0);
+                for (SanPham sp : listSPTrong) {
+                    dtm.addRow(new Object[]{
+                        sp.getMaSPCT(),
+                        sp.getTenSP(),
+                        sp.getNhaCungCap(),
+                        sp.getHang(),
+                        sp.getDonGia(),
+                        sp.getSoLuongSP(),
+                        sp.getMauSac(),
+                        sp.getKichThuoc(),
+                        sp.getMau(),
+                        sp.getChatLieu(),
+                        sp.getHinhAnh()
+                    });
+
                 }
             }
+        }
     }//GEN-LAST:event_btnTimKiemSPActionPerformed
 
     private void rdoSXMaTTSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoSXMaTTSPMouseClicked
@@ -5075,7 +5120,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_rdoSXMaTTSPMouseClicked
 
     private void rdoSXTenTTSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoSXTenTTSPMouseClicked
-         loadDataQLSP(ser.SapXepTheoTenSP());
+        loadDataQLSP(ser.SapXepTheoTenSP());
     }//GEN-LAST:event_rdoSXTenTTSPMouseClicked
 
     private void txtTenSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenSPActionPerformed
@@ -5192,7 +5237,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchNV.getText().equals("Nhập mã hoặc tên nhân viên")) {
             txtSearchNV.setText("");
-            txtSearchNV.setForeground(new Color(153,153,153));
+            txtSearchNV.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtSearchNVFocusGained
 
@@ -5200,7 +5245,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchNV.getText().equals("")) {
             txtSearchNV.setText("Nhập mã hoặc tên nhân viên");
-            txtSearchNV.setForeground(new Color(153,153,153));
+            txtSearchNV.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtSearchNVFocusLost
 
@@ -5208,15 +5253,15 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchNVNghi.getText().equals("Nhập mã hoặc tên nhân viên")) {
             txtSearchNVNghi.setText("");
-            txtSearchNVNghi.setForeground(new Color(153,153,153));
+            txtSearchNVNghi.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtSearchNVNghiFocusGained
 
     private void txtSearchNVNghiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchNVNghiFocusLost
         // TODO add your handling code here:
-         if (txtSearchNV.getText().equals("")) {
+        if (txtSearchNV.getText().equals("")) {
             txtSearchNV.setText("Nhập mã hoặc tên nhân viên");
-            txtSearchNV.setForeground(new Color(153,153,153));
+            txtSearchNV.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtSearchNVNghiFocusLost
 
@@ -5224,7 +5269,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchHD.getText().equals("Nhập mã hoá đơn cần tìm")) {
             txtSearchHD.setText("");
-            txtSearchHD.setForeground(new Color(153,153,153));
+            txtSearchHD.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtSearchHDFocusGained
 
@@ -5232,7 +5277,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchHD.getText().equals("")) {
             txtSearchHD.setText("Nhập mã hoá đơn cần tìm");
-            txtSearchHD.setForeground(new Color(153,153,153));
+            txtSearchHD.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtSearchHDFocusLost
 
@@ -5240,7 +5285,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchHuy.getText().equals("Nhập mã hoá đơn cần tìm")) {
             txtSearchHuy.setText("");
-            txtSearchHuy.setForeground(new Color(153,153,153));
+            txtSearchHuy.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtSearchHuyFocusGained
 
@@ -5248,7 +5293,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtSearchHuy.getText().equals("")) {
             txtSearchHuy.setText("Nhập mã hoá đơn cần tìm");
-            txtSearchHuy.setForeground(new Color(153,153,153));
+            txtSearchHuy.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtSearchHuyFocusLost
 
@@ -5256,39 +5301,39 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtBatDauHD.getText().equals("dd-mm-yyyy")) {
             txtBatDauHD.setText("");
-            txtBatDauHD.setForeground(new Color(153,153,153));
+            txtBatDauHD.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtBatDauHDFocusGained
 
     private void txtBatDauHDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBatDauHDFocusLost
         // TODO add your handling code here:
-         if (txtBatDauHD.getText().equals("")) {
+        if (txtBatDauHD.getText().equals("")) {
             txtBatDauHD.setText("dd-mm-yyyy");
-            txtBatDauHD.setForeground(new Color(153,153,153));
+            txtBatDauHD.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtBatDauHDFocusLost
 
     private void txtKetThucHDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHDFocusGained
         // TODO add your handling code here:
-         if (txtKetThucHD.getText().equals("dd-mm-yyyy")) {
+        if (txtKetThucHD.getText().equals("dd-mm-yyyy")) {
             txtKetThucHD.setText("");
-            txtKetThucHD.setForeground(new Color(153,153,153));
+            txtKetThucHD.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtKetThucHDFocusGained
 
     private void txtKetThucHDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHDFocusLost
         // TODO add your handling code here:
-         if (txtKetThucHD.getText().equals("")) {
+        if (txtKetThucHD.getText().equals("")) {
             txtKetThucHD.setText("dd-mm-yyyy");
-            txtKetThucHD.setForeground(new Color(153,153,153));
+            txtKetThucHD.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtKetThucHDFocusLost
 
     private void txtBatDauHuyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBatDauHuyFocusGained
         // TODO add your handling code here:
-          if (txtBatDauHuy.getText().equals("dd-mm-yyyy")) {
+        if (txtBatDauHuy.getText().equals("dd-mm-yyyy")) {
             txtBatDauHuy.setText("");
-            txtBatDauHuy.setForeground(new Color(153,153,153));
+            txtBatDauHuy.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtBatDauHuyFocusGained
 
@@ -5296,7 +5341,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtBatDauHuy.getText().equals("")) {
             txtBatDauHuy.setText("dd-mm-yyyy");
-            txtBatDauHuy.setForeground(new Color(153,153,153));
+            txtBatDauHuy.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtBatDauHuyFocusLost
 
@@ -5304,15 +5349,15 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (txtKetThucHuy.getText().equals("dd-mm-yyyy")) {
             txtKetThucHuy.setText("");
-            txtKetThucHuy.setForeground(new Color(153,153,153));
+            txtKetThucHuy.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtKetThucHuyFocusGained
 
     private void txtKetThucHuyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKetThucHuyFocusLost
         // TODO add your handling code here:
-         if (txtKetThucHuy.getText().equals("")) {
+        if (txtKetThucHuy.getText().equals("")) {
             txtKetThucHuy.setText("dd-mm-yyyy");
-            txtKetThucHuy.setForeground(new Color(153,153,153));
+            txtKetThucHuy.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtKetThucHuyFocusLost
 
@@ -5496,6 +5541,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -5528,6 +5574,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
+    private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
