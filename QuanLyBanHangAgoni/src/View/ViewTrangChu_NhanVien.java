@@ -2249,7 +2249,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                             } else {
                                 int yVC = JOptionPane.showConfirmDialog(this, "Bạn chưa chọn voucher, có muốn thêm không");
                                 if (yVC == JOptionPane.NO_OPTION) {
-                                    String maVoucher = "";
+                                    String maVoucher = null;
                                     String trangThai = "Đã hoàn thành";
                                     loadDataHoaDonBanHang(ser.thanhToanApVoucher(maVoucher, listHoaDon.get(rowHD).getMaHoaDon()));
                                     JOptionPane.showMessageDialog(this, ser.thanhToanHoaDon(trangThai, getLocalDate() + "", listHoaDon.get(rowHD).getMaHoaDon()));
