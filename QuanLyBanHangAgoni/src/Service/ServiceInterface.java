@@ -106,9 +106,10 @@ public interface ServiceInterface {
     String thanhToanHoaDon(String trangThai, String ngayHoanThanh, String maHoaDon);
     ArrayList<HoaDon> huyHoaDonBanHang(String maHoaDon, String trangThai);
     ArrayList<HoaDon> xoaHoaDonBanhang(String maHoaDon);
-    ArrayList<HoaDon> showHoaDonTheoVoucher(String maHoaDon, String maVoucher);
+    ArrayList<Voucher> showHoaDonTheoVoucher(Integer tien);
     ArrayList<HoaDon> searchQLHuy(String maHoaDon);
     ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc);
     ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc);
     ArrayList<HoaDon> getAllHoaDonChuaHoanThanh();
+    
 };
