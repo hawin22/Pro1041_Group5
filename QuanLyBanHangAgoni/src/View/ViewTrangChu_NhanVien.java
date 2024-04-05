@@ -1981,8 +1981,22 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 btnThanhToan.setEnabled(false);
                 setFormHoaDon(listHoaDon.get(row));
                 loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(listHoaDon.get(row).getMaHoaDon()));
-                tinhThanhTien();
-                loadDataVoucher(ser.showHoaDonTheoVoucher(Integer.valueOf(txtTongTien.getText())));
+                String maVoucher = listHoaDon.get(row).getMaVoucher();
+                if (maVoucher == null) {
+                    tinhThanhTien();
+                    loadDataVoucher(ser.showHoaDonTheoVoucher(Integer.valueOf(txtTongTien.getText())));
+                } else {
+                    double tongTien = 0;
+                    int rowHDBH = tblThanhToanBanHang.getRowCount();
+                    for (int i = 0; i < rowHDBH; i++) {
+                        tongTien += Double.parseDouble(tblThanhToanBanHang.getValueAt(i, 5).toString());
+                    }
+                    Integer tongTienSet = (int) (tongTien);
+                    Integer tienGiam = ser.layGiaGiamVoucher(maVoucher);
+                    txtTongTien.setText(tongTienSet + " - " + tienGiam);
+                    lbPhanTramTru.setText(tienGiam + "");
+                }
+
             } else {
                 txtMaKhachHangBanHang.setEnabled(true);
                 txtTienKhachDua.setEnabled(true);
@@ -2238,7 +2252,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                             int rowVC = tblDanhSachVoucher.getSelectedRow();
                             if (rowVC >= 0) {
                                 String maVoucher = listVoucer.get(rowVC).getMaVoucher();
-                                System.out.println("VC hoá đơn: "+ maVoucher);
+                                System.out.println("VC hoá đơn: " + maVoucher);
                                 String trangThai = "Đã hoàn thành";
                                 loadDataHoaDonBanHang(ser.thanhToanApVoucher(maVoucher, listHoaDon.get(rowHD).getMaHoaDon()));
                                 JOptionPane.showMessageDialog(this, ser.thanhToanHoaDon(trangThai, getLocalDate() + "", listHoaDon.get(rowHD).getMaHoaDon()));

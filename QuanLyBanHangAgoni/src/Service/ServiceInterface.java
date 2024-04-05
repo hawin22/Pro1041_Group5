@@ -124,4 +124,5 @@ public interface ServiceInterface {
     ArrayList<HoaDon> getAllHoaDonChuaHoanThanh();
     ArrayList<HoaDon> thanhToanApVoucher(String maVoucher, String maHoaDon);
     String updateSoLuongVoucherTru(String maVoucher);
+    Integer layGiaGiamVoucher(String maVoucher);
 };

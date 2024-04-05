@@ -2730,7 +2730,7 @@ public class ServiceImp implements ServiceInterface {
         return "Error";
     }
 
-        public void addSPKM(SanPham sp) {
+    public void addSPKM(SanPham sp) {
         String sql = "insert into ChiTietKhuyenMai values (?,?)";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -2743,7 +2743,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
-        public String getMaSPCT(String MaSP) {
+    public String getMaSPCT(String MaSP) {
         String maSPCT = "";
         String sql = "select b.MaSanPhamChiTiet from SanPham a\n"
                 + "join ChiTietSanPham b on b.MaSanPham = a.MaSanPham\n"
@@ -2753,7 +2753,7 @@ public class ServiceImp implements ServiceInterface {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, MaSP);
             ResultSet rs = stm.executeQuery();
-            if (rs.next()) {                
+            if (rs.next()) {
                 return maSPCT = rs.getString(1);
             }
             stm.executeUpdate();
@@ -2762,5 +2762,23 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
         return maSPCT;
-    } 
+    }
+
+    public Integer layGiaGiamVoucher(String maVoucher){
+        Integer gia = 0;
+        String sql = "select SoTienGiam from Voucher where MaVoucher = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maVoucher);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return gia = rs.getInt(1);
+            }          
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return gia;
+    }
 }
