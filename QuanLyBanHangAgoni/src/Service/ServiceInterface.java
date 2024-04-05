@@ -113,5 +113,6 @@ public interface ServiceInterface {
     ArrayList<Login> reSetPassWord(String user, String passWord);
     void updateMK(String user, String passWord);
     ArrayList<HoaDon> getAllHoaDonChuaHoanThanh();
-    
+    ArrayList<HoaDon> thanhToanApVoucher(String maVoucher, String maHoaDon);
+    String updateSoLuongVoucherTru(String maVoucher);
 };

@@ -2464,7 +2464,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<Voucher> showHoaDonTheoVoucher(Integer tien) {
-        String sql = "select * from voucher where ? >= SoTienYeuCau order by SoTienGiam desc";
+        String sql = "select * from voucher where ? >= SoTienYeuCau and HanSuDung >= CURRENT_TIMESTAMP order by SoTienGiam desc";
         listVoucher.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -2555,4 +2555,37 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public ArrayList<HoaDon> thanhToanApVoucher(String maVoucher, String maHoaDon) {
+        String sql = "update HoaDon set MaVoucher = ? where MaHoaDon = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maVoucher);
+            stm.setString(2, maHoaDon);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDon;
+    }
+
+    @Override
+    public String updateSoLuongVoucherTru(String maVoucher) {
+        String sql = "update Voucher set SoLuong = SoLuong - 1 where MaVoucher = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maVoucher);
+            stm.executeUpdate();
+            conn.close();
+            return "Số lượng voucher " + maVoucher + " -1";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Error";
+    }
+
 }
