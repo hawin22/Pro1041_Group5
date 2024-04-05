@@ -2489,6 +2489,32 @@ public class ServiceImp implements ServiceInterface {
     }
 
     @Override
+    public ArrayList<Login> reSetPassWord(String user, String passWord) {
+        String sql = "select TenDangNhap, MatKhau, TenRole, Email from NguoiDung \n"
+                + "join Roles on NguoiDung.Roles = Roles.Marole\n"
+                + "where NguoiDung.TenDangNhap = ? and MatKhau = ?";
+        listLogin.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, user);
+            stm.setString(2, passWord);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Login lg = new Login();
+                lg.setUserName(rs.getString(1));
+                lg.setPassword(rs.getString(2));
+                lg.setRole(rs.getString(3));
+                lg.setEmail(rs.getString(4));
+                listLogin.add(lg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listLogin;
+
+    }
+
     public ArrayList<HoaDon> getAllHoaDonChuaHoanThanh() {
         String sql = "select h.* from HoaDon h where h.TrangThai = N'Chưa hoàn thành'";
         listHoaDon.clear();
@@ -2511,6 +2537,22 @@ public class ServiceImp implements ServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return listHoaDon;
+    }
+
+    @Override
+    public void updateMK(String user, String passWord) {
+        String sql = "update NguoiDung set MatKhau = ? where TenDangNhap = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, passWord);
+            stm.setString(2, user);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
