@@ -125,4 +125,13 @@ public interface ServiceInterface {
     ArrayList<HoaDon> thanhToanApVoucher(String maVoucher, String maHoaDon);
     String updateSoLuongVoucherTru(String maVoucher);
     Integer layGiaGiamVoucher(String maVoucher);
+    
+    Integer tonghoadon(String ngayBatDau, String ngayKetThuc);
+   Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
+   Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
+   Integer tongHoaDonMD();
+    Double tongDoanhThuMD();
+    Integer tongDoanhSoMD();
+    Integer tongHoaDonThanhToan();
+   ArrayList<ChiTietHoaDon> getALlCTHD();
 };
