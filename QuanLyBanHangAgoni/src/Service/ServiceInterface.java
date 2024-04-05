@@ -73,7 +73,7 @@ public interface ServiceInterface {
     ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD);
     ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD);
     Boolean addVoucher(Voucher vc);
-    Boolean deleteVoucher(String mvc);
+  //  Boolean deleteVoucher(String mvc);
     Boolean updateVoucher(Voucher vc);
     ArrayList<SanPham> getAllMauSac();
     ArrayList<SanPham> getAllKichThuoc();
@@ -110,6 +110,15 @@ public interface ServiceInterface {
     ArrayList<HoaDon> searchQLHuy(String maHoaDon);
     ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc);
     ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc);
+    
+    ArrayList<KhuyenMai> sXMaKM();
+    ArrayList<KhuyenMai> sXTTTenKM();
+    ArrayList<Voucher> sXTNgayVoucher();
+    ArrayList<KhuyenMai> sXTNgayKhuyenMai();
+    void addKhuyenMai(KhuyenMai km);
+    void updateKhuyenMai(KhuyenMai km);
+    void addSPKM(SanPham sp);
+    String getMaSPCT(String MaSP);
     ArrayList<Login> reSetPassWord(String user, String passWord);
     void updateMK(String user, String passWord);
     ArrayList<HoaDon> getAllHoaDonChuaHoanThanh();
