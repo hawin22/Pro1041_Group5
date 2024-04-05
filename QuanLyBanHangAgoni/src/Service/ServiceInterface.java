@@ -5,8 +5,6 @@
 package Service;
 
 import Model.*;
-import com.sun.jdi.connect.spi.Connection;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -20,17 +18,17 @@ public interface ServiceInterface {
     ArrayList<Login> FogotPassword(String user, String email);
     ArrayList<Voucher> getAllVoucher();
     ArrayList<KhuyenMai> getAllKhuyenMai();
-    ArrayList<NguoiDung> getAllNhanVien();
-    NguoiDung getRowNhanVien(int row);
+    ArrayList<NguoiDung> getAllNhanVien(boolean trangThai);
+    NguoiDung getRowNhanVien(boolean trangThai,int row);
     ArrayList<SanPham> getAllSanPham();
     void addKhachHang(KhachHang kh);
     void updateKhachHang(KhachHang kh);
     void deleteKhachHang(String MaKhachHang);
-    ArrayList<NguoiDung> searchNhanVien(String ma);
+    ArrayList<NguoiDung> searchNhanVien(String ma, String tenNV);
     ArrayList<NguoiDung> sapXepTheoMaNhVien();
     ArrayList<NguoiDung> sapXepTheoTenNhVien();
     ArrayList<NguoiDung> getAllNguoiDung();
-    Boolean add(NguoiDung nd);
+    Boolean addNhanVien(NguoiDung nd);
     ArrayList<Voucher> searchVoucher(String maVC);
     ArrayList<HoaDon> getAllHoaDon();
     ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet();
@@ -49,7 +47,82 @@ public interface ServiceInterface {
     void updateNV(NguoiDung nd);
     ArrayList<NguoiDung> getAllQuanLy();
     void deleteNhanVien(String maNV);
+    ArrayList<HoaDonChiTiet> addHoaDonChiTiet(HoaDonChiTiet hdct);
+    ArrayList<HoaDonChiTiet> deleteHoaDonChiTiet(String maSanPhamChiTiet, String maHoaDon);
+    String getMaSanPhamFromChiTietSanPham(String maSanPhamChiTiet);
+    ArrayList<SanPham> sapXepSanPhamTheoTenBanHang();
+    ArrayList<SanPham> sapXepSanPhamTheoMaBanHang();
+    ArrayList<SanPham> sapXepSanPhamTheoGiaBanHang();
+    ArrayList<SanPham> TimKiemSanPhamTheoMaVaTenBanHang(String keyWord);
+    ArrayList<NguoiDung> sapXepTheoTuoiNV();
+    ArrayList<HoaDon> locHoaDonTheoTrangThaiBanHang(String trangThai);
+    String updateTrangThaiNhanVien(boolean trangThai, String maNhanVien);
+    ArrayList<NguoiDung> searchNhanVienNghi(String ma, String tenNV);
+    ArrayList<NguoiDung> sapXepTheoMaNhVienNghi();
+    ArrayList<NguoiDung> sapXepTheoTenNhVienNghi();
+    ArrayList<NguoiDung> sapXepTheoTuoiNVNghi();
+    ArrayList<HoaDon> getAllQuanLyHD();
+    ArrayList<SanPham> getAllQuanLyHDSP(String maHoaDon);
+    ArrayList<HoaDon> getAllQLHDHuy();
+    ArrayList<HoaDon> searchQLHD(String maHoaDon);
+    ArrayList<HoaDon> addHoaDonBanHang(HoaDon hd);
+    String searchMaNhanVienTheoTenDangNhap(String tenDangNhap);
+    ArrayList<Login> layUserName(Login lg);
+    String listLoginBanHang();
+    HoaDon getRowHoaDonTheoMa(String maHoaDon);
+    ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD);
+    ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD);
+    Boolean addVoucher(Voucher vc);
+  //  Boolean deleteVoucher(String mvc);
+    Boolean updateVoucher(Voucher vc);
+    ArrayList<SanPham> getAllMauSac();
+    ArrayList<SanPham> getAllKichThuoc();
+    ArrayList<SanPham> getAllChatLieu();
+    ArrayList<SanPham> getAllNCC();
+    void addMauSacTTSP(SanPham s);
+    void updateMauSacTTSP(SanPham s);
+    void deleteMauSacTTSP(String ma);
+    void addKichThuocTTSP(SanPham s);
+    void updateKichThuocTTSP(SanPham s);
+    void deleteKichThuocTTSP(String ma);
+    void addChatLieuTTSP(SanPham s);
+    void updateChatLieuTTSP(SanPham s);
+    void deleteChatLieuTTSP(String ma);
+    void addNCCTTSP(SanPham s);
+    void updateNCCTTSP(SanPham s);
+    void deleteNCCTTSP(String ma);
+    ArrayList<SanPham> getTimKiemSanPhamTTSP(String keyword);
+    ArrayList<SanPham> SapXepTheoMaSP();
+    ArrayList<SanPham> SapXepTheoTenSP();
+    ArrayList<SanPham> getAllSanPhamCT();
+    String getIDSanPham(String tenSP);
+    String getIDMauSac(String tenMS);
+    String getIDKichThuoc(String tenKT);
+    String getIDChatLieu(String tenCL);
+    String getIDNCC(String tenNCC);
+    public void addCTSPTTSP(SanPham s);
     
+    ArrayList<HoaDon> updateLoaiThanhToanMaKhachHangBanHang(HoaDon hd);
+    String thanhToanHoaDon(String trangThai, String ngayHoanThanh, String maHoaDon);
+    ArrayList<HoaDon> huyHoaDonBanHang(String maHoaDon, String trangThai);
+    ArrayList<HoaDon> xoaHoaDonBanhang(String maHoaDon);
+    ArrayList<Voucher> showHoaDonTheoVoucher(Integer tien);
+    ArrayList<HoaDon> searchQLHuy(String maHoaDon);
+    ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc);
+    ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc);
+    
+    ArrayList<KhuyenMai> sXMaKM();
+    ArrayList<KhuyenMai> sXTTTenKM();
+    ArrayList<Voucher> sXTNgayVoucher();
+    ArrayList<KhuyenMai> sXTNgayKhuyenMai();
+    void addKhuyenMai(KhuyenMai km);
+    void updateKhuyenMai(KhuyenMai km);
+    void addSPKM(SanPham sp);
+    String getMaSPCT(String MaSP);
+    ArrayList<Login> reSetPassWord(String user, String passWord);
+    void updateMK(String user, String passWord);
+    ArrayList<HoaDon> getAllHoaDonChuaHoanThanh();
+     
     Integer tonghoadon(String ngayBatDau, String ngayKetThuc);
    Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
    Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
@@ -58,5 +131,5 @@ public interface ServiceInterface {
     Integer tongDoanhSoMD();
     Integer tongHoaDonThanhToan();
    ArrayList<ChiTietHoaDon> getALlCTHD();
-   
+    
 };
