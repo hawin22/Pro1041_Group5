@@ -1751,7 +1751,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jLabel57.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel57.setText("Thông tin khuyến mãi");
 
-        jLabel58.setText("Mã voucher");
+        jLabel58.setText("Mã khuyến mãi");
 
         btnThemKhuyenMai.setBackground(new java.awt.Color(51, 153, 255));
         btnThemKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -1773,7 +1773,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
-        jLabel59.setText("Tên voucher");
+        jLabel59.setText("Tên khuyến mãi");
 
         jLabel60.setText("Số lượng");
 
@@ -1936,7 +1936,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
         jLabel69.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel69.setForeground(new java.awt.Color(51, 153, 255));
-        jLabel69.setText("Thông tin sản phẩm");
+        jLabel69.setText("Thêm khuyến mãi vào sản phẩm");
 
         jLabel70.setText("Mã sản phẩm");
 
