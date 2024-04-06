@@ -373,7 +373,7 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<KhuyenMai> getAllKhuyenMai() {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai = KhuyenMai.MaKhuyenMai";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -383,10 +383,11 @@ public class ServiceImp implements ServiceInterface {
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setNgayBatDauKM(rs.getString(3));
-                km.setHanSuDungKM(rs.getString(4));
-                km.setGiamGia(rs.getDouble(5));
-                km.setMaCTSP(rs.getString(6));
+                km.setSoLuongKM(rs.getInt(3));
+                km.setNgayBatDauKM(rs.getString(4));
+                km.setHanSuDungKM(rs.getString(5));
+                km.setGiamGia(rs.getDouble(6));
+                km.setMaCTSP(rs.getString(7));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
@@ -1718,7 +1719,7 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD) {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, HanSuDung, NgayBatDau, PTKhuyenMai, MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, HanSuDung, NgayBatDau, PTKhuyenMai, MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai  = KhuyenMai.MaKhuyenMai\n"
                 + "where NgayBatDau >= ? and HanSuDung <= ?";
         try {
@@ -1731,10 +1732,11 @@ public class ServiceImp implements ServiceInterface {
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setHanSuDungKM(rs.getString(3));
-                km.setNgayBatDauKM(rs.getString(4));
-                km.setGiamGia(rs.getDouble(5));
-                km.setMaCTSP(rs.getString(6));
+                km.setSoLuongKM(rs.getInt(3));
+                km.setHanSuDungKM(rs.getString(4));
+                km.setNgayBatDauKM(rs.getString(5));
+                km.setGiamGia(rs.getDouble(6));
+                km.setMaCTSP(rs.getString(7));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
@@ -2872,7 +2874,7 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<KhuyenMai> sXMaKM() {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai = KhuyenMai.MaKhuyenMai\n"
                 + "order by KhuyenMai.MaKhuyenMai desc";
         try {
@@ -2890,10 +2892,11 @@ public class ServiceImp implements ServiceInterface {
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setNgayBatDauKM(rs.getString(3));
-                km.setHanSuDungKM(rs.getString(4));
-                km.setGiamGia(rs.getDouble(5));
-                km.setMaCTSP(rs.getString(6));
+                km.setSoLuongKM(rs.getInt(3));
+                km.setNgayBatDauKM(rs.getString(4));
+                km.setHanSuDungKM(rs.getString(5));
+                km.setGiamGia(rs.getDouble(6));
+                km.setMaCTSP(rs.getString(7));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
@@ -2961,7 +2964,7 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<KhuyenMai> sXTTTenKM() {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai = KhuyenMai.MaKhuyenMai\n"
                 + "order by TenKhuyenMai desc";
         try {
@@ -2979,10 +2982,11 @@ public class ServiceImp implements ServiceInterface {
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setNgayBatDauKM(rs.getString(3));
-                km.setHanSuDungKM(rs.getString(4));
-                km.setGiamGia(rs.getDouble(5));
-                km.setMaCTSP(rs.getString(6));
+                km.setSoLuongKM(rs.getInt(3));
+                km.setNgayBatDauKM(rs.getString(4));
+                km.setHanSuDungKM(rs.getString(5));
+                km.setGiamGia(rs.getDouble(6));
+                km.setMaCTSP(rs.getString(7));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
@@ -3046,7 +3050,7 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<KhuyenMai> sXTNgayKhuyenMai() {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai = KhuyenMai.MaKhuyenMai\n"
                 + "order by NgayBatDau desc";
         try {
@@ -3057,10 +3061,11 @@ public class ServiceImp implements ServiceInterface {
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setNgayBatDauKM(rs.getString(3));
-                km.setHanSuDungKM(rs.getString(4));
-                km.setGiamGia(rs.getDouble(5));
-                km.setMaCTSP(rs.getString(6));
+                km.setSoLuongKM(rs.getInt(3));
+                km.setNgayBatDauKM(rs.getString(4));
+                km.setHanSuDungKM(rs.getString(5));
+                km.setGiamGia(rs.getDouble(6));
+                km.setMaCTSP(rs.getString(7));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
@@ -3077,6 +3082,7 @@ public class ServiceImp implements ServiceInterface {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, km.getMaKM());
             stm.setString(2, km.getTenKM());
+            stm.setInt(3, km.getSoLuongKM());
             stm.setString(4, km.getHanSuDungKM());
             stm.setString(5, km.getNgayBatDauKM());
             stm.executeUpdate();
@@ -3129,14 +3135,15 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public void updateKhuyenMai(KhuyenMai km) {
-        String sql = "update KhuyenMai set TenKhuyenMai = ?, HanSuDung = ?, NgayBatDau = ? where MaKhuyenMai = ?";
+        String sql = "update KhuyenMai set TenKhuyenMai = ?, SoLuong = ?, HanSuDung = ?, NgayBatDau = ? where MaKhuyenMai = ?";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, km.getTenKM());
-            stm.setString(2, km.getHanSuDungKM());
-            stm.setString(3, km.getNgayBatDauKM());
-            stm.setString(4, km.getMaKM());
+            stm.setInt(2, km.getSoLuongKM());
+            stm.setString(3, km.getHanSuDungKM());
+            stm.setString(4, km.getNgayBatDauKM());
+            stm.setString(5, km.getMaKM());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {

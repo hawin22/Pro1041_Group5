@@ -11,17 +11,19 @@ package Model;
 public class KhuyenMai {
     private String maKM, tenKM, ngayBatDauKM, hanSuDungKM, maCTSP;
     private Double giamGia;
+    private Integer soLuongKM;
 
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String maKM, String tenKM, String ngayBatDauKM, String hanSuDungKM, String maCTSP, Double giamGia) {
+    public KhuyenMai(String maKM, String tenKM, String ngayBatDauKM, String hanSuDungKM, String maCTSP, Double giamGia, Integer soLuongKM) {
         this.maKM = maKM;
         this.tenKM = tenKM;
         this.ngayBatDauKM = ngayBatDauKM;
         this.hanSuDungKM = hanSuDungKM;
         this.maCTSP = maCTSP;
         this.giamGia = giamGia;
+        this.soLuongKM = soLuongKM;
     }
 
     public String getMaKM() {
@@ -72,6 +74,17 @@ public class KhuyenMai {
         this.giamGia = giamGia;
     }
 
+    public Integer getSoLuongKM() {
+        return soLuongKM;
+    }
+
+    public void setSoLuongKM(Integer soLuongKM) {
+        this.soLuongKM = soLuongKM;
+    }
+
+    
+    
+    
     
     
 }

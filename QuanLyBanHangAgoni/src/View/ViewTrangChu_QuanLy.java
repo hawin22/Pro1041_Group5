@@ -195,6 +195,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             dtm.addRow(new Object[]{
                 khuyenMai.getMaKM(),
                 khuyenMai.getTenKM(),
+                khuyenMai.getSoLuongKM(),
                 khuyenMai.getHanSuDungKM(),
                 khuyenMai.getNgayBatDauKM(),
                 khuyenMai.getGiamGia(),
@@ -207,6 +208,11 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         KhuyenMai km = new KhuyenMai();
         km.setMaKM(txtMaKhuyenMai.getText());
         km.setTenKM(txtTenKhuyenMai.getText());
+        if (txtSoLuongKhuyenMai.getText().equals("")) {
+            km.setSoLuongKM(0);
+        } else {
+            km.setSoLuongKM(Integer.valueOf(txtSoLuongKhuyenMai.getText()));
+        }
         km.setNgayBatDauKM(txtNBatDauKhuyenMai.getText());
         km.setHanSuDungKM(txtNKetThucKhuyenMai.getText());
         if (txtGiamGiaKhuyenMai.getText().equals("")) {
@@ -218,12 +224,17 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         return km;
     }
 
-    void setFormKhuyenMai(KhuyenMai km) {
-        txtMaKhuyenMai.setText(km.getMaKM());
-        txtTenKhuyenMai.setText(km.getTenKM());
-        txtNBatDauKhuyenMai.setText(km.getNgayBatDauKM());
-        txtNKetThucKhuyenMai.setText(km.getHanSuDungKM());
-        if (km.getGiamGia() == 0) {
+    void setFormKhuyenMai(int row) {
+        txtMaKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 0) + "");
+        txtTenKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 1) + "");
+        if (tblKhuyenMai.getValueAt(row, 2).equals(0)) {
+            txtSoLuongKhuyenMai.setText("0");
+        } else {
+            txtSoLuongKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 2) + "");
+        }
+        txtNBatDauKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 3) + "");
+        txtNKetThucKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 4) + "");
+        if (tblKhuyenMai.getValueAt(row, 5).equals(0.0)) {
             txtGiamGiaKhuyenMai.setText("0");
         } else {
             txtGiamGiaKhuyenMai.setText(String.valueOf(km.getGiamGia()));
@@ -1753,11 +1764,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         tbnSuaKhuyenMai.setForeground(new java.awt.Color(255, 255, 255));
         tbnSuaKhuyenMai.setText("Sửa");
 
-        btnXoaKhuyenMai.setBackground(new java.awt.Color(51, 153, 255));
-        btnXoaKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnXoaKhuyenMai.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaKhuyenMai.setText("Xoá");
-
         jLabel59.setText("Tên voucher");
 
         jLabel60.setText("Số lượng");
@@ -1899,8 +1905,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel60)
                     .addComponent(txtSoLuongKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXoaKhuyenMai)
-                    .addComponent(tbnTKTKNKM))
+                    .addComponent(btnTKTKNKM))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel61)
@@ -5229,9 +5234,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         String ngayBD = txtTKNBDKhuyenMai.getText();
         String hanSD = txtTKNKTKhuyeMai.getText();
         loadDataKhuyenMai(ser.tKTNKhuyenMai(ngayBD, hanSD));
+//        setFormKhuyenMai(new KhuyenMai("", "", "", "", "", 0.0, 0));
         txtSoLuongKhuyenMai.setText("");
         txtGiamGiaKhuyenMai.setText("");
-    }//GEN-LAST:event_tbnTKTKNKMActionPerformed
+    }//GEN-LAST:event_btnTKTKNKMActionPerformed
 
     private void tblKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhuyenMaiMouseClicked
         // TODO add your handling code here:
