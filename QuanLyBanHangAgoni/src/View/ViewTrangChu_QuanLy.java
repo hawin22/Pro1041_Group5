@@ -214,8 +214,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
     NguoiDung getFormNhanVien() {
         NguoiDung nd = new NguoiDung();
-        nd.setMaNguoiDung(txtMaNV.getText());
-        nd.setTenNguoiDung(txtTenNV.getText());
+        nd.setMaNguoiDung(txtMaNV.getText().trim());
+        nd.setTenNguoiDung(txtTenNV.getText().trim());
         boolean gioiTinh;
         if (rdNam.isSelected()) {
             gioiTinh = true;
@@ -223,12 +223,12 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             gioiTinh = false;
         }
         nd.setGioiTinh(gioiTinh);
-        nd.setTuoi(Integer.valueOf(txtTuoi.getText()));
-        nd.setSDT(txtSDT.getText());
-        nd.setEmail(txtEmail.getText());
-        nd.setRoles(lblRoles.getText());
-        nd.setTenDN(txtTenDN.getText());
-        nd.setPassWord(generateMD5(txtPassword.getText()));
+        nd.setTuoi(Integer.valueOf(txtTuoi.getText().trim()));
+        nd.setSDT(txtSDT.getText().trim());
+        nd.setEmail(txtEmail.getText().trim());
+        nd.setRoles(lblRoles.getText().trim());
+        nd.setTenDN(txtTenDN.getText().trim());
+        nd.setPassWord(generateMD5(txtPassword.getText().trim()));
         return nd;
     }
 
@@ -4531,6 +4531,16 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             if (count == 0) {
 //                System.out.println("tgkjggf");
                 ser.addNhanVien(getFormNhanVien());
+                NguoiDung nd = getFormNhanVien();
+                 JOptionPane.showMessageDialog(this, "Mã nhân viên: "+ nd.getMaNguoiDung()+"\n"
+                   + "Tên nhân viên: "+ nd.getTenNguoiDung() + "\n"
+                   + "Giới tính: " + nd.isGioiTinh() + "\n"
+                   + "Tuổi: "+ nd.getTuoi() + "\n"
+                   + "Số điện thoại: "+ nd.getSDT() + "\n"
+                   + "Email: "+ nd.getEmail() + "\n"
+                   + "Roles: "+ nd.getRoles() + "\n"
+                   + "Password: "+ txtPassword.getText() + "\n"
+                );
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 loadDataNhanVien(ser.getAllNhanVien(true));
             } else {
