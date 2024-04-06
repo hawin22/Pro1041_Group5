@@ -7,6 +7,11 @@ package View;
 import java.util.ArrayList;
 import Model.*;
 import Service.*;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,10 +22,30 @@ public class ViewDangNhap extends javax.swing.JFrame {
 
     ArrayList<Login> list = new ArrayList<>();
     ServiceInterface qldn = new ServiceImp();
-
     public ViewDangNhap() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+
+    public static String generateMD5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(input.getBytes());
+            byte[] digest = md.digest();
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : digest) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -44,6 +69,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
         btnSignIn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lbForgotPass = new javax.swing.JLabel();
+        lblChangePass = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -137,6 +163,16 @@ public class ViewDangNhap extends javax.swing.JFrame {
             }
         });
 
+        lblChangePass.setFont(new java.awt.Font("Segoe WP Semibold", 0, 12)); // NOI18N
+        lblChangePass.setForeground(new java.awt.Color(0, 133, 255));
+        lblChangePass.setText("Change a password");
+        lblChangePass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblChangePass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblChangePassMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -167,7 +203,10 @@ public class ViewDangNhap extends javax.swing.JFrame {
                         .addGap(83, 83, 83))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lbForgotPass)
-                        .addGap(89, 89, 89))))
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblChangePass)
+                        .addGap(80, 80, 80))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,6 +227,8 @@ public class ViewDangNhap extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(lbForgotPass)
+                .addGap(26, 26, 26)
+                .addComponent(lblChangePass)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -196,11 +237,11 @@ public class ViewDangNhap extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbHinhAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(144, 144, 144))
+                .addGap(11, 11, 11))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +250,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbHinhAnh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -233,7 +274,8 @@ public class ViewDangNhap extends javax.swing.JFrame {
         String userName = txtUserName.getText().trim();
         char[] pass = txtPassword.getPassword();
         String password = new String(pass).trim();
-        list = qldn.LoginSearch(userName, password);
+        String passwordMD5 = generateMD5(password);
+        list = qldn.LoginSearch(userName, passwordMD5);
         Login lgin = new Login(userName, password, "", "");
         qldn.layUserName(lgin);
         System.out.println(lgin.getUserName());
@@ -259,7 +301,15 @@ public class ViewDangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtUserName.setText("nv_an");
         txtPassword.setText("password123");
+        
     }//GEN-LAST:event_formWindowActivated
+
+    private void lblChangePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChangePassMouseClicked
+        // TODO add your handling code here:
+        ViewResetPass viewReset = new ViewResetPass();
+        this.setVisible(false);
+        viewReset.setVisible(true);
+    }//GEN-LAST:event_lblChangePassMouseClicked
 
     /**
      * @param args the command line arguments
@@ -287,11 +337,13 @@ public class ViewDangNhap extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ViewDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ViewDangNhap().setVisible(true);
+
             }
         });
     }
@@ -307,6 +359,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbForgotPass;
     private javax.swing.JLabel lbHinhAnh;
+    private javax.swing.JLabel lblChangePass;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables

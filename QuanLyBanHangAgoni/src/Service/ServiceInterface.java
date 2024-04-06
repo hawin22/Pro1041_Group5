@@ -73,7 +73,7 @@ public interface ServiceInterface {
     ArrayList<Voucher> tKTNVoucher(String ngayBD, String HanSD);
     ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD);
     Boolean addVoucher(Voucher vc);
-    Boolean deleteVoucher(String mvc);
+  //  Boolean deleteVoucher(String mvc);
     Boolean updateVoucher(Voucher vc);
     ArrayList<SanPham> getAllMauSac();
     ArrayList<SanPham> getAllKichThuoc();
@@ -118,8 +118,32 @@ public interface ServiceInterface {
     String thanhToanHoaDon(String trangThai, String ngayHoanThanh, String maHoaDon);
     ArrayList<HoaDon> huyHoaDonBanHang(String maHoaDon, String trangThai);
     ArrayList<HoaDon> xoaHoaDonBanhang(String maHoaDon);
-    ArrayList<HoaDon> showHoaDonTheoVoucher(String maHoaDon, String maVoucher);
+    ArrayList<Voucher> showHoaDonTheoVoucher(Integer tien);
     ArrayList<HoaDon> searchQLHuy(String maHoaDon);
     ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc);
     ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc);
+    
+    ArrayList<KhuyenMai> sXMaKM();
+    ArrayList<KhuyenMai> sXTTTenKM();
+    ArrayList<Voucher> sXTNgayVoucher();
+    ArrayList<KhuyenMai> sXTNgayKhuyenMai();
+    void addKhuyenMai(KhuyenMai km);
+    void updateKhuyenMai(KhuyenMai km);
+    void addSPKM(SanPham sp);
+    String getMaSPCT(String MaSP);
+    ArrayList<Login> reSetPassWord(String user, String passWord);
+    void updateMK(String user, String passWord);
+    ArrayList<HoaDon> getAllHoaDonChuaHoanThanh();
+    ArrayList<HoaDon> thanhToanApVoucher(String maVoucher, String maHoaDon);
+    String updateSoLuongVoucherTru(String maVoucher);
+    Integer layGiaGiamVoucher(String maVoucher);
+    
+    Integer tonghoadon(String ngayBatDau, String ngayKetThuc);
+   Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
+   Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
+   Integer tongHoaDonMD();
+    Double tongDoanhThuMD();
+    Integer tongDoanhSoMD();
+    Integer tongHoaDonThanhToan();
+   ArrayList<ChiTietHoaDon> getALlCTHD();
 };
