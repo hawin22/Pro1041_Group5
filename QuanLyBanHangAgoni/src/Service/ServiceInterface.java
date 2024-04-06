@@ -79,10 +79,6 @@ public interface ServiceInterface {
     ArrayList<SanPham> getAllKichThuoc();
     ArrayList<SanPham> getAllChatLieu();
     ArrayList<SanPham> getAllNCC();
-    ArrayList<SanPham> getAllMau();
-    ArrayList<SanPham> getAllSanPhamTTSP();
-    void updateSanPhamTTSP(SanPham s);
-    void addSanPhamTTSP(SanPham s);
     void addMauSacTTSP(SanPham s);
     void updateMauSacTTSP(SanPham s);
     void deleteMauSacTTSP(String ma);
@@ -105,14 +101,6 @@ public interface ServiceInterface {
     String getIDChatLieu(String tenCL);
     String getIDNCC(String tenNCC);
     public void addCTSPTTSP(SanPham s);
-    public ArrayList<LichSuGia> getAllLichSuDonGia();
-    ArrayList<LichSuGia> locLichSuDonGia(String ngayBatDau, String ngayKetThuc);
-    ArrayList<LichSuGia> getTimKiemLSG(String keyword);
-    ArrayList<LichSuGia> getSXTheoMaLSDG();
-    ArrayList<LichSuGia> getSXTheoGiaLSDG();
-    ArrayList<SanPham> getAllSXTheoTenSP();
-    ArrayList<SanPham> getAllSXTheoMaSP();
-    ArrayList<SanPham> getTimKiemSPTTSP(String keyword);
     
     ArrayList<HoaDon> updateLoaiThanhToanMaKhachHangBanHang(HoaDon hd);
     String thanhToanHoaDon(String trangThai, String ngayHoanThanh, String maHoaDon);

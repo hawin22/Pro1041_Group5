@@ -373,7 +373,7 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<KhuyenMai> getAllKhuyenMai() {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai = KhuyenMai.MaKhuyenMai";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -383,11 +383,10 @@ public class ServiceImp implements ServiceInterface {
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setSoLuongKM(rs.getInt(3));
-                km.setNgayBatDauKM(rs.getString(4));
-                km.setHanSuDungKM(rs.getString(5));
-                km.setGiamGia(rs.getDouble(6));
-                km.setMaCTSP(rs.getString(7));
+                km.setNgayBatDauKM(rs.getString(3));
+                km.setHanSuDungKM(rs.getString(4));
+                km.setGiamGia(rs.getDouble(5));
+                km.setMaCTSP(rs.getString(6));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
@@ -1719,7 +1718,7 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<KhuyenMai> tKTNKhuyenMai(String ngayBD, String HanSD) {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, HanSuDung, NgayBatDau, PTKhuyenMai, MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, HanSuDung, NgayBatDau, PTKhuyenMai, MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai  = KhuyenMai.MaKhuyenMai\n"
                 + "where NgayBatDau >= ? and HanSuDung <= ?";
         try {
@@ -1732,11 +1731,10 @@ public class ServiceImp implements ServiceInterface {
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setSoLuongKM(rs.getInt(3));
-                km.setHanSuDungKM(rs.getString(4));
-                km.setNgayBatDauKM(rs.getString(5));
-                km.setGiamGia(rs.getDouble(6));
-                km.setMaCTSP(rs.getString(7));
+                km.setHanSuDungKM(rs.getString(3));
+                km.setNgayBatDauKM(rs.getString(4));
+                km.setGiamGia(rs.getDouble(5));
+                km.setMaCTSP(rs.getString(6));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
@@ -1858,24 +1856,6 @@ public class ServiceImp implements ServiceInterface {
                 SanPham sp = new SanPham();
                 sp.setMaCL(rs.getString(1));
                 sp.setChatLieu(rs.getString(2));
-                listSanPham.add(sp);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listSanPham;
-    }
-    
-        public ArrayList<SanPham> getAllMau() {
-        listSanPham.clear();
-        String sql = "select  Mau from SanPham group by Mau";
-        try {
-            Connection conn = DBConnect1.getConnection();
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                SanPham sp = new SanPham();
-                sp.setMau(rs.getString(1));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -2080,129 +2060,6 @@ public class ServiceImp implements ServiceInterface {
         }
     }
 
-    public ArrayList<SanPham> getAllSanPhamTTSP() {
-        listSanPham.clear();
-        String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham";
-        try {
-            Connection conn = DBConnect1.getConnection();
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                SanPham sp = new SanPham();
-                sp.setMaSP(rs.getString(1));
-                sp.setTenSP(rs.getString(2));
-                sp.setMau(rs.getString(3));
-                sp.setHang(rs.getString(4));
-                listSanPham.add(sp);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listSanPham;
-    }
-    
-    public ArrayList<SanPham> getAllSXTheoTenSP() {
-        listSanPham.clear();
-        String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham order by TenSanPham";
-        try {
-            Connection conn = DBConnect1.getConnection();
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                SanPham sp = new SanPham();
-                sp.setMaSP(rs.getString(1));
-                sp.setTenSP(rs.getString(2));
-                sp.setMau(rs.getString(3));
-                sp.setHang(rs.getString(4));
-                listSanPham.add(sp);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listSanPham;
-    }
-    
-     public ArrayList<SanPham> getAllSXTheoMaSP() {
-        listSanPham.clear();
-        String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham order by MaSanPham";
-        try {
-            Connection conn = DBConnect1.getConnection();
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                SanPham sp = new SanPham();
-                sp.setMaSP(rs.getString(1));
-                sp.setTenSP(rs.getString(2));
-                sp.setMau(rs.getString(3));
-                sp.setHang(rs.getString(4));
-                listSanPham.add(sp);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listSanPham;
-    }
-     
-        public ArrayList<SanPham> getTimKiemSPTTSP(String keyword) {
-        listSanPham.clear();
-        String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham\n"
-                + "where MaSanPham like ? ";
-
-        try {
-            Connection conn = DBConnect1.getConnection();
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, "%" + keyword + "%");
-            ResultSet rs = stm.executeQuery();
-             while (rs.next()) {
-                SanPham sp = new SanPham();
-                sp.setMaSP(rs.getString(1));
-                sp.setTenSP(rs.getString(2));
-                sp.setMau(rs.getString(3));
-                sp.setHang(rs.getString(4));
-                listSanPham.add(sp);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listSanPham;
-    }
-        
-
-    public ServiceImp() {
-    }
-    
-    public void addSanPhamTTSP(SanPham s) {
-        try {
-            Connection conn = DBConnect1.getConnection();
-            String sql = "Insert into SanPham( MaSanPham, TenSanPham, Mau, Hang)Values (?,?,?,?)";
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, s.getMaSP());
-            stm.setString(2, s.getTenSP());
-            stm.setString(3, s.getMau());
-            stm.setString(4, s.getHang());
-            stm.executeUpdate();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateSanPhamTTSP(SanPham s) {
-        try {
-            Connection conn = DBConnect1.getConnection();
-            String sql = "Update SanPham Set TenSanPham=?, Mau=?, Hang=?  where MaSanPham=?";
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(4, s.getMaSP());
-            stm.setString(1, s.getTenSP());
-            stm.setString(2, s.getMau());
-            stm.setString(3, s.getHang());
-            stm.executeUpdate();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public ArrayList<SanPham> getTimKiemSanPhamTTSP(String keyword) {
         listSanPham.clear();
         String sql = "SELECT DISTINCT\n"
@@ -2237,7 +2094,7 @@ public class ServiceImp implements ServiceInterface {
                 + "JOIN \n"
                 + "    chiTietKhuyenMai ctkm ON ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "WHERE \n"
-                + "    c.maSanPhamChiTiet LIKE ?\n"
+                + "    c.maSanPham LIKE ?\n"
                 + "GROUP BY  \n"
                 + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham, \n"
@@ -2868,13 +2725,10 @@ public class ServiceImp implements ServiceInterface {
         return listHoaDon;
     }
 
-    public ArrayList<LichSuGia> getAllLichSuDonGia() {
-        listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia";
     @Override
     public ArrayList<KhuyenMai> sXMaKM() {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai = KhuyenMai.MaKhuyenMai\n"
                 + "order by KhuyenMai.MaKhuyenMai desc";
         try {
@@ -2882,89 +2736,25 @@ public class ServiceImp implements ServiceInterface {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-                LichSuGia ls = new LichSuGia();
-                ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
-                listLichSuGia.add(ls);
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setSoLuongKM(rs.getInt(3));
-                km.setNgayBatDauKM(rs.getString(4));
-                km.setHanSuDungKM(rs.getString(5));
-                km.setGiamGia(rs.getDouble(6));
-                km.setMaCTSP(rs.getString(7));
+                km.setNgayBatDauKM(rs.getString(3));
+                km.setHanSuDungKM(rs.getString(4));
+                km.setGiamGia(rs.getDouble(5));
+                km.setMaCTSP(rs.getString(6));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listLichSuGia;
-    }
-
-    public ArrayList<LichSuGia> locLichSuDonGia(String ngayBatDau, String ngayKetThuc) {
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia\n"
-                + "where ThoiGianBatDau between ? and ? ";
-        listLichSuGia.clear();
-        try {
-            Connection conn = DBConnect1.getConnection();
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, ngayBatDau);
-            stm.setString(2, ngayKetThuc);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                LichSuGia ls = new LichSuGia();
-                ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
-                listLichSuGia.add(ls);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listLichSuGia;
-    }
-
-    public ArrayList<LichSuGia> getTimKiemLSG(String keyword) {
-        listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia\n"
-                + "where MaDonGia like ? ";
-
-        try {
-            Connection conn = DBConnect1.getConnection();
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, "%" + keyword + "%");
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                LichSuGia ls = new LichSuGia();
-                ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
-                listLichSuGia.add(ls);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listLichSuGia;
-    }
-
-    public ArrayList<LichSuGia> getSXTheoMaLSDG() {
-        listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia order by MaDonGia";
         return listKhuyenMai;
     }
 
     @Override
     public ArrayList<KhuyenMai> sXTTTenKM() {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai = KhuyenMai.MaKhuyenMai\n"
                 + "order by TenKhuyenMai desc";
         try {
@@ -2972,32 +2762,18 @@ public class ServiceImp implements ServiceInterface {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-                LichSuGia ls = new LichSuGia();
-                ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
-                listLichSuGia.add(ls);
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setSoLuongKM(rs.getInt(3));
-                km.setNgayBatDauKM(rs.getString(4));
-                km.setHanSuDungKM(rs.getString(5));
-                km.setGiamGia(rs.getDouble(6));
-                km.setMaCTSP(rs.getString(7));
+                km.setNgayBatDauKM(rs.getString(3));
+                km.setHanSuDungKM(rs.getString(4));
+                km.setGiamGia(rs.getDouble(5));
+                km.setMaCTSP(rs.getString(6));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listLichSuGia;
-    }
-
-        public ArrayList<LichSuGia> getSXTheoGiaLSDG() {
-        listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia order by GiaDau";
         return listKhuyenMai;
     }
 
@@ -3011,13 +2787,6 @@ public class ServiceImp implements ServiceInterface {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-                LichSuGia ls = new LichSuGia();
-                ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
-                listLichSuGia.add(ls);
                 Voucher vc = new Voucher();
                 vc.setMaVoucher(rs.getString(1));
                 vc.setTenVoucher(rs.getString(2));
@@ -3031,26 +2800,13 @@ public class ServiceImp implements ServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listLichSuGia;
-    }
- 
-            public void addLichSuGia(LichSuGia ls) {
-        try {
-            Connection conn = DBConnect1.getConnection();
-            String sql = "Insert into LichSuDonGia( MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc)Values (?,?,?,?,?)";
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, ls.getMaDonGia());
-            stm.setDouble(2, ls.getGiaDau());
-            stm.setDouble(3, ls.getGiaSau());
-            stm.setString(4, ls.getNgayBatDau());
-            stm.setString(5, ls.getNgayKetThuc());
         return listVoucher;
     }
 
     @Override
     public ArrayList<KhuyenMai> sXTNgayKhuyenMai() {
         listKhuyenMai.clear();
-        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, SoLuong, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
+        String sql = "select KhuyenMai.MaKhuyenMai, TenKhuyenMai, NgayBatDau, HanSuDung, PTKhuyenMai, ChiTietKhuyenMai.MaSanPhamChiTiet from KhuyenMai\n"
                 + "join ChiTietKhuyenMai on ChiTietKhuyenMai.MaKhuyenMai = KhuyenMai.MaKhuyenMai\n"
                 + "order by NgayBatDau desc";
         try {
@@ -3061,11 +2817,10 @@ public class ServiceImp implements ServiceInterface {
                 KhuyenMai km = new KhuyenMai();
                 km.setMaKM(rs.getString(1));
                 km.setTenKM(rs.getString(2));
-                km.setSoLuongKM(rs.getInt(3));
-                km.setNgayBatDauKM(rs.getString(4));
-                km.setHanSuDungKM(rs.getString(5));
-                km.setGiamGia(rs.getDouble(6));
-                km.setMaCTSP(rs.getString(7));
+                km.setNgayBatDauKM(rs.getString(3));
+                km.setHanSuDungKM(rs.getString(4));
+                km.setGiamGia(rs.getDouble(5));
+                km.setMaCTSP(rs.getString(6));
                 listKhuyenMai.add(km);
             }
         } catch (Exception e) {
@@ -3082,7 +2837,6 @@ public class ServiceImp implements ServiceInterface {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, km.getMaKM());
             stm.setString(2, km.getTenKM());
-            stm.setInt(3, km.getSoLuongKM());
             stm.setString(4, km.getHanSuDungKM());
             stm.setString(5, km.getNgayBatDauKM());
             stm.executeUpdate();
@@ -3091,17 +2845,6 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
     }
-            
-     public void updateLichSuGia(LichSuGia ls) {
-        try {
-            Connection conn = DBConnect1.getConnection();
-            String sql = "update LichSuDonGia set GiaDau=?, GiaSau=?, ThoiGianBatDau=?, ThoiGianketThuc=? where MaDonGia = ?";
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(5, ls.getMaDonGia());
-            stm.setDouble(1, ls.getGiaDau());
-            stm.setDouble(2, ls.getGiaSau());
-            stm.setString(3, ls.getNgayBatDau());
-            stm.setString(4, ls.getNgayKetThuc());
 
     public void updateMK(String user, String passWord) {
         String sql = "update NguoiDung set MatKhau = ? where TenDangNhap = ?";
@@ -3115,7 +2858,6 @@ public class ServiceImp implements ServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }       
     }
 
     @Override
@@ -3135,15 +2877,14 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public void updateKhuyenMai(KhuyenMai km) {
-        String sql = "update KhuyenMai set TenKhuyenMai = ?, SoLuong = ?, HanSuDung = ?, NgayBatDau = ? where MaKhuyenMai = ?";
+        String sql = "update KhuyenMai set TenKhuyenMai = ?, HanSuDung = ?, NgayBatDau = ? where MaKhuyenMai = ?";
         try {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, km.getTenKM());
-            stm.setInt(2, km.getSoLuongKM());
-            stm.setString(3, km.getHanSuDungKM());
-            stm.setString(4, km.getNgayBatDauKM());
-            stm.setString(5, km.getMaKM());
+            stm.setString(2, km.getHanSuDungKM());
+            stm.setString(3, km.getNgayBatDauKM());
+            stm.setString(4, km.getMaKM());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
