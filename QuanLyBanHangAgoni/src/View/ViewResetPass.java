@@ -76,7 +76,7 @@ public class ViewResetPass extends javax.swing.JFrame {
 
         jLabel2.setText("Tên đăng nhập");
 
-        jLabel3.setText("Mật khẩu");
+        jLabel3.setText("Mật khẩu cũ");
 
         jLabel4.setText("Mật khẩu mới");
 

@@ -102,7 +102,6 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             dftm.addRow(new Object[]{
                 km.getMaKM(),
                 km.getTenKM(),
-                km.getSoLuongKM(),
                 km.getHanSuDungKM(),
                 km.getNgayBatDauKM(),
                 km.getGiamGia()
@@ -389,6 +388,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         txtTienThua = new javax.swing.JTextField();
         btnThanhToan = new javax.swing.JButton();
         lbPhanTramTru = new javax.swing.JLabel();
+        btnVoucher = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
@@ -465,6 +465,12 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chanGaGoiDemAgoNi2.png"))); // NOI18N
+        jLabel32.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel32.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel32MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -885,6 +891,16 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         lbPhanTramTru.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbPhanTramTru.setText("Số tiền trừ");
 
+        btnVoucher.setBackground(new java.awt.Color(51, 153, 255));
+        btnVoucher.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnVoucher.setForeground(new java.awt.Color(255, 255, 255));
+        btnVoucher.setText("Voucher");
+        btnVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVoucherMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -905,12 +921,16 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(lblNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel16)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtMaKhachHangBanHangHDCT, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel16)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnVoucher))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 47, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -956,8 +976,10 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtMaKhachHangBanHangHDCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVoucher))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1035,6 +1057,11 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         btnTimKiemVoucher.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTimKiemVoucher.setForeground(new java.awt.Color(255, 255, 255));
         btnTimKiemVoucher.setText("Tìm kiếm");
+        btnTimKiemVoucher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemVoucherActionPerformed(evt);
+            }
+        });
 
         tblHoaDonApDungVoucher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1738,15 +1765,23 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
     private void btnThemSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSanPhamActionPerformed
         // TODO add your handling code here:
-        listSanPham.clear();
-        if (rdTatCa.isSelected()) {
-            listSanPham = ser.getAllSanPham();
-        } else if (rdTheoGia.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoGiaBanHang();
-        } else if (rdTheoMa.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoMaBanHang();
-        } else if (rdTheoTen.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoTenBanHang();
+        if (!ser.TimKiemSanPhamTheoMaVaTenBanHang(txtTimKiemSanPham.getText().trim()).isEmpty() && !txtTimKiemSanPham.getText().trim().isEmpty()) {
+            listSanPham.clear();
+            listSanPham = ser.TimKiemSanPhamTheoMaVaTenBanHang(txtTimKiemSanPham.getText().trim());
+        } else {
+            if (rdTatCa.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.getAllSanPham();
+            } else if (rdTheoGia.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoGiaBanHang();
+            } else if (rdTheoMa.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoMaBanHang();
+            } else if (rdTheoTen.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoTenBanHang();
+            }
         }
         int row = tblSanPhamBanHang.getSelectedRow();
         int rowHD = tblHoaDonBanHang.getSelectedRow();
@@ -1776,15 +1811,17 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                                 loadDataHoaDonChiTiet(ser.updateSoluongSanPhamBanHang(maSanPhamChiTiet, soLuong, maHoaDon));
                                 loadDataSanPhamBanHang(ser.updateSanPhamTruBanHang(maSanPhamChiTiet, soLuong));
                                 loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
-                                loadDataSanPhamBanHang(ser.getAllSanPham());
+                                loadDataSanPhamBanHang(listSanPham);
                                 tinhThanhTien();
+                                txtTimKiemSanPham.setText("");
                             } else {
                                 JOptionPane.showMessageDialog(this, "Đã thêm sản phẩm mới vào hoá đơn");
                                 loadDataHoaDonChiTiet(ser.addHoaDonChiTiet(new HoaDonChiTiet(maHoaDon, soLuong, maSanPhamChiTiet)));
                                 loadDataSanPhamBanHang(ser.updateSanPhamTruBanHang(maSanPhamChiTiet, soLuong));
                                 loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
-                                loadDataSanPhamBanHang(ser.getAllSanPham());
+                                loadDataSanPhamBanHang(listSanPham);
                                 tinhThanhTien();
+                                txtTimKiemSanPham.setText("");
                             }
                         }
                     } else {
@@ -1993,7 +2030,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                     }
                     Integer tongTienSet = (int) (tongTien);
                     Integer tienGiam = ser.layGiaGiamVoucher(maVoucher);
-                    txtTongTien.setText(tongTienSet + " - " + tienGiam);
+                    //txtTongTien.setText(tongTienSet + " - " + tienGiam);
                     lbPhanTramTru.setText(tienGiam + "");
                 }
 
@@ -2062,18 +2099,28 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         int row = tblSanPhamBanHang.getSelectedRow();
-        listSanPham.clear();
-        if (rdTatCa.isSelected()) {
-            listSanPham = ser.getAllSanPham();
-        } else if (rdTheoGia.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoGiaBanHang();
-        } else if (rdTheoMa.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoMaBanHang();
-        } else if (rdTheoTen.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoTenBanHang();
+
+        if (!ser.TimKiemSanPhamTheoMaVaTenBanHang(txtTimKiemSanPham.getText().trim()).isEmpty() && !txtTimKiemSanPham.getText().trim().isEmpty()) {
+            listSanPham.clear();
+            listSanPham = ser.TimKiemSanPhamTheoMaVaTenBanHang(txtTimKiemSanPham.getText().trim());
+        } else {
+            System.out.println("Roong");
+            if (rdTatCa.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.getAllSanPham();
+            } else if (rdTheoGia.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoGiaBanHang();
+            } else if (rdTheoMa.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoMaBanHang();
+            } else if (rdTheoTen.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoTenBanHang();
+            }
         }
+
         listSanPham.get(row).inThongTin();
-        System.out.println(listSanPham.get(row));
     }//GEN-LAST:event_tblSanPhamBanHangMouseClicked
 
     private void btnBotSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBotSanPhamActionPerformed
@@ -2160,8 +2207,27 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
     private void txtTimKiemSanPhamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemSanPhamKeyReleased
         // TODO add your handling code here:
+
         String timKiem = txtTimKiemSanPham.getText().trim();
+        if (timKiem.isEmpty()) {
+            rdTatCa.setEnabled(true);
+            rdTheoGia.setEnabled(true);
+            rdTheoMa.setEnabled(true);
+            rdTheoTen.setEnabled(true);
+        } else {
+            rdTatCa.setEnabled(false);
+            rdTheoGia.setEnabled(false);
+            rdTheoMa.setEnabled(false);
+            rdTheoTen.setEnabled(false);
+        }
         loadDataSanPhamBanHang(ser.TimKiemSanPhamTheoMaVaTenBanHang(timKiem));
+        if (!ser.TimKiemSanPhamTheoMaVaTenBanHang(timKiem).isEmpty()) {
+            listSanPham = ser.TimKiemSanPhamTheoMaVaTenBanHang(timKiem);
+        } else {
+            System.out.println("Roong");
+
+        }
+
     }//GEN-LAST:event_txtTimKiemSanPhamKeyReleased
 
     private void cbbLocHoaDonBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbLocHoaDonBanHangMouseClicked
@@ -2344,6 +2410,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     private void btnHuyVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyVoucherActionPerformed
         // TODO add your handling code here:
         loadDataXacNhanVoucher("", "");
+        pnNhanVien.setSelectedIndex(1);
     }//GEN-LAST:event_btnHuyVoucherActionPerformed
 
     private void btnXacNhanVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanVoucherActionPerformed
@@ -2359,7 +2426,22 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             Integer kq = tongTienthis - tienGiam;
             txtTongTien.setText(kq + "");
         }
+        pnNhanVien.setSelectedIndex(1);
     }//GEN-LAST:event_btnXacNhanVoucherActionPerformed
+
+    private void btnTimKiemVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemVoucherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTimKiemVoucherActionPerformed
+
+    private void btnVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoucherMouseClicked
+        // TODO add your handling code here:
+        pnNhanVien.setSelectedIndex(2);
+    }//GEN-LAST:event_btnVoucherMouseClicked
+
+    private void jLabel32MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MouseClicked
+        // TODO add your handling code here:
+        pnNhanVien.setSelectedIndex(1);
+    }//GEN-LAST:event_jLabel32MouseClicked
 
     /**
      * @param args the command line arguments
@@ -2411,6 +2493,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnThemSanPham;
     private javax.swing.JButton btnTimKiemKhuyenMai;
     private javax.swing.JButton btnTimKiemVoucher;
+    private javax.swing.JButton btnVoucher;
     private javax.swing.JButton btnXacNhanHuyHoaDonKM;
     private javax.swing.JButton btnXacNhanKhuyenMai;
     private javax.swing.JButton btnXacNhanVoucher;
