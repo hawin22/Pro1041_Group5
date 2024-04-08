@@ -124,7 +124,6 @@ public interface ServiceInterface {
     ArrayList<HoaDon> searchQLHuy(String maHoaDon);
     ArrayList<HoaDon> locHDTheoNgay(String ngayBatDau, String ngayKetThuc);
     ArrayList<HoaDon> locHDHuyTheoNgay(String ngayBatDau, String ngayKetThuc);
-    
     ArrayList<KhuyenMai> sXMaKM();
     ArrayList<KhuyenMai> sXTTTenKM();
     ArrayList<Voucher> sXTNgayVoucher();
@@ -139,7 +138,6 @@ public interface ServiceInterface {
     ArrayList<HoaDon> thanhToanApVoucher(String maVoucher, String maHoaDon);
     String updateSoLuongVoucherTru(String maVoucher);
     Integer layGiaGiamVoucher(String maVoucher);
-    
     Integer tonghoadon(String ngayBatDau, String ngayKetThuc);
    Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
    Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);

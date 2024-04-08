@@ -1765,15 +1765,23 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
     private void btnThemSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSanPhamActionPerformed
         // TODO add your handling code here:
-        listSanPham.clear();
-        if (rdTatCa.isSelected()) {
-            listSanPham = ser.getAllSanPham();
-        } else if (rdTheoGia.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoGiaBanHang();
-        } else if (rdTheoMa.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoMaBanHang();
-        } else if (rdTheoTen.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoTenBanHang();
+        if (!ser.TimKiemSanPhamTheoMaVaTenBanHang(txtTimKiemSanPham.getText().trim()).isEmpty() && !txtTimKiemSanPham.getText().trim().isEmpty()) {
+            listSanPham.clear();
+            listSanPham = ser.TimKiemSanPhamTheoMaVaTenBanHang(txtTimKiemSanPham.getText().trim());
+        } else {
+            if (rdTatCa.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.getAllSanPham();
+            } else if (rdTheoGia.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoGiaBanHang();
+            } else if (rdTheoMa.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoMaBanHang();
+            } else if (rdTheoTen.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoTenBanHang();
+            }
         }
         int row = tblSanPhamBanHang.getSelectedRow();
         int rowHD = tblHoaDonBanHang.getSelectedRow();
@@ -1803,15 +1811,17 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                                 loadDataHoaDonChiTiet(ser.updateSoluongSanPhamBanHang(maSanPhamChiTiet, soLuong, maHoaDon));
                                 loadDataSanPhamBanHang(ser.updateSanPhamTruBanHang(maSanPhamChiTiet, soLuong));
                                 loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
-                                loadDataSanPhamBanHang(ser.getAllSanPham());
+                                loadDataSanPhamBanHang(listSanPham);
                                 tinhThanhTien();
+                                txtTimKiemSanPham.setText("");
                             } else {
                                 JOptionPane.showMessageDialog(this, "Đã thêm sản phẩm mới vào hoá đơn");
                                 loadDataHoaDonChiTiet(ser.addHoaDonChiTiet(new HoaDonChiTiet(maHoaDon, soLuong, maSanPhamChiTiet)));
                                 loadDataSanPhamBanHang(ser.updateSanPhamTruBanHang(maSanPhamChiTiet, soLuong));
                                 loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
-                                loadDataSanPhamBanHang(ser.getAllSanPham());
+                                loadDataSanPhamBanHang(listSanPham);
                                 tinhThanhTien();
+                                txtTimKiemSanPham.setText("");
                             }
                         }
                     } else {
@@ -2089,18 +2099,28 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         int row = tblSanPhamBanHang.getSelectedRow();
-        listSanPham.clear();
-        if (rdTatCa.isSelected()) {
-            listSanPham = ser.getAllSanPham();
-        } else if (rdTheoGia.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoGiaBanHang();
-        } else if (rdTheoMa.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoMaBanHang();
-        } else if (rdTheoTen.isSelected()) {
-            listSanPham = ser.sapXepSanPhamTheoTenBanHang();
+
+        if (!ser.TimKiemSanPhamTheoMaVaTenBanHang(txtTimKiemSanPham.getText().trim()).isEmpty() && !txtTimKiemSanPham.getText().trim().isEmpty()) {
+            listSanPham.clear();
+            listSanPham = ser.TimKiemSanPhamTheoMaVaTenBanHang(txtTimKiemSanPham.getText().trim());
+        } else {
+            System.out.println("Roong");
+            if (rdTatCa.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.getAllSanPham();
+            } else if (rdTheoGia.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoGiaBanHang();
+            } else if (rdTheoMa.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoMaBanHang();
+            } else if (rdTheoTen.isSelected()) {
+                listSanPham.clear();
+                listSanPham = ser.sapXepSanPhamTheoTenBanHang();
+            }
         }
+
         listSanPham.get(row).inThongTin();
-        System.out.println(listSanPham.get(row));
     }//GEN-LAST:event_tblSanPhamBanHangMouseClicked
 
     private void btnBotSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBotSanPhamActionPerformed
@@ -2187,8 +2207,27 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
     private void txtTimKiemSanPhamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemSanPhamKeyReleased
         // TODO add your handling code here:
+
         String timKiem = txtTimKiemSanPham.getText().trim();
+        if (timKiem.isEmpty()) {
+            rdTatCa.setEnabled(true);
+            rdTheoGia.setEnabled(true);
+            rdTheoMa.setEnabled(true);
+            rdTheoTen.setEnabled(true);
+        } else {
+            rdTatCa.setEnabled(false);
+            rdTheoGia.setEnabled(false);
+            rdTheoMa.setEnabled(false);
+            rdTheoTen.setEnabled(false);
+        }
         loadDataSanPhamBanHang(ser.TimKiemSanPhamTheoMaVaTenBanHang(timKiem));
+        if (!ser.TimKiemSanPhamTheoMaVaTenBanHang(timKiem).isEmpty()) {
+            listSanPham = ser.TimKiemSanPhamTheoMaVaTenBanHang(timKiem);
+        } else {
+            System.out.println("Roong");
+
+        }
+
     }//GEN-LAST:event_txtTimKiemSanPhamKeyReleased
 
     private void cbbLocHoaDonBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbLocHoaDonBanHangMouseClicked

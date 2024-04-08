@@ -217,8 +217,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
 
     NguoiDung getFormNhanVien() {
         NguoiDung nd = new NguoiDung();
-        nd.setMaNguoiDung(txtMaNV.getText());
-        nd.setTenNguoiDung(txtTenNV.getText());
+        nd.setMaNguoiDung(txtMaNV.getText().trim());
+        nd.setTenNguoiDung(txtTenNV.getText().trim());
         boolean gioiTinh;
         if (rdNam.isSelected()) {
             gioiTinh = true;
@@ -226,12 +226,12 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
             gioiTinh = false;
         }
         nd.setGioiTinh(gioiTinh);
-        nd.setTuoi(Integer.valueOf(txtTuoi.getText()));
-        nd.setSDT(txtSDT.getText());
-        nd.setEmail(txtEmail.getText());
-        nd.setRoles(lblRoles.getText());
-        nd.setTenDN(txtTenDN.getText());
-        nd.setPassWord(generateMD5(txtPassword.getText()));
+        nd.setTuoi(Integer.valueOf(txtTuoi.getText().trim()));
+        nd.setSDT(txtSDT.getText().trim());
+        nd.setEmail(txtEmail.getText().trim());
+        nd.setRoles(lblRoles.getText().trim());
+        nd.setTenDN(txtTenDN.getText().trim());
+        nd.setPassWord(generateMD5(txtPassword.getText().trim()));
         return nd;
     }
 
@@ -1603,6 +1603,12 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         jTabbedPane2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jLabel89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chanGaGoiDemAgoNi2.png"))); // NOI18N
+        jLabel89.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel89.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel89MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel39Layout = new javax.swing.GroupLayout(jPanel39);
         jPanel39.setLayout(jPanel39Layout);
@@ -4357,7 +4363,7 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
 
         jLabel19.setText("Ngày Kết Thúc");
 
-        btnTimKiem.setText("TiemKiem");
+        btnTimKiem.setText("TimKiem");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimKiemActionPerformed(evt);
@@ -4390,7 +4396,7 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                         .addComponent(jLabel19)
                         .addGap(18, 18, 18)
                         .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
+                        .addGap(69, 69, 69)
                         .addComponent(btnTimKiem))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4417,12 +4423,12 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                         .addGap(42, 42, 42))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnHienThiBCTK, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30))))
+                        .addGap(25, 25, 25))))
         );
 
         jPanel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -4542,7 +4548,7 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Báo cáo thống kê", jPanel8);
@@ -5100,6 +5106,16 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
             if (count == 0) {
 //                System.out.println("tgkjggf");
                 ser.addNhanVien(getFormNhanVien());
+                NguoiDung nd = getFormNhanVien();
+                 JOptionPane.showMessageDialog(this, "Mã nhân viên: "+ nd.getMaNguoiDung()+"\n"
+                   + "Tên nhân viên: "+ nd.getTenNguoiDung() + "\n"
+                   + "Giới tính: " + nd.isGioiTinh() + "\n"
+                   + "Tuổi: "+ nd.getTuoi() + "\n"
+                   + "Số điện thoại: "+ nd.getSDT() + "\n"
+                   + "Email: "+ nd.getEmail() + "\n"
+                   + "Roles: "+ nd.getRoles() + "\n"
+                   + "Password: "+ txtPassword.getText() + "\n"
+                );
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 loadDataNhanVien(ser.getAllNhanVien(true));
             } else {
@@ -5718,7 +5734,7 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                 return;
             } else {
                 SanPham sp = new SanPham();
-                sp.setMaSPCT(ser.getMaSPCT(txtMaSPCT.getText()));
+                sp.setMaSPCT(ser.getMaSPCT(txtMaSPCT.getText())); 
                 sp.setMaSPKM(txtMaKMChonSP.getText());
                 ser.addSPKM(sp);
             }
@@ -6346,6 +6362,10 @@ private boolean isValidDate(String date) {
             }
         }
     }//GEN-LAST:event_btnUpdateLSDGActionPerformed
+    private void jLabel89MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel89MouseClicked
+        // TODO add your handling code here:
+        jTabbedPane2.setSelectedIndex(5);
+    }//GEN-LAST:event_jLabel89MouseClicked
 
     /**
      * @param args the command line arguments
