@@ -2065,6 +2065,129 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
     }
+    
+        public ArrayList<SanPham> getAllSanPhamTTSP() {
+        listSanPham.clear();
+        String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setMau(rs.getString(3));
+                sp.setHang(rs.getString(4));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+    
+    public ArrayList<SanPham> getAllSXTheoTenSP() {
+        listSanPham.clear();
+        String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham order by TenSanPham";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setMau(rs.getString(3));
+                sp.setHang(rs.getString(4));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+    
+     public ArrayList<SanPham> getAllSXTheoMaSP() {
+        listSanPham.clear();
+        String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham order by MaSanPham";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setMau(rs.getString(3));
+                sp.setHang(rs.getString(4));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+     
+        public ArrayList<SanPham> getTimKiemSPTTSP(String keyword) {
+        listSanPham.clear();
+        String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham\n"
+                + "where MaSanPham like ? ";
+
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, "%" + keyword + "%");
+            ResultSet rs = stm.executeQuery();
+             while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setMau(rs.getString(3));
+                sp.setHang(rs.getString(4));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
+    }
+        
+
+    public ServiceImp() {
+    }
+    
+    public void addSanPhamTTSP(SanPham s) {
+        try {
+            Connection conn = DBConnect1.getConnection();
+            String sql = "Insert into SanPham( MaSanPham, TenSanPham, Mau, Hang)Values (?,?,?,?)";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, s.getMaSP());
+            stm.setString(2, s.getTenSP());
+            stm.setString(3, s.getMau());
+            stm.setString(4, s.getHang());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSanPhamTTSP(SanPham s) {
+        try {
+            Connection conn = DBConnect1.getConnection();
+            String sql = "Update SanPham Set TenSanPham=?, Mau=?, Hang=?  where MaSanPham=?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(4, s.getMaSP());
+            stm.setString(1, s.getTenSP());
+            stm.setString(2, s.getMau());
+            stm.setString(3, s.getHang());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public ArrayList<SanPham> getTimKiemSanPhamTTSP(String keyword) {
         listSanPham.clear();
@@ -2526,6 +2649,174 @@ public class ServiceImp implements ServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+     public ArrayList<LichSuGia> getAllLichSuDonGia() {
+        listLichSuGia.clear();
+        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                LichSuGia ls = new LichSuGia();
+                ls.setMaDonGia(rs.getString(1));
+                ls.setGiaDau(rs.getDouble(2));
+                ls.setGiaSau(rs.getDouble(3));
+                ls.setNgayBatDau(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(4));
+                listLichSuGia.add(ls);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listLichSuGia;
+    }
+
+    public ArrayList<LichSuGia> locLichSuDonGia(String ngayBatDau, String ngayKetThuc) {
+        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia\n"
+                + "where ThoiGianBatDau between ? and ? ";
+        listLichSuGia.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, ngayBatDau);
+            stm.setString(2, ngayKetThuc);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                LichSuGia ls = new LichSuGia();
+                ls.setMaDonGia(rs.getString(1));
+                ls.setGiaDau(rs.getDouble(2));
+                ls.setGiaSau(rs.getDouble(3));
+                ls.setNgayBatDau(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(4));
+                listLichSuGia.add(ls);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listLichSuGia;
+    }
+
+    public ArrayList<LichSuGia> getTimKiemLSG(String keyword) {
+        listLichSuGia.clear();
+        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia\n"
+                + "where MaDonGia like ? ";
+
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, "%" + keyword + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                LichSuGia ls = new LichSuGia();
+                ls.setMaDonGia(rs.getString(1));
+                ls.setGiaDau(rs.getDouble(2));
+                ls.setGiaSau(rs.getDouble(3));
+                ls.setNgayBatDau(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(4));
+                listLichSuGia.add(ls);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listLichSuGia;
+    }
+
+    public ArrayList<LichSuGia> getSXTheoMaLSDG() {
+        listLichSuGia.clear();
+        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia order by MaDonGia";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                LichSuGia ls = new LichSuGia();
+                ls.setMaDonGia(rs.getString(1));
+                ls.setGiaDau(rs.getDouble(2));
+                ls.setGiaSau(rs.getDouble(3));
+                ls.setNgayBatDau(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(4));
+                listLichSuGia.add(ls);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listLichSuGia;
+    }
+
+        public ArrayList<LichSuGia> getSXTheoGiaLSDG() {
+        listLichSuGia.clear();
+        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia order by GiaDau";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                LichSuGia ls = new LichSuGia();
+                ls.setMaDonGia(rs.getString(1));
+                ls.setGiaDau(rs.getDouble(2));
+                ls.setGiaSau(rs.getDouble(3));
+                ls.setNgayBatDau(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(4));
+                listLichSuGia.add(ls);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listLichSuGia;
+    }
+ 
+            public void addLichSuGia(LichSuGia ls) {
+        try {
+            Connection conn = DBConnect1.getConnection();
+            String sql = "Insert into LichSuDonGia( MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc)Values (?,?,?,?,?)";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, ls.getMaDonGia());
+            stm.setDouble(2, ls.getGiaDau());
+            stm.setDouble(3, ls.getGiaSau());
+            stm.setString(4, ls.getNgayBatDau());
+            stm.setString(5, ls.getNgayKetThuc());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+            
+     public void updateLichSuGia(LichSuGia ls) {
+        try {
+            Connection conn = DBConnect1.getConnection();
+            String sql = "update LichSuDonGia set GiaDau=?, GiaSau=?, ThoiGianBatDau=?, ThoiGianketThuc=? where MaDonGia = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(5, ls.getMaDonGia());
+            stm.setDouble(1, ls.getGiaDau());
+            stm.setDouble(2, ls.getGiaSau());
+            stm.setString(3, ls.getNgayBatDau());
+            stm.setString(4, ls.getNgayKetThuc());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }       
+     
+        public ArrayList<SanPham> getAllMau() {
+        listSanPham.clear();
+        String sql = "select  Mau from SanPham group by Mau";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMau(rs.getString(1));
+                listSanPham.add(sp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSanPham;
     }
 
     @Override
