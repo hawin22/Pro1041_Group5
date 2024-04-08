@@ -102,7 +102,6 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             dftm.addRow(new Object[]{
                 km.getMaKM(),
                 km.getTenKM(),
-                km.getSoLuongKM(),
                 km.getHanSuDungKM(),
                 km.getNgayBatDauKM(),
                 km.getGiamGia()
