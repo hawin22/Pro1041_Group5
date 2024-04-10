@@ -146,4 +146,5 @@ public interface ServiceInterface {
     Integer tongDoanhSoMD();
     Integer tongHoaDonThanhToan();
    ArrayList<ChiTietHoaDon> getALlCTHD();
+   ArrayList<HoaDonChiTiet> getAllHoaDonChiTietChuaHoanThanh(String maHoaDon);
 };
