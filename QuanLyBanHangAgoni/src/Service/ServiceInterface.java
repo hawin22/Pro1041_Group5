@@ -139,11 +139,12 @@ public interface ServiceInterface {
     String updateSoLuongVoucherTru(String maVoucher);
     Integer layGiaGiamVoucher(String maVoucher);
     Integer tonghoadon(String ngayBatDau, String ngayKetThuc);
-   Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
-   Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
-   Integer tongHoaDonMD();
+    Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
+    Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
+    Integer tongHoaDonMD();
     Double tongDoanhThuMD();
     Integer tongDoanhSoMD();
     Integer tongHoaDonThanhToan();
-   ArrayList<ChiTietHoaDon> getALlCTHD();
+    ArrayList<ChiTietHoaDon> getALlCTHD();
+    ArrayList<SanPham> getAllSanPhamKM();
 };

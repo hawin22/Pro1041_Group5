@@ -43,20 +43,20 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     ServiceInterface ser = new ServiceImp();
     DefaultTableModel dtm;
     ArrayList<SanPham> listSPTrong = new ArrayList<>();
-ArrayList<SanPham> listsp1 = new ArrayList<>();
+    ArrayList<SanPham> listsp1 = new ArrayList<>();
     ArrayList<HoaDon> listHoaDon = new ArrayList<>();
     ArrayList<LichSuGia> listLSGTrong = new ArrayList<>();
     DecimalFormat df = new DecimalFormat("#");
     Double tongDoanhThu = ser.tongDoanhThuMD();
     String formattedResult = df.format(tongDoanhThu);
-    
+
     public ViewTrangChu_QuanLy() {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataVoucher(ser.getAllVoucher());
         loadDataNhanVien(ser.getAllNhanVien(true));
         loadDataKhuyenMai(ser.getAllKhuyenMai());
-        loadDataSPKM(ser.getAllSanPham());
+        loadDataSPKM(ser.getAllSanPhamKM());
         loadDataKMChonSP(ser.getAllKhuyenMai());
         loadDataQuanLy(ser.getAllQuanLy());
         loadDataNhanVienNghi(ser.getAllNhanVien(false));
@@ -74,13 +74,13 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         loadDataMauSac();
         loadDataChatLieu();
         loadDataKichThuoc();
-      loadDataChiTietSP(ser.getAllSanPham());
-         loadDaTaChiTietHD(ser.getALlCTHD());
+        loadDataChiTietSP(ser.getAllSanPham());
+        loadDaTaChiTietHD(ser.getALlCTHD());
         txtTongDonHang.setText(String.valueOf(ser.tongHoaDonMD()));
         txtTongDoanhThu.setText(formattedResult);
         txtTongDoanhSoBanHang.setText(String.valueOf(ser.tongDoanhSoMD()));
         lblThanhCong.setText(String.valueOf(ser.tongHoaDonThanhToan()));
-        lblCTT.setText(String.valueOf(ser.tongHoaDonMD()-ser.tongHoaDonThanhToan()));
+        lblCTT.setText(String.valueOf(ser.tongHoaDonMD() - ser.tongHoaDonThanhToan()));
 
     }
 
@@ -104,7 +104,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
             return null;
         }
     }
-     void loadDaTaChiTietHD(ArrayList<ChiTietHoaDon> list){
+
+    void loadDaTaChiTietHD(ArrayList<ChiTietHoaDon> list) {
         dtm = (DefaultTableModel) tblChiTietHoaDon.getModel();
         dtm.setRowCount(0);
         for (ChiTietHoaDon cthd : list) {
@@ -118,18 +119,17 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                 cthd.getLoaiThanhToan(),
                 cthd.getMaSanPhamChiTiet(),
                 cthd.getSoLuong()
-               
-                
-                
+
             });
         }
     }
-     void loadDataChiTietSP(ArrayList<SanPham> list){
+
+    void loadDataChiTietSP(ArrayList<SanPham> list) {
         dtm = (DefaultTableModel) tblThongTinChiTietSanPham.getModel();
         dtm.setRowCount(0);
-        for(SanPham sp : list){
+        for (SanPham sp : list) {
             dtm.addRow(new Object[]{
-                sp.getMaSP(),sp.getSoLuongSP(),sp.getKichThuoc(),sp.getMauSac(),sp.getDonGia(),sp.getNhaCungCap(),sp.getChatLieu()
+                sp.getMaSP(), sp.getSoLuongSP(), sp.getKichThuoc(), sp.getMauSac(), sp.getDonGia(), sp.getNhaCungCap(), sp.getChatLieu()
             });
         }
     }
@@ -285,12 +285,12 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
     void setFormKhuyenMai(int row) {
         txtMaKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 0) + "");
         txtTenKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 1) + "");
-        txtNBatDauKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 3) + "");
-        txtNKetThucKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 4) + "");
-        if (tblKhuyenMai.getValueAt(row, 5).equals(0.0)) {
+        txtNBatDauKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 2) + "");
+        txtNKetThucKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 3) + "");
+        if (tblKhuyenMai.getValueAt(row, 4).equals(0.0)) {
             txtGiamGiaKhuyenMai.setText("0");
         } else {
-            txtGiamGiaKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 5) + "");
+            txtGiamGiaKhuyenMai.setText(tblKhuyenMai.getValueAt(row, 4) + "");
         }
     }
 
@@ -486,7 +486,7 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
     }
 
     public boolean checkTrungEmailTenDNNhanVien(String maNV, String email, String tenDN, String SDT) {
-    
+
         ArrayList<NguoiDung> listEmailTenDN = ser.getAllNguoiDung();
         for (int i = 0; i < listEmailTenDN.size(); i++) {
             if (listEmailTenDN.get(i).getMaNguoiDung().equals(maNV)) {
@@ -592,7 +592,7 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         cboChatLieuTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 8) + "");
         cboMauTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 7) + "");
     }
-    
+
     void showCboMau() {
         List<SanPham> mau = ser.getAllMau();
         for (SanPham m : mau) {
@@ -699,7 +699,6 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         txtMaKichThuoc.setText(sp.getMaKT());
         txtTenKichThuoc.setText(sp.getKichThuoc());
     }
- 
 
     public boolean checkMauSac() {
         if (txtMaMauSac.getText().trim().equals("")) {
@@ -833,7 +832,6 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
 
     }
 
-
     public boolean checkTrungMaNCC(String ma) {
         int count = 0;
         for (SanPham sp : ser.getAllNCC()) {
@@ -919,7 +917,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         }
 
     }
-     void loadDataSanPhamTTSP(List<SanPham> listSXSP) {
+
+    void loadDataSanPhamTTSP(List<SanPham> listSXSP) {
         dtm = (DefaultTableModel) tblSanPhamTTSP.getModel();
         dtm.setRowCount(0);
         for (SanPham sp : listSXSP) {
@@ -949,8 +948,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         txtHangTTSP.setText(sp.getHang());
 
     }
-    
-        public boolean checkSPTTSP() {
+
+    public boolean checkSPTTSP() {
         if (txtMaSP.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã sản phẩm");
             return false;
@@ -1001,8 +1000,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         }
 
     }
-    
-      void loadDataLichSuGia(List<LichSuGia> listLSG) {
+
+    void loadDataLichSuGia(List<LichSuGia> listLSG) {
         dtm = (DefaultTableModel) tblLichSuDonGia.getModel();
         dtm.setRowCount(0);
         for (LichSuGia sp : listLSG) {
@@ -1034,8 +1033,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         txtTGKetThucLSDG.setText(tblLichSuDonGia.getValueAt(row, 4) + "");
 
     }
-    
-      public boolean checkLSDG() {
+
+    public boolean checkLSDG() {
         if (txtMaDonGia.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã đơn giá");
             return false;
@@ -1075,9 +1074,6 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         }
 
     }
-
-
-
 
     double tinhTongTienTheoHoaDon(String maHoaDon) {
         double tinhTien = 0.0;
@@ -1182,6 +1178,166 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         txtGiamGiaKMChonSP.setText(tblKMChonSP.getValueAt(row, 2) + "");
     }
 
+    public boolean checkVoucher() {
+        if (txtMaVoucher.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã Voucher");
+            return false;
+        }
+        if (txtTenVoucher.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên Voucher");
+            return false;
+        }
+
+        String soLuongText = txtSoLuongVoucher.getText().trim();
+        if (soLuongText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập số lượng Voucher");
+            return false;
+        }
+        try {
+            double soLuong = Double.parseDouble(soLuongText);
+            if (soLuong < 0) {
+                JOptionPane.showMessageDialog(this, "Số lượng Voucher phải là số không âm");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số lượng Voucher không hợp lệ");
+            return false;
+        }
+
+        String soTienGiamText = txtSoTienGiamVoucher.getText().trim();
+        if (soTienGiamText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập số tiền giảm cho Voucher");
+            return false;
+        }
+        try {
+            double soTienGiam = Double.parseDouble(soTienGiamText);
+            if (soTienGiam < 0) {
+                JOptionPane.showMessageDialog(this, "Số tiền giảm cho Voucher phải là số không âm");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số tiền giảm cho Voucher không hợp lệ");
+            return false;
+        }
+
+        String soTienYeuCauText = txtSoTienYCVoucher.getText().trim();
+        if (soTienYeuCauText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập số tiền yêu cầu để áp dụng Voucher");
+            return false;
+        }
+        try {
+            double soTienYeuCau = Double.parseDouble(soTienYeuCauText);
+            if (soTienYeuCau < 0) {
+                JOptionPane.showMessageDialog(this, "Số tiền yêu cầu để áp dụng Voucher phải là số không âm");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số tiền yêu cầu để áp dụng Voucher không hợp lệ");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkTrungMaVoucher(String ma) {
+        int count = 0;
+        for (Voucher sp : ser.getAllVoucher()) {
+            if (sp.getMaVoucher().equals(ma)) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            JOptionPane.showMessageDialog(this, "Trùng mã Voucher");
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public boolean checkTrungTenVoucher(String ten) {
+        int count = 0;
+        for (Voucher sp : ser.getAllVoucher()) {
+            if (sp.getTenVoucher().equals(ten)) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            JOptionPane.showMessageDialog(this, "Trùng tên Voucher");
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public boolean checkKhuyenMai() {
+        if (txtMaKhuyenMai.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã khuyến mãi");
+            return false;
+        }
+        if (txtTenKhuyenMai.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên khuyến mãi");
+            return false;
+        }
+        if (txtNBatDauKhuyenMai.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập ngày bắt đầu");
+            return false;
+        }
+        if (txtNKetThucKhuyenMai.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập ngày kết thúc");
+            return false;
+        }
+        if (txtGiamGiaKhuyenMai.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập giảm giá");
+            return false;
+        }
+        // Kiểm tra định dạng dữ liệu của trường Giảm giá
+        try {
+            double giamGia = Double.parseDouble(txtGiamGiaKhuyenMai.getText().trim());
+            if (giamGia < 0) {
+                JOptionPane.showMessageDialog(this, "Giảm giá không được âm");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giảm giá phải là một số");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkTrungMaKM(String ma) {
+        int count = 0;
+        for (KhuyenMai sp : ser.getAllKhuyenMai()) {
+            if (sp.getMaKM().equals(ma)) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            JOptionPane.showMessageDialog(this, "Mã Khuyến mãi đã tồn tại");
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public boolean checkTrungTenKM(String ten) {
+        int count = 0;
+        for (KhuyenMai sp : ser.getAllKhuyenMai()) {
+            if (sp.getTenKM().equals(ten)) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            JOptionPane.showMessageDialog(this, "Tên Khuyến mãi đã tồn tại");
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1243,6 +1399,7 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         txtTKNKTVoucher = new javax.swing.JTextField();
         txtTKNBDVoucher = new javax.swing.JTextField();
         btnTKTNVoucher = new javax.swing.JButton();
+        btnNewFormVoucher = new javax.swing.JButton();
         jPanel30 = new javax.swing.JPanel();
         jLabel55 = new javax.swing.JLabel();
         jLabel56 = new javax.swing.JLabel();
@@ -1271,6 +1428,7 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         jLabel67 = new javax.swing.JLabel();
         txtTKNKTKhuyeMai = new javax.swing.JTextField();
         btnTKTKNKM = new javax.swing.JButton();
+        btnNewFormKM = new javax.swing.JButton();
         jPanel31 = new javax.swing.JPanel();
         jLabel68 = new javax.swing.JLabel();
         txtTenSPKM = new javax.swing.JTextField();
@@ -1746,6 +1904,16 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
             }
         });
 
+        btnNewFormVoucher.setBackground(new java.awt.Color(51, 153, 255));
+        btnNewFormVoucher.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnNewFormVoucher.setForeground(new java.awt.Color(255, 255, 255));
+        btnNewFormVoucher.setText("Làm mới");
+        btnNewFormVoucher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewFormVoucherActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1782,7 +1950,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                             .addComponent(rdSXTTenVoucher)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btnThemVoucher, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSuaVoucher, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(btnSuaVoucher, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnNewFormVoucher, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1834,7 +2003,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel50)
                     .addComponent(txtSoLuongVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTKTNVoucher))
+                    .addComponent(btnTKTNVoucher)
+                    .addComponent(btnNewFormVoucher))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel51)
@@ -1959,6 +2129,16 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
             }
         });
 
+        btnNewFormKM.setBackground(new java.awt.Color(51, 153, 255));
+        btnNewFormKM.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnNewFormKM.setForeground(new java.awt.Color(255, 255, 255));
+        btnNewFormKM.setText("Làm mới");
+        btnNewFormKM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewFormKMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
@@ -1991,7 +2171,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                             .addComponent(rdSXTTenKhuyenMai)
                             .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btnThemKhuyenMai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSuaKhuyenMai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(btnSuaKhuyenMai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnNewFormKM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel30Layout.createSequentialGroup()
@@ -2051,7 +2232,8 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                     .addGroup(jPanel30Layout.createSequentialGroup()
                         .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel61)
-                            .addComponent(txtNBatDauKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNBatDauKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNewFormKM))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel62)
@@ -2062,7 +2244,7 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                             .addComponent(txtGiamGiaKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(59, 59, 59)
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Khuyến mãi", jPanel30);
@@ -2171,9 +2353,9 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel31Layout.createSequentialGroup()
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                         .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))))
+                        .addGap(56, 56, 56))))
         );
         jPanel31Layout.setVerticalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2202,10 +2384,10 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                             .addComponent(cbTrangThaiThemKM)
                             .addComponent(jLabel74)
                             .addComponent(txtGiamGiaKMChonSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(64, 64, 64)
+                        .addGap(34, 34, 34)
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Chọn sản phẩm khuyến mãi", jPanel31);
@@ -5100,21 +5282,21 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                 if (!checkTrungTenDNNhanVien(txtTenDN.getText())) {
                     count++;
                 }
-                
+
             }
 
             if (count == 0) {
 //                System.out.println("tgkjggf");
                 ser.addNhanVien(getFormNhanVien());
                 NguoiDung nd = getFormNhanVien();
-                 JOptionPane.showMessageDialog(this, "Mã nhân viên: "+ nd.getMaNguoiDung()+"\n"
-                   + "Tên nhân viên: "+ nd.getTenNguoiDung() + "\n"
-                   + "Giới tính: " + nd.isGioiTinh() + "\n"
-                   + "Tuổi: "+ nd.getTuoi() + "\n"
-                   + "Số điện thoại: "+ nd.getSDT() + "\n"
-                   + "Email: "+ nd.getEmail() + "\n"
-                   + "Roles: "+ nd.getRoles() + "\n"
-                   + "Password: "+ txtPassword.getText() + "\n"
+                JOptionPane.showMessageDialog(this, "Mã nhân viên: " + nd.getMaNguoiDung() + "\n"
+                        + "Tên nhân viên: " + nd.getTenNguoiDung() + "\n"
+                        + "Giới tính: " + nd.isGioiTinh() + "\n"
+                        + "Tuổi: " + nd.getTuoi() + "\n"
+                        + "Số điện thoại: " + nd.getSDT() + "\n"
+                        + "Email: " + nd.getEmail() + "\n"
+                        + "Roles: " + nd.getRoles() + "\n"
+                        + "Password: " + txtPassword.getText() + "\n"
                 );
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 loadDataNhanVien(ser.getAllNhanVien(true));
@@ -5399,20 +5581,30 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
     }//GEN-LAST:event_tblKhuyenMaiMouseClicked
 
     private void btnThemVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemVoucherActionPerformed
-        int row = tblVoucher.getSelectedRow();
-        if (row >= 0) {
-            ser.addVoucher(getFormVoucher());
-            loadDataVoucher(ser.getAllVoucher());
+        int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
+        if (check == JOptionPane.YES_OPTION) {
+            if (checkVoucher() && checkTrungMaVoucher(txtMaVoucher.getText()) && checkTrungTenVoucher(txtTenVoucher.getText())) {
+                ser.addVoucher(getFormVoucher());
+                loadDataVoucher(ser.getAllVoucher());
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
         }
-
     }//GEN-LAST:event_btnThemVoucherActionPerformed
 
     private void btnSuaVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaVoucherActionPerformed
-        int row = tblVoucher.getSelectedRow();
-        if (row >= 0) {
-            ser.updateVoucher(getFormVoucher());
-            loadDataVoucher(ser.getAllVoucher());
+        int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không");
+        if (check == JOptionPane.YES_OPTION) {
+            if (checkVoucher()) {
+                ser.updateVoucher(getFormVoucher());
+                loadDataVoucher(ser.getAllVoucher());
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            }
         }
+
     }//GEN-LAST:event_btnSuaVoucherActionPerformed
 
     private void btnHienThiHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiHDActionPerformed
@@ -5686,10 +5878,12 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
         if (check == JOptionPane.YES_OPTION) {
-            int row = tblKhuyenMai.getSelectedRow();
-            if (row >= 0) {
+            if (checkKhuyenMai() && checkTrungMaKM(txtMaKhuyenMai.getText()) && checkTrungTenKM(txtTenKhuyenMai.getText())) {
                 ser.addKhuyenMai(getFormKhuyenMai());
                 loadDataKhuyenMai(ser.getAllKhuyenMai());
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
         }
     }//GEN-LAST:event_btnThemKhuyenMaiActionPerformed
@@ -5698,10 +5892,12 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
         // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không");
         if (check == JOptionPane.YES_OPTION) {
-            int row = tblKhuyenMai.getSelectedRow();
-            if (row >= 0) {
+            if (checkKhuyenMai()) {
                 ser.updateKhuyenMai(getFormKhuyenMai());
                 loadDataKhuyenMai(ser.getAllKhuyenMai());
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thất bại");
             }
         }
     }//GEN-LAST:event_btnSuaKhuyenMaiActionPerformed
@@ -5734,15 +5930,15 @@ ArrayList<SanPham> listsp1 = new ArrayList<>();
                 return;
             } else {
                 SanPham sp = new SanPham();
-                sp.setMaSPCT(ser.getMaSPCT(txtMaSPCT.getText())); 
+                sp.setMaSPCT(ser.getMaSPCT(txtMaSPCT.getText()));
                 sp.setMaSPKM(txtMaKMChonSP.getText());
                 ser.addSPKM(sp);
             }
         }
     }//GEN-LAST:event_btnThemSPKMActionPerformed
-private boolean isValidDate(String date) {
-    return date.matches("\\d{4}-\\d{2}-\\d{2}");
-}
+    private boolean isValidDate(String date) {
+        return date.matches("\\d{4}-\\d{2}-\\d{2}");
+    }
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         String ngayBatDau = txtNgayBatDau.getText();
         String NgayKetThuc = txtNgayKetThuc.getText();
@@ -5772,7 +5968,7 @@ private boolean isValidDate(String date) {
         txtTongDoanhThu.setText(formattedResult);
         txtTongDoanhSoBanHang.setText(String.valueOf(ser.tongDoanhSoMD()));
         lblThanhCong.setText(String.valueOf(ser.tongHoaDonThanhToan()));
-        lblCTT.setText(String.valueOf(ser.tongHoaDonMD()-ser.tongHoaDonThanhToan()));
+        lblCTT.setText(String.valueOf(ser.tongHoaDonMD() - ser.tongHoaDonThanhToan()));
 
     }//GEN-LAST:event_btnHienThiBCTKActionPerformed
 
@@ -6331,7 +6527,7 @@ private boolean isValidDate(String date) {
     }//GEN-LAST:event_btnTKNgayLSDG1ActionPerformed
 
     private void btnAddLSDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLSDGActionPerformed
-               int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
+        int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkLSDG() && checkTrungMaDonGia(txtMaDonGia.getText())) {
                 ser.addLichSuGia(getFormLichSuGia());
@@ -6344,7 +6540,7 @@ private boolean isValidDate(String date) {
     }//GEN-LAST:event_btnAddLSDGActionPerformed
 
     private void btnUpdateLSDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateLSDGActionPerformed
-         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
+        int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkLSDG()) {
                 int row = tblLichSuDonGia.getSelectedRow();
@@ -6366,6 +6562,27 @@ private boolean isValidDate(String date) {
         // TODO add your handling code here:
         jTabbedPane2.setSelectedIndex(5);
     }//GEN-LAST:event_jLabel89MouseClicked
+
+    private void btnNewFormVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewFormVoucherActionPerformed
+        // TODO add your handling code here:
+        txtMaVoucher.setText("");
+        txtTenVoucher.setText("");
+        txtSoLuongVoucher.setText("");
+        txtNBatDauVoucher.setText("");
+        txtNKetThucVoucher.setText("");
+        txtSoTienGiamVoucher.setText("");
+        txtSoTienYCVoucher.setText("");
+    }//GEN-LAST:event_btnNewFormVoucherActionPerformed
+
+    private void btnNewFormKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewFormKMActionPerformed
+        // TODO add your handling code here:
+        txtMaKhuyenMai.setText("");
+        txtTenKhuyenMai.setText("");
+        txtNBatDauKhuyenMai.setText("");
+        txtNKetThucKhuyenMai.setText("");
+        txtGiamGiaKhuyenMai.setText("");
+        
+    }//GEN-LAST:event_btnNewFormKMActionPerformed
 
     /**
      * @param args the command line arguments
@@ -6424,6 +6641,8 @@ private boolean isValidDate(String date) {
     private javax.swing.JButton btnKhoiPhuc;
     private javax.swing.JButton btnLocHD;
     private javax.swing.JButton btnLocHuy;
+    private javax.swing.JButton btnNewFormKM;
+    private javax.swing.JButton btnNewFormVoucher;
     private javax.swing.JButton btnNewKichThuoc;
     private javax.swing.JButton btnNewLSDG;
     private javax.swing.JButton btnNewMauSac;
