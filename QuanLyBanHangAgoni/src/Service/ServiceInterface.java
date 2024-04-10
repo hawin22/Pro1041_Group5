@@ -81,6 +81,7 @@ public interface ServiceInterface {
     ArrayList<SanPham> getAllNCC();
     ArrayList<SanPham> getAllMau();
     ArrayList<SanPham> getAllSanPhamTTSP();
+    void updateCTSPTTSP(SanPham s);
     void updateSanPhamTTSP(SanPham s);
     void addSanPhamTTSP(SanPham s);
     void addMauSacTTSP(SanPham s);
@@ -139,12 +140,13 @@ public interface ServiceInterface {
     String updateSoLuongVoucherTru(String maVoucher);
     Integer layGiaGiamVoucher(String maVoucher);
     Integer tonghoadon(String ngayBatDau, String ngayKetThuc);
-   Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
-   Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
-   Integer tongHoaDonMD();
+    Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
+    Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
+    Integer tongHoaDonMD();
     Double tongDoanhThuMD();
     Integer tongDoanhSoMD();
     Integer tongHoaDonThanhToan();
-   ArrayList<ChiTietHoaDon> getALlCTHD();
    ArrayList<HoaDonChiTiet> getAllHoaDonChiTietChuaHoanThanh(String maHoaDon);
+    ArrayList<ChiTietHoaDon> getALlCTHD();
+    ArrayList<SanPham> getAllSanPhamKM();
 };
