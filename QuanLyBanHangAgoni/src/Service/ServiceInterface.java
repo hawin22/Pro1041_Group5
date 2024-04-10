@@ -81,6 +81,7 @@ public interface ServiceInterface {
     ArrayList<SanPham> getAllNCC();
     ArrayList<SanPham> getAllMau();
     ArrayList<SanPham> getAllSanPhamTTSP();
+    void updateCTSPTTSP(SanPham s);
     void updateSanPhamTTSP(SanPham s);
     void addSanPhamTTSP(SanPham s);
     void addMauSacTTSP(SanPham s);
