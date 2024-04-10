@@ -64,7 +64,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
         txtUserName = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         txtPassword = new javax.swing.JPasswordField();
-        cbxRememberPass = new javax.swing.JCheckBox();
+        cbxShowPass = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         btnSignIn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -129,16 +129,16 @@ public class ViewDangNhap extends javax.swing.JFrame {
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        cbxRememberPass.setBackground(new java.awt.Color(255, 255, 255));
-        cbxRememberPass.setForeground(new java.awt.Color(255, 255, 255));
-        cbxRememberPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cbxRememberPass.addActionListener(new java.awt.event.ActionListener() {
+        cbxShowPass.setBackground(new java.awt.Color(255, 255, 255));
+        cbxShowPass.setForeground(new java.awt.Color(255, 255, 255));
+        cbxShowPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cbxShowPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxRememberPassActionPerformed(evt);
+                cbxShowPassActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Remember password");
+        jLabel3.setText("Show password");
 
         btnSignIn.setBackground(new java.awt.Color(0, 133, 255));
         btnSignIn.setFont(new java.awt.Font("Raleway SemiBold", 0, 14)); // NOI18N
@@ -189,7 +189,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbxRememberPass)
+                                .addComponent(cbxShowPass)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -219,7 +219,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbxRememberPass)
+                    .addComponent(cbxShowPass)
                     .addComponent(jLabel3))
                 .addGap(24, 24, 24)
                 .addComponent(btnSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,9 +256,14 @@ public class ViewDangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxRememberPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRememberPassActionPerformed
+    private void cbxShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxShowPassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxRememberPassActionPerformed
+        if (cbxShowPass.isSelected()) {
+            txtPassword.setEchoChar((char) 0);
+        }else{
+           txtPassword.setEchoChar((char) 42);
+        }
+    }//GEN-LAST:event_cbxShowPassActionPerformed
 
     private void lbForgotPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbForgotPassMouseClicked
         // TODO add your handling code here:
@@ -350,7 +355,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSignIn;
-    private javax.swing.JCheckBox cbxRememberPass;
+    private javax.swing.JCheckBox cbxShowPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
