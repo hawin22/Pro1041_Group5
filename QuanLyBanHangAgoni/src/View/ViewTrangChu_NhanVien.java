@@ -2045,6 +2045,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 btnXoaSanPhamThem.setEnabled(true);
                 btnBotSanPham.setEnabled(true);
                 btnThanhToan.setEnabled(true);
+                btnChonVoucher.setEnabled(true);
                 lbPhanTramTru.setText("Số tiền giảm");
                 setFormHoaDon(listHoaDon.get(row));
                 loadDataHoaDonChiTiet(ser.getAllHoaDonChiTietChuaHoanThanh(listHoaDon.get(row).getMaHoaDon()));
