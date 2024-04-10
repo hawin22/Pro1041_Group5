@@ -439,8 +439,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                    TenChatLieu,\n"
                 + "                \n"
                 + "                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "                Hang,\n"
-                + "                maKhuyenMai\n"
+                + "                Hang\n"
                 + "                FROM \n"
                 + "                  ChiTietSanPham c\n"
                 + "                JOIN \n"
@@ -471,8 +470,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                Hang,\n"
                 + "				l.ThoiGianBatDau,\n"
                 + "				l.ThoiGianKetThuc,\n"
-                + "				l.GiaSau,\n"
-                + "                maKhuyenMai";
+                + "				l.GiaSau\n";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -490,7 +488,6 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(9));
                 sp.setHinhAnh(rs.getString(10));
                 sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -697,19 +694,25 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet(String maHoaDon) {
-        String sql = "SELECT cthd.MaHoaDon, cthd.MaSanPhamChiTiet, sp.TenSanPham, cthd.SoLuong, ls.GiaDau,\n"
-                + "CASE\n"
-                + "WHEN (hd.NgayHoanThanh between ThoiGianBatDau and ThoiGianKetThuc) or (hd.NgayHoanThanh between km.NgayBatDau and km.HanSuDung )then ls.GiaSau - (ls.GiaSau * km.PTKhuyenMai / 100)\n"
-                + "ELSE ls.GiaDau\n"
-                + "END AS Gia\n"
+        String sql = "SELECT distinct cthd.MaHoaDon, cthd.MaSanPhamChiTiet, sp.TenSanPham, cthd.SoLuong, ls.GiaDau,\n"
+                + "       CASE\n"
+                + "           WHEN (NgayHoanThanh BETWEEN ThoiGianBatDau AND ThoiGianKetThuc) OR\n"
+                + "                (NgayHoanThanh BETWEEN km.NgayBatDau AND km.HanSuDung) THEN ls.GiaSau - (ls.GiaSau * km.PTKhuyenMai / 100)\n"
+                + "           ELSE ls.GiaDau\n"
+                + "       END AS Gia\n"
                 + "FROM ChiTietSanPham ct\n"
                 + "JOIN LichSuDonGia ls ON ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
                 + "JOIN SanPham sp ON sp.MaSanPham = ct.MaSanPham\n"
                 + "JOIN ChiTietHoaDon cthd ON cthd.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
-                + "join HoaDon hd on hd.MaHoaDon = cthd.MaHoaDon \n"
-                + "join ChiTietKhuyenMai c on c.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
-                + "join KhuyenMai km on km.MaKhuyenMai = c.MaKhuyenMai\n"
-                + "WHERE cthd.MaHoaDon = ?";
+                + "JOIN HoaDon hd ON hd.MaHoaDon = cthd.MaHoaDon \n"
+                + "JOIN (\n"
+                + "    SELECT MaSanPhamChiTiet, MAX(kmm.PTKhuyenMai) AS MaxPTKhuyenMai\n"
+                + "    FROM ChiTietKhuyenMai\n"
+                + "	join KhuyenMai kmm on kmm.MaKhuyenMai = ChiTietKhuyenMai.MaKhuyenMai\n"
+                + "    GROUP BY MaSanPhamChiTiet\n"
+                + ") max_km ON ct.MaSanPhamChiTiet = max_km.MaSanPhamChiTiet\n"
+                + "JOIN KhuyenMai km ON km.PTKhuyenMai = max_km.MaxPTKhuyenMai\n"
+                + "WHERE cthd.MaHoaDon = ?;";
         listHoaDonChiTiet.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1920,7 +1923,7 @@ public class ServiceImp implements ServiceInterface {
     public void deleteMauSacTTSP(String ma) {
         listSanPham.clear();
         try {
-            
+
             Connection conn = DBConnect1.getConnection();
             String sql = "DELETE FROM MauSac Where MaMauSac = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
@@ -2589,8 +2592,8 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
     }
-    
-      public void updateCTSPTTSP(SanPham s) {
+
+    public void updateCTSPTTSP(SanPham s) {
         try {
             Connection conn = DBConnect1.getConnection();
             String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong = ?, MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ? Where MaSanPhamChiTiet = ?";
@@ -3217,19 +3220,25 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<HoaDonChiTiet> getAllHoaDonChiTietChuaHoanThanh(String maHoaDon) {
-        String sql = "SELECT cthd.MaHoaDon, cthd.MaSanPhamChiTiet, sp.TenSanPham, cthd.SoLuong, ls.GiaDau,\n"
-                + "                              CASE\n"
-                + "                                      WHEN (CURRENT_TIMESTAMP between ThoiGianBatDau and ThoiGianKetThuc) or (CURRENT_TIMESTAMP between km.NgayBatDau and km.HanSuDung )then ls.GiaSau - (ls.GiaSau * km.PTKhuyenMai / 100)\n"
-                + "        ELSE ls.GiaDau\n"
-                + "                                   END AS Gia\n"
-                + "                               FROM ChiTietSanPham ct\n"
-                + "                             JOIN LichSuDonGia ls ON ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
-                + "                                JOIN SanPham sp ON sp.MaSanPham = ct.MaSanPham\n"
-                + "               				JOIN ChiTietHoaDon cthd ON cthd.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
-                + "                              join HoaDon hd on hd.MaHoaDon = cthd.MaHoaDon \n"
-                + "							  join ChiTietKhuyenMai c on c.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
-                + "							  join KhuyenMai km on km.MaKhuyenMai = c.MaKhuyenMai\n"
-                + "                                WHERE cthd.MaHoaDon = ?";
+        String sql = "SELECT distinct cthd.MaHoaDon, cthd.MaSanPhamChiTiet, sp.TenSanPham, cthd.SoLuong, ls.GiaDau,\n"
+                + "       CASE\n"
+                + "           WHEN (CURRENT_TIMESTAMP BETWEEN ThoiGianBatDau AND ThoiGianKetThuc) OR\n"
+                + "                (CURRENT_TIMESTAMP BETWEEN km.NgayBatDau AND km.HanSuDung) THEN ls.GiaSau - (ls.GiaSau * km.PTKhuyenMai / 100)\n"
+                + "           ELSE ls.GiaDau\n"
+                + "       END AS Gia\n"
+                + "FROM ChiTietSanPham ct\n"
+                + "JOIN LichSuDonGia ls ON ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "JOIN SanPham sp ON sp.MaSanPham = ct.MaSanPham\n"
+                + "JOIN ChiTietHoaDon cthd ON cthd.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "JOIN HoaDon hd ON hd.MaHoaDon = cthd.MaHoaDon \n"
+                + "JOIN (\n"
+                + "    SELECT MaSanPhamChiTiet, MAX(kmm.PTKhuyenMai) AS MaxPTKhuyenMai\n"
+                + "    FROM ChiTietKhuyenMai\n"
+                + "	join KhuyenMai kmm on kmm.MaKhuyenMai = ChiTietKhuyenMai.MaKhuyenMai\n"
+                + "    GROUP BY MaSanPhamChiTiet\n"
+                + ") max_km ON ct.MaSanPhamChiTiet = max_km.MaSanPhamChiTiet\n"
+                + "JOIN KhuyenMai km ON km.PTKhuyenMai = max_km.MaxPTKhuyenMai\n"
+                + "WHERE cthd.MaHoaDon = ?;";
         listHoaDonChiTiet.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -3251,6 +3260,8 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
         return listHoaDonChiTiet;
+    }
+
     public ArrayList<SanPham> getAllSanPhamKM() {
         listSanPham.clear();
         String sql = "select ChiTietSanPham.MaSanPham, TenSanPham, ChiTietKhuyenMai.MaKhuyenMai from ChiTietSanPham\n"
