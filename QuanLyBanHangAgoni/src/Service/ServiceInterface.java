@@ -115,8 +115,7 @@ public interface ServiceInterface {
     ArrayList<LichSuGia> getSXTheoGiaLSDG();
     ArrayList<SanPham> getAllSXTheoTenSP();
     ArrayList<SanPham> getAllSXTheoMaSP();
-    ArrayList<SanPham> getTimKiemSPTTSP(String keyword);
-    
+    ArrayList<SanPham> getTimKiemSPTTSP(String keyword);  
     ArrayList<HoaDon> updateLoaiThanhToanMaKhachHangBanHang(HoaDon hd);
     String thanhToanHoaDon(String trangThai, String ngayHoanThanh, String maHoaDon);
     ArrayList<HoaDon> huyHoaDonBanHang(String maHoaDon, String trangThai);
@@ -146,6 +145,7 @@ public interface ServiceInterface {
     Double tongDoanhThuMD();
     Integer tongDoanhSoMD();
     Integer tongHoaDonThanhToan();
+   ArrayList<HoaDonChiTiet> getAllHoaDonChiTietChuaHoanThanh(String maHoaDon);
     ArrayList<ChiTietHoaDon> getALlCTHD();
     ArrayList<SanPham> getAllSanPhamKM();
 };

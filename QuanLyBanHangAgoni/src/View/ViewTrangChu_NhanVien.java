@@ -2016,6 +2016,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 txtTienKhachDua.setEnabled(false);
                 txtTienThua.setEnabled(false);
                 btnThanhToan.setEnabled(false);
+                btnChonVoucher.setEnabled(false);
                 setFormHoaDon(listHoaDon.get(row));
                 loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(listHoaDon.get(row).getMaHoaDon()));
                 String maVoucher = listHoaDon.get(row).getMaVoucher();
@@ -2030,7 +2031,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                     }
                     Integer tongTienSet = (int) (tongTien);
                     Integer tienGiam = ser.layGiaGiamVoucher(maVoucher);
-                    //txtTongTien.setText(tongTienSet + " - " + tienGiam);
+                    txtTongTien.setText(tongTienSet + " - " + tienGiam);
                     lbPhanTramTru.setText(tienGiam + "");
                 }
 
@@ -2044,9 +2045,10 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 btnXoaSanPhamThem.setEnabled(true);
                 btnBotSanPham.setEnabled(true);
                 btnThanhToan.setEnabled(true);
+                btnChonVoucher.setEnabled(true);
                 lbPhanTramTru.setText("Số tiền giảm");
                 setFormHoaDon(listHoaDon.get(row));
-                loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(listHoaDon.get(row).getMaHoaDon()));
+                loadDataHoaDonChiTiet(ser.getAllHoaDonChiTietChuaHoanThanh(listHoaDon.get(row).getMaHoaDon()));
                 tinhThanhTien();
                 loadDataVoucher(ser.showHoaDonTheoVoucher(Integer.valueOf(txtTongTien.getText())));
             }
