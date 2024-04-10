@@ -109,36 +109,35 @@ public class ServiceImp implements ServiceInterface {
         return listKhachHang.get(row);
     }
 
-     public ArrayList<ChiTietHoaDon> getALlCTHD(){
-            listCTHD.clear();
-            String sql = "select hd.MaHoaDon,NgayTao,TrangThai,MaVoucher,MaNhanVien,NgayHoanThanh,LoaiThanhToan, MaSanPhamChiTiet,SoLuong\n" +
-    "from HoaDon hd  join ChiTietHoaDon cthd on hd.MaHoaDon = cthd.MaHoaDon\n" +
-    "Group By hd.MaHoaDon,NgayTao,TrangThai,MaVoucher,MaNhanVien,NgayHoanThanh,LoaiThanhToan,MaSanPhamChiTiet,SoLuong ";
+    public ArrayList<ChiTietHoaDon> getALlCTHD() {
+        listCTHD.clear();
+        String sql = "select hd.MaHoaDon,NgayTao,TrangThai,MaVoucher,MaNhanVien,NgayHoanThanh,LoaiThanhToan, MaSanPhamChiTiet,SoLuong\n"
+                + "from HoaDon hd  join ChiTietHoaDon cthd on hd.MaHoaDon = cthd.MaHoaDon\n"
+                + "Group By hd.MaHoaDon,NgayTao,TrangThai,MaVoucher,MaNhanVien,NgayHoanThanh,LoaiThanhToan,MaSanPhamChiTiet,SoLuong ";
 
-            try {
-                Connection conn = DBConnect1.getConnection();
-                Statement stm = conn.createStatement();
-                ResultSet rs = stm.executeQuery(sql);
-                while(rs.next()){
-                    ChiTietHoaDon cthd = new ChiTietHoaDon();
-                    cthd.setMaHoaDon(rs.getString(1));
-                    cthd.setNgayTao(rs.getString(2));
-                    cthd.setTrangThai(rs.getString(3));
-                    cthd.setMaVoucher(rs.getString(4));
-                    cthd.setMaNhanVien(rs.getString(5));
-                    cthd.setNgayHoanThanh(rs.getString(6));
-                    cthd.setLoaiThanhToan(rs.getString(7));
-                    cthd.setMaSanPhamChiTiet(rs.getString(8));
-                    cthd.setSoLuong(rs.getInt(9));
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                ChiTietHoaDon cthd = new ChiTietHoaDon();
+                cthd.setMaHoaDon(rs.getString(1));
+                cthd.setNgayTao(rs.getString(2));
+                cthd.setTrangThai(rs.getString(3));
+                cthd.setMaVoucher(rs.getString(4));
+                cthd.setMaNhanVien(rs.getString(5));
+                cthd.setNgayHoanThanh(rs.getString(6));
+                cthd.setLoaiThanhToan(rs.getString(7));
+                cthd.setMaSanPhamChiTiet(rs.getString(8));
+                cthd.setSoLuong(rs.getInt(9));
                 listCTHD.add(cthd);
 
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-           return listCTHD;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    
+        return listCTHD;
+    }
 
     public Integer tongHoaDonThanhToan() {
         String sql = "SELECT COUNT(*) AS 'TONG_DON_HANG_THANH_CONG' FROM HoaDon WHERE TrangThai =N'Đã hoàn thành'";
@@ -1809,7 +1808,7 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<SanPham> getAllMauSac() {
         listSanPham.clear();
-        String sql = "select MaMauSac, MauSac from MauSac";
+        String sql = "select DISTINCT MaMauSac, MauSac from MauSac";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -1828,7 +1827,7 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<SanPham> getAllKichThuoc() {
         listSanPham.clear();
-        String sql = "select MaKichThuoc, KichThuoc from KichThuoc";
+        String sql = "select DISTINCT MaKichThuoc, KichThuoc from KichThuoc";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -1847,7 +1846,7 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<SanPham> getAllChatLieu() {
         listSanPham.clear();
-        String sql = "select MaChatLieu, TenChatLieu from ChatLieu";
+        String sql = "select DISTINCT MaChatLieu, TenChatLieu from ChatLieu";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -1866,7 +1865,7 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<SanPham> getAllNCC() {
         listSanPham.clear();
-        String sql = "select MaNCC, TenNCC, DiaChi, SDT, Email from NhaCungCap";
+        String sql = "select DISTINCT MaNCC, TenNCC, DiaChi, SDT, Email from NhaCungCap";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -1887,6 +1886,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public void addMauSacTTSP(SanPham s) {
+        listSanPham.clear();
         try {
             Connection conn = DBConnect1.getConnection();
             String sql = "Insert into MauSac( MaMauSac, MauSac)Values (?,?)";
@@ -1901,6 +1901,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public void updateMauSacTTSP(SanPham s) {
+        listSanPham.clear();
         try {
             Connection conn = DBConnect1.getConnection();
             String sql = "Update MauSac Set MauSac=? where MaMauSac=?";
@@ -1915,7 +1916,9 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public void deleteMauSacTTSP(String ma) {
+        listSanPham.clear();
         try {
+            
             Connection conn = DBConnect1.getConnection();
             String sql = "DELETE FROM MauSac Where MaMauSac = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
@@ -2059,8 +2062,8 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
     }
-    
-        public ArrayList<SanPham> getAllSanPhamTTSP() {
+
+    public ArrayList<SanPham> getAllSanPhamTTSP() {
         listSanPham.clear();
         String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham";
         try {
@@ -2080,7 +2083,7 @@ public class ServiceImp implements ServiceInterface {
         }
         return listSanPham;
     }
-    
+
     public ArrayList<SanPham> getAllSXTheoTenSP() {
         listSanPham.clear();
         String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham order by TenSanPham";
@@ -2101,8 +2104,8 @@ public class ServiceImp implements ServiceInterface {
         }
         return listSanPham;
     }
-    
-     public ArrayList<SanPham> getAllSXTheoMaSP() {
+
+    public ArrayList<SanPham> getAllSXTheoMaSP() {
         listSanPham.clear();
         String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham order by MaSanPham";
         try {
@@ -2122,8 +2125,8 @@ public class ServiceImp implements ServiceInterface {
         }
         return listSanPham;
     }
-     
-        public ArrayList<SanPham> getTimKiemSPTTSP(String keyword) {
+
+    public ArrayList<SanPham> getTimKiemSPTTSP(String keyword) {
         listSanPham.clear();
         String sql = "select MaSanPham, TenSanPham, Mau, Hang from SanPham\n"
                 + "where MaSanPham like ? ";
@@ -2133,7 +2136,7 @@ public class ServiceImp implements ServiceInterface {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, "%" + keyword + "%");
             ResultSet rs = stm.executeQuery();
-             while (rs.next()) {
+            while (rs.next()) {
                 SanPham sp = new SanPham();
                 sp.setMaSP(rs.getString(1));
                 sp.setTenSP(rs.getString(2));
@@ -2146,11 +2149,10 @@ public class ServiceImp implements ServiceInterface {
         }
         return listSanPham;
     }
-        
 
     public ServiceImp() {
     }
-    
+
     public void addSanPhamTTSP(SanPham s) {
         try {
             Connection conn = DBConnect1.getConnection();
@@ -2187,17 +2189,15 @@ public class ServiceImp implements ServiceInterface {
         listSanPham.clear();
         String sql = "SELECT DISTINCT\n"
                 + "    c.MaSanPhamChiTiet, \n"
-                + "    TenSanPham,\n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
+                + "    TenSanPham, \n"
+                + "    TenNCC,  \n"
                 + "    c.SoLuong, \n"
                 + "    MauSac, \n"
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "    Hang,\n"
-                + "    maKhuyenMai\n"
+                + "    TenChatLieu, \n"
+                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh, \n"
+                + "    Hang\n"
                 + "FROM \n"
                 + "    ChiTietSanPham c\n"
                 + "JOIN \n"
@@ -2205,31 +2205,25 @@ public class ServiceImp implements ServiceInterface {
                 + "JOIN \n"
                 + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
                 + "JOIN \n"
-                + "    LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "JOIN \n"
                 + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
                 + "JOIN \n"
                 + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
-                + "JOIN\n"
+                + "JOIN \n"
                 + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
                 + "LEFT JOIN \n"
                 + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "JOIN \n"
-                + "    chiTietKhuyenMai ctkm ON ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "WHERE \n"
-                + "    c.maSanPham LIKE ?\n"
+                + "    c.MaSanPhamChiTiet LIKE ?\n"
                 + "GROUP BY  \n"
                 + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham, \n"
                 + "    TenNCC, \n"
-                + "    GiaDau, \n"
                 + "    c.SoLuong, \n"
                 + "    MauSac, \n"
                 + "    KichThuoc, \n"
-                + "    Mau,\n"
-                + "    TenChatLieu,\n"
-                + "    Hang,\n"
-                + "    maKhuyenMai";
+                + "    Mau, \n"
+                + "    TenChatLieu, \n"
+                + "    Hang;";
 
         try {
             Connection conn = DBConnect1.getConnection();
@@ -2241,15 +2235,13 @@ public class ServiceImp implements ServiceInterface {
                 sp.setMaSPCT(rs.getString(1));
                 sp.setTenSP(rs.getString(2));
                 sp.setNhaCungCap(rs.getString(3));
-                sp.setDonGia(rs.getDouble(4));
-                sp.setSoLuongSP(rs.getInt(5));
-                sp.setMauSac(rs.getString(6));
-                sp.setKichThuoc(rs.getString(7));
-                sp.setMau(rs.getString(8));
-                sp.setChatLieu(rs.getString(9));
-                sp.setHinhAnh(rs.getString(10));
-                sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
+                sp.setSoLuongSP(rs.getInt(4));
+                sp.setMauSac(rs.getString(5));
+                sp.setKichThuoc(rs.getString(6));
+                sp.setMau(rs.getString(7));
+                sp.setChatLieu(rs.getString(8));
+                sp.setHinhAnh(rs.getString(9));
+                sp.setHang(rs.getString(10));
 
                 listSanPham.add(sp);
             }
@@ -2294,48 +2286,32 @@ public class ServiceImp implements ServiceInterface {
     public ArrayList<SanPham> SapXepTheoMaSP() {
         listSanPham.clear();
         String sql = " SELECT DISTINCT\n"
-                + "    c.MaSanPhamChiTiet, \n"
-                + "    TenSanPham,\n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "    Hang,\n"
-                + "    maKhuyenMai\n"
+                + "    c.MaSanPhamChiTiet, TenSanPham, TenNCC,  c.SoLuong, MauSac, KichThuoc, Mau, TenChatLieu,STRING_AGG(HinhAnh, ',') AS HinhAnh,Hang\n"
                 + "FROM \n"
                 + "    ChiTietSanPham c\n"
+                + "	\n"
                 + "JOIN \n"
                 + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
                 + "JOIN \n"
                 + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
                 + "JOIN \n"
-                + "    LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "JOIN \n"
                 + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
                 + "JOIN \n"
                 + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
-                + "JOIN\n"
+                + "JOIN \n"
                 + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
                 + "LEFT JOIN \n"
                 + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "JOIN \n"
-                + "    chiTietKhuyenMai ctkm ON ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "GROUP BY  \n"
                 + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham, \n"
                 + "    TenNCC, \n"
-                + "    GiaDau, \n"
                 + "    c.SoLuong, \n"
                 + "    MauSac, \n"
                 + "    KichThuoc, \n"
-                + "    Mau,\n"
+                + "    Mau, \n"
                 + "    TenChatLieu,\n"
-                + "    Hang,\n"
-                + "    maKhuyenMai\n"
+                + "    Hang\n"
                 + "ORDER BY\n"
                 + "    c.MaSanPhamChiTiet ";
         try {
@@ -2347,15 +2323,13 @@ public class ServiceImp implements ServiceInterface {
                 sp.setMaSPCT(rs.getString(1));
                 sp.setTenSP(rs.getString(2));
                 sp.setNhaCungCap(rs.getString(3));
-                sp.setDonGia(rs.getDouble(4));
-                sp.setSoLuongSP(rs.getInt(5));
-                sp.setMauSac(rs.getString(6));
-                sp.setKichThuoc(rs.getString(7));
-                sp.setMau(rs.getString(8));
-                sp.setChatLieu(rs.getString(9));
-                sp.setHinhAnh(rs.getString(10));
-                sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
+                sp.setSoLuongSP(rs.getInt(4));
+                sp.setMauSac(rs.getString(5));
+                sp.setKichThuoc(rs.getString(6));
+                sp.setMau(rs.getString(7));
+                sp.setChatLieu(rs.getString(8));
+                sp.setHinhAnh(rs.getString(9));
+                sp.setHang(rs.getString(10));
 
                 listSanPham.add(sp);
             }
@@ -2368,48 +2342,34 @@ public class ServiceImp implements ServiceInterface {
     public ArrayList<SanPham> SapXepTheoTenSP() {
         listSanPham.clear();
         String sql = " SELECT DISTINCT\n"
-                + "    c.MaSanPhamChiTiet, \n"
-                + "    TenSanPham,\n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "    Hang,\n"
-                + "    maKhuyenMai\n"
+                + "    c.MaSanPhamChiTiet, TenSanPham, TenNCC,  c.SoLuong, MauSac, KichThuoc, Mau, TenChatLieu,STRING_AGG(HinhAnh, ',') AS HinhAnh,Hang\n"
                 + "FROM \n"
                 + "    ChiTietSanPham c\n"
+                + "	\n"
                 + "JOIN \n"
                 + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
                 + "JOIN \n"
                 + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
                 + "JOIN \n"
-                + "    LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "JOIN \n"
                 + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
                 + "JOIN \n"
                 + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
-                + "JOIN\n"
+                + "JOIN \n"
                 + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
                 + "LEFT JOIN \n"
                 + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "JOIN \n"
-                + "    chiTietKhuyenMai ctkm ON ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "\n"
+                + "		\n"
                 + "GROUP BY  \n"
                 + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham, \n"
                 + "    TenNCC, \n"
-                + "    GiaDau, \n"
                 + "    c.SoLuong, \n"
                 + "    MauSac, \n"
                 + "    KichThuoc, \n"
-                + "    Mau,\n"
+                + "    Mau, \n"
                 + "    TenChatLieu,\n"
-                + "    Hang,\n"
-                + "    maKhuyenMai\n"
+                + "    Hang\n"
                 + "ORDER BY\n"
                 + "    TenSanPham ";
         try {
@@ -2421,15 +2381,13 @@ public class ServiceImp implements ServiceInterface {
                 sp.setMaSPCT(rs.getString(1));
                 sp.setTenSP(rs.getString(2));
                 sp.setNhaCungCap(rs.getString(3));
-                sp.setDonGia(rs.getDouble(4));
-                sp.setSoLuongSP(rs.getInt(5));
-                sp.setMauSac(rs.getString(6));
-                sp.setKichThuoc(rs.getString(7));
-                sp.setMau(rs.getString(8));
-                sp.setChatLieu(rs.getString(9));
-                sp.setHinhAnh(rs.getString(10));
-                sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
+                sp.setSoLuongSP(rs.getInt(4));
+                sp.setMauSac(rs.getString(5));
+                sp.setKichThuoc(rs.getString(6));
+                sp.setMau(rs.getString(7));
+                sp.setChatLieu(rs.getString(8));
+                sp.setHinhAnh(rs.getString(9));
+                sp.setHang(rs.getString(10));
 
                 listSanPham.add(sp);
             }
@@ -2441,49 +2399,36 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<SanPham> getAllSanPhamCT() {
         listSanPham.clear();
-        String sql = "SELECT distinct\n"
-                + "    c.MaSanPhamChiTiet, \n"
-                + "    TenSanPham, \n"
-                + "    TenNCC, \n"
-                + "    GiaDau, \n"
-                + "    c.SoLuong, \n"
-                + "    MauSac, \n"
-                + "    KichThuoc, \n"
-                + "    Mau, \n"
-                + "    TenChatLieu,\n"
-                + "	\n"
-                + "    STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + " Hang,\n"
-                + "	maKhuyenMai\n"
+        String sql = "SELECT DISTINCT\n"
+                + "    c.MaSanPhamChiTiet, TenSanPham, TenNCC,  c.SoLuong, MauSac, KichThuoc, Mau, TenChatLieu,STRING_AGG(HinhAnh, ',') AS HinhAnh,Hang\n"
                 + "FROM \n"
                 + "    ChiTietSanPham c\n"
+                + "	\n"
                 + "JOIN \n"
                 + "    SanPham s ON c.MaSanPham = s.MaSanPham\n"
                 + "JOIN \n"
                 + "    NhaCungCap n ON n.MaNCC = c.NCC\n"
-                + "JOIN \n"
-                + "    LichSuDonGia l ON l.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "JOIN \n"
                 + "    MauSac m ON m.MaMauSac = c.MaMauSac\n"
                 + "JOIN \n"
                 + "    KichThuoc k ON k.MaKichThuoc = c.MaKichThuoc\n"
                 + "JOIN \n"
                 + "    ChatLieu cl ON cl.MaChatLieu = c.ChatLieu\n"
-                + "left JOIN \n"
+                + "LEFT JOIN \n"
                 + "    HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "join \n"
-                + "	chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
-                + "	group by  c.MaSanPhamChiTiet, \n"
+                + "\n"
+                + "		\n"
+                + "GROUP BY  \n"
+                + "    c.MaSanPhamChiTiet, \n"
                 + "    TenSanPham, \n"
                 + "    TenNCC, \n"
-                + "    GiaDau, \n"
                 + "    c.SoLuong, \n"
                 + "    MauSac, \n"
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
                 + "    TenChatLieu,\n"
-                + " Hang,\n"
-                + "	maKhuyenMai";
+                + "    Hang\n"
+                + "    ";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -2493,15 +2438,13 @@ public class ServiceImp implements ServiceInterface {
                 sp.setMaSPCT(rs.getString(1));
                 sp.setTenSP(rs.getString(2));
                 sp.setNhaCungCap(rs.getString(3));
-                sp.setDonGia(rs.getDouble(4));
-                sp.setSoLuongSP(rs.getInt(5));
-                sp.setMauSac(rs.getString(6));
-                sp.setKichThuoc(rs.getString(7));
-                sp.setMau(rs.getString(8));
-                sp.setChatLieu(rs.getString(9));
-                sp.setHinhAnh(rs.getString(10));
-                sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
+                sp.setSoLuongSP(rs.getInt(4));
+                sp.setMauSac(rs.getString(5));
+                sp.setKichThuoc(rs.getString(6));
+                sp.setMau(rs.getString(7));
+                sp.setChatLieu(rs.getString(8));
+                sp.setHinhAnh(rs.getString(9));
+                sp.setHang(rs.getString(10));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -2645,9 +2588,28 @@ public class ServiceImp implements ServiceInterface {
         }
     }
     
-     public ArrayList<LichSuGia> getAllLichSuDonGia() {
+      public void updateCTSPTTSP(SanPham s) {
+        try {
+            Connection conn = DBConnect1.getConnection();
+            String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong = ?, MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ? Where MaSanPhamChiTiet = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(7, s.getMaSPCT());
+            stm.setString(1, s.getMaSP());
+            stm.setInt(2, s.getSoLuongSP());
+            stm.setString(3, s.getMaKT());
+            stm.setString(4, s.getMaMS());
+            stm.setString(5, s.getMaNCC());
+            stm.setString(6, s.getMaCL());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<LichSuGia> getAllLichSuDonGia() {
         listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia";
+        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -2658,7 +2620,7 @@ public class ServiceImp implements ServiceInterface {
                 ls.setGiaDau(rs.getDouble(2));
                 ls.setGiaSau(rs.getDouble(3));
                 ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(5));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2668,7 +2630,7 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<LichSuGia> locLichSuDonGia(String ngayBatDau, String ngayKetThuc) {
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia\n"
+        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia\n"
                 + "where ThoiGianBatDau between ? and ? ";
         listLichSuGia.clear();
         try {
@@ -2683,7 +2645,7 @@ public class ServiceImp implements ServiceInterface {
                 ls.setGiaDau(rs.getDouble(2));
                 ls.setGiaSau(rs.getDouble(3));
                 ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(5));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2694,7 +2656,7 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<LichSuGia> getTimKiemLSG(String keyword) {
         listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia\n"
+        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia\n"
                 + "where MaDonGia like ? ";
 
         try {
@@ -2708,7 +2670,7 @@ public class ServiceImp implements ServiceInterface {
                 ls.setGiaDau(rs.getDouble(2));
                 ls.setGiaSau(rs.getDouble(3));
                 ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(5));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2719,7 +2681,7 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<LichSuGia> getSXTheoMaLSDG() {
         listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia order by MaDonGia";
+        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia order by MaDonGia";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -2730,7 +2692,7 @@ public class ServiceImp implements ServiceInterface {
                 ls.setGiaDau(rs.getDouble(2));
                 ls.setGiaSau(rs.getDouble(3));
                 ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(5));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2739,9 +2701,9 @@ public class ServiceImp implements ServiceInterface {
         return listLichSuGia;
     }
 
-        public ArrayList<LichSuGia> getSXTheoGiaLSDG() {
+    public ArrayList<LichSuGia> getSXTheoGiaLSDG() {
         listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc from LichSuDonGia order by GiaDau";
+        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia order by GiaDau";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -2752,7 +2714,7 @@ public class ServiceImp implements ServiceInterface {
                 ls.setGiaDau(rs.getDouble(2));
                 ls.setGiaSau(rs.getDouble(3));
                 ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(4));
+                ls.setNgayKetThuc(rs.getString(5));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2760,8 +2722,8 @@ public class ServiceImp implements ServiceInterface {
         }
         return listLichSuGia;
     }
- 
-            public void addLichSuGia(LichSuGia ls) {
+
+    public void addLichSuGia(LichSuGia ls) {
         try {
             Connection conn = DBConnect1.getConnection();
             String sql = "Insert into LichSuDonGia( MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc)Values (?,?,?,?,?)";
@@ -2777,8 +2739,8 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
     }
-            
-     public void updateLichSuGia(LichSuGia ls) {
+
+    public void updateLichSuGia(LichSuGia ls) {
         try {
             Connection conn = DBConnect1.getConnection();
             String sql = "update LichSuDonGia set GiaDau=?, GiaSau=?, ThoiGianBatDau=?, ThoiGianketThuc=? where MaDonGia = ?";
@@ -2793,9 +2755,9 @@ public class ServiceImp implements ServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }       
-     
-        public ArrayList<SanPham> getAllMau() {
+    }
+
+    public ArrayList<SanPham> getAllMau() {
         listSanPham.clear();
         String sql = "select  Mau from SanPham group by Mau";
         try {
