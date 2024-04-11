@@ -1012,8 +1012,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                    TenChatLieu,\n"
                 + "                \n"
                 + "                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "                Hang,\n"
-                + "                maKhuyenMai\n"
+                + "                Hang\n"
                 + "                FROM \n"
                 + "                  ChiTietSanPham c\n"
                 + "                JOIN \n"
@@ -1044,8 +1043,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                Hang,\n"
                 + "				l.ThoiGianBatDau,\n"
                 + "				l.ThoiGianKetThuc,\n"
-                + "				l.GiaSau,\n"
-                + "                maKhuyenMai"
+                + "				l.GiaSau\n"
                 + "	order by TenSanPham";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1064,7 +1062,6 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(9));
                 sp.setHinhAnh(rs.getString(10));
                 sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -1089,8 +1086,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                    TenChatLieu,\n"
                 + "                \n"
                 + "                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "                Hang,\n"
-                + "                maKhuyenMai\n"
+                + "                Hang\n"
                 + "                FROM \n"
                 + "                  ChiTietSanPham c\n"
                 + "                JOIN \n"
@@ -1121,8 +1117,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                Hang,\n"
                 + "				l.ThoiGianBatDau,\n"
                 + "				l.ThoiGianKetThuc,\n"
-                + "				l.GiaSau,\n"
-                + "                maKhuyenMai\n"
+                + "				l.GiaSau\n"
                 + "			order by c.MaSanPham";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1141,7 +1136,6 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(9));
                 sp.setHinhAnh(rs.getString(10));
                 sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -1166,8 +1160,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                    TenChatLieu,\n"
                 + "                \n"
                 + "                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "                Hang,\n"
-                + "                maKhuyenMai\n"
+                + "                Hang\n"
                 + "                FROM \n"
                 + "                  ChiTietSanPham c\n"
                 + "                JOIN \n"
@@ -1198,8 +1191,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                Hang,\n"
                 + "				l.ThoiGianBatDau,\n"
                 + "				l.ThoiGianKetThuc,\n"
-                + "				l.GiaSau,\n"
-                + "                maKhuyenMai\n"
+                + "				l.GiaSau\n"
                 + "			order by Gia";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1218,7 +1210,6 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(9));
                 sp.setHinhAnh(rs.getString(10));
                 sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -3282,5 +3273,23 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
         return listSanPham;
+    }
+
+    @Override
+    public ArrayList<Voucher> timKiemVoucherBanHang(String keyWord) {
+        String sql = "select * from Voucher where MaVoucher like ?  or TenVoucher like ?";
+        listVoucher.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, "%" + keyWord + "%");
+            ResultSet rs = stm.executeQuery();
+            while (true) {                
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listVoucher;
     }
 }
