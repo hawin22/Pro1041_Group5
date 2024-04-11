@@ -148,4 +148,5 @@ public interface ServiceInterface {
    ArrayList<HoaDonChiTiet> getAllHoaDonChiTietChuaHoanThanh(String maHoaDon);
     ArrayList<ChiTietHoaDon> getALlCTHD();
     ArrayList<SanPham> getAllSanPhamKM();
+    ArrayList<Voucher> timKiemVoucherBanHang(String keyWord);
 };

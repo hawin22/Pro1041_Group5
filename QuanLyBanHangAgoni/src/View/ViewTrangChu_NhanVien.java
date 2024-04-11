@@ -2433,6 +2433,8 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
     private void btnTimKiemVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemVoucherActionPerformed
         // TODO add your handling code here:
+        String keyWord = txtTimKiemVoucher.getText().trim();
+        
     }//GEN-LAST:event_btnTimKiemVoucherActionPerformed
 
     private void btnVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoucherMouseClicked
