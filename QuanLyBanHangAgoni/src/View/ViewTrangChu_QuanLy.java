@@ -1061,7 +1061,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             return false;
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         dateFormat.setLenient(false); // To enforce strict date parsing
 
         try {
