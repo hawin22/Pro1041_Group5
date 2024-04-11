@@ -1810,7 +1810,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(this, "Thêm số lượng sản phẩm thành công");
                                 loadDataHoaDonChiTiet(ser.updateSoluongSanPhamBanHang(maSanPhamChiTiet, soLuong, maHoaDon));
                                 loadDataSanPhamBanHang(ser.updateSanPhamTruBanHang(maSanPhamChiTiet, soLuong));
-                                loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
+                                loadDataHoaDonChiTiet(ser.getAllHoaDonChiTietChuaHoanThanh(maHoaDon));
                                 loadDataSanPhamBanHang(listSanPham);
                                 tinhThanhTien();
                                 txtTimKiemSanPham.setText("");
@@ -1818,7 +1818,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(this, "Đã thêm sản phẩm mới vào hoá đơn");
                                 loadDataHoaDonChiTiet(ser.addHoaDonChiTiet(new HoaDonChiTiet(maHoaDon, soLuong, maSanPhamChiTiet)));
                                 loadDataSanPhamBanHang(ser.updateSanPhamTruBanHang(maSanPhamChiTiet, soLuong));
-                                loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
+                                loadDataHoaDonChiTiet(ser.getAllHoaDonChiTietChuaHoanThanh(maHoaDon));
                                 loadDataSanPhamBanHang(listSanPham);
                                 tinhThanhTien();
                                 txtTimKiemSanPham.setText("");
@@ -1866,7 +1866,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                     loadDataHoaDonChiTiet(ser.deleteHoaDonChiTiet(maSanPhamChiTiet, maHoaDon));
                     loadDataSanPhamBanHang(ser.updateSanPhamCongBanHang(maSanPhamChiTiet, soLuong));
                     loadDataSanPhamBanHang(ser.getAllSanPham());
-                    loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
+                    loadDataHoaDonChiTiet(ser.getAllHoaDonChiTietChuaHoanThanh(maHoaDon));
                     JOptionPane.showMessageDialog(this, "Xoá thành công sản phẩm khỏi hoá đơn");
                     tinhThanhTien();
                 } else {
@@ -2016,6 +2016,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 txtTienKhachDua.setEnabled(false);
                 txtTienThua.setEnabled(false);
                 btnThanhToan.setEnabled(false);
+                btnChonVoucher.setEnabled(false);
                 setFormHoaDon(listHoaDon.get(row));
                 loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(listHoaDon.get(row).getMaHoaDon()));
                 String maVoucher = listHoaDon.get(row).getMaVoucher();
@@ -2030,7 +2031,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                     }
                     Integer tongTienSet = (int) (tongTien);
                     Integer tienGiam = ser.layGiaGiamVoucher(maVoucher);
-                    //txtTongTien.setText(tongTienSet + " - " + tienGiam);
+                    txtTongTien.setText(tongTienSet + " - " + tienGiam);
                     lbPhanTramTru.setText(tienGiam + "");
                 }
 
@@ -2044,9 +2045,10 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                 btnXoaSanPhamThem.setEnabled(true);
                 btnBotSanPham.setEnabled(true);
                 btnThanhToan.setEnabled(true);
+                btnChonVoucher.setEnabled(true);
                 lbPhanTramTru.setText("Số tiền giảm");
                 setFormHoaDon(listHoaDon.get(row));
-                loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(listHoaDon.get(row).getMaHoaDon()));
+                loadDataHoaDonChiTiet(ser.getAllHoaDonChiTietChuaHoanThanh(listHoaDon.get(row).getMaHoaDon()));
                 tinhThanhTien();
                 loadDataVoucher(ser.showHoaDonTheoVoucher(Integer.valueOf(txtTongTien.getText())));
             }
@@ -2160,7 +2162,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "Giảm số lượng thành công");
                             loadDataHoaDonChiTiet(ser.updateSoluongSanPhamBanHangTru(maSanPhamChiTiet, soLuong, maHoaDon));
                             loadDataSanPhamBanHang(ser.updateSanPhamCongBanHang(maSanPhamChiTiet, soLuong));
-                            loadDataHoaDonChiTiet(ser.getAllHoaDonChiTiet(maHoaDon));
+                            loadDataHoaDonChiTiet(ser.getAllHoaDonChiTietChuaHoanThanh(maHoaDon));
                             loadDataSanPhamBanHang(ser.getAllSanPham());
                             tinhThanhTien();
                         }
@@ -2431,6 +2433,8 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
     private void btnTimKiemVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemVoucherActionPerformed
         // TODO add your handling code here:
+        String keyWord = txtTimKiemVoucher.getText().trim();
+        
     }//GEN-LAST:event_btnTimKiemVoucherActionPerformed
 
     private void btnVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoucherMouseClicked

@@ -115,8 +115,7 @@ public interface ServiceInterface {
     ArrayList<LichSuGia> getSXTheoGiaLSDG();
     ArrayList<SanPham> getAllSXTheoTenSP();
     ArrayList<SanPham> getAllSXTheoMaSP();
-    ArrayList<SanPham> getTimKiemSPTTSP(String keyword);
-    
+    ArrayList<SanPham> getTimKiemSPTTSP(String keyword);  
     ArrayList<HoaDon> updateLoaiThanhToanMaKhachHangBanHang(HoaDon hd);
     String thanhToanHoaDon(String trangThai, String ngayHoanThanh, String maHoaDon);
     ArrayList<HoaDon> huyHoaDonBanHang(String maHoaDon, String trangThai);
@@ -140,11 +139,14 @@ public interface ServiceInterface {
     String updateSoLuongVoucherTru(String maVoucher);
     Integer layGiaGiamVoucher(String maVoucher);
     Integer tonghoadon(String ngayBatDau, String ngayKetThuc);
-   Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
-   Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
-   Integer tongHoaDonMD();
+    Double tongDoanhThu(String ngayBatDau, String ngayKetThuc);
+    Integer tongDoanhSo(String ngayBatDau, String ngayKetThuc);
+    Integer tongHoaDonMD();
     Double tongDoanhThuMD();
     Integer tongDoanhSoMD();
     Integer tongHoaDonThanhToan();
-   ArrayList<ChiTietHoaDon> getALlCTHD();
+   ArrayList<HoaDonChiTiet> getAllHoaDonChiTietChuaHoanThanh(String maHoaDon);
+    ArrayList<ChiTietHoaDon> getALlCTHD();
+    ArrayList<SanPham> getAllSanPhamKM();
+    ArrayList<Voucher> timKiemVoucherBanHang(String keyWord);
 };
