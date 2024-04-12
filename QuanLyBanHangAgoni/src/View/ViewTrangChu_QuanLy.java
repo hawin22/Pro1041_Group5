@@ -5657,14 +5657,23 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 System.out.println(ngayBD);
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Ngày bắt đầu không đúng định dạng");
-//                return;
+                System.out.println(e.getMessage());
             }
             try {
                 Date date2 = sdf.parse(ngayKT);
                 System.out.println(ngayKT);
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Ngày kết thúc không đúng định dạng");
-//                return;
+                System.out.println(e.getMessage());
+            }
+              try {
+                Date date1 = sdf.parse(ngayBD);
+                Date date2 = sdf.parse(ngayKT);
+                if (date1.after(date2)) {
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu phải lớn ngày kết thúc");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
             ArrayList<HoaDon> listLocHDHuy = ser.locHDHuyTheoNgay(ngayBD, ngayKT);
             if (listLocHDHuy.isEmpty()) {
@@ -5694,6 +5703,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày kết thúc");
             count++;
         }
+        
         if (count == 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             try {
@@ -5701,14 +5711,23 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 System.out.println(ngayBD);
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Ngày bắt đầu không đúng định dạng");
-//                return;
+                System.out.println(e.getMessage());
             }
             try {
                 Date date2 = sdf.parse(ngayKT);
                 System.out.println(ngayKT);
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Ngày kết thúc không đúng định dạng");
-//                return;
+                System.out.println(e.getMessage());
+            }
+            try {
+                Date date1 = sdf.parse(ngayBD);
+                Date date2 = sdf.parse(ngayKT);
+                if (date1.after(date2)) {
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu phải lớn ngày kết thúc");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
             ArrayList<HoaDon> listLocHD = ser.locHDTheoNgay(ngayBD, ngayKT);
             if (listLocHD.isEmpty()) {
