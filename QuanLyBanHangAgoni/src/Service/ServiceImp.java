@@ -1277,8 +1277,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                                    TenChatLieu,\n"
                 + "                                \n"
                 + "                                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "                                Hang,\n"
-                + "                                maKhuyenMai\n"
+                + "                                Hang\n"
                 + "                                FROM \n"
                 + "                                  ChiTietSanPham c\n"
                 + "                              JOIN\n"
@@ -1309,8 +1308,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                               Hang,\n"
                 + "                			l.ThoiGianBatDau,\n"
                 + "                				l.ThoiGianKetThuc,\n"
-                + "                				l.GiaSau,\n"
-                + "                                maKhuyenMai\n"
+                + "                				l.GiaSau\n"
                 + "                having c.MaSanPham like ? or TenSanPham like ?";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1331,7 +1329,6 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(9));
                 sp.setHinhAnh(rs.getString(10));
                 sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
