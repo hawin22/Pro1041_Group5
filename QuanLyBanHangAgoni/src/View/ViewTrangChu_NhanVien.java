@@ -411,6 +411,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         cbbSapXepTheoNgayHetHanVoucher = new javax.swing.JComboBox<>();
         btnChonVoucher = new javax.swing.JButton();
+        btnHienThiVoucherBanHang = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -1145,6 +1146,16 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             }
         });
 
+        btnHienThiVoucherBanHang.setBackground(new java.awt.Color(51, 153, 255));
+        btnHienThiVoucherBanHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHienThiVoucherBanHang.setForeground(new java.awt.Color(255, 255, 255));
+        btnHienThiVoucherBanHang.setText("Hiển thị");
+        btnHienThiVoucherBanHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHienThiVoucherBanHangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1163,7 +1174,10 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                                         .addComponent(txtTimKiemVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnTimKiemVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cbbSapXepTheoNgayHetHanVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(cbbSapXepTheoNgayHetHanVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(37, 37, 37)
+                                        .addComponent(btnHienThiVoucherBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel20)
@@ -1194,7 +1208,9 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
                             .addComponent(txtTimKiemVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTimKiemVoucher))
                         .addGap(18, 18, 18)
-                        .addComponent(cbbSapXepTheoNgayHetHanVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbbSapXepTheoNgayHetHanVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnHienThiVoucherBanHang)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNgayBatDauVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2372,7 +2388,12 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
     private void tblDanhSachVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachVoucherMouseClicked
         // TODO add your handling code here:
+        int rowHD = tblHoaDonBanHang.getSelectedRow();
+        if (rowHD >= 0) {
+            listVoucer.clear();
+        } else {
 
+        }
     }//GEN-LAST:event_tblDanhSachVoucherMouseClicked
 
     private void btnChonVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonVoucherActionPerformed
@@ -2434,7 +2455,13 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     private void btnTimKiemVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemVoucherActionPerformed
         // TODO add your handling code here:
         String keyWord = txtTimKiemVoucher.getText().trim();
-        
+        listVoucer.clear();
+        listVoucer = ser.timKiemVoucherBanHang(keyWord);
+        if (listVoucer.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không có voucher cần tìm");
+        } else {
+            loadDataVoucher(listVoucer);
+        }
     }//GEN-LAST:event_btnTimKiemVoucherActionPerformed
 
     private void btnVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoucherMouseClicked
@@ -2446,6 +2473,11 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
         pnNhanVien.setSelectedIndex(1);
     }//GEN-LAST:event_jLabel32MouseClicked
+
+    private void btnHienThiVoucherBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiVoucherBanHangActionPerformed
+        // TODO add your handling code here:
+        loadDataVoucher(ser.getAllVoucher());
+    }//GEN-LAST:event_btnHienThiVoucherBanHangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2487,6 +2519,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnBotSanPham;
     private javax.swing.JButton btnChonVoucher;
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnHienThiVoucherBanHang;
     private javax.swing.JButton btnHuyHoaDon;
     private javax.swing.JButton btnHuyVoucher;
     private javax.swing.JButton btnNewBanHang;
