@@ -19,15 +19,18 @@ import javax.mail.internet.MimeMultipart;
 import javax.swing.JOptionPane;
 import Service.*;
 import java.util.ArrayList;
+
 /**
  *
  * @author Hawin
  */
 // fvbh vogl elmb mvul
 public class ViewEmail extends javax.swing.JFrame {
+
     ServiceInterface ser = new ServiceImp();
+
     /**
-     * 
+     *
      * Creates new form ViewEmail
      */
     public ViewEmail() {
@@ -221,33 +224,33 @@ public class ViewEmail extends javax.swing.JFrame {
             final char[] password = txtPass.getPassword();
             final String pass = new String(password);
             Session session = Session.getInstance(p,
-                new javax.mail.Authenticator() {
+                    new javax.mail.Authenticator() {
 
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(user, pass);
-                    }
-                });
-                String from = txtUser.getText();
-                String to = txtTo.getText();
-                String subject = txtSubject.getText();
-                String body = txtMess.getText();
-                Message mess = new MimeMessage(session);
-                mess.setFrom(new InternetAddress(from));
-                mess.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-                mess.setText(body);
-                mess.setSubject(subject);
-                MimeBodyPart textPart = new MimeBodyPart();
-                textPart.setContent(body, "text/plain");
-                Multipart mu = new MimeMultipart();
-                mu.addBodyPart(textPart);
-                mess.setContent(mu);
-                Transport.send(mess);
-                JOptionPane.showMessageDialog(null, "Email đã gửi thành công", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                this.setVisible(false);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Lỗi khi gửi email: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(user, pass);
+                }
+            });
+            String from = txtUser.getText();
+            String to = txtTo.getText();
+            String subject = txtSubject.getText();
+            String body = txtMess.getText();
+            Message mess = new MimeMessage(session);
+            mess.setFrom(new InternetAddress(from));
+            mess.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            mess.setText(body);
+            mess.setSubject(subject);
+            MimeBodyPart textPart = new MimeBodyPart();
+            textPart.setContent(body, "text/plain");
+            Multipart mu = new MimeMultipart();
+            mu.addBodyPart(textPart);
+            mess.setContent(mu);
+            Transport.send(mess);
+            JOptionPane.showMessageDialog(null, "Email đã gửi thành công", "Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi khi gửi email: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnSendActionPerformed
 
@@ -262,13 +265,15 @@ public class ViewEmail extends javax.swing.JFrame {
         for (NguoiDung nguoiDung : listND) {
             nguoiDung.inInf();
         }
+        String tkNV = listND.get(0).getTenDN();
         String emailNV = listND.get(0).getEmail();
         String emailQL = listND.get(1).getTenDN();
         String passNV = listND.get(0).getPassWord();
         txtUser.setText(emailQL);
         txtTo.setText(emailNV);
         txtSubject.setText("Welcome to Agoni");
-        txtMess.setText("Your password: "+ passNV);
+        txtMess.setText("Your account: " + tkNV + "\n"
+                + "Your password: " + passNV);
     }//GEN-LAST:event_formWindowActivated
 
     /**

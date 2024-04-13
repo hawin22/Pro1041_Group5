@@ -237,6 +237,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         nd.setPassWord(generateMD5(txtPassword.getText().trim()));
         return nd;
     }
+
     NguoiDung getFormNhanVienEmail() {
         NguoiDung nd = new NguoiDung();
         nd.setMaNguoiDung(txtMaNV.getText().trim());
@@ -430,7 +431,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     }
 
     public boolean checkSDT(String SDT) {
-        String sdtRegex = "^(84|0[3|5|7|8|9])+([0-9]{8})$";
+        String sdtRegex = "^((\\+84)|(0))(9[0-9]|3[2-9]|7[06-9]|8[1-9]|5[68])\\d{7}$";
         Pattern sdtPat = Pattern.compile(sdtRegex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = sdtPat.matcher(SDT);
         return matcher.find();
@@ -447,8 +448,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
     public boolean checkTrungMaNhanVien(String ma) {
         int count = 0;
+        String result = ma.replace("", "");
         for (NguoiDung nd : ser.getAllNguoiDung()) {
-            if (nd.getMaNguoiDung().equals(ma)) {
+            if (nd.getMaNguoiDung().trim().equals(result)) {
                 count++;
             }
         }
@@ -464,7 +466,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     public boolean checkTrungTenDNNhanVien(String ten) {
         int count = 0;
         for (NguoiDung nd : ser.getAllNguoiDung()) {
-            if (nd.getTenDN().equals(ten)) {
+            if (nd.getTenDN().trim().equals(ten)) {
                 count++;
             }
         }
@@ -480,7 +482,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     public boolean checkTrungEmailNhanVien(String email) {
         int count = 0;
         for (NguoiDung nd : ser.getAllNguoiDung()) {
-            if (nd.getEmail().equals(email)) {
+            if (nd.getEmail().trim().equals(email)) {
                 count++;
             }
         }
@@ -495,7 +497,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     public boolean checkTrungSDTNhanVien(String SDT) {
         int count = 0;
         for (NguoiDung nd : ser.getAllNguoiDung()) {
-            if (nd.getSDT().equals(SDT)) {
+            if (nd.getSDT().trim().equals(SDT)) {
                 count++;
             }
         }
@@ -511,21 +513,21 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 
         ArrayList<NguoiDung> listEmailTenDN = ser.getAllNguoiDung();
         for (int i = 0; i < listEmailTenDN.size(); i++) {
-            if (listEmailTenDN.get(i).getMaNguoiDung().equals(maNV)) {
+            if (listEmailTenDN.get(i).getMaNguoiDung().trim().equals(maNV)) {
                 listEmailTenDN.remove(i);
             }
         }
         int count = 0;
         for (NguoiDung nd : listEmailTenDN) {
-            if (nd.getEmail().equals(email)) {
+            if (nd.getEmail().trim().equals(email)) {
                 count++;
                 JOptionPane.showMessageDialog(this, "Email này đã tồn tại");
             }
-            if (nd.getTenDN().equals(tenDN)) {
+            if (nd.getTenDN().trim().equals(tenDN)) {
                 count++;
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập này đã tồn tại");
             }
-            if (nd.getSDT().equals(SDT)) {
+            if (nd.getSDT().trim().equals(SDT)) {
                 count++;
                 JOptionPane.showMessageDialog(this, "Số điện thoại này đã tồn tại");
             }
@@ -5316,7 +5318,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
             if (dem == 0) {
 
-                if (!checkTrungMaNhanVien(txtMaNV.getText())) {
+                if (!checkTrungMaNhanVien(getFormNhanVien().getMaNguoiDung())) {
                     count++;
                 }
                 if (!checkTuoiNV()) {
@@ -5328,13 +5330,13 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 if (!emailNV()) {
                     count++;
                 }
-                if (!checkTrungEmailNhanVien(txtEmail.getText())) {
+                if (!checkTrungEmailNhanVien(getFormNhanVien().getEmail())) {
                     count++;
                 }
-                if (!checkTrungSDTNhanVien(txtSDT.getText())) {
+                if (!checkTrungSDTNhanVien(getFormNhanVien().getSDT())) {
                     count++;
                 }
-                if (!checkTrungTenDNNhanVien(txtTenDN.getText())) {
+                if (!checkTrungTenDNNhanVien(getFormNhanVien().getTenDN())) {
                     count++;
                 }
 
@@ -5344,6 +5346,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
 //                System.out.println("tgkjggf");
                 ser.addNhanVien(getFormNhanVien());
                 NguoiDung nd = getFormNhanVien();
+                System.out.println(nd.getMaNguoiDung());
                 JOptionPane.showMessageDialog(this, "Mã nhân viên: " + nd.getMaNguoiDung() + "\n"
                         + "Tên nhân viên: " + nd.getTenNguoiDung() + "\n"
                         + "Giới tính: " + nd.isGioiTinh() + "\n"
@@ -5354,6 +5357,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         + "Password: " + txtPassword.getText() + "\n"
                 );
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
+                loadDataNhanVien(ser.getAllNhanVien(true));
                 String tenDN = ser.getEmail(ser.getTenDN());
                 NguoiDung ndnv = getFormNhanVienEmail();
                 NguoiDung ndql = new NguoiDung(tenDN);
@@ -5365,9 +5369,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 viewEmail.setLocationRelativeTo(null);
                 viewEmail.ser.listEmail(ndnv);
                 viewEmail.ser.listEmail(ndql);
+
                 
-                loadDataNhanVien(ser.getAllNhanVien(true));
-                
+
             } else {
 
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
@@ -5716,7 +5720,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Ngày kết thúc không đúng định dạng");
                 System.out.println(e.getMessage());
             }
-              try {
+            try {
                 Date date1 = sdf.parse(ngayBD);
                 Date date2 = sdf.parse(ngayKT);
                 if (date1.after(date2)) {
@@ -5753,7 +5757,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày kết thúc");
             count++;
         }
-        
+
         if (count == 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             try {
@@ -6709,7 +6713,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         txtNBatDauKhuyenMai.setText("");
         txtNKetThucKhuyenMai.setText("");
         txtGiamGiaKhuyenMai.setText("");
-        
+
     }//GEN-LAST:event_btnNewFormKMActionPerformed
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
