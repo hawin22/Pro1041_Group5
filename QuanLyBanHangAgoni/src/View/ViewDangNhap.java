@@ -286,10 +286,12 @@ public class ViewDangNhap extends javax.swing.JFrame {
         System.out.println(lgin.getUserName());
         qldn.listLoginBanHang();
         System.out.println(qldn.listLoginBanHang());
+        NguoiDung nd = new NguoiDung(userName);
         if (list.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
         } else if (list.size() == 1 && list.get(0).getRole().equals("Quản lý")) {
             this.setVisible(false);
+            viewQL.ser.listEmail(nd);
             viewQL.setVisible(true);
             viewQL.setLocationRelativeTo(null);
         } else if (list.size() == 1 && list.get(0).getRole().equals("Nhân viên")) {
