@@ -1338,7 +1338,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã khuyến mãi", "Tên khuyến mãi", "Số lượng", "Hạn sử dụng", "Ngày bắt đầu", "Phần trăm giảm"
+                "Mã khuyến mãi", "Tên khuyến mãi", "Hạn sử dụng", "Ngày bắt đầu", "Phần trăm giảm"
             }
         ));
         jScrollPane6.setViewportView(tblDanhSachKhuyenMai);
