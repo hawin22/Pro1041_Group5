@@ -32,6 +32,7 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<NguoiDung> listQuanLy = new ArrayList<>();
     ArrayList<Login> listLoginTam = new ArrayList<>();
     ArrayList<ChiTietHoaDon> listCTHD = new ArrayList<>();
+    ArrayList<NguoiDung> listEMail = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
@@ -3284,12 +3285,47 @@ public class ServiceImp implements ServiceInterface {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, "%" + keyWord + "%");
             ResultSet rs = stm.executeQuery();
-            while (true) {                
-                
+            while (true) {
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listVoucher;
     }
+
+    @Override
+    public String getEmail(String tenDN) {
+        String getEmail = "";
+        String sql = "select email from NguoiDung where tenDangNhap = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, tenDN);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                getEmail = rs.getString("email");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return getEmail;
+    }
+
+    @Override
+    public ArrayList<NguoiDung> listEmail(NguoiDung nd) {
+        listEMail.add(nd);
+        return listEMail;
+    }
+
+    @Override
+    public String getTenDN() {
+        return listEMail.get(0).getTenDN();
+    }
+
+    @Override
+    public ArrayList<NguoiDung> listNV() {
+        return listEMail;
+    }
+
 }

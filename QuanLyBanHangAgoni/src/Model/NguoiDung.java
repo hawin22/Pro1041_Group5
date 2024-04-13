@@ -126,4 +126,8 @@ public class NguoiDung {
         System.out.println("NguoiDung{" + "maNguoiDung=" + maNguoiDung + ", tenNguoiDung=" + tenNguoiDung + ", gioiTinh=" + gioiTinh + ", tuoi=" + tuoi + ", SDT=" + SDT + ", Email=" + Email + ", Roles=" + Roles + ", tenDN=" + tenDN + ", passWord=" + passWord + ", trangThai=" + trangThai + '}');
     }
 
+    public NguoiDung(String tenDN) {
+        this.tenDN = tenDN;
+    }
+
 }
