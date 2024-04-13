@@ -430,7 +430,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     }
 
     public boolean checkSDT(String SDT) {
-        String sdtRegex = "^(\\+84|0)(\\d{1,3})([\\s-.]?)(\\d{3})([\\s-.]?)(\\d{3})$";
+        String sdtRegex = "^(84|0[3|5|7|8|9])+([0-9]{8})$";
         Pattern sdtPat = Pattern.compile(sdtRegex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = sdtPat.matcher(SDT);
         return matcher.find();
