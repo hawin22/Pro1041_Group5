@@ -1763,7 +1763,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         txtNgayBatDau = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
         btnHienThiBCTK = new javax.swing.JButton();
-        cboTongbctk = new javax.swing.JComboBox<>();
         jTabbedPane7 = new javax.swing.JTabbedPane();
         jPanel22 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
@@ -5036,13 +5035,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
-        cboTongbctk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hôm nay", "Theo ngày", "Theo tuần", "Theo tháng", "Theo năm" }));
-        cboTongbctk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboTongbctkActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -5059,9 +5051,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(btnHienThiBCTK)
-                        .addGap(38, 38, 38)
-                        .addComponent(cboTongbctk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
+                        .addGap(207, 207, 207)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -5093,8 +5083,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                             .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnHienThiBCTK, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboTongbctk, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnHienThiBCTK, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25))))
         );
 
@@ -6909,10 +6898,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSuaChiTietSanPhamMouseClicked
 
-    private void cboTongbctkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTongbctkActionPerformed
-         
-    }//GEN-LAST:event_cboTongbctkActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -7024,8 +7009,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboMauSacTTSP;
     private javax.swing.JComboBox<String> cboMauTTSP;
     private javax.swing.JComboBox<String> cboTenNCCTTSP;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton21;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
