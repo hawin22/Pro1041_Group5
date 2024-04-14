@@ -1438,7 +1438,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         buttonGroup9 = new javax.swing.ButtonGroup();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel39 = new javax.swing.JPanel();
-        jLabel89 = new javax.swing.JLabel();
+        lblAnhNen = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jTabbedPane6 = new javax.swing.JTabbedPane();
         jPanel32 = new javax.swing.JPanel();
@@ -1573,7 +1573,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jLabel75 = new javax.swing.JLabel();
         txtNewTTSP = new javax.swing.JButton();
         btnAddSPCT = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
+        btnSuaChiTietSanPham = new javax.swing.JButton();
         cboTenNCCTTSP = new javax.swing.JComboBox<>();
         btnThemThuocTinh = new javax.swing.JButton();
         jPanel26 = new javax.swing.JPanel();
@@ -1840,11 +1840,11 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jTabbedPane2.setForeground(new java.awt.Color(51, 153, 255));
         jTabbedPane2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jLabel89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chanGaGoiDemAgoNi2.png"))); // NOI18N
-        jLabel89.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel89.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblAnhNen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chanGaGoiDemAgoNi2.png"))); // NOI18N
+        lblAnhNen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAnhNen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel89MouseClicked(evt);
+                lblAnhNenMouseClicked(evt);
             }
         });
 
@@ -1854,14 +1854,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel89, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAnhNen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(14, 14, 14))
         );
         jPanel39Layout.setVerticalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel39Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel89, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAnhNen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2079,9 +2079,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnExit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
         btnExit.setText("Exit");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitMouseClicked(evt);
             }
         });
 
@@ -3187,13 +3187,13 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
-        jButton17.setBackground(new java.awt.Color(51, 153, 255));
-        jButton17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton17.setForeground(new java.awt.Color(255, 255, 255));
-        jButton17.setText("Sửa");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
+        btnSuaChiTietSanPham.setBackground(new java.awt.Color(51, 153, 255));
+        btnSuaChiTietSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSuaChiTietSanPham.setForeground(new java.awt.Color(255, 255, 255));
+        btnSuaChiTietSanPham.setText("Sửa");
+        btnSuaChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSuaChiTietSanPhamMouseClicked(evt);
             }
         });
 
@@ -3266,7 +3266,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnAddSPCT, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSuaChiTietSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnThemThuocTinh)
                 .addGap(467, 467, 467))
@@ -3322,7 +3322,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewTTSP)
-                    .addComponent(jButton17)
+                    .addComponent(btnSuaChiTietSanPham)
                     .addComponent(btnAddSPCT)
                     .addComponent(btnThemThuocTinh))
                 .addGap(23, 23, 23))
@@ -4057,9 +4057,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnNewFormVoucher.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnNewFormVoucher.setForeground(new java.awt.Color(255, 255, 255));
         btnNewFormVoucher.setText("Làm mới");
-        btnNewFormVoucher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewFormVoucherActionPerformed(evt);
+        btnNewFormVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNewFormVoucherMouseClicked(evt);
             }
         });
 
@@ -4282,9 +4282,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnNewFormKM.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnNewFormKM.setForeground(new java.awt.Color(255, 255, 255));
         btnNewFormKM.setText("Làm mới");
-        btnNewFormKM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewFormKMActionPerformed(evt);
+        btnNewFormKM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNewFormKMMouseClicked(evt);
             }
         });
 
@@ -4625,9 +4625,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnAddLSDG.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAddLSDG.setForeground(new java.awt.Color(255, 255, 255));
         btnAddLSDG.setText("Thêm");
-        btnAddLSDG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddLSDGActionPerformed(evt);
+        btnAddLSDG.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddLSDGMouseClicked(evt);
             }
         });
 
@@ -4635,9 +4635,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnUpdateLSDG.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUpdateLSDG.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdateLSDG.setText("Sửa");
-        btnUpdateLSDG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateLSDGActionPerformed(evt);
+        btnUpdateLSDG.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateLSDGMouseClicked(evt);
             }
         });
 
@@ -6588,12 +6588,12 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblChatLieuTTSPMouseClicked
 
-    private void jLabel89MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel89MouseClicked
+    private void jLabel89MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         jTabbedPane2.setSelectedIndex(5);
-    }//GEN-LAST:event_jLabel89MouseClicked
+    }
 
-    private void btnNewFormVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewFormVoucherActionPerformed
+    private void btnNewFormVoucherActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         txtMaVoucher.setText("");
         txtTenVoucher.setText("");
@@ -6602,9 +6602,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         txtNKetThucVoucher.setText("");
         txtSoTienGiamVoucher.setText("");
         txtSoTienYCVoucher.setText("");
-    }//GEN-LAST:event_btnNewFormVoucherActionPerformed
+    }
 
-    private void btnNewFormKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewFormKMActionPerformed
+    private void btnNewFormKMActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         txtMaKhuyenMai.setText("");
         txtTenKhuyenMai.setText("");
@@ -6612,8 +6612,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         txtNKetThucKhuyenMai.setText("");
         txtGiamGiaKhuyenMai.setText("");
 
-    }//GEN-LAST:event_btnNewFormKMActionPerformed
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+    }
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkTTSP()) {
@@ -6631,12 +6632,12 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton17ActionPerformed
+    }
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_btnExitActionPerformed
+    }
 
     private void txtTGBatDauLSDGFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTGBatDauLSDGFocusGained
         if (txtTGBatDauLSDG.getText().equals("dd-mm-yyyy")) {
@@ -6676,7 +6677,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         txtTGKetThucLSDG.setText("dd-mm-yyyy");
     }//GEN-LAST:event_btnNewLSDGActionPerformed
 
-    private void btnAddLSDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLSDGActionPerformed
+    private void btnAddLSDGActionPerformed(java.awt.event.ActionEvent evt) {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkLSDG() && checkTrungMaDonGia(txtMaDonGia.getText()) && checkTrungMaSPCTLSG(cboMaSPCTLSG.getSelectedItem() + "")) {
@@ -6687,9 +6688,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
         }
-    }//GEN-LAST:event_btnAddLSDGActionPerformed
+    }
 
-    private void btnUpdateLSDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateLSDGActionPerformed
+    private void btnUpdateLSDGActionPerformed(java.awt.event.ActionEvent evt) {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkLSDG()) {
@@ -6707,7 +6708,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_btnUpdateLSDGActionPerformed
+    }
 
     private void cboMaSPCTLSGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMaSPCTLSGActionPerformed
         // TODO add your handling code here:
@@ -6836,7 +6837,26 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         txtTimKiemTGKTLSDG.setText(" ");
     }//GEN-LAST:event_btnTKNgayLSDG1ActionPerformed
 
-    private void btnAddLSDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLSDGActionPerformed
+    private void btnThemThuocTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemThuocTinhActionPerformed
+        jTabbedPane4.setSelectedIndex(2);
+    }//GEN-LAST:event_btnThemThuocTinhActionPerformed
+
+    private void lblHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhAnhMouseClicked
+        // TODO add your handling code here:
+        dlg.showOpenDialog(this);
+        String path = dlg.getSelectedFile().getAbsolutePath();
+        ImageIcon icon = new ImageIcon(path);
+        Image imageIcon = icon.getImage().getScaledInstance(120, 150, Image.SCALE_SMOOTH);
+
+    }//GEN-LAST:event_lblHinhAnhMouseClicked
+
+    private void lblAnhNenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhNenMouseClicked
+        // TODO add your handling code here:
+        jTabbedPane2.setSelectedIndex(6);
+    }//GEN-LAST:event_lblAnhNenMouseClicked
+
+    private void btnAddLSDGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddLSDGMouseClicked
+        // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkLSDG() && checkTrungMaDonGia(txtMaDonGia.getText())) {
@@ -6847,9 +6867,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
         }
-    }//GEN-LAST:event_btnAddLSDGActionPerformed
+    }//GEN-LAST:event_btnAddLSDGMouseClicked
 
-    private void btnUpdateLSDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateLSDGActionPerformed
+    private void btnUpdateLSDGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateLSDGMouseClicked
+        // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkLSDG()) {
@@ -6867,13 +6888,23 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_btnUpdateLSDGActionPerformed
-    private void jLabel89MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel89MouseClicked
-        // TODO add your handling code here:
-        jTabbedPane2.setSelectedIndex(6);
-    }//GEN-LAST:event_jLabel89MouseClicked
+    }//GEN-LAST:event_btnUpdateLSDGMouseClicked
 
-    private void btnNewFormVoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewFormVoucherActionPerformed
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnExitMouseClicked
+
+    private void btnNewFormKMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewFormKMMouseClicked
+        // TODO add your handling code here:
+        txtMaKhuyenMai.setText("");
+        txtTenKhuyenMai.setText("");
+        txtNBatDauKhuyenMai.setText("");
+        txtNKetThucKhuyenMai.setText("");
+        txtGiamGiaKhuyenMai.setText("");
+    }//GEN-LAST:event_btnNewFormKMMouseClicked
+
+    private void btnNewFormVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNewFormVoucherMouseClicked
         // TODO add your handling code here:
         txtMaVoucher.setText("");
         txtTenVoucher.setText("");
@@ -6882,18 +6913,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         txtNKetThucVoucher.setText("");
         txtSoTienGiamVoucher.setText("");
         txtSoTienYCVoucher.setText("");
-    }//GEN-LAST:event_btnNewFormVoucherActionPerformed
+    }//GEN-LAST:event_btnNewFormVoucherMouseClicked
 
-    private void btnNewFormKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewFormKMActionPerformed
+    private void btnSuaChiTietSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaChiTietSanPhamMouseClicked
         // TODO add your handling code here:
-        txtMaKhuyenMai.setText("");
-        txtTenKhuyenMai.setText("");
-        txtNBatDauKhuyenMai.setText("");
-        txtNKetThucKhuyenMai.setText("");
-        txtGiamGiaKhuyenMai.setText("");
-
-    }//GEN-LAST:event_btnNewFormKMActionPerformed
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkTTSP()) {
@@ -6911,24 +6934,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnExitActionPerformed
-    private void btnThemThuocTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemThuocTinhActionPerformed
-        jTabbedPane4.setSelectedIndex(2);
-    }//GEN-LAST:event_btnThemThuocTinhActionPerformed
-
-    private void lblHinhAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhAnhMouseClicked
-        // TODO add your handling code here:
-        dlg.showOpenDialog(this);
-        String path = dlg.getSelectedFile().getAbsolutePath();
-        ImageIcon icon = new ImageIcon(path);
-        Image imageIcon = icon.getImage().getScaledInstance(120, 150, Image.SCALE_SMOOTH);
-        
-    }//GEN-LAST:event_lblHinhAnhMouseClicked
+    }//GEN-LAST:event_btnSuaChiTietSanPhamMouseClicked
 
     /**
      * @param args the command line arguments
@@ -6999,6 +7005,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btnSearchHuy;
     private javax.swing.JButton btnSearchNV;
     private javax.swing.JButton btnSearchNVNghi;
+    private javax.swing.JButton btnSuaChiTietSanPham;
     private javax.swing.JButton btnSuaKhuyenMai;
     private javax.swing.JButton btnSuaMauSacTTSP;
     private javax.swing.JButton btnSuaVoucher;
@@ -7041,7 +7048,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboMauTTSP;
     private javax.swing.JComboBox<String> cboTenNCCTTSP;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton3;
@@ -7128,7 +7134,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel85;
-    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel90;
     private javax.swing.JLabel jLabel91;
@@ -7213,6 +7218,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JLabel lblAnhNen;
     private javax.swing.JLabel lblCTT;
     private javax.swing.JLabel lblHinhAnh;
     private javax.swing.JLabel lblRoles;
