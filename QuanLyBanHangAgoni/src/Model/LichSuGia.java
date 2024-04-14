@@ -13,6 +13,7 @@ public class LichSuGia {
     String maDonGia;
     String maSPCT;
     String TenSP;
+    String maSanPham;
     String ngayBatDau;
     String ngayKetThuc;
     double giaDau;
@@ -21,10 +22,11 @@ public class LichSuGia {
     public LichSuGia() {
     }
 
-    public LichSuGia(String maDonGia, String maSPCT, String TenSP, String ngayBatDau, String ngayKetThuc, double giaDau, double giaSau) {
+    public LichSuGia(String maDonGia, String maSPCT, String TenSP, String maSanPham, String ngayBatDau, String ngayKetThuc, double giaDau, double giaSau) {
         this.maDonGia = maDonGia;
         this.maSPCT = maSPCT;
         this.TenSP = TenSP;
+        this.maSanPham = maSanPham;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
         this.giaDau = giaDau;
@@ -53,6 +55,14 @@ public class LichSuGia {
 
     public void setTenSP(String TenSP) {
         this.TenSP = TenSP;
+    }
+
+    public String getMaSanPham() {
+        return maSanPham;
+    }
+
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
     }
 
     public String getNgayBatDau() {
@@ -87,5 +97,6 @@ public class LichSuGia {
         this.giaSau = giaSau;
     }
 
-    
+ 
+  
 }

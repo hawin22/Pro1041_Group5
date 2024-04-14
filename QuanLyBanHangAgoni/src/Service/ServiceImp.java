@@ -32,6 +32,7 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<NguoiDung> listQuanLy = new ArrayList<>();
     ArrayList<Login> listLoginTam = new ArrayList<>();
     ArrayList<ChiTietHoaDon> listCTHD = new ArrayList<>();
+    ArrayList<NguoiDung> listEMail = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
@@ -772,7 +773,7 @@ public class ServiceImp implements ServiceInterface {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 LichSuGia lsg = new LichSuGia();
-//                lsg.setMaSanPham(rs.getString(1));
+                lsg.setMaSanPham(rs.getString(1));
                 lsg.setMaDonGia(rs.getString(2));
                 lsg.setGiaDau(rs.getDouble(3));
                 lsg.setGiaSau(rs.getDouble(4));
@@ -1277,8 +1278,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                                    TenChatLieu,\n"
                 + "                                \n"
                 + "                                   STRING_AGG(HinhAnh, ',') AS HinhAnh,\n"
-                + "                                Hang,\n"
-                + "                                maKhuyenMai\n"
+                + "                                Hang\n"
                 + "                                FROM \n"
                 + "                                  ChiTietSanPham c\n"
                 + "                              JOIN\n"
@@ -1309,8 +1309,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                               Hang,\n"
                 + "                			l.ThoiGianBatDau,\n"
                 + "                				l.ThoiGianKetThuc,\n"
-                + "                				l.GiaSau,\n"
-                + "                                maKhuyenMai\n"
+                + "                				l.GiaSau\n"
                 + "                having c.MaSanPham like ? or TenSanPham like ?";
         try {
             Connection conn = DBConnect1.getConnection();
@@ -1331,7 +1330,6 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(9));
                 sp.setHinhAnh(rs.getString(10));
                 sp.setHang(rs.getString(11));
-                sp.setMaSPKM(rs.getString(12));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -2664,12 +2662,13 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<LichSuGia> getTimKiemLSG(String keyword) {
         listLichSuGia.clear();
-        String sql = "Select ls.MaDonGia, ls.MaSanPhamChiTiet,sp.TenSanPham, GiaDau ,\n"
-                + "GiaSau , CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau,\n"
-                + "CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia ls\n"
-                + "join ChiTietSanPham ct on ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
-                + "join SanPham sp on ct.MaSanPham = sp.MaSanPham"
-                + "where ls.MaDonGia like ? ";
+        String sql = "SELECT ls.MaDonGia, ls.MaSanPhamChiTiet, sp.TenSanPham, GiaDau, GiaSau, \n"
+                + "       CONVERT(VARCHAR, ThoiGianBatDau, 110) AS ThoiGianBatDau, \n"
+                + "       CONVERT(VARCHAR, ThoiGianKetThuc, 110) AS ThoiGianKetThuc \n"
+                + "FROM LichSuDonGia ls\n"
+                + "JOIN ChiTietSanPham ct ON ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "JOIN SanPham sp ON ct.MaSanPham = sp.MaSanPham\n"
+                + "WHERE ls.MaDonGia LIKE ?";
 
         try {
             Connection conn = DBConnect1.getConnection();
@@ -3317,13 +3316,57 @@ public class ServiceImp implements ServiceInterface {
             Connection conn = DBConnect1.getConnection();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, "%" + keyWord + "%");
+            stm.setString(2, "%" + keyWord + "%");
             ResultSet rs = stm.executeQuery();
-            while (true) {
-
+            while (rs.next()) {
+                Voucher vc = new Voucher();
+                vc.setMaVoucher(rs.getString(1));
+                vc.setTenVoucher(rs.getString(2));
+                vc.setSoLuongVC(rs.getInt(3));
+                vc.setHanSuDungVC(rs.getString(4));
+                vc.setNgayBatDauVC(rs.getString(5));
+                vc.setSoTienGiam(rs.getDouble(6));
+                vc.setSoTienYeuCau(rs.getDouble(7));
+                listVoucher.add(vc);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listVoucher;
     }
+
+    @Override
+    public String getEmail(String tenDN) {
+        String getEmail = "";
+        String sql = "select email from NguoiDung where tenDangNhap = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, tenDN);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                getEmail = rs.getString("email");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return getEmail;
+    }
+
+    @Override
+    public ArrayList<NguoiDung> listEmail(NguoiDung nd) {
+        listEMail.add(nd);
+        return listEMail;
+    }
+
+    @Override
+    public String getTenDN() {
+        return listEMail.get(0).getTenDN();
+    }
+
+    @Override
+    public ArrayList<NguoiDung> listNV() {
+        return listEMail;
+    }
+
 }

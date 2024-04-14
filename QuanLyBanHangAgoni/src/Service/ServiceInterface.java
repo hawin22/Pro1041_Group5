@@ -145,8 +145,12 @@ public interface ServiceInterface {
     Double tongDoanhThuMD();
     Integer tongDoanhSoMD();
     Integer tongHoaDonThanhToan();
-   ArrayList<HoaDonChiTiet> getAllHoaDonChiTietChuaHoanThanh(String maHoaDon);
+    ArrayList<HoaDonChiTiet> getAllHoaDonChiTietChuaHoanThanh(String maHoaDon);
     ArrayList<ChiTietHoaDon> getALlCTHD();
     ArrayList<SanPham> getAllSanPhamKM();
     ArrayList<Voucher> timKiemVoucherBanHang(String keyWord);
+    String getEmail(String tenDN);
+    ArrayList<NguoiDung> listEmail(NguoiDung nd);
+    ArrayList<NguoiDung> listNV();
+    String getTenDN();
 };
