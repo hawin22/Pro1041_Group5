@@ -11,7 +11,8 @@ package Model;
 public class LichSuGia {
 
     String maDonGia;
-    String maSanPham;
+    String maSPCT;
+    String TenSP;
     String ngayBatDau;
     String ngayKetThuc;
     double giaDau;
@@ -20,9 +21,10 @@ public class LichSuGia {
     public LichSuGia() {
     }
 
-    public LichSuGia(String maDonGia, String maSanPham, String ngayBatDau, String ngayKetThuc, double giaDau, double giaSau) {
+    public LichSuGia(String maDonGia, String maSPCT, String TenSP, String ngayBatDau, String ngayKetThuc, double giaDau, double giaSau) {
         this.maDonGia = maDonGia;
-        this.maSanPham = maSanPham;
+        this.maSPCT = maSPCT;
+        this.TenSP = TenSP;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
         this.giaDau = giaDau;
@@ -37,12 +39,20 @@ public class LichSuGia {
         this.maDonGia = maDonGia;
     }
 
-    public String getMaSanPham() {
-        return maSanPham;
+    public String getMaSPCT() {
+        return maSPCT;
     }
 
-    public void setMaSanPham(String maSanPham) {
-        this.maSanPham = maSanPham;
+    public void setMaSPCT(String maSPCT) {
+        this.maSPCT = maSPCT;
+    }
+
+    public String getTenSP() {
+        return TenSP;
+    }
+
+    public void setTenSP(String TenSP) {
+        this.TenSP = TenSP;
     }
 
     public String getNgayBatDau() {
@@ -77,4 +87,5 @@ public class LichSuGia {
         this.giaSau = giaSau;
     }
 
+    
 }

@@ -772,7 +772,7 @@ public class ServiceImp implements ServiceInterface {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 LichSuGia lsg = new LichSuGia();
-                lsg.setMaSanPham(rs.getString(1));
+//                lsg.setMaSanPham(rs.getString(1));
                 lsg.setMaDonGia(rs.getString(2));
                 lsg.setGiaDau(rs.getDouble(3));
                 lsg.setGiaSau(rs.getDouble(4));
@@ -2605,7 +2605,11 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<LichSuGia> getAllLichSuDonGia() {
         listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia";
+        String sql = "Select ls.MaDonGia, ls.MaSanPhamChiTiet,sp.TenSanPham, GiaDau ,\n"
+                + "GiaSau , CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau,\n"
+                + "CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia ls\n"
+                + "join ChiTietSanPham ct on ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "join SanPham sp on ct.MaSanPham = sp.MaSanPham";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -2613,10 +2617,12 @@ public class ServiceImp implements ServiceInterface {
             while (rs.next()) {
                 LichSuGia ls = new LichSuGia();
                 ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(5));
+                ls.setMaSPCT(rs.getString(2));
+                ls.setTenSP(rs.getString(3));
+                ls.setGiaDau(rs.getDouble(4));
+                ls.setGiaSau(rs.getDouble(5));
+                ls.setNgayBatDau(rs.getString(6));
+                ls.setNgayKetThuc(rs.getString(7));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2626,8 +2632,12 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public ArrayList<LichSuGia> locLichSuDonGia(String ngayBatDau, String ngayKetThuc) {
-        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia\n"
-                + "where ThoiGianBatDau between ? and ? ";
+        String sql = "Select ls.MaDonGia, ls.MaSanPhamChiTiet,sp.TenSanPham, GiaDau ,\n"
+                + "GiaSau , CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau,\n"
+                + "CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia ls\n"
+                + "join ChiTietSanPham ct on ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "join SanPham sp on ct.MaSanPham = sp.MaSanPham\n"
+                + "where ls.ThoiGianBatDau between ? and ? ";
         listLichSuGia.clear();
         try {
             Connection conn = DBConnect1.getConnection();
@@ -2638,10 +2648,12 @@ public class ServiceImp implements ServiceInterface {
             while (rs.next()) {
                 LichSuGia ls = new LichSuGia();
                 ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(5));
+                ls.setMaSPCT(rs.getString(2));
+                ls.setTenSP(rs.getString(3));
+                ls.setGiaDau(rs.getDouble(4));
+                ls.setGiaSau(rs.getDouble(5));
+                ls.setNgayBatDau(rs.getString(6));
+                ls.setNgayKetThuc(rs.getString(7));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2652,8 +2664,12 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<LichSuGia> getTimKiemLSG(String keyword) {
         listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia\n"
-                + "where MaDonGia like ? ";
+        String sql = "Select ls.MaDonGia, ls.MaSanPhamChiTiet,sp.TenSanPham, GiaDau ,\n"
+                + "GiaSau , CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau,\n"
+                + "CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia ls\n"
+                + "join ChiTietSanPham ct on ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "join SanPham sp on ct.MaSanPham = sp.MaSanPham"
+                + "where ls.MaDonGia like ? ";
 
         try {
             Connection conn = DBConnect1.getConnection();
@@ -2663,10 +2679,12 @@ public class ServiceImp implements ServiceInterface {
             while (rs.next()) {
                 LichSuGia ls = new LichSuGia();
                 ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(5));
+                ls.setMaSPCT(rs.getString(2));
+                ls.setTenSP(rs.getString(3));
+                ls.setGiaDau(rs.getDouble(4));
+                ls.setGiaSau(rs.getDouble(5));
+                ls.setNgayBatDau(rs.getString(6));
+                ls.setNgayKetThuc(rs.getString(7));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2677,7 +2695,12 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<LichSuGia> getSXTheoMaLSDG() {
         listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia order by MaDonGia";
+        String sql = "Select ls.MaDonGia, ls.MaSanPhamChiTiet,sp.TenSanPham, GiaDau ,\n"
+                + "GiaSau , CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau,\n"
+                + "CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia ls\n"
+                + "join ChiTietSanPham ct on ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "join SanPham sp on ct.MaSanPham = sp.MaSanPham"
+                + " order by ls.MaDonGia";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -2685,10 +2708,12 @@ public class ServiceImp implements ServiceInterface {
             while (rs.next()) {
                 LichSuGia ls = new LichSuGia();
                 ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(5));
+                ls.setMaSPCT(rs.getString(2));
+                ls.setTenSP(rs.getString(3));
+                ls.setGiaDau(rs.getDouble(4));
+                ls.setGiaSau(rs.getDouble(5));
+                ls.setNgayBatDau(rs.getString(6));
+                ls.setNgayKetThuc(rs.getString(7));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2699,7 +2724,12 @@ public class ServiceImp implements ServiceInterface {
 
     public ArrayList<LichSuGia> getSXTheoGiaLSDG() {
         listLichSuGia.clear();
-        String sql = "select MaDonGia, GiaDau, GiaSau, CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau, CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia order by GiaDau";
+        String sql = "Select ls.MaDonGia, ls.MaSanPhamChiTiet,sp.TenSanPham, GiaDau ,\n"
+                + "GiaSau , CONVERT(Varchar , ThoiGianBatDau, 110 ) ThoiGianBatDau,\n"
+                + "CONVERT(Varchar , ThoiGianKetThuc, 110 ) ThoiGianKetThuc from LichSuDonGia ls\n"
+                + "join ChiTietSanPham ct on ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "join SanPham sp on ct.MaSanPham = sp.MaSanPham"
+                + " order by ls.GiaDau";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -2707,10 +2737,12 @@ public class ServiceImp implements ServiceInterface {
             while (rs.next()) {
                 LichSuGia ls = new LichSuGia();
                 ls.setMaDonGia(rs.getString(1));
-                ls.setGiaDau(rs.getDouble(2));
-                ls.setGiaSau(rs.getDouble(3));
-                ls.setNgayBatDau(rs.getString(4));
-                ls.setNgayKetThuc(rs.getString(5));
+                ls.setMaSPCT(rs.getString(2));
+                ls.setTenSP(rs.getString(3));
+                ls.setGiaDau(rs.getDouble(4));
+                ls.setGiaSau(rs.getDouble(5));
+                ls.setNgayBatDau(rs.getString(6));
+                ls.setNgayKetThuc(rs.getString(7));
                 listLichSuGia.add(ls);
             }
         } catch (Exception e) {
@@ -2722,13 +2754,14 @@ public class ServiceImp implements ServiceInterface {
     public void addLichSuGia(LichSuGia ls) {
         try {
             Connection conn = DBConnect1.getConnection();
-            String sql = "Insert into LichSuDonGia( MaDonGia, GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc)Values (?,?,?,?,?)";
+            String sql = "Insert into LichSuDonGia( MaDonGia, Masanphamchitiet , GiaDau, GiaSau, ThoiGianBatDau, ThoiGianketThuc)Values (?,?,?,?,?,?)";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, ls.getMaDonGia());
-            stm.setDouble(2, ls.getGiaDau());
-            stm.setDouble(3, ls.getGiaSau());
-            stm.setString(4, ls.getNgayBatDau());
-            stm.setString(5, ls.getNgayKetThuc());
+            stm.setString(2, ls.getMaSPCT());
+            stm.setDouble(3, ls.getGiaDau());
+            stm.setDouble(4, ls.getGiaSau());
+            stm.setString(5, ls.getNgayBatDau());
+            stm.setString(6, ls.getNgayKetThuc());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
@@ -2739,13 +2772,14 @@ public class ServiceImp implements ServiceInterface {
     public void updateLichSuGia(LichSuGia ls) {
         try {
             Connection conn = DBConnect1.getConnection();
-            String sql = "update LichSuDonGia set GiaDau=?, GiaSau=?, ThoiGianBatDau=?, ThoiGianketThuc=? where MaDonGia = ?";
+            String sql = "update LichSuDonGia set MaSanPhamChiTiet = ?, GiaDau=?, GiaSau=?, ThoiGianBatDau=?, ThoiGianketThuc=? where MaDonGia = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(5, ls.getMaDonGia());
-            stm.setDouble(1, ls.getGiaDau());
-            stm.setDouble(2, ls.getGiaSau());
-            stm.setString(3, ls.getNgayBatDau());
-            stm.setString(4, ls.getNgayKetThuc());
+            stm.setString(6, ls.getMaDonGia());
+            stm.setString(1, ls.getMaSPCT());
+            stm.setDouble(2, ls.getGiaDau());
+            stm.setDouble(3, ls.getGiaSau());
+            stm.setString(4, ls.getNgayBatDau());
+            stm.setString(5, ls.getNgayKetThuc());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
@@ -3284,8 +3318,8 @@ public class ServiceImp implements ServiceInterface {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, "%" + keyWord + "%");
             ResultSet rs = stm.executeQuery();
-            while (true) {                
-                
+            while (true) {
+
             }
         } catch (Exception e) {
             e.printStackTrace();
