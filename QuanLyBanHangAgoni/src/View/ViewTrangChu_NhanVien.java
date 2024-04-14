@@ -374,6 +374,7 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
             document.add(maHoaDonPara);
             document.add(new Paragraph("Ma khach hang: " + maKhachHang));
             document.add(new Paragraph("Ma nhan vien: " + maNhanVien));
+            document.add(new Paragraph("Ngay tao: " + getLocalDate()));
             document.add(new Paragraph("Danh muc san pham:"));
             document.add(new Paragraph("-----------------------------------------------------------------------------"));
             document.add(new Paragraph("."));
