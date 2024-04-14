@@ -1898,42 +1898,40 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         setFormKhachHang(ser.getAllKhachHang().get(row));
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
-    boolean isValidPhoneNumber(String phoneNumber) {
-        return phoneNumber.matches("\\d+");
+      boolean isValidPhoneNumber(String phoneNumber) {
+    return phoneNumber.matches("\\d+");
+    }
+    
+   boolean checkKH() {
+    if (txtMaKH.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Mã Khách hàng không để trống");
+        txtMaKH.requestFocus();
+        return false;
+    } else if (txtTenKH.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Tên khách hàng không để trống");
+        txtTenKH.requestFocus();
+        return false;
+    } else if (txtSDTKH.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Số điện thoại không để trống");
+        txtSDTKH.requestFocus();
+        return false;
+    } else if (txtDCKH.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Địa chỉ không để trống");
+        txtDCKH.requestFocus();
+        return false;
     }
 
-    boolean checkKH() {
-        if (txtMaKH.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Mã Khách hàng không  để trống");
-            txtMaKH.requestFocus();
-
-            return false;
-        } else if (txtTenKH.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Tên khách hàng không để trống");
-            txtTenKH.requestFocus();
-
-            return false;
-        } else if (txtSDTKH.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Số điện thoại không để trống");
-            txtSDTKH.requestFocus();
-            return false;
-        } else if (txtDCKH.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "địa chỉ không để trống ");
-            txtDCKH.requestFocus();
-
-            return false;
-        }
-        // Kiểm tra số điện thoại chỉ chứa chữ số
-        if (!isValidPhoneNumber(txtSDTKH.getText())) {
-            JOptionPane.showMessageDialog(this, "Số ĐT chỉ được chứa chữ số");
-            txtSDTKH.requestFocus();
-            return false;
-        }
-
-        return true;
+    // Kiểm tra định dạng số điện thoại
+    String phoneNumber = txtSDTKH.getText().trim();
+    if (!isValidPhoneNumber(phoneNumber)) {
+        JOptionPane.showMessageDialog(this, "Số ĐT chỉ được chứa chữ số");
+        txtSDTKH.requestFocus();
+        return false;
     }
 
-    boolean checkTrung(ArrayList<KhachHang> list, String maKH) {
+    return true;
+}
+    boolean checkTrung(ArrayList<KhachHang> list, String maKH){
         int dem = 0;
         for (KhachHang kh : list) {
             if (kh.getMaKhachHang().equals(maKH)) {
@@ -1942,51 +1940,68 @@ public class ViewTrangChu_NhanVien extends javax.swing.JFrame {
         }
         if (dem == 0) {
             return false;
-        } else {
+        }else{
             return true;
         }
     }
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
         if (checkKH()) {
-            String maKH = txtMaKH.getText();
-
-            // Kiểm tra trùng mã khách hàng
-            if (checkTrung(ser.getAllKhachHang(), maKH)) {
-                JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại");
-            } else {
+        String maKH = txtMaKH.getText();
+        
+        // Kiểm tra trùng mã khách hàng
+        
+        if (checkTrung(ser.getAllKhachHang(), maKH)) {
+            JOptionPane.showMessageDialog(this, "Mã khách hàng đã Tồn Tại");
+        } else {
+            int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn thêm khách hàng này?", "Xác nhận thêm", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
                 ser.addKhachHang(getFormKhachHang());
                 loadDataKhachHang(ser.getAllKhachHang());
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
             }
         }
+    }
     }//GEN-LAST:event_btnThemKHActionPerformed
 
     private void tbnSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnSuaKHActionPerformed
-        if (checkKH()) {
-            int row = tblKhachHang.getSelectedRow();
-            if (row >= 0) {
-                String maKH = txtMaKH.getText();
-
-                KhachHang kh = getFormKhachHang();
-                kh.setMaKhachHang(maKH);
-                ser.updateKhachHang(kh);
-                loadDataKhachHang(ser.getAllKhachHang());
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-
+         if (checkKH()) {
+        int row = tblKhachHang.getSelectedRow();
+        if (row >= 0) {
+            String maKH = txtMaKH.getText();
+            KhachHang kh = getFormKhachHang();
+            kh.setMaKhachHang(maKH);
+            
+            // Kiểm tra trùng mã khách hàng trừ khách hàng đang chỉnh sửa
+            ArrayList<KhachHang> listKhachHang = ser.getAllKhachHang();
+            listKhachHang.remove(row); // Loại bỏ khách hàng đang chỉnh sửa
+            if (checkTrung(listKhachHang, maKH)) {
+                JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại");
+            } else {
+                int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn cập nhật khách hàng này?", "Xác nhận cập nhật", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    ser.updateKhachHang(kh);
+                    loadDataKhachHang(ser.getAllKhachHang());
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                }
             }
         }
+    }
     }//GEN-LAST:event_tbnSuaKHActionPerformed
 
     private void btnXoaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKHActionPerformed
-        int row = tblKhachHang.getSelectedRow();
+         int row = tblKhachHang.getSelectedRow();
         if (row >= 0) {
-            String maKH = ser.getRowKhachHang(row).getMaKhachHang();
-            ser.deleteKhachHang(maKH);
-            loadDataKhachHang(ser.getAllKhachHang());
-            JOptionPane.showMessageDialog(this, "Xoá thành công khách hàng");
-        } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để xoá");
-        }
+    String maKH = ser.getRowKhachHang(row).getMaKhachHang();
+    
+    int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa khách hàng này?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+    if (choice == JOptionPane.YES_OPTION) {
+        ser.deleteKhachHang(maKH);
+        loadDataKhachHang(ser.getAllKhachHang());
+        JOptionPane.showMessageDialog(this, "Xoá thành công khách hàng");
+    }
+} else {
+    JOptionPane.showMessageDialog(this, "Vui lòng chọn một khách hàng để xoá");
+}
     }//GEN-LAST:event_btnXoaKHActionPerformed
     private void tblHoaDonBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonBanHangMouseClicked
         // TODO add your handling code here:
