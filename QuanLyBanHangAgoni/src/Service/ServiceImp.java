@@ -292,6 +292,7 @@ public class ServiceImp implements ServiceInterface {
 
         return tongDoanhSo;
     }
+    
 
     @Override
     public ArrayList<Voucher> getAllVoucher() {
@@ -1668,7 +1669,12 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public String listLoginBanHang() {
+        if (!listLoginTam.isEmpty()) { // Kiểm tra nếu danh sách không rỗng
         return listLoginTam.get(0).getUserName();
+    } else {
+        // Xử lý trường hợp danh sách rỗng, có thể thông báo lỗi hoặc trả về giá trị mặc định
+        return "Danh sách đăng nhập rỗng";
+    }
     }
 
     public HoaDon getRowHoaDonTheoMa(String maHoaDon) {
