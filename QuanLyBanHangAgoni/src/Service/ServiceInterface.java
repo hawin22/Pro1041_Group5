@@ -153,4 +153,5 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> listEmail(NguoiDung nd);
     ArrayList<NguoiDung> listNV();
     String getTenDN();
+    ArrayList<KhachHang> timKiemTenKhachHangSDT(String keyWord);
 };
