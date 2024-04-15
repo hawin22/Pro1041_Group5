@@ -595,6 +595,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         sp.setMaKT(ser.getIDKichThuoc(cboKichThuocTTSP.getSelectedItem().toString()));
         sp.setMaCL(ser.getIDChatLieu(cboChatLieuTTSP.getSelectedItem().toString()));
         sp.setMau(String.valueOf(cboMauTTSP.getSelectedItem() + ""));
+        sp.setHinhAnh(linkAnh);
         System.out.println("" + sp.toString());
         return sp;
     }
@@ -622,6 +623,12 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         cboKichThuocTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 6) + "");
         cboChatLieuTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 8) + "");
         cboMauTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 7) + "");
+        String linkAnh = (String) tblSanPhamCTSP.getValueAt(row, 8);
+        ImageIcon icon = new ImageIcon(linkAnh);
+        Image imageIcon = icon.getImage().getScaledInstance(120, 150, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(imageIcon);
+        lblHinhAnh.setIcon(icon);
+        lblHinhAnh.setText("");
     }
 
     void showCboMau() {
@@ -6809,7 +6816,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         String path = dlg.getSelectedFile().getAbsolutePath();
         ImageIcon icon = new ImageIcon(path);
         Image imageIcon = icon.getImage().getScaledInstance(120, 150, Image.SCALE_SMOOTH);
-
+        icon = new ImageIcon(imageIcon);
+        lblHinhAnh.setIcon(icon);
+        lblHinhAnh.setText("");
+        linkAnh = path;
     }//GEN-LAST:event_lblHinhAnhMouseClicked
 
     private void lblAnhNenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhNenMouseClicked
