@@ -1421,6 +1421,12 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
 
     }
+    
+    public String genMaHinhAnh(){
+        int dem = ser.getAllHinhAnh();
+        String maHinhAnh = "HA00"+(dem+1);
+        return maHinhAnh;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -6369,6 +6375,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         cboKichThuocTTSP.setSelectedIndex(0);
         cboChatLieuTTSP.setSelectedIndex(0);
         cboMauTTSP.setSelectedIndex(0);
+        System.out.println(genMaHinhAnh());
     }//GEN-LAST:event_txtNewTTSPActionPerformed
 
     private void btnAddSPCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSPCTActionPerformed
@@ -6377,6 +6384,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         if (check == JOptionPane.YES_OPTION) {
             if (checkTTSP() && checkTrungMaSP(txtMaSPCT.getText()) && checkTrungTenSP(txtTenSPSPCT.getText())) {
                 ser.addCTSPTTSP(getFormSanPhamTTSP());
+                ser.themAnhVaoCTSP(getFormSanPhamTTSP().getHinhAnh(), txtMaSPCT.getText(), genMaHinhAnh());
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 loadDataQLSP(ser.getAllSanPhamCT());
                 showCboSPCT();
