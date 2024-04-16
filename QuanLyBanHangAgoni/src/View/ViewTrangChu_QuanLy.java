@@ -595,6 +595,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         sp.setMaKT(ser.getIDKichThuoc(cboKichThuocTTSP.getSelectedItem().toString()));
         sp.setMaCL(ser.getIDChatLieu(cboChatLieuTTSP.getSelectedItem().toString()));
         sp.setMau(String.valueOf(cboMauTTSP.getSelectedItem() + ""));
+        sp.setHinhAnh(linkAnh);
         System.out.println("" + sp.toString());
         return sp;
     }
@@ -622,6 +623,12 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         cboKichThuocTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 6) + "");
         cboChatLieuTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 8) + "");
         cboMauTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 7) + "");
+        String linkAnh = (String) tblSanPhamCTSP.getValueAt(row, 8);
+        ImageIcon icon = new ImageIcon(linkAnh);
+        Image imageIcon = icon.getImage().getScaledInstance(120, 150, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(imageIcon);
+        lblHinhAnh.setIcon(icon);
+        lblHinhAnh.setText("");
     }
 
     void showCboMau() {
@@ -1588,9 +1595,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         tblSanPhamCTSP = new javax.swing.JTable();
         btnTimKiemSP = new javax.swing.JButton();
         jLabel43 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jPanel27 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
@@ -2407,7 +2411,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jTabbedPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3021,7 +3025,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jLabel83.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel83.setText("Tìm kiếm mã sản phẩm:");
 
-        buttonGroup7.add(rdoSXTheoMaSPTTSP);
         rdoSXTheoMaSPTTSP.setText("Sắp xếp theo mã");
         rdoSXTheoMaSPTTSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -3029,7 +3032,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup7.add(rdoSXTheoTenTTSP);
         rdoSXTheoTenTTSP.setText("Sắp xếp theo tên");
         rdoSXTheoTenTTSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -3431,27 +3433,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(51, 153, 255));
         jLabel43.setText("Quản lý chi tiết sản phẩm");
-
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Remove");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -4133,7 +4114,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                                     .addComponent(txtTKNBDVoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnTKTNVoucher)))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4354,7 +4335,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                                     .addComponent(txtTKNBDKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnTKTKNKM)))))
                     .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 1273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(371, Short.MAX_VALUE))
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4518,7 +4499,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel31Layout.createSequentialGroup()
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
                         .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56))))
         );
@@ -4931,7 +4912,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     .addGroup(jPanel41Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jLabel100)))
-                .addContainerGap(549, Short.MAX_VALUE))
+                .addContainerGap(654, Short.MAX_VALUE))
         );
         jPanel41Layout.setVerticalGroup(
             jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5082,11 +5063,18 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(btnHienThiBCTK, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149)
+                        .addGap(40, 40, 40)
+                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(btnHienThiBCTK)
+                        .addGap(207, 207, 207)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -5095,13 +5083,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
-                        .addComponent(btnTimKiem))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTimKiem)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -5120,11 +5102,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                             .addComponent(jLabel19))
                         .addGap(42, 42, 42))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHienThiBCTK, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25))))
         );
@@ -5238,7 +5219,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane7))
-                .addContainerGap(627, Short.MAX_VALUE))
+                .addContainerGap(732, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5274,7 +5255,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(193, 193, 193)
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(467, Short.MAX_VALUE))
+                .addContainerGap(572, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6358,18 +6339,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTimKiemSPActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void txtMaMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaMauSacActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaMauSacActionPerformed
@@ -6863,7 +6832,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         String path = dlg.getSelectedFile().getAbsolutePath();
         ImageIcon icon = new ImageIcon(path);
         Image imageIcon = icon.getImage().getScaledInstance(120, 150, Image.SCALE_SMOOTH);
-
+        icon = new ImageIcon(imageIcon);
+        lblHinhAnh.setIcon(icon);
+        lblHinhAnh.setText("");
+        linkAnh = path;
     }//GEN-LAST:event_lblHinhAnhMouseClicked
 
     private void lblAnhNenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhNenMouseClicked
@@ -7084,10 +7056,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboMauSacTTSP;
     private javax.swing.JComboBox<String> cboMauTTSP;
     private javax.swing.JComboBox<String> cboTenNCCTTSP;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;

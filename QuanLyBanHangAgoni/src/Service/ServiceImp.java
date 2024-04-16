@@ -292,6 +292,7 @@ public class ServiceImp implements ServiceInterface {
 
         return tongDoanhSo;
     }
+    
 
     @Override
     public ArrayList<Voucher> getAllVoucher() {
@@ -1668,7 +1669,12 @@ public class ServiceImp implements ServiceInterface {
     }
 
     public String listLoginBanHang() {
+        if (!listLoginTam.isEmpty()) { // Kiểm tra nếu danh sách không rỗng
         return listLoginTam.get(0).getUserName();
+    } else {
+        // Xử lý trường hợp danh sách rỗng, có thể thông báo lỗi hoặc trả về giá trị mặc định
+        return "Danh sách đăng nhập rỗng";
+    }
     }
 
     public HoaDon getRowHoaDonTheoMa(String maHoaDon) {
@@ -3366,6 +3372,29 @@ public class ServiceImp implements ServiceInterface {
         }
         return getEmail;
     }
+   public ArrayList<KhachHang> timKiemTenKhachHangSDT(String tenHoacSDT) {
+    ArrayList<KhachHang> listKhachHang = new ArrayList<>();
+   
+    String sql = "SELECT * FROM KhachHang WHERE TenKhachHang LIKE ? OR SDT LIKE ?";
+    try {
+        Connection conn = DBConnect1.getConnection();
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1, "%" + tenHoacSDT + "%");
+        stm.setString(2, "%" + tenHoacSDT + "%");
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            KhachHang kh = new KhachHang();
+            kh.setMaKhachHang(rs.getString("MaKhachHang"));
+            kh.setTenKhachHang(rs.getString("TenKhachHang"));
+            kh.setSDT(rs.getString("SDT"));
+            kh.setDiaChi(rs.getString("DiaChi"));
+            listKhachHang.add(kh);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return listKhachHang;
+}
 
     @Override
     public ArrayList<NguoiDung> listEmail(NguoiDung nd) {
