@@ -1123,6 +1123,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         return true;
     }
 
+    
+    
     public boolean checkTrungMaDonGia(String ma) {
         int count = 0;
         for (LichSuGia sp : ser.getAllLichSuDonGia()) {
@@ -1583,6 +1585,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnSuaChiTietSanPham = new javax.swing.JButton();
         cboTenNCCTTSP = new javax.swing.JComboBox<>();
         btnThemThuocTinh = new javax.swing.JButton();
+        btnThemSoLuongSP = new javax.swing.JButton();
         jPanel26 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
         txtTimKiemSPTTSP = new javax.swing.JTextField();
@@ -3216,6 +3219,16 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnThemSoLuongSP.setBackground(new java.awt.Color(51, 153, 255));
+        btnThemSoLuongSP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThemSoLuongSP.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemSoLuongSP.setText("Thêm số lượng");
+        btnThemSoLuongSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnThemSoLuongSPMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
@@ -3262,8 +3275,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                             .addComponent(cboMauSacTTSP, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cboChatLieuTTSP, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(105, 105, 105))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGap(392, 392, 392)
                 .addComponent(txtNewTTSP, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAddSPCT, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3271,7 +3284,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addComponent(btnSuaChiTietSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnThemThuocTinh)
-                .addGap(467, 467, 467))
+                .addGap(18, 18, 18)
+                .addComponent(btnThemSoLuongSP)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3321,13 +3336,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel37)
                             .addComponent(txtSoLuongTTSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewTTSP)
                     .addComponent(btnSuaChiTietSanPham)
                     .addComponent(btnAddSPCT)
-                    .addComponent(btnThemThuocTinh))
-                .addGap(23, 23, 23))
+                    .addComponent(btnThemThuocTinh)
+                    .addComponent(btnThemSoLuongSP))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel26.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -6908,6 +6924,26 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSuaChiTietSanPhamMouseClicked
 
+    private void btnThemSoLuongSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemSoLuongSPMouseClicked
+         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
+        if (check == JOptionPane.YES_OPTION) {
+            if (checkTTSP()) {
+                int row = tblSanPhamCTSP.getSelectedRow();
+                if (row >= 0) {
+                    String ma = ser.getAllSanPhamCT().get(row).getMaSPCT();
+                    SanPham sp = getFormSanPhamTTSP();
+                    sp.setMaSPCT(ma);
+                    ser.updateSLCTSPTTSP(sp);
+                    JOptionPane.showMessageDialog(this, "Thêm số lượng thành công");
+                    loadDataQLSP(ser.getAllSanPhamCT());
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm số lượng thất bại yêu cầu không sửa các trường khác ngoài số lượng");
+                }
+            }
+        }
+    }//GEN-LAST:event_btnThemSoLuongSPMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -6988,6 +7024,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btnTKTNVoucher;
     private javax.swing.JButton btnThemKhuyenMai;
     private javax.swing.JButton btnThemSPKM;
+    private javax.swing.JButton btnThemSoLuongSP;
     private javax.swing.JButton btnThemThuocTinh;
     private javax.swing.JButton btnThemVoucher;
     private javax.swing.JButton btnTimKiem;
