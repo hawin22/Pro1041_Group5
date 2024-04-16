@@ -1125,8 +1125,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         return true;
     }
 
-    
-    
     public boolean checkTrungMaDonGia(String ma) {
         int count = 0;
         for (LichSuGia sp : ser.getAllLichSuDonGia()) {
@@ -1421,10 +1419,10 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
 
     }
-    
-    public String genMaHinhAnh(){
+
+    public String genMaHinhAnh() {
         int dem = ser.getAllHinhAnh();
-        String maHinhAnh = "HA00"+(dem+1);
+        String maHinhAnh = "HA00" + (dem + 1);
         return maHinhAnh;
     }
 
@@ -7023,6 +7021,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                     SanPham sp = getFormSanPhamTTSP();
                     sp.setMaSPCT(ma);
                     ser.updateCTSPTTSP(sp);
+                    ser.updateHinhAnhVaoCTSP(getFormSanPhamTTSP().getHinhAnh(), getFormSanPhamTTSP().getMaSPCT());
                     JOptionPane.showMessageDialog(this, "Update thành công");
                     loadDataQLSP(ser.getAllSanPhamCT());
 
@@ -7034,7 +7033,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaChiTietSanPhamMouseClicked
 
     private void btnThemSoLuongSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemSoLuongSPMouseClicked
-         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
+        int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkTTSP()) {
                 int row = tblSanPhamCTSP.getSelectedRow();
