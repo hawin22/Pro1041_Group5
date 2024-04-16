@@ -33,6 +33,7 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<Login> listLoginTam = new ArrayList<>();
     ArrayList<ChiTietHoaDon> listCTHD = new ArrayList<>();
     ArrayList<NguoiDung> listEMail = new ArrayList<>();
+    ArrayList<SanPham> listHinhAnh = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
@@ -292,7 +293,6 @@ public class ServiceImp implements ServiceInterface {
 
         return tongDoanhSo;
     }
-    
 
     @Override
     public ArrayList<Voucher> getAllVoucher() {
@@ -1670,11 +1670,11 @@ public class ServiceImp implements ServiceInterface {
 
     public String listLoginBanHang() {
         if (!listLoginTam.isEmpty()) { // Kiểm tra nếu danh sách không rỗng
-        return listLoginTam.get(0).getUserName();
-    } else {
-        // Xử lý trường hợp danh sách rỗng, có thể thông báo lỗi hoặc trả về giá trị mặc định
-        return "Danh sách đăng nhập rỗng";
-    }
+            return listLoginTam.get(0).getUserName();
+        } else {
+            // Xử lý trường hợp danh sách rỗng, có thể thông báo lỗi hoặc trả về giá trị mặc định
+            return "Danh sách đăng nhập rỗng";
+        }
     }
 
     public HoaDon getRowHoaDonTheoMa(String maHoaDon) {
@@ -2601,11 +2601,11 @@ public class ServiceImp implements ServiceInterface {
             e.printStackTrace();
         }
     }
-    
+
     public void updateCTSPTTSP(SanPham s) {
         try {
             Connection conn = DBConnect1.getConnection();
-            String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong =? , MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ? Where MaSanPhamChiTiet = ?";
+            String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong = ? , MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ? Where MaSanPhamChiTiet = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(7, s.getMaSPCT());
             stm.setString(1, s.getMaSP());
@@ -3372,29 +3372,30 @@ public class ServiceImp implements ServiceInterface {
         }
         return getEmail;
     }
-   public ArrayList<KhachHang> timKiemTenKhachHangSDT(String tenHoacSDT) {
-    ArrayList<KhachHang> listKhachHang = new ArrayList<>();
-   
-    String sql = "SELECT * FROM KhachHang WHERE TenKhachHang LIKE ? OR SDT LIKE ?";
-    try {
-        Connection conn = DBConnect1.getConnection();
-        PreparedStatement stm = conn.prepareStatement(sql);
-        stm.setString(1, "%" + tenHoacSDT + "%");
-        stm.setString(2, "%" + tenHoacSDT + "%");
-        ResultSet rs = stm.executeQuery();
-        while (rs.next()) {
-            KhachHang kh = new KhachHang();
-            kh.setMaKhachHang(rs.getString("MaKhachHang"));
-            kh.setTenKhachHang(rs.getString("TenKhachHang"));
-            kh.setSDT(rs.getString("SDT"));
-            kh.setDiaChi(rs.getString("DiaChi"));
-            listKhachHang.add(kh);
+
+    public ArrayList<KhachHang> timKiemTenKhachHangSDT(String tenHoacSDT) {
+        ArrayList<KhachHang> listKhachHang = new ArrayList<>();
+
+        String sql = "SELECT * FROM KhachHang WHERE TenKhachHang LIKE ? OR SDT LIKE ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, "%" + tenHoacSDT + "%");
+            stm.setString(2, "%" + tenHoacSDT + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                KhachHang kh = new KhachHang();
+                kh.setMaKhachHang(rs.getString("MaKhachHang"));
+                kh.setTenKhachHang(rs.getString("TenKhachHang"));
+                kh.setSDT(rs.getString("SDT"));
+                kh.setDiaChi(rs.getString("DiaChi"));
+                listKhachHang.add(kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+        return listKhachHang;
     }
-    return listKhachHang;
-}
 
     @Override
     public ArrayList<NguoiDung> listEmail(NguoiDung nd) {
@@ -3412,4 +3413,51 @@ public class ServiceImp implements ServiceInterface {
         return listEMail;
     }
 
+    @Override
+    public void themAnhVaoCTSP(String hinhAnh, String maSanPhamChiTiet, String maHinhAnh) {
+        String sql = "insert into HinhAnh values(?,?,?)";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maHinhAnh);
+            stm.setString(2, maSanPhamChiTiet);
+            stm.setString(3, hinhAnh);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Integer getAllHinhAnh() {
+        String sql = "select count(MaHinhAnh)as slHA from HinhAnh";
+        int dem = 0;
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                dem = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dem;
+    }
+
+    @Override
+    public void updateHinhAnhVaoCTSP(String hinhAnh, String maSanPhamChiTiet) {
+        String sql = "update HinhAnh set HinhAnh = ? where MaSanPhamChiTiet = ?";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, hinhAnh);
+            stm.setString(2, maSanPhamChiTiet);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

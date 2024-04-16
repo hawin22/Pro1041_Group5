@@ -155,4 +155,7 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> listNV();
     String getTenDN();
     ArrayList<KhachHang> timKiemTenKhachHangSDT(String keyWord);
+    void themAnhVaoCTSP(String hinhAnh, String maSanPhamChiTiet, String maHinhAnh);
+    Integer getAllHinhAnh();
+    void updateHinhAnhVaoCTSP(String hinhAnh, String maSanPhamChiTiet);
 };
