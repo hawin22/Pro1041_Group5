@@ -33,6 +33,7 @@ public class ServiceImp implements ServiceInterface {
     ArrayList<Login> listLoginTam = new ArrayList<>();
     ArrayList<ChiTietHoaDon> listCTHD = new ArrayList<>();
     ArrayList<NguoiDung> listEMail = new ArrayList<>();
+    ArrayList<SanPham> listHinhAnh = new ArrayList<>();
 
     public ArrayList<KhachHang> getAllKhachHang() {
         String sql = "select * from KhachHang";
@@ -2588,10 +2589,24 @@ public class ServiceImp implements ServiceInterface {
         }
     }
 
+    public void updateSLCTSPTTSP(SanPham s) {
+        try {
+            Connection conn = DBConnect1.getConnection();
+            String sql = "Update Chitietsanpham set   SoLuong = SoLuong + ? Where MaSanPhamChiTiet = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(2, s.getMaSPCT());
+            stm.setInt(1, s.getSoLuongSP());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void updateCTSPTTSP(SanPham s) {
         try {
             Connection conn = DBConnect1.getConnection();
-            String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong = ?, MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ? Where MaSanPhamChiTiet = ?";
+            String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong , MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ? Where MaSanPhamChiTiet = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(7, s.getMaSPCT());
             stm.setString(1, s.getMaSP());
@@ -3396,6 +3411,39 @@ public class ServiceImp implements ServiceInterface {
     @Override
     public ArrayList<NguoiDung> listNV() {
         return listEMail;
+    }
+
+    @Override
+    public void themAnhVaoCTSP(String hinhAnh, String maSanPhamChiTiet, String maHinhAnh) {
+        String sql = "insert into HinhAnh values(?,?,?)";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maHinhAnh);
+            stm.setString(2, maSanPhamChiTiet);
+            stm.setString(3, hinhAnh);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Integer getAllHinhAnh() {
+        String sql = "select count(MaHinhAnh)as slHA from HinhAnh";
+        int dem = 0;
+        try {
+            Connection conn = DBConnect1.getConnection();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {                
+                dem = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dem;
     }
 
 }

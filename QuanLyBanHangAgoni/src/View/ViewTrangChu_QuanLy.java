@@ -26,6 +26,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -623,7 +625,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         cboKichThuocTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 6) + "");
         cboChatLieuTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 8) + "");
         cboMauTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 7) + "");
-        String linkAnh = (String) tblSanPhamCTSP.getValueAt(row, 8);
+        String linkAnh = (String) tblSanPhamCTSP.getValueAt(row, 9);
         ImageIcon icon = new ImageIcon(linkAnh);
         Image imageIcon = icon.getImage().getScaledInstance(120, 150, Image.SCALE_SMOOTH);
         icon = new ImageIcon(imageIcon);
@@ -1123,6 +1125,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         return true;
     }
 
+    
+    
     public boolean checkTrungMaDonGia(String ma) {
         int count = 0;
         for (LichSuGia sp : ser.getAllLichSuDonGia()) {
@@ -1417,6 +1421,12 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
 
     }
+    
+    public String genMaHinhAnh(){
+        int dem = ser.getAllHinhAnh();
+        String maHinhAnh = "HA00"+(dem+1);
+        return maHinhAnh;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1583,6 +1593,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         btnSuaChiTietSanPham = new javax.swing.JButton();
         cboTenNCCTTSP = new javax.swing.JComboBox<>();
         btnThemThuocTinh = new javax.swing.JButton();
+        btnThemSoLuongSP = new javax.swing.JButton();
         jPanel26 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
         txtTimKiemSPTTSP = new javax.swing.JTextField();
@@ -3216,6 +3227,16 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnThemSoLuongSP.setBackground(new java.awt.Color(51, 153, 255));
+        btnThemSoLuongSP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThemSoLuongSP.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemSoLuongSP.setText("Thêm số lượng");
+        btnThemSoLuongSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnThemSoLuongSPMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
@@ -3262,8 +3283,8 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                             .addComponent(cboMauSacTTSP, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cboChatLieuTTSP, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(105, 105, 105))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGap(392, 392, 392)
                 .addComponent(txtNewTTSP, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAddSPCT, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3271,7 +3292,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 .addComponent(btnSuaChiTietSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnThemThuocTinh)
-                .addGap(467, 467, 467))
+                .addGap(18, 18, 18)
+                .addComponent(btnThemSoLuongSP)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3321,13 +3344,14 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel37)
                             .addComponent(txtSoLuongTTSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewTTSP)
                     .addComponent(btnSuaChiTietSanPham)
                     .addComponent(btnAddSPCT)
-                    .addComponent(btnThemThuocTinh))
-                .addGap(23, 23, 23))
+                    .addComponent(btnThemThuocTinh)
+                    .addComponent(btnThemSoLuongSP))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel26.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -4483,9 +4507,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel31Layout.createSequentialGroup()
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                         .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))))
+                        .addGap(62, 62, 62))))
         );
         jPanel31Layout.setVerticalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4517,7 +4541,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(398, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Chọn sản phẩm khuyến mãi", jPanel31);
@@ -5724,9 +5748,34 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkVoucher() && checkTrungMaVoucher(txtMaVoucher.getText()) && checkTrungTenVoucher(txtTenVoucher.getText())) {
-                ser.addVoucher(getFormVoucher());
-                loadDataVoucher(ser.getAllVoucher());
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                String date1String = txtNBatDauVoucher.getText();
+                String date2String = txtNKetThucVoucher.getText();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date1 = null, date2 = null;
+                try {
+                    date1 = formatter.parse(date1String);
+                    date2 = formatter.parse(date2String);
+                } catch (ParseException ex) {
+                    System.err.println("Error parsing dates: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Lỗi khi phân tích ngày tháng. Vui lòng kiểm tra định dạng ngày (yyyy-MM-dd).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int result = date1.compareTo(date2);
+
+                if (result > 0) {
+                    System.out.println(date1String + " sau " + date2String);
+                    System.out.println("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu voucher phải nhỏ hơn hoặc bằng ngày kết thúc.", "Ngày không hợp lệ", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println(date1String + " trước " + date2String);
+                    ser.addVoucher(getFormVoucher());
+                    loadDataVoucher(ser.getAllVoucher());
+                    JOptionPane.showMessageDialog(this, "Thêm voucher thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
@@ -5737,9 +5786,34 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkVoucher()) {
-                ser.updateVoucher(getFormVoucher());
-                loadDataVoucher(ser.getAllVoucher());
-                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                String date1String = txtNBatDauVoucher.getText();
+                String date2String = txtNKetThucVoucher.getText();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date1 = null, date2 = null;
+                try {
+                    date1 = formatter.parse(date1String);
+                    date2 = formatter.parse(date2String);
+                } catch (ParseException ex) {
+                    System.err.println("Error parsing dates: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Lỗi khi phân tích ngày tháng. Vui lòng kiểm tra định dạng ngày (yyyy-MM-dd).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int result = date1.compareTo(date2);
+
+                if (result > 0) {
+                    System.out.println(date1String + " sau " + date2String);
+                    System.out.println("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu voucher phải nhỏ hơn hoặc bằng ngày kết thúc.", "Ngày không hợp lệ", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println(date1String + " trước " + date2String);
+                    ser.updateVoucher(getFormVoucher());
+                    loadDataVoucher(ser.getAllVoucher());
+                    JOptionPane.showMessageDialog(this, "Sửa voucher thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thất bại");
             }
@@ -6038,9 +6112,33 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkKhuyenMai() && checkTrungMaKM(txtMaKhuyenMai.getText()) && checkTrungTenKM(txtTenKhuyenMai.getText())) {
-                ser.addKhuyenMai(getFormKhuyenMai());
-                loadDataKhuyenMai(ser.getAllKhuyenMai());
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                String date1String = txtNBatDauKhuyenMai.getText();
+                String date2String = txtNKetThucKhuyenMai.getText();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date1 = null, date2 = null;
+                try {
+                    date1 = formatter.parse(date1String);
+                    date2 = formatter.parse(date2String);
+                } catch (ParseException ex) {
+                    System.err.println("Error parsing dates: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Lỗi khi phân tích ngày tháng. Vui lòng kiểm tra định dạng ngày (yyyy-MM-dd).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int result = date1.compareTo(date2);
+
+                if (result > 0) {
+                    System.out.println(date1String + " sau " + date2String);
+                    System.out.println("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu khuyến mãi phải nhỏ hơn hoặc bằng ngày kết thúc.", "Ngày không hợp lệ", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println(date1String + " trước " + date2String);
+                    ser.addKhuyenMai(getFormKhuyenMai());
+                    loadDataKhuyenMai(ser.getAllKhuyenMai());
+                    JOptionPane.showMessageDialog(this, "Thêm khuyến mãi thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
@@ -6052,9 +6150,34 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkKhuyenMai()) {
-                ser.updateKhuyenMai(getFormKhuyenMai());
-                loadDataKhuyenMai(ser.getAllKhuyenMai());
-                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                String date1String = txtNBatDauKhuyenMai.getText();
+                String date2String = txtNKetThucKhuyenMai.getText();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date1 = null, date2 = null;
+                try {
+                    date1 = formatter.parse(date1String);
+                    date2 = formatter.parse(date2String);
+                } catch (ParseException ex) {
+                    System.err.println("Error parsing dates: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Lỗi khi phân tích ngày tháng. Vui lòng kiểm tra định dạng ngày (yyyy-MM-dd).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int result = date1.compareTo(date2);
+
+                if (result > 0) {
+                    System.out.println(date1String + " sau " + date2String);
+                    System.out.println("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu khuyến mãi phải nhỏ hơn hoặc bằng ngày kết thúc.", "Ngày không hợp lệ", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println(date1String + " trước " + date2String);
+                    ser.updateKhuyenMai(getFormKhuyenMai());
+                    loadDataKhuyenMai(ser.getAllKhuyenMai());
+                    JOptionPane.showMessageDialog(this, "Sửa khuyến mãi thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thất bại");
             }
@@ -6252,6 +6375,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         cboKichThuocTTSP.setSelectedIndex(0);
         cboChatLieuTTSP.setSelectedIndex(0);
         cboMauTTSP.setSelectedIndex(0);
+        System.out.println(genMaHinhAnh());
     }//GEN-LAST:event_txtNewTTSPActionPerformed
 
     private void btnAddSPCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSPCTActionPerformed
@@ -6260,6 +6384,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         if (check == JOptionPane.YES_OPTION) {
             if (checkTTSP() && checkTrungMaSP(txtMaSPCT.getText()) && checkTrungTenSP(txtTenSPSPCT.getText())) {
                 ser.addCTSPTTSP(getFormSanPhamTTSP());
+                ser.themAnhVaoCTSP(getFormSanPhamTTSP().getHinhAnh(), txtMaSPCT.getText(), genMaHinhAnh());
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
                 loadDataQLSP(ser.getAllSanPhamCT());
                 showCboSPCT();
@@ -6908,6 +7033,26 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSuaChiTietSanPhamMouseClicked
 
+    private void btnThemSoLuongSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemSoLuongSPMouseClicked
+         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn Update không");
+        if (check == JOptionPane.YES_OPTION) {
+            if (checkTTSP()) {
+                int row = tblSanPhamCTSP.getSelectedRow();
+                if (row >= 0) {
+                    String ma = ser.getAllSanPhamCT().get(row).getMaSPCT();
+                    SanPham sp = getFormSanPhamTTSP();
+                    sp.setMaSPCT(ma);
+                    ser.updateSLCTSPTTSP(sp);
+                    JOptionPane.showMessageDialog(this, "Thêm số lượng thành công");
+                    loadDataQLSP(ser.getAllSanPhamCT());
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm số lượng thất bại yêu cầu không sửa các trường khác ngoài số lượng");
+                }
+            }
+        }
+    }//GEN-LAST:event_btnThemSoLuongSPMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -6988,6 +7133,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btnTKTNVoucher;
     private javax.swing.JButton btnThemKhuyenMai;
     private javax.swing.JButton btnThemSPKM;
+    private javax.swing.JButton btnThemSoLuongSP;
     private javax.swing.JButton btnThemThuocTinh;
     private javax.swing.JButton btnThemVoucher;
     private javax.swing.JButton btnTimKiem;
