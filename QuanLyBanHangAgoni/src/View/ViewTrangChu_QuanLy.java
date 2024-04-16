@@ -26,6 +26,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -4499,9 +4501,9 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel31Layout.createSequentialGroup()
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                         .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))))
+                        .addGap(62, 62, 62))))
         );
         jPanel31Layout.setVerticalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4533,7 +4535,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(398, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Chọn sản phẩm khuyến mãi", jPanel31);
@@ -5740,9 +5742,34 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkVoucher() && checkTrungMaVoucher(txtMaVoucher.getText()) && checkTrungTenVoucher(txtTenVoucher.getText())) {
-                ser.addVoucher(getFormVoucher());
-                loadDataVoucher(ser.getAllVoucher());
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                String date1String = txtNBatDauVoucher.getText();
+                String date2String = txtNKetThucVoucher.getText();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date1 = null, date2 = null;
+                try {
+                    date1 = formatter.parse(date1String);
+                    date2 = formatter.parse(date2String);
+                } catch (ParseException ex) {
+                    System.err.println("Error parsing dates: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Lỗi khi phân tích ngày tháng. Vui lòng kiểm tra định dạng ngày (yyyy-MM-dd).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int result = date1.compareTo(date2);
+
+                if (result > 0) {
+                    System.out.println(date1String + " sau " + date2String);
+                    System.out.println("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu voucher phải nhỏ hơn hoặc bằng ngày kết thúc.", "Ngày không hợp lệ", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println(date1String + " trước " + date2String);
+                    ser.addVoucher(getFormVoucher());
+                    loadDataVoucher(ser.getAllVoucher());
+                    JOptionPane.showMessageDialog(this, "Thêm voucher thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
@@ -5753,9 +5780,34 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkVoucher()) {
-                ser.updateVoucher(getFormVoucher());
-                loadDataVoucher(ser.getAllVoucher());
-                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                String date1String = txtNBatDauVoucher.getText();
+                String date2String = txtNKetThucVoucher.getText();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date1 = null, date2 = null;
+                try {
+                    date1 = formatter.parse(date1String);
+                    date2 = formatter.parse(date2String);
+                } catch (ParseException ex) {
+                    System.err.println("Error parsing dates: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Lỗi khi phân tích ngày tháng. Vui lòng kiểm tra định dạng ngày (yyyy-MM-dd).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int result = date1.compareTo(date2);
+
+                if (result > 0) {
+                    System.out.println(date1String + " sau " + date2String);
+                    System.out.println("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu voucher phải nhỏ hơn hoặc bằng ngày kết thúc.", "Ngày không hợp lệ", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println(date1String + " trước " + date2String);
+                    ser.updateVoucher(getFormVoucher());
+                    loadDataVoucher(ser.getAllVoucher());
+                    JOptionPane.showMessageDialog(this, "Sửa voucher thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thất bại");
             }
@@ -6054,9 +6106,33 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkKhuyenMai() && checkTrungMaKM(txtMaKhuyenMai.getText()) && checkTrungTenKM(txtTenKhuyenMai.getText())) {
-                ser.addKhuyenMai(getFormKhuyenMai());
-                loadDataKhuyenMai(ser.getAllKhuyenMai());
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                String date1String = txtNBatDauKhuyenMai.getText();
+                String date2String = txtNKetThucKhuyenMai.getText();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date1 = null, date2 = null;
+                try {
+                    date1 = formatter.parse(date1String);
+                    date2 = formatter.parse(date2String);
+                } catch (ParseException ex) {
+                    System.err.println("Error parsing dates: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Lỗi khi phân tích ngày tháng. Vui lòng kiểm tra định dạng ngày (yyyy-MM-dd).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int result = date1.compareTo(date2);
+
+                if (result > 0) {
+                    System.out.println(date1String + " sau " + date2String);
+                    System.out.println("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu khuyến mãi phải nhỏ hơn hoặc bằng ngày kết thúc.", "Ngày không hợp lệ", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println(date1String + " trước " + date2String);
+                    ser.addKhuyenMai(getFormKhuyenMai());
+                    loadDataKhuyenMai(ser.getAllKhuyenMai());
+                    JOptionPane.showMessageDialog(this, "Thêm khuyến mãi thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
@@ -6068,9 +6144,34 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không");
         if (check == JOptionPane.YES_OPTION) {
             if (checkKhuyenMai()) {
-                ser.updateKhuyenMai(getFormKhuyenMai());
-                loadDataKhuyenMai(ser.getAllKhuyenMai());
-                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                String date1String = txtNBatDauKhuyenMai.getText();
+                String date2String = txtNKetThucKhuyenMai.getText();
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date1 = null, date2 = null;
+                try {
+                    date1 = formatter.parse(date1String);
+                    date2 = formatter.parse(date2String);
+                } catch (ParseException ex) {
+                    System.err.println("Error parsing dates: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Lỗi khi phân tích ngày tháng. Vui lòng kiểm tra định dạng ngày (yyyy-MM-dd).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                int result = date1.compareTo(date2);
+
+                if (result > 0) {
+                    System.out.println(date1String + " sau " + date2String);
+                    System.out.println("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                    JOptionPane.showMessageDialog(this, "Ngày bắt đầu khuyến mãi phải nhỏ hơn hoặc bằng ngày kết thúc.", "Ngày không hợp lệ", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println(date1String + " trước " + date2String);
+                    ser.updateKhuyenMai(getFormKhuyenMai());
+                    loadDataKhuyenMai(ser.getAllKhuyenMai());
+                    JOptionPane.showMessageDialog(this, "Sửa khuyến mãi thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thất bại");
             }
