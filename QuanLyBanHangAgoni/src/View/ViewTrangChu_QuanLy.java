@@ -623,7 +623,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         cboKichThuocTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 6) + "");
         cboChatLieuTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 8) + "");
         cboMauTTSP.setSelectedItem(tblSanPhamCTSP.getValueAt(row, 7) + "");
-        String linkAnh = (String) tblSanPhamCTSP.getValueAt(row, 8);
+        String linkAnh = (String) tblSanPhamCTSP.getValueAt(row, 9);
         ImageIcon icon = new ImageIcon(linkAnh);
         Image imageIcon = icon.getImage().getScaledInstance(120, 150, Image.SCALE_SMOOTH);
         icon = new ImageIcon(imageIcon);
