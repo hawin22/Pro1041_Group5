@@ -2588,10 +2588,24 @@ public class ServiceImp implements ServiceInterface {
         }
     }
 
+    public void updateSLCTSPTTSP(SanPham s) {
+        try {
+            Connection conn = DBConnect1.getConnection();
+            String sql = "Update Chitietsanpham set   SoLuong = SoLuong + ? Where MaSanPhamChiTiet = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(2, s.getMaSPCT());
+            stm.setInt(1, s.getSoLuongSP());
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void updateCTSPTTSP(SanPham s) {
         try {
             Connection conn = DBConnect1.getConnection();
-            String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong = ?, MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ? Where MaSanPhamChiTiet = ?";
+            String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong , MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ? Where MaSanPhamChiTiet = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(7, s.getMaSPCT());
             stm.setString(1, s.getMaSP());

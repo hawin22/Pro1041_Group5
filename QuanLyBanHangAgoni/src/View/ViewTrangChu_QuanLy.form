@@ -2651,8 +2651,8 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="392" max="-2" attributes="0"/>
                                   <Component id="txtNewTTSP" min="-2" pref="93" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Component id="btnAddSPCT" min="-2" pref="93" max="-2" attributes="0"/>
@@ -2660,7 +2660,9 @@
                                   <Component id="btnSuaChiTietSanPham" min="-2" pref="93" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnThemThuocTinh" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="467" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnThemSoLuongSP" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2729,14 +2731,15 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txtNewTTSP" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnSuaChiTietSanPham" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnAddSPCT" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnThemThuocTinh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnThemSoLuongSP" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                  <EmptySpace pref="25" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2965,6 +2968,23 @@
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemThuocTinhActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnThemSoLuongSP">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="99" red="33" type="rgb"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Th&#xea;m s&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnThemSoLuongSPMouseClicked"/>
                           </Events>
                         </Component>
                       </SubComponents>
