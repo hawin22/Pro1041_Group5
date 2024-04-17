@@ -2197,7 +2197,8 @@ public class ServiceImp implements ServiceInterface {
                 + "    Mau, \n"
                 + "    TenChatLieu, \n"
                 + "    STRING_AGG(HinhAnh, ',') AS HinhAnh, \n"
-                + "    Hang\n"
+                + "    Hang,\n"
+                + "    trangThai\n"
                 + "FROM \n"
                 + "    ChiTietSanPham c\n"
                 + "JOIN \n"
@@ -2223,7 +2224,8 @@ public class ServiceImp implements ServiceInterface {
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
                 + "    TenChatLieu, \n"
-                + "    Hang;";
+                + "    Hang,;"
+                + "    trangThai;";
 
         try {
             Connection conn = DBConnect1.getConnection();
@@ -2242,6 +2244,7 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(8));
                 sp.setHinhAnh(rs.getString(9));
                 sp.setHang(rs.getString(10));
+                sp.setTrangThai(rs.getBoolean(11));
 
                 listSanPham.add(sp);
             }
@@ -2286,7 +2289,7 @@ public class ServiceImp implements ServiceInterface {
     public ArrayList<SanPham> SapXepTheoMaSP() {
         listSanPham.clear();
         String sql = " SELECT DISTINCT\n"
-                + "    c.MaSanPhamChiTiet, TenSanPham, TenNCC,  c.SoLuong, MauSac, KichThuoc, Mau, TenChatLieu,STRING_AGG(HinhAnh, ',') AS HinhAnh,Hang\n"
+                + "    c.MaSanPhamChiTiet, TenSanPham, TenNCC,  c.SoLuong, MauSac, KichThuoc, Mau, TenChatLieu,STRING_AGG(HinhAnh, ',') AS HinhAnh,Hang,trangThai\n"
                 + "FROM \n"
                 + "    ChiTietSanPham c\n"
                 + "	\n"
@@ -2311,7 +2314,8 @@ public class ServiceImp implements ServiceInterface {
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
                 + "    TenChatLieu,\n"
-                + "    Hang\n"
+                + "    Hang,\n"
+                + "    TrangThai\n"
                 + "ORDER BY\n"
                 + "    c.MaSanPhamChiTiet ";
         try {
@@ -2330,7 +2334,7 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(8));
                 sp.setHinhAnh(rs.getString(9));
                 sp.setHang(rs.getString(10));
-
+                sp.setTrangThai(rs.getBoolean(11));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -2342,7 +2346,7 @@ public class ServiceImp implements ServiceInterface {
     public ArrayList<SanPham> SapXepTheoTenSP() {
         listSanPham.clear();
         String sql = " SELECT DISTINCT\n"
-                + "    c.MaSanPhamChiTiet, TenSanPham, TenNCC,  c.SoLuong, MauSac, KichThuoc, Mau, TenChatLieu,STRING_AGG(HinhAnh, ',') AS HinhAnh,Hang\n"
+                + "    c.MaSanPhamChiTiet, TenSanPham, TenNCC,  c.SoLuong, MauSac, KichThuoc, Mau, TenChatLieu,STRING_AGG(HinhAnh, ',') AS HinhAnh,Hang, trangThai\n"
                 + "FROM \n"
                 + "    ChiTietSanPham c\n"
                 + "	\n"
@@ -2369,7 +2373,8 @@ public class ServiceImp implements ServiceInterface {
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
                 + "    TenChatLieu,\n"
-                + "    Hang\n"
+                + "    Hang,\n"
+                + "    TrangThai\n"
                 + "ORDER BY\n"
                 + "    TenSanPham ";
         try {
@@ -2388,7 +2393,7 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(8));
                 sp.setHinhAnh(rs.getString(9));
                 sp.setHang(rs.getString(10));
-
+                sp.setTrangThai(rs.getBoolean(11));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -2400,7 +2405,7 @@ public class ServiceImp implements ServiceInterface {
     public ArrayList<SanPham> getAllSanPhamCT() {
         listSanPham.clear();
         String sql = "SELECT DISTINCT\n"
-                + "    c.MaSanPhamChiTiet, TenSanPham, TenNCC,  c.SoLuong, MauSac, KichThuoc, Mau, TenChatLieu,STRING_AGG(HinhAnh, ',') AS HinhAnh,Hang\n"
+                + "    c.MaSanPhamChiTiet, TenSanPham, TenNCC,  c.SoLuong, MauSac, KichThuoc, Mau, TenChatLieu,STRING_AGG(HinhAnh, ',') AS HinhAnh,Hang, trangThai\n"
                 + "FROM \n"
                 + "    ChiTietSanPham c\n"
                 + "	\n"
@@ -2427,8 +2432,8 @@ public class ServiceImp implements ServiceInterface {
                 + "    KichThuoc, \n"
                 + "    Mau, \n"
                 + "    TenChatLieu,\n"
-                + "    Hang\n"
-                + "    ";
+                + "    Hang,\n"
+                + "trangThai";
         try {
             Connection conn = DBConnect1.getConnection();
             Statement stm = conn.createStatement();
@@ -2445,6 +2450,7 @@ public class ServiceImp implements ServiceInterface {
                 sp.setChatLieu(rs.getString(8));
                 sp.setHinhAnh(rs.getString(9));
                 sp.setHang(rs.getString(10));
+                sp.setTrangThai(rs.getBoolean(11));
                 listSanPham.add(sp);
             }
         } catch (Exception e) {
@@ -2572,7 +2578,7 @@ public class ServiceImp implements ServiceInterface {
     public void addCTSPTTSP(SanPham s) {
         try {
             Connection conn = DBConnect1.getConnection();
-            String sql = "Insert into Chitietsanpham( MaSanPhamChiTiet, MaSanPham, SoLuong, MaKichThuoc, MaMauSac, NCC, ChatLieu)Values (?,?,?,?,?,?,?)";
+            String sql = "Insert into Chitietsanpham( MaSanPhamChiTiet, MaSanPham, SoLuong, MaKichThuoc, MaMauSac, NCC, ChatLieu, trangThai)Values (?,?,?,?,?,?,?,?)";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, s.getMaSPCT());
             stm.setString(2, s.getMaSP());
@@ -2581,6 +2587,7 @@ public class ServiceImp implements ServiceInterface {
             stm.setString(5, s.getMaMS());
             stm.setString(6, s.getMaNCC());
             stm.setString(7, s.getMaCL());
+            stm.setBoolean(8, s.getTrangThai());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
@@ -2591,10 +2598,11 @@ public class ServiceImp implements ServiceInterface {
     public void updateSLCTSPTTSP(SanPham s) {
         try {
             Connection conn = DBConnect1.getConnection();
-            String sql = "Update Chitietsanpham set   SoLuong = SoLuong + ? Where MaSanPhamChiTiet = ?";
+            String sql = "Update Chitietsanpham set   SoLuong = SoLuong + ?, trangthai = ? Where MaSanPhamChiTiet = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(2, s.getMaSPCT());
+            stm.setString(3, s.getMaSPCT());
             stm.setInt(1, s.getSoLuongSP());
+            stm.setBoolean(2,s.getTrangThai());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
@@ -2605,15 +2613,16 @@ public class ServiceImp implements ServiceInterface {
     public void updateCTSPTTSP(SanPham s) {
         try {
             Connection conn = DBConnect1.getConnection();
-            String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong = ? , MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ? Where MaSanPhamChiTiet = ?";
+            String sql = "Update Chitietsanpham set  MaSanPham = ?, SoLuong = ? , MaKichThuoc = ?, MaMauSac = ?, NCC = ?, ChatLieu = ?, trangThai=? Where MaSanPhamChiTiet = ?";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(7, s.getMaSPCT());
+            stm.setString(8, s.getMaSPCT());
             stm.setString(1, s.getMaSP());
             stm.setInt(2, s.getSoLuongSP());
             stm.setString(3, s.getMaKT());
             stm.setString(4, s.getMaMS());
             stm.setString(5, s.getMaNCC());
             stm.setString(6, s.getMaCL());
+            stm.setBoolean(7, s.getTrangThai());
             stm.executeUpdate();
             conn.close();
         } catch (Exception e) {
@@ -3459,5 +3468,36 @@ public class ServiceImp implements ServiceInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<LichSuGia> getLichSuGiaList(String maSPCT) {
+        ArrayList<LichSuGia> lichSuGiaList = new ArrayList<>();
+
+        try {
+            // Thực hiện truy vấn để lấy dữ liệu từ bảng lịch sử giá dựa trên maSPCT
+            String sql = "SELECT CONVERT(Varchar, ThoiGianBatDau, 110) AS ThoiGianBatDau,\n"
+                    + "       CONVERT(Varchar, ThoiGianKetThuc, 110) AS ThoiGianKetThuc\n"
+                    + "FROM LichSuDonGia WHERE MaSanPhamChiTiet = ?";
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, maSPCT);
+            ResultSet rs = ps.executeQuery();
+
+            // Xử lý dữ liệu lấy được và tạo các đối tượng LichSuGia
+            while (rs.next()) {
+                LichSuGia ls = new LichSuGia();
+                ls.setStartTime(rs.getString("ThoiGianBatDau"));
+                ls.setEndTime(rs.getString("ThoiGianKetThuc"));
+                lichSuGiaList.add(ls);
+            }
+
+            // Đóng tài nguyên
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lichSuGiaList;
     }
 }
