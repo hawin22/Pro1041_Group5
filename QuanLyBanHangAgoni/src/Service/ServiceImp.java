@@ -3503,6 +3503,7 @@ public class ServiceImp implements ServiceInterface {
         }
 
         return lichSuGiaList;
+    }
     @Override
     public void updateTrangThaiSanPhamSoLuong() {
         String sql = "update ChiTietSanPham set TrangThai = 0 where SoLuong = 0";
@@ -3516,3 +3517,5 @@ public class ServiceImp implements ServiceInterface {
         }
     }
 }
+
+
