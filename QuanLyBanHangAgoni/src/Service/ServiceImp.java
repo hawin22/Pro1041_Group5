@@ -3631,4 +3631,48 @@ public class ServiceImp implements ServiceInterface {
         }
         return tongHoaDonThanhToan;
     }
+
+    @Override
+    public ArrayList<HoaDonChiTiet> getHDCTBCTK(String maHoaDon) {
+        String sql = "SELECT distinct cthd.MaHoaDon, cthd.MaSanPhamChiTiet, sp.TenSanPham, cthd.SoLuong, ls.GiaDau,\n"
+                + "       CASE\n"
+                + "           WHEN (NgayHoanThanh BETWEEN ThoiGianBatDau AND ThoiGianKetThuc) OR\n"
+                + "                (NgayHoanThanh BETWEEN km.NgayBatDau AND km.HanSuDung) THEN ls.GiaSau - (ls.GiaSau * km.PTKhuyenMai / 100)\n"
+                + "           ELSE ls.GiaDau\n"
+                + "       END AS Gia\n"
+                + "FROM ChiTietSanPham ct\n"
+                + "JOIN LichSuDonGia ls ON ls.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "JOIN SanPham sp ON sp.MaSanPham = ct.MaSanPham\n"
+                + "JOIN ChiTietHoaDon cthd ON cthd.MaSanPhamChiTiet = ct.MaSanPhamChiTiet\n"
+                + "JOIN HoaDon hd ON hd.MaHoaDon = cthd.MaHoaDon \n"
+                + "JOIN (\n"
+                + "    SELECT MaSanPhamChiTiet, MAX(kmm.PTKhuyenMai) AS MaxPTKhuyenMai\n"
+                + "    FROM ChiTietKhuyenMai\n"
+                + "	join KhuyenMai kmm on kmm.MaKhuyenMai = ChiTietKhuyenMai.MaKhuyenMai\n"
+                + "    GROUP BY MaSanPhamChiTiet\n"
+                + ") max_km ON ct.MaSanPhamChiTiet = max_km.MaSanPhamChiTiet\n"
+                + "JOIN KhuyenMai km ON km.PTKhuyenMai = max_km.MaxPTKhuyenMai\n"
+                + "WHERE cthd.MaHoaDon = ? and hd.TrangThai = N'Đã hoàn thành';";
+        listHoaDonChiTiet.clear();
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, maHoaDon);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                HoaDonChiTiet hdct = new HoaDonChiTiet();
+                hdct.setMaHoaDon(rs.getString(1));
+                hdct.setMaSanPham(rs.getString(2));
+                hdct.setTenSanPham(rs.getString(3));
+                hdct.setSoLuong(rs.getInt(4));
+                hdct.setDonGia(rs.getDouble(5));
+                hdct.setDonGiaSau(rs.getDouble(6));
+                listHoaDonChiTiet.add(hdct);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listHoaDonChiTiet;
+    }
 }
