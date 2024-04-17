@@ -7257,6 +7257,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         } else if (choose.equals("Lọc theo tháng")) {
             cboTheoNgay.setEnabled(false);
             cboTheoNam.setEnabled(true);
+            cboTheoThang.setEnabled(true);
             cboTheoNgay.setSelectedIndex(0);
             cboTheoThang.setSelectedIndex(0);
             cboTheoNam.setSelectedIndex(0);
