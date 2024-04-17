@@ -160,4 +160,10 @@ public interface ServiceInterface {
     Integer getAllHinhAnh();
     void updateHinhAnhVaoCTSP(String hinhAnh, String maSanPhamChiTiet);
     void updateTrangThaiSanPhamSoLuong();
+    ArrayList<SanPham> dsSPThongKe();
+    ArrayList<ChiTietHoaDon> dsHDThongKe();
+    Integer tongHoaDonThanhToanDHuy(String ngayBatDau, String ngayKetThuc);
+    Integer tongHoaDonThanhToanDHT(String ngayBatDau, String ngayKetThuc);
+    Integer tongHoaDonThanhToanHuy();
+    ArrayList<HoaDonChiTiet> getHDCTBCTK(String maHoaDon);
 };
