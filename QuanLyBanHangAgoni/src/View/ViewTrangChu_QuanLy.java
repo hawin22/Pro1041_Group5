@@ -163,10 +163,6 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
         }
     }
 
-   
-
-     
-
     void loadDataVoucher(ArrayList<Voucher> list) {
         dtm = (DefaultTableModel) tblVoucher.getModel();
         dtm.setRowCount(0);
@@ -7276,11 +7272,7 @@ public class ViewTrangChu_QuanLy extends javax.swing.JFrame {
                 dsHDNam.add(hd);
             }
         }
-        for (SanPham sanPham : listSPTrong) {
-            
-        }
         loadDaTaChiTietHD(dsHDNam);
-        
         if (cboTheoNam.getSelectedIndex() == 0) {
             loadDaTaChiTietHD(ser.dsHDThongKe());
         }

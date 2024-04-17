@@ -164,5 +164,4 @@ public interface ServiceInterface {
     Integer tongHoaDonThanhToanDHuy(String ngayBatDau, String ngayKetThuc);
     Integer tongHoaDonThanhToanDHT(String ngayBatDau, String ngayKetThuc);
     Integer tongHoaDonThanhToanHuy();
-    
 };
