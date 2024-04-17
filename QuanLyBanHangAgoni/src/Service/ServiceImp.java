@@ -460,6 +460,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "                join \n"
                 + "                chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "where TrangThai = 1"
                 + "                group by  c.MaSanPham, \n"
                 + "                  TenSanPham,\n"
                 + "                    TenNCC,\n"
@@ -1033,6 +1034,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "                join \n"
                 + "                chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "where trangThai = 1"
                 + "                group by  c.MaSanPham, \n"
                 + "                  TenSanPham,\n"
                 + "                    TenNCC,\n"
@@ -1107,6 +1109,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "                join \n"
                 + "                chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "where trangThai = 1"
                 + "                group by  c.MaSanPham, \n"
                 + "                  TenSanPham,\n"
                 + "                    TenNCC,\n"
@@ -1181,6 +1184,7 @@ public class ServiceImp implements ServiceInterface {
                 + "                HinhAnh ha ON ha.MaSanPhamChiTiet = c.MaSanPhamChiTiet\n"
                 + "                join \n"
                 + "                chiTietKhuyenMai ctkm on ctkm.maSanPhamChiTiet = c.MaSanPhamChiTiet\n"
+                + "where trangThai = 1"
                 + "                group by  c.MaSanPham, \n"
                 + "                  TenSanPham,\n"
                 + "                    TenNCC,\n"
@@ -3499,5 +3503,16 @@ public class ServiceImp implements ServiceInterface {
         }
 
         return lichSuGiaList;
+    @Override
+    public void updateTrangThaiSanPhamSoLuong() {
+        String sql = "update ChiTietSanPham set TrangThai = 0 where SoLuong = 0";
+        try {
+            Connection conn = DBConnect1.getConnection();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.executeUpdate();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
