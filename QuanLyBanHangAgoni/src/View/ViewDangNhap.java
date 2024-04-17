@@ -22,6 +22,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
 
     ArrayList<Login> list = new ArrayList<>();
     ServiceInterface qldn = new ServiceImp();
+
     public ViewDangNhap() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -260,8 +261,8 @@ public class ViewDangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (cbxShowPass.isSelected()) {
             txtPassword.setEchoChar((char) 0);
-        }else{
-           txtPassword.setEchoChar((char) 42);
+        } else {
+            txtPassword.setEchoChar((char) 42);
         }
     }//GEN-LAST:event_cbxShowPassActionPerformed
 
@@ -308,7 +309,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtUserName.setText("nv_an");
         txtPassword.setText("password123");
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void lblChangePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChangePassMouseClicked

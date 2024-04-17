@@ -5,6 +5,7 @@
 package Service;
 
 import Model.*;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
@@ -154,4 +155,5 @@ public interface ServiceInterface {
     ArrayList<NguoiDung> listNV();
     String getTenDN();
     ArrayList<KhachHang> timKiemTenKhachHangSDT(String keyWord);
+  
 };
